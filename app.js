@@ -5,6 +5,8 @@
 
 const STORAGE_KEY = 'civil_servant_trainee_app_v2';
 const PARTICIPANTS_STORAGE_KEY = 'participants_gemini_ai_data';
+const GEMINI_API_KEY_STORAGE = 'civil_servant_gemini_api_key';
+const AI_CHAT_HISTORY_STORAGE = 'civil_servant_ai_chat_history';
 let activeScheduleFilter = 'AUTO'; // 'AUTO', 'ADV', 'FND', 'BOTH'
 let currentParticipantView = 'table'; // 'table', 'card', 'analytics'
 let filteredParticipantsData = [];
@@ -2993,8 +2995,6 @@ function clearRememberedDevice() {
 /* ==========================================================================
    AI CO-PILOT & STUDY BUDDY HYBRID ENGINE (DRAWER, KNOWLEDGE BASE, VOICE & TTS)
    ========================================================================== */
-const GEMINI_API_KEY_STORAGE = 'civil_servant_gemini_api_key';
-const AI_CHAT_HISTORY_STORAGE = 'civil_servant_ai_chat_history';
 let aiVoiceRecognition = null;
 let isAIVoiceListening = false;
 
@@ -3442,4 +3442,17 @@ function clearGeminiApiKey() {
     closeModal('modal-gemini-key');
     showToast('ล้าง Gemini API Key แล้ว');
 }
+
+// Global Window Bindings
+window.toggleAIBuddyDrawer = toggleAIBuddyDrawer;
+window.sendAIChatMessage = sendAIChatMessage;
+window.triggerQuickPrompt = triggerQuickPrompt;
+window.clearAIChatHistory = clearAIChatHistory;
+window.openGeminiApiKeyModal = openGeminiApiKeyModal;
+window.saveGeminiApiKey = saveGeminiApiKey;
+window.clearGeminiApiKey = clearGeminiApiKey;
+window.toggleAIVoiceRecognition = toggleAIVoiceRecognition;
+window.speakSingleAIChatMessage = speakSingleAIChatMessage;
+window.copyAIChatMessage = copyAIChatMessage;
+
 
