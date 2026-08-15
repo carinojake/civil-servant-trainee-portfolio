@@ -575,11 +575,21 @@ let appState = JSON.parse(JSON.stringify(defaultAppData));
 // 2. Initialization & Lifecycle
 // --------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', async () => {
+    // Check if Gemini API key was passed via secure URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlKey = urlParams.get('gemini_key') || urlParams.get('key');
+    if (urlKey && urlKey.trim().length > 10) {
+        localStorage.setItem(GEMINI_API_KEY_STORAGE, urlKey.trim());
+        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+    }
+
     initSecurityLock();
     loadSavedState();
     loadParticipantsData();
     renderAllViews();
     setupRctfPromptListener();
+    updateGeminiKeyStatusLabel();
 });
 
 function loadSavedState() {
