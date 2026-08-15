@@ -788,6 +788,8 @@ function renderUserProfileForm() {
     setInputValue('prof-email', p.email);
     setInputValue('prof-phone', p.phone);
     setInputValue('prof-accessibility', p.accessibilityNeeds);
+    setInputValue('prof-hardskills', (p.hardSkills || []).join(', '));
+    setInputValue('prof-softskills', (p.softSkills || []).join(', '));
     setInputValue('prof-vision', p.vision);
 
     const headerName = document.getElementById('header-user-name');
@@ -799,6 +801,8 @@ function renderUserProfileForm() {
     if (schedActiveTrackLabel) {
         schedActiveTrackLabel.innerText = p.track;
     }
+
+    renderExperiencesList();
 }
 
 function saveUserProfile() {
@@ -812,11 +816,123 @@ function saveUserProfile() {
     appState.userProfile.email = getInputValue('prof-email');
     appState.userProfile.phone = getInputValue('prof-phone');
     appState.userProfile.accessibilityNeeds = getInputValue('prof-accessibility');
+
+    const hardVal = getInputValue('prof-hardskills');
+    appState.userProfile.hardSkills = hardVal ? hardVal.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+    const softVal = getInputValue('prof-softskills');
+    appState.userProfile.softSkills = softVal ? softVal.split(',').map(s => s.trim()).filter(Boolean) : [];
+
     appState.userProfile.vision = getInputValue('prof-vision');
 
     saveState();
     renderScheduleList();
-    showToast('บันทึกข้อมูลประวัติผู้เข้าอบรมเรียบร้อยแล้ว');
+    renderPortfolioPreview();
+    showToast('บันทึกข้อมูลประวัติผู้เข้าอบรมและทักษะเรียบร้อยแล้ว');
+}
+
+function renderExperiencesList() {
+    const listEl = document.getElementById('prof-experience-list');
+    if (!listEl) return;
+
+    const exps = appState.userProfile.experiences || [];
+    if (exps.length === 0) {
+        listEl.innerHTML = `<div class="col-span-full py-4 text-center text-slate-400 border border-dashed border-slate-300 rounded-xl bg-slate-50">ยังไม่มีข้อมูลประวัติการทำงาน กดปุ่ม [+ เพิ่มประวัติการทำงาน] เพื่อระบุข้อมูลสำหรับ Portfolio หน้า 3</div>`;
+        return;
+    }
+
+    listEl.innerHTML = exps.map((exp, idx) => `
+        <div class="p-3.5 bg-slate-50 hover:bg-white rounded-xl border border-slate-200 transition space-y-1.5 relative group">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h5 class="font-bold text-govNavy text-xs">${exp.role}</h5>
+                    <span class="text-[10px] text-slate-500 font-semibold">${exp.agency} • ${exp.period}</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <button type="button" onclick="openExperienceModal(${idx})" class="w-6 h-6 rounded bg-slate-200 hover:bg-blue-100 text-slate-600 hover:text-blue-600 flex items-center justify-center text-[10px] transition" title="แก้ไข">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button type="button" onclick="deleteExperienceItem(${idx})" class="w-6 h-6 rounded bg-slate-200 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center text-[10px] transition" title="ลบ">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            </div>
+            <p class="text-[11px] text-slate-600 line-clamp-2 leading-relaxed">${exp.desc}</p>
+        </div>
+    `).join('');
+}
+
+function openExperienceModal(editIndex = -1) {
+    const titleEl = document.getElementById('modal-exp-title');
+    const indexInput = document.getElementById('exp-edit-index');
+    const roleInput = document.getElementById('exp-role');
+    const periodInput = document.getElementById('exp-period');
+    const agencyInput = document.getElementById('exp-agency');
+    const descInput = document.getElementById('exp-desc');
+
+    if (editIndex >= 0 && appState.userProfile.experiences[editIndex]) {
+        const exp = appState.userProfile.experiences[editIndex];
+        if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-600"></i><span>แก้ไขประวัติการทำงาน</span>`;
+        if (indexInput) indexInput.value = editIndex;
+        if (roleInput) roleInput.value = exp.role || '';
+        if (periodInput) periodInput.value = exp.period || '';
+        if (agencyInput) agencyInput.value = exp.agency || '';
+        if (descInput) descInput.value = exp.desc || '';
+    } else {
+        if (titleEl) titleEl.innerHTML = `<i class="fa-solid fa-briefcase text-amber-600"></i><span>เพิ่มประวัติการทำงาน / ผลงานที่ผ่านมา</span>`;
+        if (indexInput) indexInput.value = -1;
+        if (roleInput) roleInput.value = '';
+        if (periodInput) periodInput.value = '';
+        if (agencyInput) agencyInput.value = '';
+        if (descInput) descInput.value = '';
+    }
+
+    const modal = document.getElementById('modal-experience');
+    if (modal) modal.classList.remove('hidden');
+}
+
+function saveExperienceItem() {
+    const editIndex = parseInt(document.getElementById('exp-edit-index').value, 10);
+    const role = getInputValue('exp-role').trim();
+    const period = getInputValue('exp-period').trim();
+    const agency = getInputValue('exp-agency').trim();
+    const desc = getInputValue('exp-desc').trim();
+
+    if (!role || !period || !agency) {
+        showToast('กรุณากรอกข้อมูลให้ครบถ้วน');
+        return;
+    }
+
+    if (!appState.userProfile.experiences) {
+        appState.userProfile.experiences = [];
+    }
+
+    const item = { role, period, agency, desc };
+
+    if (editIndex >= 0 && editIndex < appState.userProfile.experiences.length) {
+        appState.userProfile.experiences[editIndex] = item;
+        showToast('แก้ไขประวัติการทำงานเรียบร้อยแล้ว');
+    } else {
+        appState.userProfile.experiences.push(item);
+        showToast('เพิ่มประวัติการทำงานใหม่เรียบร้อยแล้ว');
+    }
+
+    saveState();
+    renderExperiencesList();
+    renderPortfolioPreview();
+    closeModal('modal-experience');
+}
+
+function deleteExperienceItem(idx) {
+    if (confirm('คุณต้องการลบรายการประวัติการทำงานนี้ใช่หรือไม่?')) {
+        if (appState.userProfile.experiences && appState.userProfile.experiences[idx]) {
+            appState.userProfile.experiences.splice(idx, 1);
+            saveState();
+            renderExperiencesList();
+            renderPortfolioPreview();
+            showToast('ลบรายการประวัติการทำงานเรียบร้อยแล้ว');
+        }
+    }
 }
 
 // --------------------------------------------------------------------------
