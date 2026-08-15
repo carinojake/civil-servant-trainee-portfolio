@@ -98,6 +98,10 @@
                             <span class="hidden sm:inline">กู้คืน</span>
                             <input type="file" id="import-json-input" accept=".json" class="hidden" onchange="importDataJSON(event)">
                         </label>
+                        <button onclick="lockAppImmediately()" class="bg-slate-700 hover:bg-rose-700 text-white px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 border border-slate-500/40" title="ล็อคหน้าจอทันที (Passcode Lock)">
+                            <i class="fa-solid fa-lock text-amber-400"></i>
+                            <span class="hidden sm:inline">ล็อค</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1374,6 +1378,49 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Security & PIN Management Section -->
+            <div class="app-card p-6 border-l-8 border-blue-600 space-y-4">
+                <div class="flex justify-between items-start flex-wrap gap-2">
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                            <i class="fa-solid fa-lock text-blue-600"></i>
+                            <span>ระบบล็อครหัสผ่าน & ความปลอดภัย (Passcode Access Control)</span>
+                        </h3>
+                        <p class="text-slate-600 text-xs mt-0.5">
+                            ป้องกันบุคคลอื่นเข้าถึงข้อมูลประวัติ คะแนนสอบ และเล่ม Portfolio (รหัสเริ่มต้น: <code class="bg-slate-100 px-1 py-0.5 rounded font-mono font-bold">2569</code>)
+                        </p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 flex items-center space-x-1">
+                        <i class="fa-solid fa-shield-check"></i>
+                        <span id="pin-status-badge">เปิดใช้งานระบบล็อค PIN</span>
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="font-bold text-slate-800"><i class="fa-solid fa-key text-blue-600 mr-1.5"></i>รหัสผ่าน PIN ปัจจุบัน</div>
+                        <div class="text-slate-500 text-[11px] mt-1">ใช้ปลดล็อคบน MacBook / iPad / iPhone</div>
+                        <button onclick="openChangePinModal()" class="mt-2 text-blue-600 hover:text-blue-800 font-bold hover:underline">
+                            ✏️ เปลี่ยนรหัส PIN ใหม่
+                        </button>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="font-bold text-slate-800"><i class="fa-solid fa-fingerprint text-emerald-600 mr-1.5"></i>Biometric & Face ID</div>
+                        <div class="text-slate-500 text-[11px] mt-1">รองรับการจำเครื่อง 30 วัน บน Safari iOS / Mac</div>
+                        <button onclick="clearRememberedDevice()" class="mt-2 text-slate-600 hover:text-rose-600 font-semibold">
+                            🔄 ล้างสิทธิ์จำเครื่อง
+                        </button>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="font-bold text-slate-800"><i class="fa-solid fa-lock-open text-amber-600 mr-1.5"></i>ล็อคหน้าจอทันที</div>
+                        <div class="text-slate-500 text-[11px] mt-1">ล็อคระบบเมื่อเดินออกจากหน้าจอ</div>
+                        <button onclick="lockAppImmediately()" class="mt-2 text-rose-600 hover:text-rose-800 font-bold hover:underline">
+                            🔒 ล็อคระบบเดี๋ยวนี้
+                        </button>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -1860,6 +1907,102 @@
                 <button onclick="confirmDeleteParticipant()" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white shadow transition">
                     ยืนยันลบข้อมูล
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Change Security PIN -->
+    <div id="modal-change-pin" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-sm w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                    <i class="fa-solid fa-key text-blue-600"></i>
+                    <span>เปลี่ยนรหัสผ่าน PIN</span>
+                </h3>
+                <button onclick="closeModal('modal-change-pin')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="modal-change-pin-form" onsubmit="event.preventDefault(); saveNewSecurityPin();" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="pin-old">รหัส PIN ปัจจุบัน (ค่าเริ่มต้น: 2569)</label>
+                    <input type="password" id="pin-old" required maxlength="8" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white font-mono text-center tracking-widest text-base">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="pin-new">รหัส PIN ใหม่ (4-8 ตัวเลข)</label>
+                    <input type="password" id="pin-new" required pattern="[0-9]{4,8}" maxlength="8" placeholder="เช่น 1234 หรือ 2569" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white font-mono text-center tracking-widest text-base">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="pin-confirm">ยืนยันรหัส PIN ใหม่อีกครั้ง</label>
+                    <input type="password" id="pin-confirm" required pattern="[0-9]{4,8}" maxlength="8" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white font-mono text-center tracking-widest text-base">
+                </div>
+                <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('modal-change-pin')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow">บันทึกรหัสใหม่</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Passcode Security Lock Screen Overlay -->
+    <div id="lock-screen-overlay" class="fixed inset-0 z-[999] bg-govNavy flex items-center justify-center p-4 transition-opacity duration-300">
+        <div class="max-w-md w-full bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border-4 border-govGreen text-center space-y-5 animate-fade-in">
+            <!-- Security Emblem -->
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-govNavy text-amber-400 text-2xl shadow-md">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+                <h2 class="text-lg sm:text-xl font-bold text-govNavy">ระบบรักษาความปลอดภัยข้อมูลภาครัฐ</h2>
+                <div class="text-xs text-govGreen font-semibold mt-0.5">Civil Service Trainee Portfolio Security Lock</div>
+                <p class="text-slate-500 text-xs mt-2">
+                    กรุณาใส่รหัส PIN เพื่อยืนยันตัวตนก่อนเข้าใช้งาน <br>
+                    <span class="text-[11px] text-slate-400">(รหัสเริ่มต้น: <strong class="text-govNavy">2569</strong>)</span>
+                </p>
+            </div>
+
+            <!-- PIN Display & Input -->
+            <div class="space-y-3">
+                <div class="flex justify-center items-center space-x-3 py-2" id="pin-dots-container">
+                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-1"></div>
+                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-2"></div>
+                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-3"></div>
+                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-4"></div>
+                </div>
+
+                <form id="lock-screen-form" onsubmit="event.preventDefault(); submitPinUnlock();">
+                    <input type="password" id="lock-pin-input" autofocus maxlength="8" pattern="[0-9]*" inputmode="numeric" placeholder="แตะเพื่อพิมพ์รหัส PIN" class="w-full text-center tracking-[0.4em] font-mono text-xl py-2.5 px-4 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    
+                    <div class="flex items-center justify-center space-x-2 mt-3 text-xs text-slate-600">
+                        <input type="checkbox" id="lock-remember-device" checked class="rounded text-govNavy focus:ring-govNavy">
+                        <label for="lock-remember-device" class="cursor-pointer font-medium">จดจำอุปกรณ์นี้ 30 วัน (สำหรับ Mac / iPad / iPhone ส่วนตัว)</label>
+                    </div>
+
+                    <!-- Touch Keypad for iPad & Mobile -->
+                    <div class="grid grid-cols-3 gap-2 pt-3 max-w-[260px] mx-auto text-sm font-bold">
+                        <button type="button" onclick="keypadPress('1')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">1</button>
+                        <button type="button" onclick="keypadPress('2')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">2</button>
+                        <button type="button" onclick="keypadPress('3')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">3</button>
+                        <button type="button" onclick="keypadPress('4')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">4</button>
+                        <button type="button" onclick="keypadPress('5')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">5</button>
+                        <button type="button" onclick="keypadPress('6')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">6</button>
+                        <button type="button" onclick="keypadPress('7')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">7</button>
+                        <button type="button" onclick="keypadPress('8')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">8</button>
+                        <button type="button" onclick="keypadPress('9')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">9</button>
+                        <button type="button" onclick="keypadClear()" class="p-3 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl transition text-xs font-semibold">ล้าง</button>
+                        <button type="button" onclick="keypadPress('0')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">0</button>
+                        <button type="button" onclick="keypadBackspace()" class="p-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition"><i class="fa-solid fa-delete-left"></i></button>
+                    </div>
+
+                    <div id="lock-error-msg" class="text-rose-600 text-xs font-bold mt-3 hidden">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> รหัส PIN ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง
+                    </div>
+
+                    <button type="submit" class="w-full mt-4 py-3 bg-govNavy hover:bg-govNavyDark active:scale-[0.98] text-white rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>ปลดล็อคเข้าสู่ระบบ</span>
+                    </button>
+                </form>
             </div>
         </div>
     </div>

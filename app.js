@@ -567,6 +567,7 @@ let appState = JSON.parse(JSON.stringify(defaultAppData));
 // 2. Initialization & Lifecycle
 // --------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', async () => {
+    initSecurityLock();
     loadSavedState();
     loadParticipantsData();
     renderAllViews();

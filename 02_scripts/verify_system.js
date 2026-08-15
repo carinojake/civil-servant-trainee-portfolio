@@ -103,6 +103,8 @@ if (fs.existsSync(indexPath)) {
     assert(html.includes('btn-sched-track-auto') && html.includes('btn-sched-track-both'), 'Contains M2 track filter buttons (Auto, ADV, FND, Both)');
     assert(html.includes('modal-ref-course-info'), 'Contains M2 reflection modal course info preview context');
     assert(html.includes('id="modal-day-links"'), 'Contains Daily Action Hub Link & Score Editor modal');
+    assert(html.includes('id="lock-screen-overlay"'), 'Contains Passcode Security Lock Screen Overlay');
+    assert(html.includes('id="modal-change-pin"'), 'Contains Change Security PIN modal');
     assert(html.includes('skip-link'), 'Contains Screen Reader skip link for WCAG Level AA');
     assert(html.includes('portfolio-page-1') && html.includes('portfolio-page-7'), 'Contains 7-page standard portfolio structure (Page 1 to Page 7)');
 }
