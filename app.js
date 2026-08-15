@@ -2979,3 +2979,438 @@ function clearRememberedDevice() {
     localStorage.removeItem(REMEMBER_DEVICE_KEY);
     showToast('ล้างสิทธิ์การจำเครื่อง 30 วันแล้ว (จะถามรหัส PIN เมื่อเปิดแอปใหม่)');
 }
+
+/* ==========================================================================
+   AI CO-PILOT & STUDY BUDDY HYBRID ENGINE (DRAWER, KNOWLEDGE BASE, VOICE & TTS)
+   ========================================================================== */
+const GEMINI_API_KEY_STORAGE = 'civil_servant_gemini_api_key';
+const AI_CHAT_HISTORY_STORAGE = 'civil_servant_ai_chat_history';
+let aiVoiceRecognition = null;
+let isAIVoiceListening = false;
+
+const defaultAIChatGreeting = {
+    sender: 'ai',
+    text: `สวัสดีครับพี่แจ็คและผู้เข้าอบรมทุกท่าน! ผมคือ **AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน** ประจำหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1 ครับ 🤖✨
+
+พี่แจ็คสามารถกดปุ่มภารกิจด่วนด้านบน หรือพิมพ์/กดไมค์ถามคำถามได้ตลอดเวลาเลยนะครับ เช่น:
+• 📝 **ช่วยร่างหนังสือราชการ 3 ย่อหน้า** (เหตุผล-ข้อเท็จจริง-ข้อพิจารณา)
+• 🎓 **สรุปบทเรียนประจำวัน 13 วัน ณ เซ็นทารา ไลฟ์**
+• 💡 **ติวแนวข้อสอบ Pre/Post-test และข้อกฎหมายข้าราชการ**
+• 💼 **วางแผนและจัดทำรายงานฝึกงาน OJT 90 ชม. ครบ 4 มิติ**`,
+    time: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })
+};
+
+function getAIChatHistory() {
+    try {
+        const stored = localStorage.getItem(AI_CHAT_HISTORY_STORAGE);
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+    } catch (e) {
+        console.warn('Error reading AI chat history', e);
+    }
+    return [defaultAIChatGreeting];
+}
+
+function saveAIChatHistory(history) {
+    try {
+        localStorage.setItem(AI_CHAT_HISTORY_STORAGE, JSON.stringify(history));
+    } catch (e) {
+        console.warn('Error saving AI chat history', e);
+    }
+}
+
+function toggleAIBuddyDrawer() {
+    const drawer = document.getElementById('ai-study-buddy-drawer');
+    if (!drawer) return;
+
+    if (drawer.classList.contains('drawer-closed')) {
+        drawer.classList.remove('drawer-closed');
+        drawer.classList.add('drawer-open');
+        renderAIChatFeed();
+        updateGeminiKeyStatusLabel();
+        const input = document.getElementById('ai-chat-input');
+        if (input) setTimeout(() => input.focus(), 300);
+    } else {
+        drawer.classList.remove('drawer-open');
+        drawer.classList.add('drawer-closed');
+        if (window.speechSynthesis && window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+        }
+    }
+}
+
+function updateGeminiKeyStatusLabel() {
+    const label = document.getElementById('gemini-key-status-label');
+    const key = localStorage.getItem(GEMINI_API_KEY_STORAGE);
+    if (label) {
+        if (key && key.trim().length > 10) {
+            label.textContent = 'Gemini Pro Live';
+            label.classList.add('text-purple-600', 'font-bold');
+        } else {
+            label.textContent = 'Hybrid (ฟรี 0บ.)';
+            label.classList.remove('text-purple-600', 'font-bold');
+        }
+    }
+}
+
+function renderAIChatFeed() {
+    const feed = document.getElementById('ai-chat-feed');
+    if (!feed) return;
+
+    const history = getAIChatHistory();
+    feed.innerHTML = history.map((msg, idx) => {
+        const isAI = msg.sender === 'ai';
+        const formattedText = escapeHtml(msg.text)
+            .replace(/\n\n/g, '<br><br>')
+            .replace(/\n/g, '<br>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        return `
+            <div class="flex items-start gap-2.5 ${isAI ? 'justify-start' : 'justify-end'} animate-fade-in">
+                ${isAI ? `
+                    <div class="w-7 h-7 rounded-lg bg-govNavy text-amber-400 flex items-center justify-center text-xs shrink-0 shadow mt-0.5">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                ` : ''}
+                <div class="max-w-[85%] sm:max-w-[80%] space-y-1">
+                    <div class="p-3 text-xs leading-relaxed ${isAI ? 'chat-bubble-ai text-slate-800' : 'chat-bubble-user shadow-sm'}">
+                        ${formattedText}
+                    </div>
+                    <div class="text-[10px] text-slate-400 px-1 flex items-center gap-2 ${isAI ? 'justify-start' : 'justify-end'}">
+                        <span>${msg.time || ''}</span>
+                        ${isAI ? `
+                            <button type="button" onclick="speakSingleAIChatMessage(${idx})" class="text-slate-400 hover:text-blue-600 transition" title="อ่านออกเสียงข้อความนี้">
+                                <i class="fa-solid fa-volume-high text-[10px]"></i>
+                            </button>
+                            <button type="button" onclick="copyAIChatMessage(${idx})" class="text-slate-400 hover:text-emerald-600 transition" title="คัดลอกข้อความ">
+                                <i class="fa-solid fa-copy text-[10px]"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    feed.scrollTop = feed.scrollHeight;
+}
+
+function speakSingleAIChatMessage(index) {
+    const history = getAIChatHistory();
+    if (history[index] && history[index].text) {
+        speakAIText(history[index].text);
+    }
+}
+
+function copyAIChatMessage(index) {
+    const history = getAIChatHistory();
+    if (history[index] && history[index].text) {
+        navigator.clipboard.writeText(history[index].text).then(() => {
+            showToast('คัดลอกข้อความแล้ว');
+        });
+    }
+}
+
+function clearAIChatHistory() {
+    if (confirm('ต้องการล้างประวัติการสนทนาทั้งหมด และเริ่มบทสนทนาใหม่หรือไม่?')) {
+        saveAIChatHistory([defaultAIChatGreeting]);
+        renderAIChatFeed();
+        showToast('ล้างบทสนทนาเรียบร้อยแล้ว');
+    }
+}
+
+async function sendAIChatMessage() {
+    const input = document.getElementById('ai-chat-input');
+    if (!input) return;
+
+    const query = input.value.trim();
+    if (!query) return;
+
+    input.value = '';
+    const timeNow = new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+    const history = getAIChatHistory();
+    history.push({ sender: 'user', text: query, time: timeNow });
+    saveAIChatHistory(history);
+    renderAIChatFeed();
+
+    // Show AI typing bubble
+    const feed = document.getElementById('ai-chat-feed');
+    if (feed) {
+        feed.innerHTML += `
+            <div id="ai-typing-indicator" class="flex items-start gap-2.5 justify-start animate-fade-in">
+                <div class="w-7 h-7 rounded-lg bg-govNavy text-amber-400 flex items-center justify-center text-xs shrink-0 shadow">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="p-3 text-xs chat-bubble-ai text-slate-500 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-notch fa-spin text-blue-600"></i>
+                    <span>AI กำลังประมวลผลคำตอบ...</span>
+                </div>
+            </div>
+        `;
+        feed.scrollTop = feed.scrollHeight;
+    }
+
+    try {
+        const aiResponseText = await generateAIStudyResponse(query);
+        const typing = document.getElementById('ai-typing-indicator');
+        if (typing) typing.remove();
+
+        const updatedHistory = getAIChatHistory();
+        updatedHistory.push({
+            sender: 'ai',
+            text: aiResponseText,
+            time: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })
+        });
+        saveAIChatHistory(updatedHistory);
+        renderAIChatFeed();
+
+        // Check if TTS is enabled
+        const ttsToggle = document.getElementById('ai-tts-toggle');
+        if (ttsToggle && ttsToggle.checked) {
+            speakAIText(aiResponseText);
+        }
+    } catch (err) {
+        console.error('AI response error', err);
+        const typing = document.getElementById('ai-typing-indicator');
+        if (typing) typing.remove();
+
+        const updatedHistory = getAIChatHistory();
+        updatedHistory.push({
+            sender: 'ai',
+            text: `ขออภัยครับ เกิดข้อผิดพลาดในการประมวลผล แต่พี่แจ็คสามารถใช้งานคลังคำตอบอัจฉริยะในตัวได้ตลอดเวลานะครับ 😊`,
+            time: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' })
+        });
+        saveAIChatHistory(updatedHistory);
+        renderAIChatFeed();
+    }
+}
+
+async function generateAIStudyResponse(userQuery) {
+    const apiKey = localStorage.getItem(GEMINI_API_KEY_STORAGE);
+    const queryLower = userQuery.toLowerCase();
+
+    // If Gemini API Key exists, try calling Gemini 1.5 Flash
+    if (apiKey && apiKey.trim().length > 10) {
+        try {
+            const systemPrompt = `คุณคือ "AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน" ประจำหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1 (จัดโดยกรมส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ ณ โรงแรมเซ็นทารา ไลฟ์ ศูนย์ราชการ แจ้งวัฒนะ 13 วัน และฝึก OJT 90 ชม.)
+ผู้ใช้งานหลักคือ "พี่แจ็ค (นายนิติพัฒน์ คุ้มวงษ์)" ผู้เชี่ยวชาญไอทีและระบบฐานข้อมูล 13 ปี สังกัดสาย Advanced AI & Automation
+หน้าที่ของคุณ:
+1. ให้คำแนะนำเรื่องงานสารบรรณภาครัฐ โครงสร้างหนังสือราชการ 3 ย่อหน้า (เหตุผล-ข้อเท็จจริง-ข้อพิจารณา)
+2. ติวข้อสอบ Pre/Post-test, สรุปเนื้อหา 13 วัน, กฎหมาย ม.33/ม.35 และการสะท้อนคิด (Reflection)
+3. ให้คำตอบเป็นภาษาไทยที่สุภาพ เป็นมืออาชีพ ชัดเจน มีโครงสร้างหัวข้อย่อยอ่านง่าย จัดย่อหน้าสวยงาม`;
+
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey.trim()}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [
+                            { text: systemPrompt },
+                            { text: `คำถามจากผู้เข้าอบรม: ${userQuery}` }
+                        ]
+                    }],
+                    generationConfig: {
+                        temperature: 0.4,
+                        maxOutputTokens: 1000
+                    }
+                })
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) return text;
+            }
+        } catch (e) {
+            console.warn('Gemini Live API failed, falling back to built-in knowledge engine', e);
+        }
+    }
+
+    // Built-in Intelligent Thai Civil Service Knowledge Engine (Cost-effective 0 THB)
+    if (queryLower.includes('หนังสือ') || queryLower.includes('สารบรรณ') || queryLower.includes('3 ย่อหน้า') || queryLower.includes('บันทึกข้อความ')) {
+        return `📜 **โครงสร้างหนังสือราชการ 3 ย่อหน้ามาตรฐานตามระเบียบสำนักนายกรัฐมนตรี:**
+
+**1. ย่อหน้าที่ 1: เหตุผล / ความเป็นมา (ด้วย/ตามที่/เนื่องด้วย)**
+• ระบุที่มาว่าทำไมจึงต้องมีหนังสือฉบับนี้ เช่น *"ตามที่ สถาบันฯ ได้มีคำสั่งแต่งตั้งคณะทำงานขับเคลื่อนระบบดิจิทัล..."* หรือ *"ด้วย ศูนย์เทคโนโลยีฯ มีความประสงค์จะพัฒนาระบบคลังข้อมูล..."*
+
+**2. ย่อหน้าที่ 2: ข้อเท็จจริง / สาระสำคัญ (ข้อเท็จจริงมีอยู่ว่า/ในการนี้)**
+• ชี้แจงรายละเอียด วัตถุประสงค์ ผลการดำเนินงาน หรือปัญหาที่เกิดขึ้นอย่างกระชับและมีหลักฐานอ้างอิงชัดเจน
+
+**3. ย่อหน้าที่ 3: ข้อพิจารณา / ความประสงค์ (จึงเรียนมาเพื่อโปรดพิจารณา...)**
+• สรุปความต้องการที่ชัดเจน เช่น *"จึงเรียนมาเพื่อโปรดพิจารณาให้ความเห็นชอบ และอนุมัติงบประมาณโครงการต่อไป"*
+
+💡 **คำลงท้ายยอดนิยม:**
+• หนังสือราชการทั่วไป: *"จึงเรียนมาเพื่อโปรดทราบ / จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติ"*`;
+    }
+
+    if (queryLower.includes('สรุป') || queryLower.includes('บทเรียน') || queryLower.includes('เซ็นทารา') || queryLower.includes('13 วัน')) {
+        return `🎓 **สรุปภาพรวมบทเรียน 13 วัน ณ โรงแรมเซ็นทารา ไลฟ์:**
+
+• **สัปดาห์ที่ 1 (10-14 ส.ค. 69):**
+  - **วันที่ 1:** ปฐมนิเทศ & วินัย จริยธรรม จรรยาบรรณข้าราชการยุคดิจิทัล
+  - **วันที่ 2:** ระบบราชการ & กฎหมาย (FND) / วิเคราะห์ข้อมูล & Agile & Digital Workflow (ADV)
+  - **วันที่ 3:** ทักษะบริการ & Design Thinking (FND) / การสื่อสาร & วิเคราะห์ข้อมูลตัดสินใจ (ADV)
+  - **วันที่ 4:** การประยุกต์ใช้ AI ในงานราชการ & บริบทการบริหารงานยุคดิจิทัล
+
+• **สัปดาห์ที่ 2 (17-20 ส.ค. 69):**
+  - **วันที่ 5-6:** ภาษาราชการ & ระบบงานสารบรรณอิเล็กทรอนิกส์ (e-Saraban) & แพลตฟอร์ม MS 365 / Google Workspace
+  - **วันที่ 7-8:** การสื่อสาร & ทีมเวิร์ก / บริหารคลังข้อมูล แดชบอร์ด & จิตวิทยาบริการขั้นสูง
+
+• **สัปดาห์ที่ 3 (24-28 ส.ค. 69):**
+  - **วันที่ 9-11:** Critical Thinking, Customer Experience, AI ช่วยงานวิชาการ & ระบบอัตโนมัติ (Automation)
+  - **วันที่ 12-13:** การพัฒนา EQ/SQ/AQ, สรุป Reflection ปิดการอบรม และเตรียมตัวก้าวสู่ OJT 90 ชม.`;
+    }
+
+    if (queryLower.includes('สอบ') || queryLower.includes('pre') || queryLower.includes('post') || queryLower.includes('ติว')) {
+        return `💡 **แนวทางพิชิตคะแนนเต็ม Pre-test / Post-test:**
+
+1. **ระเบียบงานสารบรรณ:** จำรูปแบบหนังสือ 3 ย่อหน้า และหนังสือภายนอก/ภายในให้แม่นยำ
+2. **การรักษาความลับข้อมูล (PDPA) & ข้อมูลข่าวสารราชการ:** ข้อมูลส่วนบุคคลต้องได้รับความยินยอมและจัดเก็บอย่างปลอดภัยตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล
+3. **การทำงานแบบ Agile ภาครัฐ:** เน้นการส่งมอบงานทีละส่วน (Iterative), การสื่อสารในทีม, และความยืดหยุ่นต่อการเปลี่ยนแปลง
+4. **จริยธรรมข้าราชการ:** ยึดถือประโยชน์ของประชาชนเป็นศูนย์กลาง ความโปร่งใส และการไม่เลือกปฏิบัติ (Universal Accessibility)`;
+    }
+
+    if (queryLower.includes('ojt') || queryLower.includes('ฝึกงาน') || queryLower.includes('90 ชม') || queryLower.includes('กันยายน')) {
+        return `💼 **แผนกลยุทธ์การฝึกปฏิบัติงานจริง OJT 90 ชั่วโมง (กำหนดการ: กันยายน 2569):**
+
+• **เป้าหมาย:** สะสมเวลาปฏิบัติงานให้ครบ ≥ 90 ชม. ครอบคลุม **4 มิติหลัก:**
+  1. 📊 **มิติที่ 1 (วิเคราะห์ข้อมูล):** เช่น การจัดทำ Dashboard, ทำความสะอาดข้อมูล (Data Cleaning), วิเคราะห์สถิติผู้รับบริการ
+  2. 📝 **มิติที่ 2 (งานสารบรรณ):** ร่างหนังสือราชการ 3 ย่อหน้า, ลงทะเบียนรับ-ส่งหนังสือในระบบ e-Saraban
+  3. 💻 **มิติที่ 3 (งานเทคนิค/ระบบ):** การดูแลระบบไอที, การเขียนสคริปต์อัตโนมัติ (Automation), ดูแลฐานข้อมูล
+  4. 🤝 **มิติที่ 4 (งานบริการ/ประสานงาน):** ให้บริการช่วยเหลือผู้ใช้งาน (Helpdesk Support), ประสานงานหน่วยงานภาครัฐ
+
+📋 **สิ่งที่ต้องเตรียมเบิกเบี้ยเลี้ยง:** ใบบันทึกเวลาทำงาน, รายงานผลประจำสัปดาห์, และแบบประเมินจากพี่เลี้ยง`;
+    }
+
+    return `🤖 **ข้อแนะนำจาก AI Co-Pilot:**
+
+สำหรับเรื่อง *"**${escapeHtml(userQuery)}**"* 
+พี่แจ็คสามารถนำไปปรับใช้ในการอบรม 13 วันและการฝึกงาน OJT ได้ดังนี้ครับ:
+
+1. **ยึดหลักธรรมาภิบาลและความถูกต้อง:** ตรวจสอบความสอดคล้องกับระเบียบราชการและมาตรฐานข้อมูลเสมอ
+2. **นำเครื่องมือดิจิทัลมาทุ่นแรง:** ใช้ AI และระบบ Automate ช่วยลดขั้นตอนที่ซ้ำซ้อน
+3. **บันทึกลงในแฟ้ม Portfolio:** นำผลงานที่ได้ไปเพิ่มในเมนู M1, M3 หรือ M5 เพื่อให้ระบบดึงเข้าเล่ม Portfolio หน้า 6-7 อัตโนมัติครับ
+
+*(หากพี่แจ็คต้องการให้ผมช่วยร่างข้อความเฉพาะเจาะจง พิมพ์บอกรายละเอียดเพิ่มเติมได้เลยนะครับ)*`;
+}
+
+function triggerQuickPrompt(type) {
+    const input = document.getElementById('ai-chat-input');
+    if (!input) return;
+
+    if (type === 'memo3') {
+        input.value = 'ช่วยแนะนำโครงสร้างการเขียนหนังสือราชการ 3 ย่อหน้า พร้อมตัวอย่างภาษาทางการ';
+    } else if (type === 'daily_summary') {
+        input.value = 'ช่วยสรุปภาพรวมเนื้อหาการอบรม 13 วัน ณ โรงแรมเซ็นทารา ไลฟ์ ให้หน่อยครับ';
+    } else if (type === 'exam_prep') {
+        input.value = 'ขอแนวข้อสอบและจุดสำคัญที่มักออกใน Pre-test และ Post-test ภาครัฐ';
+    } else if (type === 'ojt_plan') {
+        input.value = 'ขอแนวทางการวางแผนฝึกปฏิบัติงาน OJT 90 ชม. ในเดือนกันยายน ให้ครบทั้ง 4 ด้าน';
+    }
+
+    sendAIChatMessage();
+}
+
+function toggleAIVoiceRecognition() {
+    const btn = document.getElementById('btn-ai-voice-input');
+    const input = document.getElementById('ai-chat-input');
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert('เบราว์เซอร์ของท่านไม่รองรับการสั่งงานด้วยเสียง กรุณาใช้ Chrome / Safari / Edge เวอร์ชันล่าสุดครับ');
+        return;
+    }
+
+    if (isAIVoiceListening && aiVoiceRecognition) {
+        aiVoiceRecognition.stop();
+        isAIVoiceListening = false;
+        if (btn) btn.classList.remove('text-rose-600', 'animate-pulse');
+        return;
+    }
+
+    try {
+        aiVoiceRecognition = new SpeechRecognition();
+        aiVoiceRecognition.lang = 'th-TH';
+        aiVoiceRecognition.interimResults = false;
+        aiVoiceRecognition.maxAlternatives = 1;
+
+        if (btn) btn.classList.add('text-rose-600', 'animate-pulse');
+        isAIVoiceListening = true;
+        showToast('🎙️ กำลังฟังเสียงภาษาไทย... พูดคำถามได้เลยครับ');
+
+        aiVoiceRecognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            if (input) {
+                input.value = transcript;
+                sendAIChatMessage();
+            }
+        };
+
+        aiVoiceRecognition.onerror = (event) => {
+            console.warn('Speech recognition error', event.error);
+            if (btn) btn.classList.remove('text-rose-600', 'animate-pulse');
+            isAIVoiceListening = false;
+        };
+
+        aiVoiceRecognition.onend = () => {
+            if (btn) btn.classList.remove('text-rose-600', 'animate-pulse');
+            isAIVoiceListening = false;
+        };
+
+        aiVoiceRecognition.start();
+    } catch (e) {
+        console.error('Error starting voice recognition', e);
+        if (btn) btn.classList.remove('text-rose-600', 'animate-pulse');
+        isAIVoiceListening = false;
+    }
+}
+
+function speakAIText(rawText) {
+    if (!('speechSynthesis' in window)) return;
+
+    window.speechSynthesis.cancel();
+    // Clean markdown symbols for natural TTS speech
+    const cleanText = rawText
+        .replace(/[*#_`~\[\]\(\)]/g, '')
+        .replace(/[•-]/g, ' ')
+        .replace(/\n+/g, '. ');
+
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = 'th-TH';
+    utterance.rate = 1.05;
+    utterance.pitch = 1.0;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+function openGeminiApiKeyModal() {
+    const key = localStorage.getItem(GEMINI_API_KEY_STORAGE) || '';
+    setInputValue('input-gemini-api-key', key);
+    openModal('modal-gemini-key');
+}
+
+function saveGeminiApiKey() {
+    const key = getInputValue('input-gemini-api-key').trim();
+    if (key) {
+        localStorage.setItem(GEMINI_API_KEY_STORAGE, key);
+        showToast('บันทึก Gemini API Key เรียบร้อยแล้ว (เปิดใช้ Gemini 1.5 Flash Live)');
+    } else {
+        localStorage.removeItem(GEMINI_API_KEY_STORAGE);
+        showToast('ล้าง Key แล้ว (ใช้งานโหมด Built-in ฟรี 0 บาท)');
+    }
+    updateGeminiKeyStatusLabel();
+    closeModal('modal-gemini-key');
+}
+
+function clearGeminiApiKey() {
+    setInputValue('input-gemini-api-key', '');
+    localStorage.removeItem(GEMINI_API_KEY_STORAGE);
+    updateGeminiKeyStatusLabel();
+    closeModal('modal-gemini-key');
+    showToast('ล้าง Gemini API Key แล้ว');
+}
+

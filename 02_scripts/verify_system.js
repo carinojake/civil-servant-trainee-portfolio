@@ -107,6 +107,10 @@ if (fs.existsSync(indexPath)) {
     assert(html.includes('id="modal-change-pin"'), 'Contains Change Security PIN modal');
     assert(html.includes('skip-link'), 'Contains Screen Reader skip link for WCAG Level AA');
     assert(html.includes('portfolio-page-1') && html.includes('portfolio-page-7'), 'Contains 7-page standard portfolio structure (Page 1 to Page 7)');
+    assert(html.includes('id="ai-buddy-fab"'), 'Contains AI Co-Pilot Floating Action Button');
+    assert(html.includes('id="ai-study-buddy-drawer"'), 'Contains AI Study Buddy Side Drawer');
+    assert(html.includes('id="ai-chat-feed"') && html.includes('id="ai-chat-input"'), 'Contains AI Chat Feed and Input Bar');
+    assert(html.includes('id="modal-gemini-key"'), 'Contains Modal for Gemini API Key setup');
 }
 
 // 5. Audit JavaScript Logic Engine & Calculations (app.js)
@@ -125,6 +129,8 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('preTestUrl') && js.includes('postTestUrl') && js.includes('evalSubmitted'), 'Contains Pre/Post test URLs, scores, and evaluation tracking');
     assert(js.includes('initSecurityLock') && js.includes('submitPinUnlock') && js.includes('lockAppImmediately'), 'Contains Passcode Security Lock & Unlock controllers');
     assert(js.includes('saveNewSecurityPin') && js.includes('clearRememberedDevice'), 'Contains PIN change and device remember management');
+    assert(js.includes('toggleAIBuddyDrawer') && js.includes('sendAIChatMessage') && js.includes('triggerQuickPrompt'), 'Contains AI Study Buddy Drawer & Quick Prompts engine');
+    assert(js.includes('generateAIStudyResponse') && js.includes('speakAIText') && js.includes('toggleAIVoiceRecognition'), 'Contains Hybrid Gemini / Built-in AI & Thai Voice/TTS controllers');
     assert(js.includes('BB 212') && js.includes('BB 211') && js.includes('BB 202') && js.includes('BB 205') && js.includes('BB 203'), 'Contains all 5 Centara Life conference rooms');
     assert(js.includes('ojtLogs'), 'Contains ojtLogs state collection');
     assert(js.includes('artifacts'), 'Contains artifacts state collection');

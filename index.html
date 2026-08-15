@@ -2025,9 +2025,47 @@
                     <button type="button" onclick="closeModal('modal-change-pin')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
                     <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow">บันทึกรหัสใหม่</button>
                 </div>
+    <!-- Modal: Set Gemini API Key -->
+    <div id="modal-gemini-key" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-600"></i>
+                    <span>ตั้งค่า Gemini API Key (Google AI Studio)</span>
+                </h3>
+                <button type="button" onclick="closeModal('modal-gemini-key')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="modal-gemini-key-form" onsubmit="event.preventDefault(); saveGeminiApiKey();" class="space-y-3 text-xs">
+                <div class="p-3 bg-purple-50 rounded-xl border border-purple-200 text-purple-900 leading-relaxed">
+                    <div class="font-bold mb-1 flex items-center gap-1.5">
+                        <i class="fa-solid fa-shield-halved text-purple-700"></i>
+                        <span>ระบบ Hybrid AI: ค่าเริ่มต้นใช้งานฟรี 0 บาท</span>
+                    </div>
+                    <p class="text-[11px] text-purple-800">
+                        หากไม่ใส่ Key ระบบจะใช้ <strong>คลังสมองอัจฉริยะในตัว (Built-in Knowledge)</strong> ได้ทันที หากต้องการคุยสดไม่จำกัดกับ Gemini 1.5 Flash สามารถใส่ API Key ฟรีจาก Google AI Studio ได้ที่นี่ค่ะ (จัดเก็บเฉพาะบนเครื่องของท่านอย่างปลอดภัย)
+                    </p>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="input-gemini-api-key">Gemini API Key</label>
+                    <input type="password" id="input-gemini-api-key" placeholder="AIzaSy..." class="w-full p-2.5 rounded-lg border border-slate-300 bg-white font-mono text-xs focus:ring-2 focus:ring-purple-500">
+                    <div class="mt-1.5 flex justify-between items-center text-[11px]">
+                        <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline font-semibold flex items-center gap-1">
+                            <span>ขอรับ API Key ฟรีที่ Google AI Studio</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                        </a>
+                        <button type="button" onclick="clearGeminiApiKey()" class="text-rose-600 hover:underline">ล้าง Key</button>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('modal-gemini-key')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold shadow">บันทึก Key</button>
+                </div>
             </form>
         </div>
     </div>
+
 
     <!-- Passcode Security Lock Screen Overlay -->
     <div id="lock-screen-overlay" class="fixed inset-0 z-[99999] bg-govNavy flex items-center justify-center p-3 sm:p-4 transition-opacity duration-300">
@@ -2087,6 +2125,94 @@
                         <span>ปลดล็อคเข้าสู่ระบบ</span>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating AI Co-Pilot Button -->
+    <button id="ai-buddy-fab" onclick="toggleAIBuddyDrawer()" class="flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 sm:py-3 bg-gradient-to-r from-govNavy via-blue-900 to-indigo-900 text-white rounded-full font-bold text-xs shadow-2xl border-2 border-amber-400 hover:border-amber-300 animate-pulse-glow cursor-pointer" title="เปิด AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน" aria-label="เปิด AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน">
+        <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-amber-400 text-govNavy flex items-center justify-center text-xs sm:text-sm shadow font-bold">
+            <i class="fa-solid fa-robot"></i>
+        </span>
+        <span class="font-bold text-[11px] sm:text-xs tracking-tight">AI Co-Pilot ติว & งานราชการ</span>
+    </button>
+
+    <!-- AI Study Buddy Side Drawer -->
+    <div id="ai-study-buddy-drawer" class="drawer-closed fixed inset-y-0 right-0 z-[100] w-full sm:w-[420px] md:w-[460px] bg-white shadow-2xl border-l border-slate-200 flex flex-col justify-between" role="dialog" aria-modal="true" aria-label="AI Co-Pilot ผู้ช่วยติวและภารกิจราชการ">
+        <!-- Drawer Header -->
+        <div class="p-4 bg-gradient-to-r from-govNavy to-blue-900 text-white border-b border-slate-700/50 flex items-center justify-between shrink-0 shadow-md">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-9 h-9 rounded-xl bg-amber-400 text-govNavy flex items-center justify-center text-base shadow font-bold">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold flex items-center gap-1.5">
+                        <span>AI Co-Pilot ผู้ช่วยติว & งานราชการ</span>
+                        <span class="text-[10px] bg-emerald-500/30 text-emerald-300 px-1.5 py-0.2 rounded border border-emerald-400/30 font-normal">Hybrid</span>
+                    </h3>
+                    <div class="text-[10px] text-blue-200 font-medium">ผู้ช่วยอัจฉริยะ 13 วัน เซ็นทารา ไลฟ์ & OJT 90 ชม.</div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-1">
+                <button type="button" onclick="clearAIChatHistory()" class="p-2 text-slate-300 hover:text-rose-300 hover:bg-white/10 rounded-lg transition text-xs" title="ล้างบทสนทนา">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+                <button type="button" onclick="toggleAIBuddyDrawer()" class="p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition text-sm" title="ปิดหน้าต่าง AI">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Action Prompts Bar -->
+        <div class="p-2.5 bg-slate-50 border-b border-slate-200 shrink-0">
+            <div class="text-[10px] font-bold text-slate-500 mb-1.5 flex items-center justify-between">
+                <span><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> ภารกิจด่วนคลิกเดียว (Quick Prompts):</span>
+                <span class="text-[9px] text-emerald-600 font-semibold">ฟรี 0 บาท</span>
+            </div>
+            <div class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-1">
+                <button type="button" onclick="triggerQuickPrompt('memo3')" class="px-2.5 py-1 bg-white hover:bg-blue-50 text-govNavy hover:text-blue-700 border border-slate-200 hover:border-blue-300 rounded-lg text-[11px] font-bold shrink-0 shadow-2xs transition flex items-center gap-1">
+                    <span>📝</span><span>ร่างหนังสือ 3 ย่อหน้า</span>
+                </button>
+                <button type="button" onclick="triggerQuickPrompt('daily_summary')" class="px-2.5 py-1 bg-white hover:bg-emerald-50 text-govNavy hover:text-emerald-700 border border-slate-200 hover:border-emerald-300 rounded-lg text-[11px] font-bold shrink-0 shadow-2xs transition flex items-center gap-1">
+                    <span>🎓</span><span>สรุปบทเรียนประจำวัน</span>
+                </button>
+                <button type="button" onclick="triggerQuickPrompt('exam_prep')" class="px-2.5 py-1 bg-white hover:bg-purple-50 text-govNavy hover:text-purple-700 border border-slate-200 hover:border-purple-300 rounded-lg text-[11px] font-bold shrink-0 shadow-2xs transition flex items-center gap-1">
+                    <span>💡</span><span>ติวข้อสอบ Pre/Post</span>
+                </button>
+                <button type="button" onclick="triggerQuickPrompt('ojt_plan')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-govNavy hover:text-amber-700 border border-slate-200 hover:border-amber-300 rounded-lg text-[11px] font-bold shrink-0 shadow-2xs transition flex items-center gap-1">
+                    <span>💼</span><span>วางแผน OJT 4 มิติ</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Feed -->
+        <div id="ai-chat-feed" class="flex-grow p-4 overflow-y-auto custom-scrollbar space-y-3 text-xs bg-slate-50/50">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Chat Input & Controls Bar -->
+        <div class="p-3 bg-white border-t border-slate-200 space-y-2 shrink-0">
+            <div class="flex items-center justify-between text-[10px] text-slate-500 px-1">
+                <label class="flex items-center gap-1.5 cursor-pointer">
+                    <input type="checkbox" id="ai-tts-toggle" class="rounded text-govNavy focus:ring-govNavy" checked>
+                    <span><i class="fa-solid fa-volume-high text-blue-600"></i> อ่านออกเสียงคำตอบ (TTS)</span>
+                </label>
+                <button type="button" onclick="openGeminiApiKeyModal()" class="text-slate-400 hover:text-blue-600 font-semibold flex items-center gap-1 transition">
+                    <i class="fa-solid fa-key text-[9px]"></i>
+                    <span id="gemini-key-status-label">ตั้งค่า API Key</span>
+                </button>
+            </div>
+
+            <div class="flex items-end gap-1.5">
+                <div class="relative flex-grow">
+                    <textarea id="ai-chat-input" rows="2" placeholder="พิมพ์คำถาม หรือข้อความที่ต้องการให้ AI ช่วย..." class="w-full p-2.5 pr-8 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-slate-50 focus:bg-white resize-none leading-relaxed transition" onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendAIChatMessage();}"></textarea>
+                    <button type="button" id="btn-ai-voice-input" onclick="toggleAIVoiceRecognition()" class="absolute right-2.5 bottom-2.5 w-6 h-6 rounded-lg text-slate-400 hover:text-rose-500 flex items-center justify-center transition" title="พิมพ์ด้วยเสียงภาษาไทย">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                </div>
+                <button type="button" id="btn-ai-send" onclick="sendAIChatMessage()" class="px-3.5 py-3 bg-govNavy hover:bg-govNavyDark active:scale-95 text-white rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </div>
         </div>
     </div>
