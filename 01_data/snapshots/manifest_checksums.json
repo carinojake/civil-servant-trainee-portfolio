@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-08-15T13:47:56.407Z",
+  "generatedAt": "2026-08-15T13:55:53.471Z",
   "snapshotFile": "snapshot_baseline_v1.json",
   "fileManifest": {
     "index.html": {
-      "sizeBytes": 162414,
-      "sha256": "7c65d800edfbaebcf6a368898fb6c8ed1e5d47de691dc65cea152c7484901f55"
+      "sizeBytes": 162457,
+      "sha256": "245fd0d4feec8e38f226b451af7cf1409b5cac2994622c9f2f929bb2844b8d71"
     },
     "app.js": {
       "sizeBytes": 180934,
       "sha256": "060aaa1ce8788b8fab588c359f64fe76f3f64827a34b5dd5caf60c8d8623cdef"
     },
     "styles.css": {
-      "sizeBytes": 10167,
-      "sha256": "6b49c0f6c66d6dcf0166bda5c2e1fd16e6e967add22b1242c50264e059e268cd"
+      "sizeBytes": 10032,
+      "sha256": "4e83c764081085d762b9c65689a9de8e395e0b801e2ee5758c7a7489357d9d8f"
     },
     "system_requirements_blueprint.html": {
       "sizeBytes": 35398,
