@@ -61,38 +61,46 @@ const initialMasterParticipants = [
 const defaultAppData = {
     userProfile: {
         id: "TR-001",
-        fullName: "นายเจค นิติพัฒน์ คุ้มวงษ์",
+        fullName: "นายนิติพัฒน์ คุ้มวงษ์",
         nickname: "เจค",
         track: "ADV",
         trackName: "Advanced AI & Automation",
-        position: "นักวิชาการคอมพิวเตอร์",
-        organization: "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
-        ojtAgency: "สำนักงานพัฒนารัฐบาลดิจิทัล (องค์การมหาชน) - DGA",
-        email: "nitipat.k@bdi.or.th",
-        phone: "081-234-5678",
-        accessibilityNeeds: "สิ่งอำนวยความสะดวก: การปรับขยายตัวอักษรและชุดสีความคมชัดสูง (High Contrast)",
-        vision: "มุ่งมั่นนำความรู้และประสบการณ์ด้านเทคโนโลยีสารสนเทศ การวิเคราะห์ข้อมูล และปัญญาประดิษฐ์ (AI) มาขับเคลื่อนการพัฒนาระบบบริการภาครัฐให้มีความสะดวกรวดเร็ว ปลอดภัย มีธรรมาภิบาล และทุกคนสามารถเข้าถึงได้อย่างเท่าเทียม (Universal Accessibility) เพื่อประโยชน์สูงสุดของประชาชนและประเทศชาติ",
+        position: "นักวิชาการคอมพิวเตอร์ / เจ้าหน้าที่ระบบคอมพิวเตอร์",
+        organization: "ระบบเทคโนโลยีสารสนเทศ การบริหารจัดการฐานข้อมูล และโครงสร้างเครือข่ายองค์กร (ประสบการณ์ทำงานรวม 13 ปี)",
+        ojtAgency: "หน่วยงานภาครัฐ / การฝึกปฏิบัติงานจริง (OJT)",
+        email: "lusir999@gmail.com",
+        phone: "0819265159",
+        accessibilityNeeds: "เพิ่มรูปโปรไฟล์ผ่าน Admin / ขยายตัวอักษรและชุดสีความคมชัดสูง",
+        vision: "มุ่งมั่นนำประสบการณ์ด้านเทคโนโลยีสารสนเทศมาพัฒนาระบบงานภาครัฐ ให้มีประสิทธิภาพ ปลอดภัย เข้าถึงง่าย และสร้างประโยชน์สูงสุดแก่ประชาชน\n\n“ข้อจำกัดไม่ใช่อุปสรรคของการสร้างคุณค่า”",
         experiences: [
             {
-                role: "เจ้าหน้าที่พัฒนาระบบคอมพิวเตอร์และระบบอัตโนมัติ",
-                agency: "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)",
-                period: "2565 - ปัจจุบัน",
-                desc: "ออกแบบและดูแลกระบวนการจัดการข้อมูล (Data Pipeline), พัฒนาโมเดล AI Automation และประสานงานระบบสารสนเทศภาครัฐ"
+                role: "เจ้าหน้าที่ระบบคอมพิวเตอร์",
+                agency: "สภากาชาดไทย",
+                period: "2565 – 2567 (2 ปี)",
+                desc: "ดูแลระบบคอมพิวเตอร์ เครื่องแม่ข่าย และเครือข่ายองค์กร พร้อมสนับสนุนและแก้ไขปัญหาทางเทคนิคให้บุคลากร"
             },
             {
-                role: "นักวิชาการสารสนเทศ",
-                agency: "ศูนย์สนับสนุนบริการสุขภาพดิจิทัล",
-                period: "2560 - 2565",
-                desc: "บริหารจัดการฐานข้อมูล ดูแลความมั่นคงปลอดภัยทางไซเบอร์ และจัดทำรายงานวิเคราะห์ข้อมูลเชิงสถิติ"
+                role: "นักวิชาการคอมพิวเตอร์ / ผู้เชี่ยวชาญด้านไอที",
+                agency: "กรมกิจการผู้สูงอายุ",
+                period: "2556 – 2565 (9 ปี)",
+                desc: "ออกแบบและบริหารฐานข้อมูล วางโครงสร้างระบบเครือข่าย และร่วมขับเคลื่อนแผนงานดิจิทัลสู่ Government 4.0"
+            },
+            {
+                role: "ช่างเทคนิคสนับสนุนด้านไอที (IT Support)",
+                agency: "World Entertainment Network",
+                period: "2554 – 2556 (2 ปี)",
+                desc: "ดูแลโครงสร้างพื้นฐานไอที ติดตั้งซอฟต์แวร์และฮาร์ดแวร์ และให้บริการช่วยเหลือผู้ใช้งานในองค์กร"
             }
         ],
         hardSkills: [
-            "Python & Fast API", "PostgreSQL & Database Architecture", "Generative AI Prompting (R-C-T-F)",
-            "Data Analytics & Dashboard", "System Analysis & Design", "Docker & Linux", "Google Apps Script"
+            "Database Management & Architecture",
+            "Systems Analysis & Design (SA)",
+            "Network & IT Security"
         ],
         softSkills: [
-            "การสื่อสารและประสานงานภาครัฐ", "การคิดเชิงวิเคราะห์และการแก้ปัญหา", "จริยธรรมและธรรมาภิบาลข้อมูล (PDPA)",
-            "การทำงานร่วมกันเป็นทีม", "การบริหารจัดการเวลาและโครงการ"
+            "Strategic Planning & Budgeting",
+            "Complex Problem Solving & Crisis Management",
+            "Adaptability & Continuous Learning"
         ]
     },
     attendance: [
@@ -580,6 +588,12 @@ function loadSavedState() {
         if (stored) {
             const parsed = JSON.parse(stored);
             appState = { ...defaultAppData, ...parsed };
+
+            // Upgrade to authentic 13-year resume data if previously using sample mock data
+            if (!parsed.userProfile || parsed.userProfile.email === 'nitipat.k@bdi.or.th' || !parsed.userProfile.experiences || parsed.userProfile.experiences.length < 3) {
+                appState.userProfile = JSON.parse(JSON.stringify(defaultAppData.userProfile));
+            }
+
             // Ensure attendance data includes the updated rich structure & daily action hub properties
             if (parsed.attendance && parsed.attendance.length === 13) {
                 appState.attendance = defaultAppData.attendance.map((defDay, idx) => {
