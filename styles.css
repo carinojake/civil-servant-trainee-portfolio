@@ -1,0 +1,337 @@
+/* ==========================================================================
+   Inclusive Design System & Print Stylesheet (styles.css)
+   Complies with WCAG 2.1 Level AA & Official Thai Government Standard
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Typography & Global Resets
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+    --font-heading: 'Prompt', sans-serif;
+    --font-body: 'Sarabun', sans-serif;
+    
+    /* Default Theme (Modern Dynamic) */
+    --bg-main: #F4F7FB;
+    --bg-card: #FFFFFF;
+    --bg-card-alt: #F8FAFC;
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border-color: #E2E8F0;
+    
+    --primary: #1B365D;
+    --primary-hover: #122543;
+    --primary-light: #EEF4FF;
+    --primary-text: #FFFFFF;
+    
+    --accent: #2E8B57;
+    --accent-hover: #246B43;
+    --accent-light: #ECFDF5;
+    --accent-text: #FFFFFF;
+    
+    --warning: #D97706;
+    --danger: #DC2626;
+    --info: #0284C7;
+    
+    --focus-ring: #2563EB;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   2. Accessible Themes (Executive Slate, Modern Dynamic, High Contrast)
+   -------------------------------------------------------------------------- */
+/* Theme 1: Executive Slate */
+body.theme-slate {
+    --bg-main: #0F172A;
+    --bg-card: #1E293B;
+    --bg-card-alt: #334155;
+    --text-main: #F8FAFC;
+    --text-muted: #94A3B8;
+    --border-color: #334155;
+    
+    --primary: #38BDF8;
+    --primary-hover: #0EA5E9;
+    --primary-light: rgba(56, 189, 248, 0.15);
+    --primary-text: #0F172A;
+    
+    --accent: #34D399;
+    --accent-hover: #10B981;
+    --accent-light: rgba(52, 211, 153, 0.15);
+    --accent-text: #0F172A;
+    
+    --focus-ring: #38BDF8;
+}
+
+/* Theme 2: High Contrast (WCAG AAA - Vision Impairment / Low Vision) */
+body.theme-contrast {
+    --bg-main: #000000;
+    --bg-card: #121212;
+    --bg-card-alt: #1F1F1F;
+    --text-main: #FFFFFF;
+    --text-muted: #E2E8F0;
+    --border-color: #FFD600;
+    
+    --primary: #FFD600;
+    --primary-hover: #FFF066;
+    --primary-light: #2A2600;
+    --primary-text: #000000;
+    
+    --accent: #00FF66;
+    --accent-hover: #66FF99;
+    --accent-light: #002B11;
+    --accent-text: #000000;
+    
+    --warning: #FF9900;
+    --danger: #FF3333;
+    --info: #33CCFF;
+    
+    --focus-ring: #FFD600;
+    --shadow-md: none;
+    --shadow-lg: none;
+}
+
+body.theme-contrast .card,
+body.theme-contrast .app-panel,
+body.theme-contrast input,
+body.theme-contrast textarea,
+body.theme-contrast select,
+body.theme-contrast table,
+body.theme-contrast th,
+body.theme-contrast td {
+    border-color: #FFD600 !important;
+}
+
+body.theme-contrast button:focus,
+body.theme-contrast a:focus,
+body.theme-contrast input:focus,
+body.theme-contrast textarea:focus {
+    outline: 3px solid #FFD600 !important;
+    outline-offset: 2px !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Font Size Scaling (A- / A / A+)
+   -------------------------------------------------------------------------- */
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .heading-font {
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+}
+
+body.font-normal {
+    font-size: 15px;
+}
+body.font-large {
+    font-size: 17px;
+}
+body.font-large h1 { font-size: 1.85rem !important; }
+body.font-large h2 { font-size: 1.55rem !important; }
+body.font-large h3 { font-size: 1.3rem !important; }
+body.font-large p, body.font-large input, body.font-large select, body.font-large button { font-size: 1.05rem !important; }
+
+body.font-xlarge {
+    font-size: 19px;
+}
+body.font-xlarge h1 { font-size: 2.1rem !important; }
+body.font-xlarge h2 { font-size: 1.75rem !important; }
+body.font-xlarge h3 { font-size: 1.45rem !important; }
+body.font-xlarge p, body.font-xlarge input, body.font-xlarge select, body.font-xlarge button { font-size: 1.2rem !important; }
+
+/* --------------------------------------------------------------------------
+   4. Universal Accessibility Helpers & Focus Ring
+   -------------------------------------------------------------------------- */
+:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: #fff;
+    padding: 8px 16px;
+    z-index: 100;
+    transition: top 0.2s ease;
+}
+.skip-link:focus {
+    top: 0;
+}
+
+/* Touch targets for mobile (>= 44px) */
+.touch-target {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* --------------------------------------------------------------------------
+   5. UI Cards, Panels, and Animations
+   -------------------------------------------------------------------------- */
+.app-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+}
+
+.app-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.tab-btn.active {
+    background-color: var(--primary);
+    color: var(--primary-text);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-btn:not(.active) {
+    background-color: transparent;
+    color: var(--text-muted);
+}
+.tab-btn:not(.active):hover {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+/* Voice Indicator Pulse Animation */
+@keyframes voice-pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+.voice-recording-pulse {
+    animation: voice-pulse 1.2s infinite ease-in-out;
+}
+
+/* Modal Transition */
+.modal-backdrop {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(4px);
+}
+
+/* --------------------------------------------------------------------------
+   6. Portfolio Master Print Stylesheet (A4 Multi-Page Layout)
+   -------------------------------------------------------------------------- */
+.print-page {
+    background: #FFFFFF;
+    color: #1A202C;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+}
+
+@media screen {
+    .print-only {
+        display: none !important;
+    }
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 12mm 15mm;
+    }
+
+    body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Hide Web UI interactive components during printing */
+    header,
+    nav,
+    .no-print,
+    .app-header-bar,
+    .tab-navigation-bar,
+    .toast-container,
+    .modal-backdrop,
+    .action-bar-floating,
+    button:not(.allow-print-btn),
+    .web-only {
+        display: none !important;
+    }
+
+    /* Make print container full width */
+    #portfolio-preview-container,
+    .print-container {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .print-page {
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 10mm 12mm !important;
+        width: 100% !important;
+        min-height: auto !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: block !important;
+    }
+
+    .print-page:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+
+    /* Ensure text colors remain sharp and readable */
+    h1, h2, h3, h4, p, span, td, th {
+        color: #000000 !important;
+    }
+
+    /* Preserve borders and background colors */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   8. Passcode Security Lock Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.animate-shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInScale 0.25s ease-out forwards;
+}
+

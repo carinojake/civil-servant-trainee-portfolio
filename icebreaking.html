@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 ระบบบันทึกกิจกรรม Ice Breaking & แบบบันทึกการมีส่วนร่วมอย่างเท่าเทียม</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="icebreaking.css">
+</head>
+<body class="theme-icebreaking">
+    <!-- Header / Topbar -->
+    <header class="app-header">
+        <div class="brand">
+            <i class="fa-solid fa-users-rays logo-icon"></i>
+            <div class="brand-text">
+                <h1>ICE BREAKING & EQUALITY FORM STUDIO</h1>
+                <p>ใบงานกิจกรรม "รู้จักฉัน รู้จักเธอ" & แบบบันทึกการมีส่วนร่วมอย่างเท่าเทียม <span class="badge-active"><i class="fa-solid fa-check-circle"></i> แบบโต้ตอบ & สั่งพิมพ์ PDF A4</span></p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <!-- 3 Visual Theme Presets Switcher -->
+            <div class="theme-preset-group" style="display:flex;align-items:center;gap:4px;background:rgba(15,23,42,0.8);padding:3px 8px;border-radius:30px;border:1px solid rgba(255,255,255,0.1);">
+                <span class="label" style="font-size:11px;color:#94A3B8;margin-right:2px;"><i class="fa-solid fa-palette"></i> ดีไซน์ 3 แบบ:</span>
+                <button class="btn-theme-chip active" id="btnIceStyle1" onclick="switchIceTheme('style-1')" title="แบบที่ 1: Modern Corporate Teal (ทางการ ไอที สมาร์ท) [แนะนำ]" style="padding:4px 8px;font-size:11px;">
+                    <span class="dot" style="background:#10B981;width:8px;height:8px;border-radius:50%;display:inline-block;"></span> แบบ 1
+                </button>
+                <button class="btn-theme-chip" id="btnIceStyle2" onclick="switchIceTheme('style-2')" title="แบบที่ 2: High-Tech Cyber Dark (นีออน ดาร์กโหมด ไฮเทค)" style="padding:4px 8px;font-size:11px;">
+                    <span class="dot" style="background:#06B6D4;width:8px;height:8px;border-radius:50%;display:inline-block;"></span> แบบ 2
+                </button>
+                <button class="btn-theme-chip" id="btnIceStyle3" onclick="switchIceTheme('style-3')" title="แบบที่ 3: Royal Government Minimalist (โทนอบอุ่น เรียบหรู มาตรฐานราชการ)" style="padding:4px 8px;font-size:11px;">
+                    <span class="dot" style="background:#D97706;width:8px;height:8px;border-radius:50%;display:inline-block;"></span> แบบ 3
+                </button>
+            </div>
+            <a href="index.html" class="btn btn-outline" title="กลับไปยัง Portfolio Studio">
+                <i class="fa-solid fa-arrow-left"></i> กลับ Portfolio Studio
+            </a>
+            <button class="btn btn-outline" onclick="exportIceJSON()" title="ส่งออกข้อมูล JSON">
+                <i class="fa-solid fa-download"></i> ส่งออก JSON
+            </button>
+            <button class="btn btn-outline" onclick="triggerImportIceJSON()" title="นำเข้าข้อมูล JSON">
+                <i class="fa-solid fa-upload"></i> นำเข้า JSON
+            </button>
+            <input type="file" id="jsonIceFileInput" accept=".json" style="display:none;" onchange="importIceJSON(event)">
+            <button class="btn btn-warning" onclick="resetIceData()" title="รีเซ็ตเป็นข้อมูลตั้งต้นของคุณเจค">
+                <i class="fa-solid fa-rotate-left"></i> รีเซ็ตข้อมูล
+            </button>
+            <button class="btn btn-success btn-lg" onclick="printIceWorksheets()" title="สั่งพิมพ์ หรือ Save เป็น PDF A4 (3 ใบ)">
+                <i class="fa-solid fa-file-pdf"></i> พิมพ์ / Save PDF (A4 3 ใบ)
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Split View -->
+    <main class="app-workspace">
+        <!-- Left Panel: Form Controls -->
+        <aside class="editor-panel">
+            <nav class="page-tabs">
+                <button class="tab-btn active" data-sheet="1" onclick="selectSheet(1)">
+                    <span class="num">1</span>
+                    <span class="title">รู้จักฉัน รู้จักเธอ (ข้อมูล&เป้าหมาย)</span>
+                </button>
+                <button class="tab-btn" data-sheet="2" onclick="selectSheet(2)">
+                    <span class="num">2</span>
+                    <span class="title">สมุดบันทึกเพื่อนใหม่ (5 คน)</span>
+                </button>
+                <button class="tab-btn" data-sheet="3" onclick="selectSheet(3)">
+                    <span class="num">3</span>
+                    <span class="title">การมีส่วนร่วมอย่างเท่าเทียม</span>
+                </button>
+            </nav>
+
+            <div class="form-container" id="iceFormContainer">
+                <!-- Dynamic form fields populated by JS -->
+            </div>
+        </aside>
+
+        <!-- Right Panel: Live Preview Canvas -->
+        <section class="preview-panel">
+            <div class="canvas-toolbar">
+                <div class="canvas-info">
+                    <span id="currentSheetTitle">📄 ใบงานที่ 1: รู้จักฉัน รู้จักเธอ</span>
+                    <span class="badge-a4"><i class="fa-solid fa-print"></i> A4 Live Preview</span>
+                </div>
+                <div class="zoom-controls">
+                    <button onclick="changeZoom(-0.1)" title="ย่อขนาด"><i class="fa-solid fa-minus"></i></button>
+                    <span id="zoomLevel">100%</span>
+                    <button onclick="changeZoom(0.1)" title="ขยายขนาด"><i class="fa-solid fa-plus"></i></button>
+                    <button onclick="resetZoom()" title="ขนาดพอดีหน้าจอ"><i class="fa-solid fa-expand"></i></button>
+                </div>
+            </div>
+
+            <div class="canvas-viewport" id="canvasViewport">
+                <div class="a4-sheet" id="iceA4Canvas">
+                    <!-- Live rendering here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Print Only Container (Prints all 3 sheets seamlessly) -->
+    <div id="icePrintContainer" class="print-only-container"></div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="iceToast"></div>
+
+    <script src="icebreaking.js"></script>
+</body>
+</html>

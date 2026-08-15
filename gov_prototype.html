@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบบริหารโครงการภาครัฐ - ต้นแบบ 3 รูปแบบ (Interactive Prototypes)</title>
+  
+  <!-- Google Fonts: Sarabun & Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700;800&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Prototype Stylesheet -->
+  <link rel="stylesheet" href="gov_styles.css">
+</head>
+<body class="style-a font-md">
+  
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to Content)</a>
+
+  <!-- TOP PROTOTYPE CONTROLLER BAR -->
+  <aside class="prototype-controller" aria-label="แถบควบคุมการทดสอบต้นแบบ">
+    <div class="controller-left">
+      <span class="controller-tag">Gov Prototype Suite</span>
+      
+      <!-- Style Selector -->
+      <div class="style-selector-group" role="radiogroup" aria-label="เลือกรูปแบบต้นแบบ">
+        <button class="style-btn active" data-style="style-a" onclick="window.govApp.switchStyle('style-a')" title="รูปแบบทางการ คล้ายระบบราชการ เมนูบน เอกสารศูนย์กลาง">
+          <i class="fa-solid fa-landmark"></i> แบบ A: Classic
+        </button>
+        <button class="style-btn" data-style="style-b" onclick="window.govApp.switchStyle('style-b')" title="รูปแบบแดชบอร์ดบริหารสมัยใหม่ เมนูด้านข้าง KPI & Workflow">
+          <i class="fa-solid fa-gauge-high"></i> แบบ B: Command Center
+        </button>
+        <button class="style-btn" data-style="style-c" onclick="window.govApp.switchStyle('style-c')" title="รูปแบบแนะนำทีละขั้นตอน ตัวหนังสือใหญ่ เข้าถึงง่าย">
+          <i class="fa-solid fa-universal-access"></i> แบบ C: Guided Flow
+        </button>
+      </div>
+    </div>
+
+    <div class="controller-center">
+      <!-- Device Viewport Switcher -->
+      <div class="view-device-group" role="group" aria-label="จำลองขนาดหน้าจอ">
+        <span style="font-size:11px; color:#94A3B8; margin-right:4px;">จอแสดงผล:</span>
+        <button class="ctrl-btn dev-btn active" data-view="responsive" onclick="window.govApp.setDeviceView('responsive')" title="ขนาดเต็มหน้าจอปกติ">
+          <i class="fa-solid fa-expand"></i> เต็มจอ
+        </button>
+        <button class="ctrl-btn dev-btn" data-view="desktop" onclick="window.govApp.setDeviceView('desktop')" title="จำลองจอคอมพิวเตอร์ 1440x900">
+          <i class="fa-solid fa-desktop"></i> Desktop
+        </button>
+        <button class="ctrl-btn dev-btn" data-view="tablet" onclick="window.govApp.setDeviceView('tablet')" title="จำลองจอแท็บเล็ต 834x1112">
+          <i class="fa-solid fa-tablet-screen-button"></i> Tablet
+        </button>
+      </div>
+    </div>
+
+    <div class="controller-right">
+      <!-- Accessibility Tools -->
+      <div class="a11y-controls-group">
+        <button class="ctrl-btn" onclick="window.govApp.toggleHighContrast()" title="เปิด/ปิด โหมดความคมชัดสูง (High Contrast WCAG AAA)">
+          <i class="fa-solid fa-circle-half-stroke"></i> Contrast
+        </button>
+        <button class="ctrl-btn" onclick="window.govApp.setFontSize('sm')" title="ลดขนาดตัวอักษร">A-</button>
+        <button class="ctrl-btn" onclick="window.govApp.setFontSize('md')" title="ขนาดตัวอักษรปกติ">A</button>
+        <button class="ctrl-btn" onclick="window.govApp.setFontSize('lg')" title="เพิ่มขนาดตัวอักษร">A+</button>
+        <button class="ctrl-btn" onclick="window.govApp.setFontSize('xl')" title="ขนาดตัวอักษรใหญ่พิเศษ">A++</button>
+        <button class="ctrl-btn" onclick="window.govApp.resetDemoData()" title="รีเซ็ตข้อมูลและสถานะการทดสอบ">
+          <i class="fa-solid fa-rotate-right"></i> รีเซ็ต
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- VIEWPORT SIMULATOR WRAPPER -->
+  <div id="viewport-simulator" class="viewport-simulator-container mode-responsive">
+    <div id="prototype-app-root" style="width:100%;">
+      <!-- Dynamic App Injected by JS -->
+    </div>
+  </div>
+
+  <!-- Prototype Application Engine -->
+  <script src="gov_app.js"></script>
+</body>
+</html>

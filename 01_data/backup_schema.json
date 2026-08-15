@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CivilServantTraineeBackupSchema",
+  "description": "JSON Schema สำหรับตรวจสอบความถูกต้องของไฟล์สำรองข้อมูลระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "exportedAt",
+    "userProfile",
+    "attendance",
+    "ojtLogs",
+    "ojtChecklist",
+    "artifacts"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "enum": ["2.0.0", "2.1.0"]
+    },
+    "exportedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "checksum": {
+      "type": "string"
+    },
+    "userProfile": {
+      "type": "object",
+      "required": ["fullName", "track", "position", "organization", "ojtAgency"],
+      "properties": {
+        "id": { "type": "string" },
+        "fullName": { "type": "string", "minLength": 3 },
+        "nickname": { "type": "string" },
+        "track": { "type": "string", "enum": ["ADV", "FND"] },
+        "trackName": { "type": "string" },
+        "position": { "type": "string" },
+        "organization": { "type": "string" },
+        "ojtAgency": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "accessibilityNeeds": { "type": "string" },
+        "vision": { "type": "string" },
+        "experiences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["role", "agency", "period", "desc"],
+            "properties": {
+              "role": { "type": "string" },
+              "agency": { "type": "string" },
+              "period": { "type": "string" },
+              "desc": { "type": "string" }
+            }
+          }
+        },
+        "hardSkills": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "softSkills": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "attendance": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": {
+        "type": "object",
+        "required": ["day", "title", "status", "reflection"],
+        "properties": {
+          "day": { "type": "integer", "minimum": 1, "maximum": 13 },
+          "title": { "type": "string" },
+          "speaker": { "type": "string" },
+          "date": { "type": "string" },
+          "status": { "type": "string", "enum": ["PRESENT", "ONLINE", "LEAVE", "ABSENT"] },
+          "reflection": { "type": "string" },
+          "actionPlan": { "type": "string" }
+        }
+      }
+    },
+    "ojtLogs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "dimension", "hours", "task"],
+        "properties": {
+          "id": { "type": "string" },
+          "date": { "type": "string" },
+          "dimension": { "type": "string", "enum": ["1", "2", "3", "4"] },
+          "dimensionName": { "type": "string" },
+          "hours": { "type": "number", "minimum": 0.5, "maximum": 24 },
+          "task": { "type": "string" },
+          "output": { "type": "string" },
+          "link": { "type": "string" }
+        }
+      }
+    },
+    "ojtChecklist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "done"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "done": { "type": "boolean" }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "category", "altText", "link"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "category": { "type": "string" },
+          "altText": { "type": "string", "minLength": 5 },
+          "link": { "type": "string" }
+        }
+      }
+    },
+    "traineesList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "track", "position", "organization", "ojtAgency"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "nickname": { "type": "string" },
+          "track": { "type": "string", "enum": ["ADV", "FND"] },
+          "trackName": { "type": "string" },
+          "position": { "type": "string" },
+          "organization": { "type": "string" },
+          "ojtAgency": { "type": "string" },
+          "skills": { "type": "array", "items": { "type": "string" } },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "accessibilityNeeds": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>พิมพ์เขียวระบบบันทึกการอบรม (Training Log App Blueprint)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sarabun', 'sans-serif'],
+                        heading: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: '#1B365D',
+                        gold: '#D97706',
+                        teal: '#0D9488',
+                        lightbg: '#F8FAFC'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .tab-active {
+            background-color: #1B365D;
+            color: #FFFFFF;
+            border-color: #1B365D;
+        }
+        .tab-inactive {
+            background-color: #FFFFFF;
+            color: #475569;
+            border-color: #E2E8F0;
+        }
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <header class="bg-navy text-white py-6 shadow-md border-b-4 border-gold sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-heading font-bold flex items-center gap-3">
+                    <span>📐</span> พิมพ์เขียวระบบบันทึกการอบรมและ Portfolio (System Blueprint)
+                </h1>
+                <p class="mt-2 text-sm md:text-base text-blue-100 font-sans">
+                    อ้างอิงจากเอกสารวิเคราะห์ข้อกำหนดและการบูรณาการระบบ โครงการอบรมหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1
+                </p>
+            </div>
+            <a href="index.html" class="bg-gold hover:bg-amber-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-sm transition shadow flex items-center gap-2">
+                <i class="fa-solid fa-rocket"></i>
+                <span>เปิดแอปพลิเคชันหลัก (index.html)</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="bg-white border-b border-gray-200 shadow-sm sticky top-[88px] md:top-[92px] z-40 overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-2 py-3 min-w-max">
+            <button onclick="navTo('sec-overview')" class="font-heading px-4 py-2 rounded-lg text-sm font-semibold bg-navy text-white transition-colors" id="nav-sec-overview">📊 ภาพรวม & วัตถุประสงค์</button>
+            <button onclick="navTo('sec-personas')" class="font-heading px-4 py-2 rounded-lg text-sm font-semibold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors" id="nav-sec-personas">👥 กลุ่มผู้ใช้งาน (Personas)</button>
+            <button onclick="navTo('sec-modules')" class="font-heading px-4 py-2 rounded-lg text-sm font-semibold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors" id="nav-sec-modules">🧩 โครงสร้างโมดูล & CRUD</button>
+            <button onclick="navTo('sec-schema')" class="font-heading px-4 py-2 rounded-lg text-sm font-semibold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors" id="nav-sec-schema">💾 ฐานข้อมูล & ความปลอดภัย</button>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-12">
+
+        <section id="sec-overview" class="block">
+            <div class="mb-6">
+                <h2 class="text-2xl font-heading font-bold text-navy border-l-4 border-gold pl-3 mb-2">ภาพรวมและวัตถุประสงค์หลัก (Core Objectives)</h2>
+                <p class="text-gray-700 leading-relaxed font-sans">
+                    ส่วนนี้แสดงภาพรวมของโครงการและเป้าหมายหลัก 5 ประการที่ระบบต้องทำได้ รวมถึงการนำเสนอแผนภูมิวิเคราะห์สัดส่วนการกระจายตัวของฟีเจอร์การทำงานในแต่ละโมดูล เพื่อให้ทีมพัฒนาเห็นภาพรวมของขนาดระบบ (System Scale) ที่ต้องจัดทำ
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:border-gold transition-colors">
+                        <div class="text-lg font-heading font-bold text-teal flex items-center gap-2 mb-2"><span>1️⃣</span> บันทึกกิจกรรมรายวัน & CRUD</div>
+                        <p class="text-sm text-gray-600">บันทึกเนื้อหาการเรียนทฤษฎี 13 วัน และ OJT 1 เดือน พร้อมระบบสร้าง อ่าน แก้ไข ลบข้อมูล</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:border-gold transition-colors">
+                        <div class="text-lg font-heading font-bold text-teal flex items-center gap-2 mb-2"><span>2️⃣</span> ติดตามเงื่อนไขการผ่านหลักสูตร</div>
+                        <p class="text-sm text-gray-600">คำนวณเวลาเรียน (≥ 80%) และสะสมชั่วโมง OJT (≥ 90 ชั่วโมง) อัตโนมัติ</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:border-gold transition-colors">
+                        <div class="text-lg font-heading font-bold text-teal flex items-center gap-2 mb-2"><span>3️⃣</span> จัดทำเล่ม Portfolio อัตโนมัติ</div>
+                        <p class="text-sm text-gray-600">แปลงข้อมูลบันทึกเป็น Portfolio 7 หน้า มาตรฐานภาครัฐ พร้อมปุ่มส่งออกข้อมูล</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:border-gold transition-colors">
+                        <div class="text-lg font-heading font-bold text-teal flex items-center gap-2 mb-2"><span>4️⃣</span> สนับสนุนการเข้าถึง (Accessibility)</div>
+                        <p class="text-sm text-gray-600">รองรับ Screen Reader, High Contrast และพิมพ์ด้วยเสียง (Voice-to-Text)</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 hover:border-gold transition-colors">
+                        <div class="text-lg font-heading font-bold text-teal flex items-center gap-2 mb-2"><span>5️⃣</span> ผสานพลัง AI (Prompt R-C-T-F)</div>
+                        <p class="text-sm text-gray-600">ใช้สูตร R-C-T-F ขัดเกลาข้อความให้เป็นภาษาทำงานภาครัฐที่ถูกต้องตามระเบียบสารบรรณ</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col h-full">
+                    <h3 class="text-lg font-heading font-bold text-navy text-center mb-4">สัดส่วนฟีเจอร์การทำงานแยกตามโมดูลหลัก</h3>
+                    <div class="flex-grow flex items-center justify-center">
+                        <div class="chart-container">
+                            <canvas id="featureChart"></canvas>
+                        </div>
+                    </div>
+                    <p class="text-xs text-center text-gray-500 mt-4">กราฟแสดงจำนวนความต้องการทางเทคนิคและฟังก์ชันย่อยที่ต้องพัฒนาในแต่ละโมดูลของระบบ</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-personas" class="hide">
+            <div class="mb-6">
+                <h2 class="text-2xl font-heading font-bold text-navy border-l-4 border-gold pl-3 mb-2">กลุ่มผู้ใช้งานและการออกแบบ (User Persona & UX)</h2>
+                <p class="text-gray-700 leading-relaxed font-sans">
+                    ส่วนนี้จัดกลุ่มผู้ใช้งานหลักของระบบออกเป็น 4 กลุ่ม เพื่อแสดงความต้องการและข้อพิจารณาด้าน Accessibility (UX/UI) ที่นักออกแบบและนักพัฒนาต้องให้ความสำคัญ ผู้ใช้สามารถคลิกเลือกกลุ่มผู้ใช้งานเพื่อดูรายละเอียดเฉพาะด้านได้
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-6" id="persona-tabs">
+                <button onclick="showPersona(0)" class="tab-active font-heading px-5 py-3 rounded-lg text-sm font-bold border transition-colors shadow-sm w-full md:w-auto text-left md:text-center">👨‍🦯 ผู้พิการทางการเห็น (Screen Reader)</button>
+                <button onclick="showPersona(1)" class="tab-inactive font-heading px-5 py-3 rounded-lg text-sm font-bold border transition-colors shadow-sm w-full md:w-auto text-left md:text-center">👓 ผู้พิการสายตาสั้น/สายตาเอียง</button>
+                <button onclick="showPersona(2)" class="tab-inactive font-heading px-5 py-3 rounded-lg text-sm font-bold border transition-colors shadow-sm w-full md:w-auto text-left md:text-center">🦽 ผู้พิการทางการเคลื่อนไหว</button>
+                <button onclick="showPersona(3)" class="tab-inactive font-heading px-5 py-3 rounded-lg text-sm font-bold border transition-colors shadow-sm w-full md:w-auto text-left md:text-center">📋 พี่เลี้ยง OJT / ผู้บริหาร</button>
+            </div>
+
+            <div id="persona-content" class="bg-white p-6 md:p-8 rounded-xl shadow-md border border-gray-200 min-h-[250px]">
+            </div>
+        </section>
+
+        <section id="sec-modules" class="hide">
+            <div class="mb-6">
+                <h2 class="text-2xl font-heading font-bold text-navy border-l-4 border-gold pl-3 mb-2">โครงสร้างโมดูลระบบและ CRUD (System Modules)</h2>
+                <p class="text-gray-700 leading-relaxed font-sans">
+                    ส่วนนี้แจกแจงโครงสร้างสถาปัตยกรรมทั้ง 7 โมดูลหลักของแอปพลิเคชัน พร้อมรายละเอียดการเชื่อมโยงข้อมูล (Data Integration) และข้อกำหนดการจัดการข้อมูลแบบ CRUD ในแต่ละส่วน เพื่อใช้เป็นคู่มืออ้างอิงในการเขียนโปรแกรม
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1 space-y-2 max-h-[500px] overflow-y-auto pr-2 custom-scroll" id="module-list">
+                </div>
+                
+                <div class="md:col-span-2 bg-navy text-white rounded-xl shadow-lg p-6 md:p-8 relative overflow-hidden" id="module-detail">
+                    <div class="absolute -right-10 -top-10 text-[120px] opacity-5">🧩</div>
+                    <h3 class="text-2xl font-heading font-bold text-gold mb-2">เลือกโมดูลเพื่อดูรายละเอียด</h3>
+                    <p class="text-blue-100">คลิกที่รายชื่อโมดูลด้านซ้ายมือเพื่อตรวจสอบรายละเอียดการบูรณาการข้อมูลและฟังก์ชัน CRUD</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-schema" class="hide">
+            <div class="mb-6">
+                <h2 class="text-2xl font-heading font-bold text-navy border-l-4 border-gold pl-3 mb-2">โครงสร้างฐานข้อมูลและความปลอดภัย (Data Schema & Security)</h2>
+                <p class="text-gray-700 leading-relaxed font-sans">
+                    นำเสนอโครงสร้างการจัดเก็บข้อมูล (Data Schema) แบบ JSON ที่รองรับการทำงานของโมดูลทั้งหมด พร้อมสรุปข้อกำหนดด้านความปลอดภัย ข้อมูลส่วนบุคคล (PDPA) และจริยธรรม AI เพื่อความโปร่งใสตามมาตรฐานภาครัฐ
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-900 rounded-xl shadow-md overflow-hidden flex flex-col">
+                    <div class="bg-gray-800 px-4 py-2 border-b border-gray-700 flex justify-between items-center">
+                        <span class="text-gray-300 font-mono text-sm">integrated_schema.json</span>
+                        <span class="text-xs text-gray-500">LocalStorage / IndexedDB</span>
+                    </div>
+                    <div class="p-4 overflow-auto max-h-[400px] text-green-400 font-mono text-sm leading-relaxed whitespace-pre" id="json-code"></div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-red-100 border-l-4 border-l-red-500">
+                        <h3 class="text-lg font-heading font-bold text-red-700 mb-2 flex items-center gap-2"><span>🛡️</span> การคุ้มครองข้อมูลส่วนบุคคล (PDPA)</h3>
+                        <p class="text-sm text-gray-700">ข้อมูลประวัติและรูปถ่ายทั้งหมดจัดเก็บไว้ใน LocalStorage บนเครื่องของผู้ใช้เองเป็นหลัก (Client-Side Isolation) เพื่อลดความเสี่ยงในการเปิดเผยข้อมูลส่วนบุคคล</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-purple-100 border-l-4 border-l-purple-500">
+                        <h3 class="text-lg font-heading font-bold text-purple-700 mb-2 flex items-center gap-2"><span>🤖</span> ความปลอดภัยและจริยธรรม AI</h3>
+                        <p class="text-sm text-gray-700">การส่งข้อความไปขัดเกลาด้วย Gemini API จะต้องไม่รวมข้อมูลลับ เลขบัตรประชาชน หรือข้อมูลส่วนบุคคลจริง มีการแจ้งเตือนผู้ใช้งานก่อนส่งข้อมูล</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-blue-100 border-l-4 border-l-blue-500">
+                        <h3 class="text-lg font-heading font-bold text-blue-700 mb-2 flex items-center gap-2"><span>©️</span> ลิขสิทธิ์สื่อ & ความโปร่งใส</h3>
+                        <p class="text-sm text-gray-700">สื่อและข้อความที่สร้างหรือขัดเกลาด้วย AI จะมีป้ายระบุสัญลักษณ์ AI (AI-Generated Tag) กำกับอย่างชัดเจนตามมาตรฐานงานดิจิทัลภาครัฐ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const personas = [
+            {
+                icon: '👨‍🦯',
+                title: 'คนพิการทางการเห็น (ผู้ใช้ Screen Reader)',
+                need: 'ต้องการระบบที่อ่านออกเสียงได้ถูกต้อง ลำดับโค้ดชัดเจน ไม่ซับซ้อน',
+                ux: 'ใช้ HTML5 Semantic Tag, ARIA Labels อย่างถูกต้อง และบังคับให้มี Alt-Text สำหรับรูปภาพผลงานและรูปถ่ายกิจกรรมทุกรูปในระบบ'
+            },
+            {
+                icon: '👓',
+                title: 'คนพิการสายตาเอียง/สายตาสั้นมาก',
+                need: 'ต้องการตัวอักษรขนาดใหญ่ ปุ่มกดชัดเจน สีไม่กลืนกัน ตัดกันชัดเจน',
+                ux: 'เพิ่มโหมด High Contrast (สีดำ-เหลือง-ฟ้า) ให้ผู้ใช้เลือกเปิดได้ และสามารถปรับสเกลขนาด Font ในระบบได้ 3 ระดับ'
+            },
+            {
+                icon: '🦽',
+                title: 'คนพิการทางการเคลื่อนไหว/กล้ามเนื้อ',
+                need: 'พิมพ์ข้อความยาวๆ สำหรับบันทึก OJT ได้ยากลำบาก',
+                ux: 'มีระบบ Voice-to-Text (พูดแล้วแปลงเป็นข้อความ) ติดตั้งไว้ที่ช่องกรอกข้อมูลหลัก และออกแบบพื้นที่กดปุ่มให้มีขนาดใหญ่ (Large Touch Targets)'
+            },
+            {
+                icon: '📋',
+                title: 'พี่เลี้ยง OJT / ผู้ประเมินผล',
+                need: 'ต้องการเรียกดูตารางสรุปชั่วโมงงานและตรวจสอบชิ้นงานได้รวดเร็ว เพื่อประเมินผล',
+                ux: 'ออกแบบหน้าจอ Dashboard สรุปภาพรวม (Matrix View) ที่แสดงชั่วโมงสะสมรวม และรายการ Checklist พร้อมปุ่มอนุมัติ/ตรวจรับที่เข้าถึงง่าย'
+            }
+        ];
+
+        const modules = [
+            {
+                id: 'M1',
+                title: 'โมดูลจัดการประวัติ (Profile & Directory)',
+                icon: '👤',
+                integration: 'ดึงข้อมูลรายชื่อผู้เข้าอบรม 40 คน (เช่น คุณเจค INFP-A) และวิทยากร มาทำเป็นคลังรายชื่อสำหรับจับคู่ทำกิจกรรมกลุ่ม',
+                crud: 'บันทึก (Create) และแก้ไข (Update) ประวัติส่วนตัว, รหัสประจำตัว (CARD-XXX), สายหลักสูตร (ADV/FND) และประสบการณ์ทำงาน'
+            },
+            {
+                id: 'M2',
+                title: 'ตารางเรียน เช็กอิน & โน้ต (Schedule)',
+                icon: '📅',
+                integration: 'ฝังกำหนดการเรียนจริง 13 วัน ณ โรงแรมเซ็นทารา ไลฟ์ พร้อมไอคอนเตือนการใช้คอมพิวเตอร์',
+                crud: 'กดเช็กอินเพื่อสร้าง (Create) บันทึกการเข้าเรียน และระบบโน้ต "ทำอะไรวันนี้" สามารถ สร้าง อ่าน แก้ไข ลบ (CRUD) ได้เต็มรูปแบบ'
+            },
+            {
+                id: 'M3',
+                title: 'บันทึกงาน OJT & Checklist (Tracker)',
+                icon: '🏢',
+                integration: 'จัดหมวดหมู่ภารกิจ OJT 4 ด้าน พร้อมแบบฟอร์มบันทึกเวลาและอัปเดตแถบความคืบหน้า (Progress Bar) สะสมให้ครบ 90 ชม.',
+                crud: 'รองรับ CRUD เต็มรูปแบบสำหรับรายการปฏิบัติงานประจำวัน และบันทึกสถานะของ Checklist งานรายสัปดาห์'
+            },
+            {
+                id: 'M4',
+                title: 'ผู้ช่วย AI อัจฉริยะ (AI Polish Engine)',
+                icon: '✨',
+                integration: 'นำสูตร Prompt R-C-T-F จากคู่มือภาครัฐ มาฝังในระบบเพื่อช่วยเกลาภาษาการทำงานให้เป็นทางการ',
+                crud: 'ใช้ AI สร้าง (Create) ข้อความใหม่ และนำไปปรับปรุง (Update) ทับลงในช่องโน้ตบันทึกเดิม'
+            },
+            {
+                id: 'M5',
+                title: 'คลังจัดเก็บผลงาน (Storage & Drive)',
+                icon: '📂',
+                integration: 'เชื่อมต่อกับ Google Drive ส่วนตัวของผู้เรียนเพื่อแนบลิงก์ไฟล์ หรือจัดเก็บรูปภาพกิจกรรม',
+                crud: 'ผู้ใช้สามารถอัปโหลด (Create), เรียกดู (Read), เปลี่ยนรูป (Update) และลบ (Delete) รูปภาพผลงานได้'
+            },
+            {
+                id: 'M6',
+                title: 'สร้างและส่งออก Portfolio (Exporter)',
+                icon: '📑',
+                integration: 'ดึงโครงสร้าง Portfolio Master 7 หน้ามาตรฐานภาครัฐ ผสานข้อมูล CRUD ทั้งหมดมาแสดงผลแบบ Real-time',
+                crud: 'ระบบจะอ่าน (Read) ข้อมูลทั้งหมดมาจัดเรียง และผู้ใช้สามารถคัดลอกข้อความ หรือส่งออกเป็นไฟล์ PDF ได้ทันที'
+            },
+            {
+                id: 'M7',
+                title: 'สิ่งอำนวยความสะดวก (Accessibility & WCAG)',
+                icon: '🎛️',
+                integration: 'อ้างอิงจากหลักการ Universal Design และมาตรฐาน WCAG 2.1 Level AA มี 3 Theme Modes (Official, Modern, High Contrast)',
+                crud: 'อ่าน (Read) การตั้งค่าจาก LocalStorage และปรับปรุง (Update) สถานะธีมตามการตั้งค่าของผู้ใช้'
+            }
+        ];
+
+        const jsonSchema = `{
+  "user_profile": {
+    "user_id": "CARD-001",
+    "full_name": "นายเจค (Jake)",
+    "mbti": "INFP-A",
+    "track": "Advanced Course",
+    "course_no": "ADV-01",
+    "it_experience_years": 13,
+    "drive_folder_url": "https://drive.google.com/..."
+  },
+  "attendance": [
+    { 
+      "day": 1, 
+      "date": "2026-08-10", 
+      "status": "present",
+      "daily_note": "เข้าร่วมพิธีเปิดการอบรม กิจกรรม Ice Breaking..."
+    }
+  ],
+  "ojt_logs": [
+    {
+      "id": 1723700000000,
+      "date": "2026-09-01",
+      "task_type": "งานเทคโนโลยีสารสนเทศ/ไอที",
+      "hours": 7,
+      "raw_notes": "ช่วยพี่เลี้ยงคีย์ข้อมูล Excel สรุปผู้เข้าร่วม...",
+      "polished_notes": "ปฏิบัติงานจัดทำฐานข้อมูลและสรุปรายงานผล...",
+      "drive_link": "https://drive.google.com/...",
+      "photo_base64": "data:image/png;base64,..."
+    }
+  ],
+  "checklist_state": {
+    "d1": true,
+    "w1": true,
+    "allowance_claim": true
+  }
+}`;
+
+        let chartInstance = null;
+
+        function navTo(sectionId) {
+            document.querySelectorAll('main > section').forEach(sec => {
+                sec.classList.remove('block');
+                sec.classList.add('hide');
+            });
+            document.getElementById(sectionId).classList.remove('hide');
+            document.getElementById(sectionId).classList.add('block');
+
+            const navBtns = ['nav-sec-overview', 'nav-sec-personas', 'nav-sec-modules', 'nav-sec-schema'];
+            navBtns.forEach(btn => {
+                document.getElementById(btn).className = 'font-heading px-4 py-2 rounded-lg text-sm font-semibold bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors';
+            });
+            document.getElementById('nav-' + sectionId).className = 'font-heading px-4 py-2 rounded-lg text-sm font-semibold bg-navy text-white transition-colors';
+
+            if(sectionId === 'sec-overview' && chartInstance === null) {
+                renderChart();
+            }
+        }
+
+        function showPersona(index) {
+            const tabs = document.getElementById('persona-tabs').children;
+            for(let i=0; i<tabs.length; i++) {
+                tabs[i].className = 'tab-inactive font-heading px-5 py-3 rounded-lg text-sm font-bold border transition-colors shadow-sm w-full md:w-auto text-left md:text-center';
+            }
+            tabs[index].className = 'tab-active font-heading px-5 py-3 rounded-lg text-sm font-bold border transition-colors shadow-sm w-full md:w-auto text-left md:text-center';
+
+            const data = personas[index];
+            document.getElementById('persona-content').innerHTML = `
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="text-4xl">${data.icon}</div>
+                    <h3 class="text-xl md:text-2xl font-heading font-bold text-navy">${data.title}</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <div class="font-bold text-navy mb-2 flex items-center gap-2">🎯 ความต้องการหลัก (Primary Needs)</div>
+                        <p class="text-gray-700">${data.need}</p>
+                    </div>
+                    <div class="bg-teal-50 p-5 rounded-lg border border-teal-100">
+                        <div class="font-bold text-teal mb-2 flex items-center gap-2">🛠️ การออกแบบ UX/UI ที่ตอบโจทย์</div>
+                        <p class="text-gray-700">${data.ux}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderModules() {
+            const list = document.getElementById('module-list');
+            let html = '';
+            modules.forEach((mod, index) => {
+                html += `
+                    <button onclick="showModule(${index})" id="mod-btn-${index}" class="w-full text-left p-4 rounded-xl border ${index === 0 ? 'border-navy bg-blue-50' : 'border-gray-200 bg-white hover:bg-gray-50'} transition-all flex items-center gap-3">
+                        <span class="text-2xl">${mod.icon}</span>
+                        <div>
+                            <div class="text-xs text-gray-500 font-bold tracking-wider">${mod.id}</div>
+                            <div class="font-heading font-bold text-navy text-sm md:text-base leading-tight">${mod.title}</div>
+                        </div>
+                    </button>
+                `;
+            });
+            list.innerHTML = html;
+            showModule(0);
+        }
+
+        function showModule(index) {
+            for(let i=0; i<modules.length; i++) {
+                document.getElementById('mod-btn-' + i).className = 'w-full text-left p-4 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition-all flex items-center gap-3';
+            }
+            document.getElementById('mod-btn-' + index).className = 'w-full text-left p-4 rounded-xl border border-navy bg-blue-50 transition-all flex items-center gap-3';
+
+            const data = modules[index];
+            document.getElementById('module-detail').innerHTML = `
+                <div class="absolute -right-10 -top-10 text-[120px] opacity-10 drop-shadow-md">${data.icon}</div>
+                <div class="relative z-10 h-full flex flex-col">
+                    <span class="inline-block px-3 py-1 bg-gold text-navy text-xs font-bold rounded-full w-max mb-3 tracking-wider">MODULE ${data.id}</span>
+                    <h3 class="text-2xl md:text-3xl font-heading font-bold text-white mb-6">${data.title}</h3>
+                    
+                    <div class="space-y-6 flex-grow">
+                        <div class="bg-white/10 p-5 rounded-lg border border-white/20 backdrop-blur-sm">
+                            <h4 class="font-bold text-gold mb-2 flex items-center gap-2">🔗 การบูรณาการข้อมูล (Integration)</h4>
+                            <p class="text-blue-50 text-sm leading-relaxed">${data.integration}</p>
+                        </div>
+                        <div class="bg-white/10 p-5 rounded-lg border border-white/20 backdrop-blur-sm">
+                            <h4 class="font-bold text-teal mb-2 flex items-center gap-2">⚙️ ฟังก์ชันการจัดการข้อมูล (CRUD)</h4>
+                            <p class="text-blue-50 text-sm leading-relaxed">${data.crud}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('featureChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['M1: ประวัติ', 'M2: ตารางเรียน', 'M3: OJT', 'M4: AI', 'M5: จัดเก็บ', 'M6: Portfolio', 'M7: Accessibility'],
+                    datasets: [{
+                        label: 'จำนวนฟังก์ชันหลัก',
+                        data: [3, 4, 3, 3, 4, 2, 3],
+                        backgroundColor: '#1B365D',
+                        hoverBackgroundColor: '#D97706',
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleFont: { family: 'Prompt', size: 14 },
+                            bodyFont: { family: 'Sarabun', size: 13 },
+                            padding: 12,
+                            cornerRadius: 8
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: { stepSize: 1, font: { family: 'Sarabun' } },
+                            grid: { color: '#E2E8F0' }
+                        },
+                        x: {
+                            ticks: { font: { family: 'Sarabun', size: 12 } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = () => {
+            renderChart();
+            showPersona(0);
+            renderModules();
+            document.getElementById('json-code').textContent = jsonSchema;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล (Civil Servant Trainee Learning & Portfolio)</title>
+    <!-- Google Fonts: Prompt & Sarabun -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        govNavy: '#1B365D',
+                        govNavyDark: '#122543',
+                        govNavyLight: '#2B4C7E',
+                        govGreen: '#2E8B57',
+                        govGreenLight: '#42A46C',
+                        govGold: '#D97706',
+                        govBg: '#F4F7FB'
+                    },
+                    fontFamily: {
+                        prompt: ['Prompt', 'sans-serif'],
+                        sarabun: ['Sarabun', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
+
+    <!-- Screen Reader Skip Link -->
+    <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to main content)</a>
+
+    <!-- Accessibility Bar & Global App Header -->
+    <header class="bg-govNavy text-white shadow-lg border-b-4 border-govGreen sticky top-0 z-40 app-header-bar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                <!-- System Title & Badge -->
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400 text-2xl shadow-inner shrink-0">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2 flex-wrap">
+                            <span class="bg-govGreen text-white px-2 py-0.5 rounded text-[11px] font-semibold tracking-wide uppercase">หลักสูตรภาครัฐ รุ่นที่ 1</span>
+                            <span class="text-xs text-blue-200"><i class="fa-solid fa-hotel text-emerald-400"></i> เซ็นทารา ไลฟ์ & OJT</span>
+                            <span id="current-user-badge" class="bg-blue-900/80 border border-blue-400/40 text-blue-100 text-[11px] px-2 py-0.5 rounded-full font-medium">
+                                ผู้เรียน: <strong id="header-user-name">นายเจค (ADV)</strong>
+                            </span>
+                        </div>
+                        <h1 class="text-lg md:text-xl font-bold tracking-tight text-white leading-tight mt-0.5">
+                            ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Accessibility Controls & Backup Actions -->
+                <div class="flex items-center flex-wrap gap-2 justify-end">
+                    <!-- Theme Switcher -->
+                    <div class="bg-white/10 border border-white/20 rounded-lg p-1 flex items-center space-x-1" role="group" aria-label="สลับธีมการแสดงผล">
+                        <button onclick="setTheme('theme-dynamic')" id="btn-theme-dynamic" class="px-2.5 py-1 text-xs rounded font-medium transition bg-white/20 text-white" title="ธีม Modern Dynamic (ค่าเริ่มต้น)">
+                            <i class="fa-solid fa-palette mr-1"></i> สีมาตรฐาน
+                        </button>
+                        <button onclick="setTheme('theme-slate')" id="btn-theme-slate" class="px-2.5 py-1 text-xs rounded font-medium transition text-slate-300 hover:text-white" title="ธีม Executive Slate">
+                            <i class="fa-solid fa-moon mr-1"></i> โทนมืด
+                        </button>
+                        <button onclick="setTheme('theme-contrast')" id="btn-theme-contrast" class="px-2.5 py-1 text-xs rounded font-medium transition text-amber-300 hover:text-amber-200 border border-amber-400/40" title="ธีม High Contrast สำหรับผู้พิการทางสายตา">
+                            <i class="fa-solid fa-circle-half-stroke mr-1"></i> คอนทราสต์สูง
+                        </button>
+                    </div>
+
+                    <!-- Font Resizer -->
+                    <div class="bg-white/10 border border-white/20 rounded-lg p-1 flex items-center space-x-1" role="group" aria-label="ปรับขนาดตัวอักษร">
+                        <button onclick="setFontSize('font-normal')" id="btn-font-normal" class="px-2 py-1 text-xs rounded font-bold transition bg-white/20" title="ขนาดตัวอักษรปกติ (16px)">A</button>
+                        <button onclick="setFontSize('font-large')" id="btn-font-large" class="px-2 py-1 text-xs rounded font-bold transition text-slate-300 hover:text-white" title="ขนาดตัวอักษรใหญ่ (18px)">A+</button>
+                        <button onclick="setFontSize('font-xlarge')" id="btn-font-xlarge" class="px-2 py-1 text-xs rounded font-bold transition text-slate-300 hover:text-white" title="ขนาดตัวอักษรใหญ่พิเศษ (20px)">A++</button>
+                    </div>
+
+                    <!-- Backup / Restore Buttons -->
+                    <div class="flex items-center space-x-1.5">
+                        <button onclick="exportDataJSON()" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 border border-blue-400/40" title="ดาวน์โหลดสำรองข้อมูล (JSON Backup)">
+                            <i class="fa-solid fa-download"></i>
+                            <span class="hidden sm:inline">สำรอง JSON</span>
+                        </button>
+                        <label class="bg-emerald-700 hover:bg-emerald-600 text-white px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 cursor-pointer border border-emerald-400/40" title="นำเข้าข้อมูลสำรอง (Restore JSON)">
+                            <i class="fa-solid fa-upload"></i>
+                            <span class="hidden sm:inline">กู้คืน</span>
+                            <input type="file" id="import-json-input" accept=".json" class="hidden" onchange="importDataJSON(event)">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation Bar (7 Modules + Dashboard) -->
+        <nav class="bg-govNavyDark/95 border-t border-white/10 px-4 sm:px-6 lg:px-8 overflow-x-auto tab-navigation-bar" aria-label="เมนูหลัก 7 โมดูล">
+            <div class="max-w-7xl mx-auto flex space-x-1 py-1.5 min-w-max">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn active px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="true">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>แดชบอร์ดภาพรวม</span>
+                </button>
+                <button onclick="switchTab('m1')" id="nav-m1" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>M1: ประวัติ & ทำเนียบ 40 คน</span>
+                </button>
+                <button onclick="switchTab('m2')" id="nav-m2" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>M2: อบรม 13 วัน & Daily Note</span>
+                </button>
+                <button onclick="switchTab('m3')" id="nav-m3" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>M3: บันทึก OJT 4 ด้าน (≥90 ชม.)</span>
+                </button>
+                <button onclick="switchTab('m4')" id="nav-m4" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                    <span>M4: AI ขัดเกลา & R-C-T-F</span>
+                </button>
+                <button onclick="switchTab('m5')" id="nav-m5" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>M5: คลังผลงาน & Alt-Text</span>
+                </button>
+                <button onclick="switchTab('m6')" id="nav-m6" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-book-bookmark text-emerald-400"></i>
+                    <span>M6: เล่ม Portfolio 7 หน้า A4</span>
+                </button>
+                <button onclick="switchTab('m7')" id="nav-m7" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-universal-access text-cyan-400"></i>
+                    <span>M7: การเข้าถึง & PDPA</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ====================================================================
+             TAB 0: DASHBOARD OVERVIEW
+             ==================================================================== -->
+        <section id="tab-dashboard" class="tab-panel space-y-6">
+            <!-- Executive Banner -->
+            <div class="app-card p-6 border-l-8 border-govNavy flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full mb-1">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>สถานะการประมวลผล: ระบบทำงานปกติ (Local-First Secured)</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-govNavy">
+                        ความก้าวหน้าการเรียนรู้และฝึกปฏิบัติงาน (Executive Learning Dashboard)
+                    </h2>
+                    <p class="text-slate-500 text-sm">
+                        ติดตามอัตราการเข้าเรียน 13 วัน (เกณฑ์ ≥80%) และชั่วโมงฝึกงาน OJT 4 ด้าน (เป้าหมาย ≥90 ชั่วโมง)
+                    </p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="switchTab('m6')" class="bg-govNavy hover:bg-govNavyDark text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow flex items-center space-x-2">
+                        <i class="fa-solid fa-print"></i>
+                        <span>พรีวิวและพิมพ์เล่ม A4</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPI Metric Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- KPI 1: Attendance Rate -->
+                <div class="app-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">การเข้าอบรม 13 วัน</span>
+                            <div class="text-2xl font-bold text-govNavy mt-1 flex items-baseline space-x-2">
+                                <span id="kpi-attendance-pct">0%</span>
+                                <span id="kpi-attendance-days" class="text-xs font-normal text-slate-500">(0/13 วัน)</span>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-govNavy flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                            <div id="kpi-attendance-bar" class="bg-blue-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] mt-1 text-slate-500">
+                            <span>เกณฑ์ผ่าน ≥80%</span>
+                            <span id="kpi-attendance-status" class="font-bold text-amber-600">กำลังดำเนินการ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 2: OJT Total Hours -->
+                <div class="app-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">ชั่วโมงฝึกงาน OJT</span>
+                            <div class="text-2xl font-bold text-emerald-700 mt-1 flex items-baseline space-x-2">
+                                <span id="kpi-ojt-hours">0 ชม.</span>
+                                <span class="text-xs font-normal text-slate-500">/ 90 ชม.</span>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-business-time"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                            <div id="kpi-ojt-bar" class="bg-emerald-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] mt-1 text-slate-500">
+                            <span>เป้าหมาย ≥90 ชม.</span>
+                            <span id="kpi-ojt-status" class="font-bold text-emerald-600">0% บรรลุ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 3: Portfolio 7-Page Readiness -->
+                <div class="app-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">ความสมบูรณ์ Portfolio</span>
+                            <div class="text-2xl font-bold text-govNavy mt-1 flex items-baseline space-x-2">
+                                <span id="kpi-portfolio-score">7/7 หน้า</span>
+                                <span class="text-xs font-normal text-emerald-600 font-semibold">(100%)</span>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-file-invoice"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                            <div id="kpi-portfolio-bar" class="bg-purple-600 h-2 rounded-full transition-all duration-500" style="width: 100%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] mt-1 text-slate-500">
+                            <span>มาตรฐานภาครัฐ</span>
+                            <span class="font-bold text-purple-600">พร้อมพิมพ์ A4</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 4: Stored Artifacts & Media -->
+                <div class="app-card p-5 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">หลักฐาน & สื่อผลงาน</span>
+                            <div class="text-2xl font-bold text-govNavy mt-1 flex items-baseline space-x-2">
+                                <span id="kpi-artifacts-count">0 รายการ</span>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-photo-film"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                            <div class="bg-cyan-600 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] mt-1 text-slate-500">
+                            <span>รองรับ Alt-Text คนตาบอด</span>
+                            <span class="font-bold text-cyan-700">WCAG AA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2-Column Section: OJT 4 Dimensions & Quick Actions -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- OJT 4 Dimensions Breakdown -->
+                <div class="app-card p-6 lg:col-span-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                            <i class="fa-solid fa-chart-simple text-emerald-600"></i>
+                            <span>การกระจายชั่วโมงการฝึกงาน OJT แยกตาม 4 ด้าน</span>
+                        </h3>
+                        <button onclick="switchTab('m3')" class="text-xs font-semibold text-blue-600 hover:underline">
+                            บันทึกงานเพิ่ม <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+
+                    <div class="space-y-4" id="ojt-dimensions-breakdown">
+                        <!-- Dimension 1 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-700 font-semibold"><i class="fa-solid fa-database text-blue-500 mr-1.5"></i> 1. ด้านงานวิเคราะห์ข้อมูลและสารสนเทศ</span>
+                                <span id="dim-1-hours" class="font-bold text-blue-600">0 ชม.</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div id="dim-1-bar" class="bg-blue-500 h-2.5 rounded-full transition-all" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Dimension 2 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-700 font-semibold"><i class="fa-solid fa-file-lines text-emerald-500 mr-1.5"></i> 2. ด้านเอกสารราชการและงานสารบรรณ</span>
+                                <span id="dim-2-hours" class="font-bold text-emerald-600">0 ชม.</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div id="dim-2-bar" class="bg-emerald-500 h-2.5 rounded-full transition-all" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Dimension 3 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-700 font-semibold"><i class="fa-solid fa-gears text-purple-500 mr-1.5"></i> 3. ด้านเทคนิค ระบบ และการพัฒนาระบบ</span>
+                                <span id="dim-3-hours" class="font-bold text-purple-600">0 ชม.</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div id="dim-3-bar" class="bg-purple-500 h-2.5 rounded-full transition-all" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Dimension 4 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-medium mb-1">
+                                <span class="text-slate-700 font-semibold"><i class="fa-solid fa-users text-amber-500 mr-1.5"></i> 4. ด้านการประสานงาน บริการ และสื่อสาร</span>
+                                <span id="dim-4-hours" class="font-bold text-amber-600">0 ชม.</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                                <div id="dim-4-bar" class="bg-amber-500 h-2.5 rounded-full transition-all" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Action Hub -->
+                <div class="app-card p-6 flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy mb-3 flex items-center space-x-2">
+                            <i class="fa-solid fa-bolt text-amber-500"></i>
+                            <span>ทางลัดการทำงานด่วน</span>
+                        </h3>
+                        <div class="space-y-2.5">
+                            <button onclick="quickCheckInToday()" class="w-full p-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-left transition flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-govNavy">เช็กอินการอบรมวันนี้</div>
+                                    <div class="text-[11px] text-slate-500">บันทึกเวลาเรียนเซ็นทารา ไลฟ์</div>
+                                </div>
+                            </button>
+
+                            <button onclick="switchTab('m3')" class="w-full p-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-left transition flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-emerald-900">เพิ่มบันทึกการฝึกงาน OJT</div>
+                                    <div class="text-[11px] text-slate-500">ลงชั่วโมงและสรุปเนื้องาน</div>
+                                </div>
+                            </button>
+
+                            <button onclick="switchTab('m4')" class="w-full p-2.5 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-left transition flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-purple-900">AI Magic Polish ภาษาราชการ</div>
+                                    <div class="text-[11px] text-slate-500">ปรับสำนวนข้อความ 3 ย่อหน้า</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-600 flex items-center space-x-2">
+                        <i class="fa-solid fa-shield-halved text-emerald-600 text-base"></i>
+                        <span>ข้อมูลส่วนบุคคลปลอดภัยด้วยการจัดเก็บในอุปกรณ์ (PDPA Compliant)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Timeline & Summary -->
+            <div class="app-card p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                        <i class="fa-solid fa-clock-rotate-left text-slate-500"></i>
+                        <span>กิจกรรมล่าสุด (Recent Reflections & OJT Logs)</span>
+                    </h3>
+                </div>
+                <div id="recent-activities-list" class="divide-y divide-slate-100 text-xs">
+                    <!-- Dynamic Items -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             TAB 1 (M1): PROFILE & TRAINEE DIRECTORY (40 TRAINEES)
+             ==================================================================== -->
+        <section id="tab-m1" class="tab-panel hidden space-y-6">
+            <!-- Trainee Profile Form Card -->
+            <div class="app-card p-6 border-t-4 border-blue-600">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-govNavy flex items-center space-x-2">
+                            <i class="fa-solid fa-id-card text-blue-600"></i>
+                            <span>จัดการข้อมูลผู้เข้าอบรม (Trainee Profile Management)</span>
+                        </h2>
+                        <p class="text-slate-500 text-xs mt-0.5">
+                            ข้อมูลส่วนบุคคลนี้จะถูกนำไปใช้อัตโนมัติในหน้าปก เล่ม Portfolio และการรับรองผลสัมฤทธิ์
+                        </p>
+                    </div>
+                    <button onclick="saveUserProfile()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition shadow flex items-center space-x-2">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>บันทึกประวัติส่วนตัว</span>
+                    </button>
+                </div>
+
+                <form id="user-profile-form" onsubmit="event.preventDefault(); saveUserProfile();" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-fullname">ชื่อ - นามสกุล *</label>
+                        <input type="text" id="prof-fullname" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-nickname">ชื่อเล่น</label>
+                        <input type="text" id="prof-nickname" class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-track">สายหลักสูตร (Track) *</label>
+                        <select id="prof-track" class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                            <option value="ADV">Advanced AI & Automation (สายเทคโนโลยี/วิเคราะห์)</option>
+                            <option value="FND">Foundation Digital Skills (สายทักษะพื้นฐานดิจิทัล/สารบรรณ)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-position">ตำแหน่งงาน *</label>
+                        <input type="text" id="prof-position" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-org">หน่วยงานต้นสังกัด *</label>
+                        <input type="text" id="prof-org" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-ojt-agency">หน่วยงานที่ฝึกปฏิบัติงาน OJT *</label>
+                        <input type="text" id="prof-ojt-agency" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-email">อีเมลสำหรับติดต่อ</label>
+                        <input type="email" id="prof-email" class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-phone">หมายเลขโทรศัพท์</label>
+                        <input type="tel" id="prof-phone" class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-accessibility">ความต้องการสิ่งอำนวยความสะดวกพิเศษ (Accessibility)</label>
+                        <input type="text" id="prof-accessibility" placeholder="เช่น โปรแกรมอ่านจอ, ทางลาด, ซับไตเติล" class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white">
+                    </div>
+                    <div class="md:col-span-2 lg:col-span-3">
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="prof-vision">
+                            วิสัยทัศน์และเป้าหมายการปฏิบัติงานภาครัฐ (Vision Statement)
+                        </label>
+                        <div class="relative">
+                            <textarea id="prof-vision" rows="3" class="w-full p-2.5 text-xs rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 bg-white leading-relaxed"></textarea>
+                            <button type="button" onclick="startVoiceInput('prof-vision')" class="absolute right-2.5 bottom-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded text-[11px] font-medium border border-slate-300 flex items-center space-x-1" title="พิมพ์ด้วยเสียง">
+                                <i class="fa-solid fa-microphone text-rose-500"></i>
+                                <span>พูด</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Trainee Directory (40 Trainees) -->
+            <div class="app-card p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                            <i class="fa-solid fa-users text-emerald-600"></i>
+                            <span>ทำเนียบผู้เข้าอบรมร่วมรุ่น (Trainee Directory 40 คน)</span>
+                        </h3>
+                        <p class="text-slate-500 text-xs mt-0.5">
+                            รายชื่อเพื่อนร่วมรุ่นหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1
+                        </p>
+                    </div>
+                    <!-- Search & Filters -->
+                    <div class="flex items-center space-x-2 w-full md:w-auto">
+                        <div class="relative flex-grow md:w-64">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                            <input type="text" id="trainee-search" oninput="filterTraineeDirectory()" placeholder="ค้นหาชื่อ, ตำแหน่ง, สังกัด..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <select id="trainee-track-filter" onchange="filterTraineeDirectory()" class="p-1.5 text-xs rounded-lg border border-slate-300 bg-white">
+                            <option value="ALL">ทุกสายหลักสูตร</option>
+                            <option value="ADV">สาย Advanced AI</option>
+                            <option value="FND">สาย Foundation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Trainee Grid -->
+                <div id="trainee-directory-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dynamic Trainee Cards -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             TAB 2 (M2): SCHEDULE & DAILY REFLECTION (13 DAYS CENTARA LIFE)
+             ==================================================================== -->
+        <section id="tab-m2" class="tab-panel hidden space-y-6">
+            <!-- Schedule Header & Progress -->
+            <div class="app-card p-6 border-t-4 border-emerald-600 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full mb-1">
+                        <i class="fa-solid fa-hotel"></i>
+                        <span>สถานที่: โรงแรมเซ็นทารา ไลฟ์ ศูนย์ราชการและคอนเวนชันเซ็นเตอร์ แจ้งวัฒนะ</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-govNavy">
+                        ตารางการอบรม 13 วัน & บันทึกการเรียนรู้รายวัน (Schedule & Daily Reflection)
+                    </h2>
+                    <p class="text-slate-500 text-xs mt-0.5">
+                        ระบบบันทึกเวลาเรียน คำนวณเกณฑ์ผ่านหลักสูตร (≥80% หรืออย่างน้อย 11 วัน) และสรุปความรู้ประจำวัน
+                    </p>
+                </div>
+                <div class="flex items-center space-x-3 bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                    <div class="text-right">
+                        <div class="text-[11px] text-emerald-800 font-bold">สถานะการเข้าเรียนสะสม</div>
+                        <div id="m2-attendance-summary" class="text-base font-bold text-emerald-900">0 / 13 วัน (0%)</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg shadow">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13 Days Accordion / Cards List -->
+            <div id="schedule-days-container" class="space-y-4">
+                <!-- Dynamic 13-day Schedule Rows -->
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             TAB 3 (M3): OJT TRACKER & CHECKLIST (4 DIMENSIONS & ≥90 HOURS)
+             ==================================================================== -->
+        <section id="tab-m3" class="tab-panel hidden space-y-6">
+            <!-- OJT Top Header & Summary -->
+            <div class="app-card p-6 border-t-4 border-amber-600">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 text-xs font-semibold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full mb-1">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <span>การฝึกปฏิบัติงานจริง (On-the-Job Training: OJT)</span>
+                        </div>
+                        <h2 class="text-xl font-bold text-govNavy">
+                            ระบบบันทึกและติดตามการฝึกงาน 4 ด้าน (OJT Tracker & Checklist)
+                        </h2>
+                        <p class="text-slate-500 text-xs mt-0.5">
+                            สะสมชั่วโมงฝึกปฏิบัติงานให้ครบตามเกณฑ์มาตรฐาน ≥ 90 ชั่วโมง และจัดทำแบบประเมินเบิกจ่ายเบี้ยเลี้ยง
+                        </p>
+                    </div>
+                    <button onclick="openNewOjtModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow flex items-center space-x-2">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>เพิ่มบันทึกฝึกงานใหม่</span>
+                    </button>
+                </div>
+
+                <!-- 4 Dimensions Quick Metric Bar -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <div class="text-center p-2 rounded-lg bg-white shadow-sm border border-slate-100">
+                        <div class="text-[10px] text-slate-500 font-bold uppercase">1. วิเคราะห์ข้อมูล</div>
+                        <div id="ojt-badge-dim1" class="text-lg font-bold text-blue-600 mt-0.5">0 ชม.</div>
+                    </div>
+                    <div class="text-center p-2 rounded-lg bg-white shadow-sm border border-slate-100">
+                        <div class="text-[10px] text-slate-500 font-bold uppercase">2. งานสารบรรณ/เอกสาร</div>
+                        <div id="ojt-badge-dim2" class="text-lg font-bold text-emerald-600 mt-0.5">0 ชม.</div>
+                    </div>
+                    <div class="text-center p-2 rounded-lg bg-white shadow-sm border border-slate-100">
+                        <div class="text-[10px] text-slate-500 font-bold uppercase">3. เทคนิค & ระบบ</div>
+                        <div id="ojt-badge-dim3" class="text-lg font-bold text-purple-600 mt-0.5">0 ชม.</div>
+                    </div>
+                    <div class="text-center p-2 rounded-lg bg-white shadow-sm border border-slate-100">
+                        <div class="text-[10px] text-slate-500 font-bold uppercase">4. ประสานงาน/บริการ</div>
+                        <div id="ojt-badge-dim4" class="text-lg font-bold text-amber-600 mt-0.5">0 ชม.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OJT Logs Table Card -->
+            <div class="app-card p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                    <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                        <i class="fa-solid fa-list-check text-emerald-600"></i>
+                        <span>ประวัติการฝึกปฏิบัติงาน (OJT Work Logs)</span>
+                    </h3>
+                    <div class="flex items-center space-x-2">
+                        <select id="ojt-dimension-filter" onchange="filterOjtLogs()" class="p-1.5 text-xs rounded-lg border border-slate-300 bg-white">
+                            <option value="ALL">ทุกด้านงาน (4 ด้าน)</option>
+                            <option value="1">1. ด้านงานวิเคราะห์ข้อมูล</option>
+                            <option value="2">2. ด้านเอกสารราชการและสารบรรณ</option>
+                            <option value="3">3. ด้านเทคนิคและระบบ</option>
+                            <option value="4">4. ด้านการประสานงานและบริการ</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse" aria-label="ตารางบันทึกการฝึกงาน OJT">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                <th class="p-3 font-bold">วันที่</th>
+                                <th class="p-3 font-bold">ด้านงาน (4 ด้าน)</th>
+                                <th class="p-3 font-bold">ชั่วโมง</th>
+                                <th class="p-3 font-bold">รายละเอียดงานที่ปฏิบัติ & ผลสัมฤทธิ์</th>
+                                <th class="p-3 font-bold text-center">หลักฐาน</th>
+                                <th class="p-3 font-bold text-center">จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ojt-logs-table-body" class="divide-y divide-slate-200">
+                            <!-- Dynamic Table Rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Weekly Compliance & Allowance Checklist -->
+            <div class="app-card p-6">
+                <h3 class="text-base font-bold text-govNavy mb-3 flex items-center space-x-2">
+                    <i class="fa-solid fa-clipboard-check text-purple-600"></i>
+                    <span>Checklist ประจำสัปดาห์ & การเบิกจ่ายเบี้ยเลี้ยง (Weekly Compliance)</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs" id="ojt-checklist-container">
+                    <!-- Dynamic Checklist Items -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             TAB 4 (M4): AI MAGIC POLISH & R-C-T-F PROMPT ENGINE
+             ==================================================================== -->
+        <section id="tab-m4" class="tab-panel hidden space-y-6">
+            <!-- AI Engine Header -->
+            <div class="app-card p-6 border-t-4 border-purple-600">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </span>
+                    <div>
+                        <h2 class="text-xl font-bold text-govNavy">
+                            AI Magic Polish & R-C-T-F Prompt Engine
+                        </h2>
+                        <p class="text-slate-500 text-xs">
+                            เครื่องมืออัจฉริยะช่วยขัดเกลาภาษาราชการ 3 ย่อหน้า, สร้าง Video Script 1 นาที และสร้างชุดคำสั่ง AI ตามมาตรฐาน R-C-T-F
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 1: Polish to Official Thai Government Style (3 Paragraphs) -->
+            <div class="app-card p-6">
+                <h3 class="text-base font-bold text-govNavy mb-2 flex items-center space-x-2">
+                    <i class="fa-solid fa-file-signature text-purple-600"></i>
+                    <span>1. ตัวช่วยขัดเกลาข้อความเป็น "บันทึกรายงานราชการ 3 ย่อหน้ามาตรฐาน"</span>
+                </h3>
+                <p class="text-slate-500 text-xs mb-4">
+                    พิมพ์ข้อความหรือบันทึกดิบของคุณ AI จะจัดโครงสร้างเป็น: 1. ความเป็นมา / 2. การดำเนินงาน / 3. ข้อพิจารณาและประโยชน์ที่ได้รับ
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <!-- Raw Input -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" for="ai-raw-input">ข้อความหรือบันทึกย่อเบื้องต้น *</label>
+                        <div class="relative">
+                            <textarea id="ai-raw-input" rows="6" placeholder="เช่น วันนี้ได้ไปช่วยพี่เลี้ยงในฝ่ายทำระบบค้นหาเอกสารเก่าใน Google Drive และจัดหมวดหมู่ไฟล์ PDF 200 รายการ รู้สึกว่าทำให้ค้นหางานได้เร็วขึ้นมาก..." class="w-full p-3 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-purple-500 bg-white leading-relaxed"></textarea>
+                            <button type="button" onclick="startVoiceInput('ai-raw-input')" class="absolute right-2.5 bottom-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1 rounded text-[11px] font-medium border border-slate-300 flex items-center space-x-1">
+                                <i class="fa-solid fa-microphone text-rose-500"></i>
+                                <span>พิมพ์ด้วยเสียง</span>
+                            </button>
+                        </div>
+                        <div class="mt-2 flex justify-between items-center">
+                            <span class="text-[11px] text-slate-400">เลือกโทนภาษา: เป็นทางการมาก / รายงานผู้บังคับบัญชา</span>
+                            <button onclick="runAiPolish()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow flex items-center space-x-2">
+                                <i class="fa-solid fa-sparkles"></i>
+                                <span>✨ ขัดเกลาภาษาราชการ</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Polished Output -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-xs font-bold text-purple-900 flex items-center space-x-1">
+                                <i class="fa-solid fa-circle-check text-purple-600"></i>
+                                <span>ผลลัพธ์ภาษาราชการ (3 ย่อหน้า)</span>
+                            </label>
+                            <button onclick="copyToClipboard('ai-polished-output')" class="text-xs text-purple-600 hover:underline flex items-center space-x-1">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>คัดลอกข้อความ</span>
+                            </button>
+                        </div>
+                        <div id="ai-polished-output" class="w-full p-3 text-xs rounded-xl bg-purple-50/50 border border-purple-200 min-h-[148px] text-slate-800 leading-relaxed whitespace-pre-line">
+                            (ผลลัพธ์ภาษาราชการจะปรากฏที่นี่เมื่อกดปุ่มขัดเกลา)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 2: 1-Minute Video Storyboard & Script Generator -->
+            <div class="app-card p-6">
+                <h3 class="text-base font-bold text-govNavy mb-2 flex items-center space-x-2">
+                    <i class="fa-solid fa-video text-rose-600"></i>
+                    <span>2. เครื่องมือสร้างสคริปต์วิดีโอ 1 นาที 4 ช่วงเวลา (Hook, Story, Impact, CTA)</span>
+                </h3>
+                <p class="text-slate-500 text-xs mb-4">
+                    สร้างโครงเรื่องวิดีโอแนะนำตนเองและผลงานความยาว 60 วินาที พร้อมคิวภาพและเสียงสำหรับประกอบการนำเสนอ
+                </p>
+
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button onclick="generateVideoScript('profile')" class="bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+                        🎬 สร้าง Script แนะนำตัว & ความพร้อม
+                    </button>
+                    <button onclick="generateVideoScript('ojt')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+                        🏆 สร้าง Script นำเสนอผลงาน OJT ดีเด่น
+                    </button>
+                    <button onclick="generateVideoScript('ai')" class="bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+                        🤖 สร้าง Script นำเสนอทักษะ AI & Digital
+                    </button>
+                </div>
+
+                <div id="video-script-timeline" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <!-- 4 Timeline Cards -->
+                </div>
+            </div>
+
+            <!-- Tool 3: Prompt R-C-T-F Engine -->
+            <div class="app-card p-6">
+                <h3 class="text-base font-bold text-govNavy mb-2 flex items-center space-x-2">
+                    <i class="fa-solid fa-terminal text-blue-600"></i>
+                    <span>3. เครื่องมือสร้าง Prompt ตามกรอบมาตรฐาน R-C-T-F</span>
+                </h3>
+                <p class="text-slate-500 text-xs mb-4">
+                    กำหนด <strong>Role (บทบาท)</strong>, <strong>Context (บริบท)</strong>, <strong>Task (ภารกิจ)</strong>, และ <strong>Format (รูปแบบผลลัพธ์)</strong> เพื่อนำไปใช้กับ Gemini / AI Assistant
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1" for="rctf-role">Role (บทบาท)</label>
+                        <input type="text" id="rctf-role" value="ผู้เชี่ยวชาญด้านการพัฒนาระบบราชการดิจิทัล" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1" for="rctf-context">Context (บริบท)</label>
+                        <input type="text" id="rctf-context" value="หลักสูตรเตรียมความพร้อมข้าราชการ/พนักงานคนพิการ" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1" for="rctf-task">Task (ภารกิจ)</label>
+                        <input type="text" id="rctf-task" value="สรุปรายงานผลการปฏิบัติงานฝึกงาน OJT 4 ด้าน" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1" for="rctf-format">Format (รูปแบบ)</label>
+                        <input type="text" id="rctf-format" value="ตารางสรุป KPI และบันทึกข้อความราชการ 3 ย่อหน้า" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center bg-slate-900 text-emerald-300 p-4 rounded-xl font-mono text-xs overflow-x-auto">
+                    <pre id="rctf-generated-prompt" class="whitespace-pre-wrap leading-relaxed flex-grow"></pre>
+                    <button onclick="copyPromptRCTF()" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition shrink-0 ml-3">
+                        <i class="fa-solid fa-copy mr-1"></i> คัดลอก Prompt
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             TAB 5 (M5): DRIVE & ARTIFACTS STORAGE (+ ALT-TEXT)
+             ==================================================================== -->
+        <section id="tab-m5" class="tab-panel hidden space-y-6">
+            <!-- Artifacts Header -->
+            <div class="app-card p-6 border-t-4 border-cyan-600">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 text-xs font-semibold text-cyan-700 bg-cyan-50 px-2.5 py-0.5 rounded-full mb-1">
+                            <i class="fa-solid fa-folder-tree"></i>
+                            <span>คลังเก็บหลักฐานและภาพผลงานดิจิทัล (Artifacts & Cloud Drive)</span>
+                        </div>
+                        <h2 class="text-xl font-bold text-govNavy">
+                            คลังสื่อ ผลงาน และ Google Drive Storage
+                        </h2>
+                        <p class="text-slate-500 text-xs mt-0.5">
+                            จัดเก็บภาพถ่ายกิจกรรม 13 วัน ณ เซ็นทารา ไลฟ์ และผลงาน OJT พร้อมระบุ <strong>Alt-Text</strong> ตามมาตรฐานคนตาบอด
+                        </p>
+                    </div>
+                    <button onclick="openNewArtifactModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow flex items-center space-x-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>เพิ่มภาพผลงาน / เอกสาร</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Artifacts Grid -->
+            <div class="app-card p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                        <i class="fa-solid fa-images text-cyan-600"></i>
+                        <span>ภาพผลงานและเอกสารแนบในระบบ</span>
+                    </h3>
+                    <span id="artifacts-total-badge" class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full font-bold">
+                        0 รายการ
+                    </span>
+                </div>
+
+                <div id="artifacts-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Dynamic Artifact Cards -->
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             TAB 6 (M6): PORTFOLIO MASTER EXPORTER (7 STANDARD PAGES A4)
+             ==================================================================== -->
+        <section id="tab-m6" class="tab-panel hidden space-y-6">
+            <!-- Portfolio Action Bar -->
+            <div class="app-card p-6 border-t-4 border-emerald-600 no-print flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full mb-1">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>มาตรฐานเล่มผลงานสะสม 7 หน้า สำหรับข้าราชการและพนักงานรัฐ</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-govNavy">
+                        ระบบจัดทำเล่มสะสมผลงานดิจิทัล (Portfolio Master Exporter)
+                    </h2>
+                    <p class="text-slate-500 text-xs mt-0.5">
+                        ดึงข้อมูลประวัติ, ตาราง 13 วัน, OJT 4 ด้าน และวิสัยทัศน์ มาประกอบเล่มมาตรฐาน 7 หน้า A4 อัตโนมัติ
+                    </p>
+                </div>
+                <div class="flex items-center space-x-2 flex-wrap">
+                    <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-lg flex items-center space-x-2">
+                        <i class="fa-solid fa-print"></i>
+                        <span>สั่งพิมพ์ PDF (A4 7 หน้า)</span>
+                    </button>
+                    <button onclick="copyFullPortfolioText()" class="bg-slate-700 hover:bg-slate-800 text-white px-3.5 py-2.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>คัดลอกลง Canva / Word</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 7 Standard Pages Live Preview Container -->
+            <div id="portfolio-preview-container" class="space-y-6">
+                <!-- Page 1: ปกหน้า (Cover Page) -->
+                <div class="print-page app-card p-8 md:p-12 text-center flex flex-col justify-between" id="portfolio-page-1">
+                    <div class="space-y-4">
+                        <div class="w-20 h-20 mx-auto rounded-full bg-govNavy text-white flex items-center justify-center text-3xl shadow-lg border-2 border-govGreen">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <span class="inline-block bg-slate-100 text-slate-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            แฟ้มสะสมผลงานดิจิทัล (DIGITAL PORTFOLIO)
+                        </span>
+                        <h1 class="text-2xl md:text-3xl font-bold text-govNavy leading-snug">
+                            หลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1
+                        </h1>
+                        <p class="text-slate-600 text-sm">
+                            ณ โรงแรมเซ็นทารา ไลฟ์ ศูนย์ราชการและคอนเวนชันเซ็นเตอร์ แจ้งวัฒนะ & การฝึกปฏิบัติงานจริง (OJT)
+                        </p>
+                    </div>
+
+                    <div class="my-8 p-6 bg-slate-50 rounded-2xl border border-slate-200 max-w-md mx-auto w-full space-y-2">
+                        <div class="text-xs text-slate-500 font-medium">จัดทำโดย</div>
+                        <div id="pv-p1-name" class="text-xl font-bold text-govNavy">นายเจค นิติพัฒน์ คุ้มวงษ์</div>
+                        <div id="pv-p1-track" class="text-xs font-semibold text-emerald-700">สายหลักสูตร: Advanced AI & Automation</div>
+                        <div id="pv-p1-position" class="text-xs text-slate-700">ตำแหน่ง: นักวิชาการคอมพิวเตอร์</div>
+                        <div id="pv-p1-org" class="text-xs text-slate-600">สังกัด: สถาบันข้อมูลขนาดใหญ่ (BDI)</div>
+                    </div>
+
+                    <div class="text-xs text-slate-400 border-t border-slate-200 pt-4 flex justify-between">
+                        <span>หน้า 1 จาก 7 (ปกหน้า)</span>
+                        <span>ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล ภาครัฐ</span>
+                    </div>
+                </div>
+
+                <!-- Page 2: ข้อมูลส่วนตัวและวิสัยทัศน์ (Profile & Vision) -->
+                <div class="print-page app-card p-8 md:p-12 space-y-6" id="portfolio-page-2">
+                    <div class="border-b-2 border-govNavy pb-3 flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-govNavy">หน้า 2: ประวัติส่วนตัวและวิสัยทัศน์การปฏิบัติงาน</h2>
+                        <span class="text-xs text-slate-400">หน้า 2 จาก 7</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        <div class="space-y-3">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="text-slate-500 text-[11px] font-bold">ชื่อ-นามสกุล</div>
+                                <div id="pv-p2-name" class="font-bold text-slate-800 text-sm">-</div>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="text-slate-500 text-[11px] font-bold">ตำแหน่งและสังกัด</div>
+                                <div id="pv-p2-position-org" class="font-bold text-slate-800">-</div>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="text-slate-500 text-[11px] font-bold">ช่องทางติดต่อ</div>
+                                <div id="pv-p2-contact" class="text-slate-700">-</div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="text-slate-500 text-[11px] font-bold">หน่วยงานฝึกปฏิบัติงาน OJT</div>
+                                <div id="pv-p2-ojt-agency" class="font-bold text-emerald-800">-</div>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <div class="text-slate-500 text-[11px] font-bold">สิ่งอำนวยความสะดวกที่ใช้งาน</div>
+                                <div id="pv-p2-accessibility" class="text-slate-700">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-blue-50/50 rounded-2xl border border-blue-200">
+                        <h3 class="text-xs font-bold text-govNavy uppercase tracking-wider mb-2 flex items-center space-x-1.5">
+                            <i class="fa-solid fa-bullseye text-blue-600"></i>
+                            <span>วิสัยทัศน์และอุดมการณ์ในการปฏิบัติหน้าที่ราชการ</span>
+                        </h3>
+                        <p id="pv-p2-vision" class="text-xs text-slate-700 leading-relaxed whitespace-pre-line"></p>
+                    </div>
+                </div>
+
+                <!-- Page 3: ประวัติการทำงานและประสบการณ์ (Experience & Background) -->
+                <div class="print-page app-card p-8 md:p-12 space-y-6" id="portfolio-page-3">
+                    <div class="border-b-2 border-govNavy pb-3 flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-govNavy">หน้า 3: ประวัติการทำงานและผลงานที่ผ่านมา</h2>
+                        <span class="text-xs text-slate-400">หน้า 3 จาก 7</span>
+                    </div>
+                    <div class="space-y-4 text-xs" id="pv-p3-experience-list">
+                        <!-- Dynamic Experience Rows -->
+                    </div>
+                </div>
+
+                <!-- Page 4: ทักษะและความเชี่ยวชาญ (Hard Skills & Soft Skills) -->
+                <div class="print-page app-card p-8 md:p-12 space-y-6" id="portfolio-page-4">
+                    <div class="border-b-2 border-govNavy pb-3 flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-govNavy">หน้า 4: ทักษะความเชี่ยวชาญและสมรรถนะดิจิทัล</h2>
+                        <span class="text-xs text-slate-400">หน้า 4 จาก 7</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                            <h3 class="font-bold text-govNavy text-sm flex items-center space-x-2">
+                                <i class="fa-solid fa-laptop-code text-blue-600"></i>
+                                <span>ทักษะเชิงเทคนิค (Hard & Digital Skills)</span>
+                            </h3>
+                            <div id="pv-p4-hard-skills" class="flex flex-wrap gap-1.5"></div>
+                        </div>
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                            <h3 class="font-bold text-govNavy text-sm flex items-center space-x-2">
+                                <i class="fa-solid fa-comments text-emerald-600"></i>
+                                <span>ทักษะการทำงานร่วมกับผู้อื่น (Soft Skills & Governance)</span>
+                            </h3>
+                            <div id="pv-p4-soft-skills" class="flex flex-wrap gap-1.5"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 5: สรุปผลการฝึกอบรม 13 วัน ณ เซ็นทารา ไลฟ์ -->
+                <div class="print-page app-card p-8 md:p-12 space-y-6" id="portfolio-page-5">
+                    <div class="border-b-2 border-govNavy pb-3 flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-govNavy">หน้า 5: สรุปผลการเรียนรู้ 13 วัน (เซ็นทารา ไลฟ์)</h2>
+                        <span class="text-xs text-slate-400">หน้า 5 จาก 7</span>
+                    </div>
+                    <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 flex justify-between text-xs">
+                        <div>
+                            <strong>สถิติการเข้าเรียน:</strong> <span id="pv-p5-attendance-stat">13/13 วัน (100%)</span>
+                        </div>
+                        <div class="font-bold text-emerald-800">
+                            <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> ผ่านเกณฑ์มาตรฐานการอบรมภาครัฐ
+                        </div>
+                    </div>
+                    <div id="pv-p5-schedule-summary" class="space-y-2 text-xs divide-y divide-slate-100">
+                        <!-- Dynamic 13-day summary -->
+                    </div>
+                </div>
+
+                <!-- Page 6: ผลงานและบันทึกการฝึกปฏิบัติงานจริง OJT 4 ด้าน -->
+                <div class="print-page app-card p-8 md:p-12 space-y-6" id="portfolio-page-6">
+                    <div class="border-b-2 border-govNavy pb-3 flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-govNavy">หน้า 6: รายงานผลการฝึกปฏิบัติงานจริง (OJT Tracker)</h2>
+                        <span class="text-xs text-slate-400">หน้า 6 จาก 7</span>
+                    </div>
+                    <div class="p-4 bg-amber-50 rounded-xl border border-amber-200 flex justify-between text-xs">
+                        <div>
+                            <strong>ชั่วโมงฝึกงานสะสม:</strong> <span id="pv-p6-hours-stat">90/90 ชั่วโมง</span>
+                        </div>
+                        <div class="font-bold text-amber-800">
+                            <i class="fa-solid fa-check-double text-amber-600 mr-1"></i> ครบตามเกณฑ์เบิกจ่ายเบี้ยเลี้ยง
+                        </div>
+                    </div>
+                    <div id="pv-p6-ojt-summary-table" class="text-xs">
+                        <!-- Dynamic OJT 4 Dimensions Table -->
+                    </div>
+                </div>
+
+                <!-- Page 7: แผนการพัฒนาตนเองและเป้าหมายการรับราชการ -->
+                <div class="print-page app-card p-8 md:p-12 space-y-6 flex flex-col justify-between" id="portfolio-page-7">
+                    <div class="space-y-6">
+                        <div class="border-b-2 border-govNavy pb-3 flex justify-between items-center">
+                            <h2 class="text-xl font-bold text-govNavy">หน้า 7: แผนการพัฒนาตนเองและเป้าหมายในอนาคต</h2>
+                            <span class="text-xs text-slate-400">หน้า 7 จาก 7</span>
+                        </div>
+                        <div class="space-y-4 text-xs">
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <h3 class="font-bold text-govNavy mb-1">1. แผนการพัฒนาทักษะดิจิทัลและ AI ในระยะ 1 ปี</h3>
+                                <p class="text-slate-700 leading-relaxed">
+                                    มุ่งเน้นการต่อยอดทักษะการประยุกต์ใช้ Generative AI, การวิเคราะห์ข้อมูลขนาดใหญ่ และการเขียนโปรแกรมอัตโนมัติ เพื่อสนับสนุนงานสารสนเทศของหน่วยงานให้มีประสิทธิภาพสูงสุด
+                                </p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                                <h3 class="font-bold text-govNavy mb-1">2. ความมุ่งมั่นในการให้บริการประชาชนและจริยธรรมข้าราชการ</h3>
+                                <p class="text-slate-700 leading-relaxed">
+                                    ยึดมั่นในหลักธรรมาภิบาล ความโปร่งใส ความคุ้มค่าทางงบประมาณ และการสร้างสรรค์นวัตกรรมบริการที่ทุกคนเข้าถึงได้อย่างเท่าเทียม (Universal Accessibility)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sign-off Seal -->
+                    <div class="border-t border-slate-200 pt-6 mt-8 flex justify-between items-end text-xs">
+                        <div>
+                            <div class="text-slate-400">วันที่รับรองเอกสาร: 30 กันยายน 2569</div>
+                            <div class="text-[11px] text-slate-400">ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล (Certified Copy)</div>
+                        </div>
+                        <div class="text-center space-y-1">
+                            <div class="w-40 border-b border-slate-400 pb-8 text-slate-300">(ลงชื่อผู้เข้าอบรม)</div>
+                            <div id="pv-p7-sign-name" class="font-bold text-slate-800">นายเจค นิติพัฒน์ คุ้มวงษ์</div>
+                            <div class="text-[11px] text-slate-500">ผู้จัดทำแฟ้มสะสมผลงาน</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ====================================================================
+             TAB 7 (M7): INCLUSIVE ACCESSIBILITY & DATA PRIVACY (PDPA)
+             ==================================================================== -->
+        <section id="tab-m7" class="tab-panel hidden space-y-6">
+            <!-- Accessibility Header -->
+            <div class="app-card p-6 border-t-4 border-cyan-600">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-universal-access"></i>
+                    </span>
+                    <div>
+                        <h2 class="text-xl font-bold text-govNavy">
+                            ศูนย์การเข้าถึงที่เท่าเทียมและมาตรการคุ้มครองข้อมูล (Accessibility & PDPA)
+                        </h2>
+                        <p class="text-slate-500 text-xs">
+                            การออกแบบตามมาตรฐาน WCAG 2.1 Level AA และพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accessibility Checklist (10 Items) -->
+            <div class="app-card p-6">
+                <h3 class="text-base font-bold text-govNavy mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-square-check text-emerald-600"></i>
+                    <span>เกณฑ์การประเมินการเข้าถึงที่เท่าเทียม (Universal Accessibility Checklist)</span>
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-800">1. High Contrast Theme (อัตราส่วนความต่างสี > 7:1)</div>
+                            <div class="text-slate-500 text-[11px]">รองรับผู้มีสายตาเลือนรางด้วยชุดสีดำ-เหลืองความคมชัดสูง</div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-800">2. Font Size Scaling (ปรับขนาดฟอนต์ 3 ระดับ)</div>
+                            <div class="text-slate-500 text-[11px]">ขยายตัวอักษรได้สูงสุด 20px โดยที่ข้อความไม่ล้นหรือตัดตก</div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-800">3. Screen Reader Support (Semantic HTML & ARIA)</div>
+                            <div class="text-slate-500 text-[11px]">มี Skip Link, ARIA Labels และ Role กำกับครบทุกส่วน</div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-800">4. Voice-to-Text Input (พิมพ์ด้วยเสียงภาษาไทย)</div>
+                            <div class="text-slate-500 text-[11px]">เชื่อมต่อ Web Speech API พิมพ์ลงฟอร์มได้โดยไม่ต้องใช้แป้นพิมพ์</div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-800">5. Keyboard Navigable (การนำทางด้วยแป้นพิมพ์)</div>
+                            <div class="text-slate-500 text-[11px]">แสดง Focus Outline ชัดเจนและกด Tab นำทางได้ทุกปุ่ม</div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-start space-x-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+                        <div>
+                            <div class="font-bold text-slate-800">6. Mandatory Alt-Text for Images (คำบรรยายภาพ)</div>
+                            <div class="text-slate-500 text-[11px]">ระบบบังคับใส่คำอธิบายภาพในคลังผลงานเพื่อผู้พิการทางสายตา</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDPA & Data Governance Notice -->
+            <div class="app-card p-6 border-l-8 border-emerald-600">
+                <h3 class="text-base font-bold text-govNavy mb-2 flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                    <span>มาตรการคุ้มครองข้อมูลส่วนบุคคล (PDPA Notice & Data Control)</span>
+                </h3>
+                <p class="text-slate-600 text-xs leading-relaxed mb-4">
+                    ระบบนี้ทำงานแบบ <strong>Local-First Storage</strong> ข้อมูลทั้งหมดจะถูกจัดเก็บในหน่วยความจำของเบราว์เซอร์บนเครื่องของผู้ใช้เท่านั้น ไม่มีการส่งข้อมูลส่วนบุคคล, รูปภาพ หรือผลงานออกสู่เซิร์ฟเวอร์ภายนอก ผู้ใช้สามารถสำรอง (Export) หรือล้างข้อมูลทั้งหมดได้ตลอดเวลา
+                </p>
+                <div class="flex items-center space-x-3">
+                    <button onclick="resetAllDataToDefaults()" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition shadow flex items-center space-x-2">
+                        <i class="fa-solid fa-trash-arrow-up"></i>
+                        <span>รีเซ็ตข้อมูลเป็นค่าเริ่มต้น (Reset to Defaults)</span>
+                    </button>
+                    <button onclick="exportDataJSON()" class="bg-slate-700 hover:bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center space-x-2">
+                        <i class="fa-solid fa-download"></i>
+                        <span>ดาวน์โหลดข้อมูลสำรอง (Backup JSON)</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Standard Thai Government Aesthetic -->
+    <footer class="bg-govNavy text-white py-6 mt-12 border-t-4 border-govGreen no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-300">
+            <div>
+                <div class="font-bold text-white">ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล (Civil Servant Trainee Management)</div>
+                <div class="text-[11px] text-slate-400">สถาบันข้อมูลขนาดใหญ่ (BDI) ร่วมกับ กรมส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ (พก.)</div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="system_requirements_blueprint.html" class="hover:text-emerald-300 transition">
+                    <i class="fa-solid fa-file-lines mr-1"></i> พิมพ์เขียวระบบ
+                </a>
+                <a href="#main-content" class="hover:text-emerald-300 transition">
+                    <i class="fa-solid fa-arrow-up mr-1"></i> กลับขึ้นด้านบน
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals Container -->
+    <!-- Modal: Edit Reflection -->
+    <div id="modal-reflection" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-base font-bold text-govNavy" id="modal-reflection-title">บันทึกสรุปการเรียนรู้ประจำวัน</h3>
+                <button onclick="closeModal('modal-reflection')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="modal-reflection-form" onsubmit="event.preventDefault(); saveReflectionFromModal();" class="space-y-3 text-xs">
+                <input type="hidden" id="modal-ref-day">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-ref-status">สถานะการเข้าเรียน</label>
+                    <select id="modal-ref-status" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                        <option value="PRESENT">เข้าเรียน (Present)</option>
+                        <option value="ONLINE">เรียนออนไลน์ (Online)</option>
+                        <option value="LEAVE">ลา (Leave)</option>
+                        <option value="ABSENT">ขาด (Absent)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-ref-notes">สรุปความรู้และกิจกรรมสำคัญ</label>
+                    <div class="relative">
+                        <textarea id="modal-ref-notes" rows="4" required class="w-full p-2.5 rounded-lg border border-slate-300 bg-white leading-relaxed"></textarea>
+                        <button type="button" onclick="startVoiceInput('modal-ref-notes')" class="absolute right-2 bottom-2 bg-slate-100 px-2 py-1 rounded text-[11px] border border-slate-300">
+                            <i class="fa-solid fa-microphone text-rose-500"></i> พูด
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-ref-action">สิ่งที่นำไปประยุกต์ใช้ในการทำงาน</label>
+                    <textarea id="modal-ref-action" rows="2" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white leading-relaxed"></textarea>
+                </div>
+                <div class="flex justify-end space-x-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-reflection')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-semibold shadow">บันทึกข้อมูล</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: New / Edit OJT Log -->
+    <div id="modal-ojt" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-base font-bold text-govNavy" id="modal-ojt-title">บันทึกการฝึกปฏิบัติงานจริง (OJT)</h3>
+                <button onclick="closeModal('modal-ojt')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="modal-ojt-form" onsubmit="event.preventDefault(); saveOjtFromModal();" class="space-y-3 text-xs">
+                <input type="hidden" id="modal-ojt-id">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1" for="modal-ojt-date">วันที่ปฏิบัติงาน *</label>
+                        <input type="date" id="modal-ojt-date" required class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1" for="modal-ojt-hours">จำนวนชั่วโมง *</label>
+                        <input type="number" id="modal-ojt-hours" min="1" max="12" step="0.5" required class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-ojt-dimension">ด้านงานหลัก (4 ด้าน) *</label>
+                    <select id="modal-ojt-dimension" required class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                        <option value="1">1. ด้านงานวิเคราะห์ข้อมูลและสารสนเทศ</option>
+                        <option value="2">2. ด้านเอกสารราชการและงานสารบรรณ</option>
+                        <option value="3">3. ด้านเทคนิค ระบบ และการพัฒนาระบบ</option>
+                        <option value="4">4. ด้านการประสานงาน บริการ และสื่อสาร</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-ojt-task">รายละเอียดภารกิจที่ปฏิบัติ *</label>
+                    <div class="relative">
+                        <textarea id="modal-ojt-task" rows="3" required class="w-full p-2.5 rounded-lg border border-slate-300 bg-white leading-relaxed"></textarea>
+                        <button type="button" onclick="startVoiceInput('modal-ojt-task')" class="absolute right-2 bottom-2 bg-slate-100 px-2 py-1 rounded text-[11px] border border-slate-300">
+                            <i class="fa-solid fa-microphone text-rose-500"></i> พูด
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-ojt-output">ผลสัมฤทธิ์ / ชิ้นงานที่ได้รับ</label>
+                    <input type="text" id="modal-ojt-output" placeholder="เช่น รายงานสรุป 1 ฉบับ, ฐานข้อมูล 1 ชุด" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-ojt-link">ลิงก์ผลงาน / เอกสาร Google Drive</label>
+                    <input type="url" id="modal-ojt-link" placeholder="https://drive.google.com/..." class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                </div>
+                <div class="flex justify-end space-x-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-ojt')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-semibold shadow">บันทึก OJT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: New Artifact Upload -->
+    <div id="modal-artifact" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-base font-bold text-govNavy">เพิ่มภาพผลงาน / เอกสารเข้าคลัง</h3>
+                <button onclick="closeModal('modal-artifact')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form id="modal-artifact-form" onsubmit="event.preventDefault(); saveArtifactFromModal();" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-art-title">ชื่อผลงาน / กิจกรรม *</label>
+                    <input type="text" id="modal-art-title" required placeholder="เช่น ภาพกิจกรรมการนำเสนอผลงานกลุ่ม" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-art-category">หมวดหมู่ผลงาน</label>
+                    <select id="modal-art-category" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                        <option value="TRAINING_13DAYS">การอบรม 13 วัน ณ เซ็นทารา ไลฟ์</option>
+                        <option value="OJT_WORK">ผลงานการฝึกปฏิบัติงานจริง (OJT)</option>
+                        <option value="CERTIFICATE">เกียรติบัตรและใบรับรอง</option>
+                        <option value="PRESENTATION">สื่อการนำเสนอ / Infographic</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-art-alt">
+                        Alt-Text คำบรรยายภาพสำหรับคนตาบอด (WCAG Requirement) *
+                    </label>
+                    <input type="text" id="modal-art-alt" required placeholder="อธิบายสิ่งที่อยู่ในภาพอย่างกระชับและชัดเจน" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="modal-art-link">ลิงก์รูปภาพ หรือ Google Drive URL</label>
+                    <input type="text" id="modal-art-link" placeholder="https://... หรือปล่อยว่างเพื่อใช้ภาพตัวแทนจำลอง" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                </div>
+                <div class="flex justify-end space-x-2 pt-2">
+                    <button type="button" onclick="closeModal('modal-artifact')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-cyan-600 text-white font-semibold shadow">บันทึกเข้าคลัง</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-slate-700 text-xs flex items-center space-x-3 transition-all duration-300">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toast-msg" class="font-medium">ดำเนินการเรียบร้อยแล้ว</span>
+    </div>
+
+    <!-- Main Logic Script -->
+    <script src="app.js"></script>
+</body>
+</html>

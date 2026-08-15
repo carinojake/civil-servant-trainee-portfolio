@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-08-15T13:14:55.576Z",
+  "snapshotFile": "snapshot_baseline_v1.json",
+  "fileManifest": {
+    "index.html": {
+      "sizeBytes": 162599,
+      "sha256": "61fe8e323ef839be0d78890964b41b3f759abb6bfc0598cf0b6032393d8008a2"
+    },
+    "app.js": {
+      "sizeBytes": 180319,
+      "sha256": "b46fd259a75e3f93c6054e4fd53852d7b286e7a5031b152efe00a3f39d0fe5b1"
+    },
+    "styles.css": {
+      "sizeBytes": 9139,
+      "sha256": "e69625e7b2c1f8eeb0a357502eb22f26257e66dd8c5d49f42c82c7326dc01767"
+    },
+    "system_requirements_blueprint.html": {
+      "sizeBytes": 35398,
+      "sha256": "56db186d42296a6922e9215ee73d2dac8edfb46b3a31ed8de88933f551a7f0e8"
+    },
+    "01_data/default_trainees.json": {
+      "sizeBytes": 26940,
+      "sha256": "9ef7c840b9c1d4fbf9b3adb6f82772b15924d5a378f60e393904269c0930a263"
+    },
+    "01_data/backup_schema.json": {
+      "sizeBytes": 4870,
+      "sha256": "c2917e4c2051edaa61e1edea8884474e15cf4a8d0d897343e9cf95a212bc8bc3"
+    }
+  }
+}

@@ -1,0 +1,1237 @@
+{
+  "schemaVersion": "2.0.0",
+  "snapshotId": "SNAPSHOT-BASELINE-V1",
+  "snapshotName": "Mission 002 Baseline Freeze",
+  "createdAt": "2026-08-15T13:14:55.567Z",
+  "fileManifest": {
+    "index.html": {
+      "sizeBytes": 162599,
+      "sha256": "61fe8e323ef839be0d78890964b41b3f759abb6bfc0598cf0b6032393d8008a2"
+    },
+    "app.js": {
+      "sizeBytes": 180319,
+      "sha256": "b46fd259a75e3f93c6054e4fd53852d7b286e7a5031b152efe00a3f39d0fe5b1"
+    },
+    "styles.css": {
+      "sizeBytes": 9139,
+      "sha256": "e69625e7b2c1f8eeb0a357502eb22f26257e66dd8c5d49f42c82c7326dc01767"
+    },
+    "system_requirements_blueprint.html": {
+      "sizeBytes": 35398,
+      "sha256": "56db186d42296a6922e9215ee73d2dac8edfb46b3a31ed8de88933f551a7f0e8"
+    },
+    "01_data/default_trainees.json": {
+      "sizeBytes": 26940,
+      "sha256": "9ef7c840b9c1d4fbf9b3adb6f82772b15924d5a378f60e393904269c0930a263"
+    },
+    "01_data/backup_schema.json": {
+      "sizeBytes": 4870,
+      "sha256": "c2917e4c2051edaa61e1edea8884474e15cf4a8d0d897343e9cf95a212bc8bc3"
+    }
+  },
+  "userProfile": {
+    "id": "TR-001",
+    "fullName": "นายเจค นิติพัฒน์ คุ้มวงษ์",
+    "nickname": "เจค",
+    "track": "ADV",
+    "trackName": "Advanced AI & Automation",
+    "position": "นักวิชาการคอมพิวเตอร์",
+    "organization": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+    "ojtAgency": "สำนักงานพัฒนารัฐบาลดิจิทัล (องค์การมหาชน) - DGA",
+    "email": "nitipat.k@bdi.or.th",
+    "phone": "081-234-5678",
+    "accessibilityNeeds": "สิ่งอำนวยความสะดวก: การปรับขยายตัวอักษรและชุดสีความคมชัดสูง (High Contrast)",
+    "vision": "มุ่งมั่นนำความรู้และประสบการณ์ด้านเทคโนโลยีสารสนเทศ การวิเคราะห์ข้อมูล และปัญญาประดิษฐ์ (AI) มาขับเคลื่อนการพัฒนาระบบบริการภาครัฐให้มีความสะดวกรวดเร็ว ปลอดภัย มีธรรมาภิบาล และทุกคนสามารถเข้าถึงได้อย่างเท่าเทียม (Universal Accessibility) เพื่อประโยชน์สูงสุดของประชาชนและประเทศชาติ",
+    "experiences": [
+      {
+        "role": "เจ้าหน้าที่พัฒนาระบบคอมพิวเตอร์และระบบอัตโนมัติ",
+        "agency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)",
+        "period": "2565 - ปัจจุบัน",
+        "desc": "ออกแบบและดูแลกระบวนการจัดการข้อมูล (Data Pipeline), พัฒนาโมเดล AI Automation และประสานงานระบบสารสนเทศภาครัฐ"
+      },
+      {
+        "role": "นักวิชาการสารสนเทศ",
+        "agency": "ศูนย์สนับสนุนบริการสุขภาพดิจิทัล",
+        "period": "2560 - 2565",
+        "desc": "บริหารจัดการฐานข้อมูล ดูแลความมั่นคงปลอดภัยทางไซเบอร์ และจัดทำรายงานวิเคราะห์ข้อมูลเชิงสถิติ"
+      }
+    ],
+    "hardSkills": [
+      "Python & Fast API",
+      "PostgreSQL & Database Architecture",
+      "Generative AI Prompting (R-C-T-F)",
+      "Data Analytics & Dashboard",
+      "System Analysis & Design",
+      "Docker & Linux",
+      "Google Apps Script"
+    ],
+    "softSkills": [
+      "การสื่อสารและประสานงานภาครัฐ",
+      "การคิดเชิงวิเคราะห์และการแก้ปัญหา",
+      "จริยธรรมและธรรมาภิบาลข้อมูล (PDPA)",
+      "การทำงานร่วมกันเป็นทีม",
+      "การบริหารจัดการเวลาและโครงการ"
+    ]
+  },
+  "attendance": [
+    {
+      "day": 1,
+      "date": "10 ส.ค. 2569",
+      "title": "ปฐมนิเทศ & วินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ",
+      "isCombined": true,
+      "room": "ห้องประชุม BB 212",
+      "targetGroup": "กลุ่มเป้าหมายจำนวน 40 คน",
+      "morning": "ปฐมนิเทศ: กิจกรรมสร้างความคุ้นเคย (Ice Breaking), แนะนำหลักสูตร, แนวทางการเรียนรู้และการประเมินผล, สำรวจความพร้อมของผู้เรียน",
+      "morningComputer": false,
+      "afternoon": "รายวิชาวินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ",
+      "afternoonComputer": true,
+      "status": "PRESENT",
+      "reflection": "เข้าร่วมกิจกรรมปฐมนิเทศ Ice Breaking ทำความคุ้นเคยกับเพื่อนร่วมรุ่น 40 คน และเรียนรู้วิชาวินัย จริยธรรม คุณธรรมของข้าราชการยุคดิจิทัล",
+      "actionPlan": "ยึดมั่นในวินัยและจรรยาบรรณวิชาชีพ พร้อมเปิดรับการเรียนรู้ตลอด 13 วัน"
+    },
+    {
+      "day": 2,
+      "date": "11 ส.ค. 2569",
+      "title": "ระบบราชการ & กฎหมาย (FND) / วิเคราะห์ข้อมูล & Agile & ออกแบบกระบวนงานดิจิทัล (ADV)",
+      "isCombined": false,
+      "foundation": {
+        "room": "ห้องประชุม BB 212",
+        "morning": "รายวิชาความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน",
+        "morningComputer": true,
+        "afternoon": "รายวิชากฎหมาย ระเบียบ และข้อบังคับพื้นฐานที่เกี่ยวข้องกับการปฏิบัติราชการ",
+        "afternoonComputer": true
+      },
+      "advanced": {
+        "room": "ห้องประชุม BB 211",
+        "morning": "รายวิชาการวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / รายวิชาการบริหารโครงการภาครัฐและการทำงานแบบ Agile",
+        "morningComputer": true,
+        "afternoon": "รายวิชาการออกแบบกระบวนงานดิจิทัล",
+        "afternoonComputer": true
+      },
+      "status": "PRESENT",
+      "reflection": "เรียนรู้การวิเคราะห์ข้อมูลภาครัฐ การบริหารโครงการแบบ Agile และการออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
+      "actionPlan": "นำกรอบคิด Agile มาปรับใช้ในการวางแผนพัฒนาระบบไอทีเพื่อส่งมอบผลงานได้รวดเร็วและตรงจุด"
+    },
+    {
+      "day": 3,
+      "date": "13 ส.ค. 2569",
+      "title": "ทักษะบริการ & Design Thinking (FND) / การสื่อสาร & วิเคราะห์ข้อมูลตัดสินใจ (ADV)",
+      "isCombined": false,
+      "foundation": {
+        "room": "ห้องประชุม BB 212",
+        "morning": "รายวิชาทักษะพื้นฐานด้านการบริการภาครัฐ",
+        "morningComputer": false,
+        "afternoon": "รายวิชาทักษะการคิดเชิงออกแบบ (Design Thinking)",
+        "afternoonComputer": false
+      },
+      "advanced": {
+        "room": "ห้องประชุม BB 211",
+        "morning": "รายวิชาเทคนิคการสื่อสารและสร้างคอนเทนต์ภาครัฐ / รายวิชาการพัฒนาความเป็นผู้นำและการขับเคลื่อนองค์กรที่ยอมรับความแตกต่าง",
+        "morningComputer": true,
+        "afternoon": "รายวิชาการบริหารและวิเคราะห์ข้อมูลเพื่อการตัดสินใจ",
+        "afternoonComputer": true
+      },
+      "status": "PRESENT",
+      "reflection": "ฝึกเทคนิคการสื่อสารสร้างคอนเทนต์ภาครัฐ ภาวะผู้นำในองค์กรที่ยอมรับความหลากหลาย และการวิเคราะห์ข้อมูลเพื่อการตัดสินใจเชิงกลยุทธ์",
+      "actionPlan": "จัดทำ Data Visualization เพื่อสนับสนุนการตัดสินใจของผู้บริหารให้ชัดเจน เข้าใจง่าย"
+    },
+    {
+      "day": 4,
+      "date": "14 ส.ค. 2569",
+      "title": "การประยุกต์ใช้ AI ในงานราชการ & บริบทการบริหารและการทำงานยุคดิจิทัล",
+      "isCombined": true,
+      "room": "ห้องประชุม BB 212",
+      "targetGroup": "รวมทุกหลักสูตร",
+      "morning": "รายวิชาการฝึกปฏิบัติการประยุกต์ใช้ปัญญาประดิษฐ์ (AI) ในการปฏิบัติงานราชการ / รายวิชาการประยุกต์ใช้เทคโนโลยีปัญญาประดิษฐ์",
+      "morningComputer": true,
+      "afternoon": "รายวิชาบริบทการบริหารราชการ การเปลี่ยนแปลงเชิงกระบวนทัศน์ และระบบนิเวศการทำงานในยุคดิจิทัล",
+      "afternoonComputer": true,
+      "status": "PRESENT",
+      "reflection": "ฝึกปฏิบัติการใช้ AI ช่วยงานเอกสารและการวิเคราะห์ข้อมูล พร้อมทำความเข้าใจระบบนิเวศการทำงานภาครัฐยุคดิจิทัล",
+      "actionPlan": "นำ Prompt Engineering มาเพิ่มความเร็วในการสืบค้นและสรุปข้อมูลรายงานภาครัฐอย่างปลอดภัย"
+    },
+    {
+      "day": 5,
+      "date": "17 ส.ค. 2569",
+      "title": "การใช้ภาษาราชการ & ระบบงานสารบรรณอิเล็กทรอนิกส์และกฎหมายขั้นสูง",
+      "isCombined": true,
+      "room": "ห้องประชุม BB 205",
+      "targetGroup": "รวมทุกหลักสูตร",
+      "morning": "รายวิชาทักษะพื้นฐานด้านการใช้ภาษาราชการ / รายวิชาการฝึกปฏิบัติการจัดการระบบงานสารบรรณอิเล็กทรอนิกส์",
+      "morningComputer": true,
+      "afternoon": "รายวิชางานสารบรรณและกฎหมายภาครัฐขั้นสูง",
+      "afternoonComputer": true,
+      "status": "PRESENT",
+      "reflection": "ฝึกทักษะการร่างหนังสือราชการ การจัดการระบบสารบรรณอิเล็กทรอนิกส์ (e-Saraban) และข้อกฎหมายที่เกี่ยวข้อง",
+      "actionPlan": "เขียนหนังสือราชการให้ถูกต้องตามระเบียบสารบรรณ 3 ย่อหน้ามาตรฐาน"
+    },
+    {
+      "day": 6,
+      "date": "18 ส.ค. 2569",
+      "title": "โปรแกรมสำนักงาน สารบรรณอิเล็กทรอนิกส์ & แพลตฟอร์มการทำงานร่วมกัน",
+      "isCombined": true,
+      "room": "ห้องประชุม BB 205",
+      "targetGroup": "รวมทุกหลักสูตร",
+      "morning": "รายวิชาการฝึกปฏิบัติการใช้คอมพิวเตอร์และโปรแกรมสำนักงานพื้นฐาน / รายวิชาการฝึกปฏิบัติการจัดการระบบงานสารบรรณอิเล็กทรอนิกส์",
+      "morningComputer": true,
+      "afternoon": "รายวิชาการฝึกปฏิบัติการใช้แพลตฟอร์มการสื่อสารและการทำงานร่วมกัน",
+      "afternoonComputer": true,
+      "status": "PRESENT",
+      "reflection": "ฝึกใช้เครื่องมือสำนักงานดิจิทัล การจัดเก็บไฟล์คลาวด์ และแพลตฟอร์มการสื่อสารร่วมกันแบบเรียลไทม์",
+      "actionPlan": "ใช้ Google Workspace / MS 365 ช่วยเพิ่มประสิทธิภาพการประสานงานภายในทีม"
+    },
+    {
+      "day": 7,
+      "date": "19 ส.ค. 2569",
+      "title": "การสื่อสาร & ทีมเวิร์ก (FND) / บริหารคลังข้อมูล แดชบอร์ด & สารบรรณวิเคราะห์ (ADV)",
+      "isCombined": false,
+      "foundation": {
+        "room": "ห้องประชุม BB 202",
+        "morning": "รายวิชาทักษะพื้นฐานด้านการสื่อสาร / รายวิชาทักษะการประสานงานและบริหารความสัมพันธ์ขั้นสูง",
+        "morningComputer": true,
+        "afternoon": "รายวิชาทักษะการทำงานเป็นทีมและภาวะผู้นำขั้นพื้นฐาน / รายวิชาทักษะการบริหารจัดการและผู้นำ",
+        "afternoonComputer": false
+      },
+      "advanced": {
+        "room": "ห้องประชุม BB 211",
+        "morning": "รายวิชาการบริหารคลังข้อมูลและการสร้างแดชบอร์ด",
+        "morningComputer": true,
+        "afternoon": "รายวิชางานสารบรรณและการร่างข้อเสนอเชิงวิเคราะห์",
+        "afternoonComputer": true
+      },
+      "status": "PRESENT",
+      "reflection": "ฝึกปฏิบัติการสร้างแดชบอร์ดคลังข้อมูลและการร่างเอกสารข้อเสนอโครงการเชิงวิเคราะห์",
+      "actionPlan": "ออกแบบแดชบอร์ดติดตามสถานะงานบริการประชาชนให้ผู้บริหารเห็นภาพรวมได้ทันที"
+    },
+    {
+      "day": 8,
+      "date": "20 ส.ค. 2569",
+      "title": "ธรรมาภิบาล & พัสดุงบประมาณ (FND) / ภาวะผู้นำ & จิตวิทยาบริการขั้นสูง (ADV)",
+      "isCombined": false,
+      "foundation": {
+        "room": "ห้องประชุม BB 202",
+        "morning": "รายวิชาหลักธรรมาภิบาล การบริหารภาครัฐแนวใหม่ (New Public Management) และการพัฒนาระบบราชการ / รายวิชาการคิดเชิงยุทธศาสตร์และการวิเคราะห์สภาพแวดล้อมภาครัฐ",
+        "morningComputer": true,
+        "afternoon": "รายวิชาการบริหารพัสดุ งบประมาณ และสินทรัพย์ดิจิทัล / รายวิชาการบริหารจัดการสำนักงานอัจฉริยะ",
+        "afternoonComputer": true
+      },
+      "advanced": {
+        "room": "ห้องประชุม BB 211",
+        "morning": "รายวิชาทักษะของผู้นำด้านความคิดและการประสานงาน",
+        "morningComputer": false,
+        "afternoon": "รายวิชาจิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์",
+        "afternoonComputer": false
+      },
+      "status": "PRESENT",
+      "reflection": "เรียนรู้ภาวะผู้นำทางความคิด ทักษะการประสานงานระดับสูง และจิตวิทยาการให้บริการประชาชนเชิงรุก",
+      "actionPlan": "นำจิตวิทยาการบริการมาปรับใช้ในการสื่อสารกับผู้รับบริการทุกกลุ่มอย่างเข้าอกเข้าใจ"
+    },
+    {
+      "day": 9,
+      "date": "24 ส.ค. 2569",
+      "title": "Critical Thinking & IQ (FND) / จัดการข้อร้องเรียน & Customer Experience (ADV)",
+      "isCombined": false,
+      "foundation": {
+        "room": "ห้องประชุม BB 212",
+        "morning": "รายวิชาทักษะการคิดอย่างมีวิจารณญาณ (Critical Thinking)",
+        "morningComputer": false,
+        "afternoon": "รายวิชาพื้นฐานการเสริมสร้างความฉลาดรู้ทางเชาวน์ปัญญา (IQ)",
+        "afternoonComputer": false
+      },
+      "advanced": {
+        "room": "ห้องประชุม BB 211",
+        "morning": "รายวิชาการบริหารจัดการข้อร้องเรียนและวิกฤตขั้นวิกฤต",
+        "morningComputer": false,
+        "afternoon": "รายวิชาการออกแบบประสบการณ์ลูกค้าและการบริหารความสัมพันธ์",
+        "afternoonComputer": false
+      },
+      "status": "PRESENT",
+      "reflection": "ฝึกการรับมือข้อร้องเรียนในภาวะวิกฤต และการออกแบบ Citizen Experience ในงานบริการภาครัฐ",
+      "actionPlan": "จัดทำ Flowchart ขั้นตอนการรับมือข้อร้องเรียนทางเทคนิคให้แก่ฝ่ายสนับสนุนไอที"
+    },
+    {
+      "day": 10,
+      "date": "25 ส.ค. 2569",
+      "title": "การบริหารผลงาน PMQA (FND) / เทคโนโลยี AI & วิเคราะห์ข้อมูลปรับปรุงบริการ (ADV)",
+      "isCombined": false,
+      "foundation": {
+        "room": "ห้องประชุม BB 212",
+        "morning": "รายวิชากลไกการบริหารผลการปฏิบัติงานและการวางแผนพัฒนาอาชีพ",
+        "morningComputer": false,
+        "afternoon": "รายวิชาพื้นฐานการบริหารคุณภาพภาครัฐตามกรอบ PMQA",
+        "afternoonComputer": false
+      },
+      "advanced": {
+        "room": "ห้องประชุม BB 211",
+        "morning": "รายวิชาเทคโนโลยีและปัญญาประดิษฐ์เพื่อการบริการยุคดิจิทัล / รายวิชาการประยุกต์ใช้ปัญญาประดิษฐ์เพื่อช่วยงานวิชาการขั้นสูง",
+        "morningComputer": true,
+        "afternoon": "รายวิชาการวิเคราะห์ข้อมูลเพื่อปรับปรุงงานบริการ",
+        "afternoonComputer": true
+      },
+      "status": "PRESENT",
+      "reflection": "ฝึกใช้ AI ช่วยวิจัย วิเคราะห์ข้อมูลเพื่อปรับปรุงคุณภาพงานบริการภาครัฐตามตัวชี้วัด",
+      "actionPlan": "นำข้อมูลสถิติการใช้งานระบบมาวิเคราะห์หาจุดติดขัดเพื่อปรับปรุง UX/UI ต่อไป"
+    },
+    {
+      "day": 11,
+      "date": "26 ส.ค. 2569",
+      "title": "ความฉลาดรู้ทางจริยธรรม MQ (FND) / ระบบอัตโนมัติ AI & สารบรรณวิเคราะห์ (ADV)",
+      "isCombined": false,
+      "foundation": {
+        "room": "ห้องประชุม BB 212",
+        "morning": "รายวิชาพื้นฐานการเสริมสร้างความฉลาดรู้ทางจริยธรรม (MQ)",
+        "morningComputer": false,
+        "afternoon": "รายวิชาพื้นฐานการเสริมสร้างประสิทธิภาพและคุณภาพชีวิต การทำงานอย่างยั่งยืน หลักเศรษฐกิจพอเพียงด้วยศาสตร์ของพระราชา",
+        "afternoonComputer": false
+      },
+      "advanced": {
+        "room": "ห้องประชุม BB 211",
+        "morning": "รายวิชาการประยุกต์ใช้เทคโนโลยีอัตโนมัติและ AI ในงานธุรการ",
+        "morningComputer": true,
+        "afternoon": "รายวิชางานสารบรรณและการเขียนเชิงวิเคราะห์ขั้นสูง",
+        "afternoonComputer": true
+      },
+      "status": "PRESENT",
+      "reflection": "ฝึกปฏิบัติการสร้างระบบอัตโนมัติ (Automation) ในงานธุรการและการเขียนรายงานเชิงวิเคราะห์ขั้นสูง",
+      "actionPlan": "พัฒนาระบบ Automate ส่งออกเอกสารสรุปรายสัปดาห์เพื่อลดเวลาการทำงานซ้ำซ้อน"
+    },
+    {
+      "day": 12,
+      "date": "27 ส.ค. 2569",
+      "title": "การเสริมสร้างความฉลาดรู้ทางอารมณ์ (EQ) และความฉลาดรู้ทางสังคม (SQ)",
+      "isCombined": true,
+      "room": "ห้องประชุม BB 203",
+      "targetGroup": "รวมทุกหลักสูตร",
+      "morning": "รายวิชาพื้นฐานการเสริมสร้างความฉลาดรู้ทางอารมณ์ (EQ)",
+      "morningComputer": false,
+      "afternoon": "รายวิชาพื้นฐานการเสริมสร้างความฉลาดรู้ทางสังคม (SQ)",
+      "afternoonComputer": false,
+      "status": "PRESENT",
+      "reflection": "เสริมสร้างทักษะความฉลาดทางอารมณ์ (EQ) และความฉลาดทางสังคม (SQ) ในการทำงานร่วมกับเพื่อนร่วมงานหลากหลายฝ่าย",
+      "actionPlan": "ฝึกการบริหารอารมณ์และสร้างบรรยากาศการทำงานที่เกื้อกูลและเป็นมิตร"
+    },
+    {
+      "day": 13,
+      "date": "28 ส.ค. 2569",
+      "title": "ความฉลาดรู้ในการแก้ปัญหา (AQ), สรุปบทเรียน (Reflection) & ปิดการอบรม",
+      "isCombined": true,
+      "room": "ห้องประชุม BB 203",
+      "targetGroup": "รวมทุกหลักสูตร",
+      "morning": "รายวิชาพื้นฐานการเสริมสร้างความฉลาดรู้ทางการตอบสนองทางความคิดในการแก้ปัญหาภายใต้สถานการณ์ที่ยากลำบาก (AQ)",
+      "morningComputer": false,
+      "afternoon": "สรุปบทเรียน (Reflection) / นำเสนอผลงาน / ประเมินผล / ปิดการอบรม",
+      "afternoonComputer": false,
+      "status": "PRESENT",
+      "reflection": "ฝึกความฉลาดรู้ในการแก้ปัญหาภายใต้สถานการณ์ยากลำบาก (AQ) นำเสนอผลงานภาพรวมตลอด 13 วัน และรับการประเมินปิดการอบรม",
+      "actionPlan": "มุ่งมั่นนำความรู้ทั้งหมดไปประยุกต์ใช้ในการฝึกปฏิบัติงานจริง (OJT) ต่อไป"
+    }
+  ],
+  "ojtLogs": [
+    {
+      "id": "OJT-001",
+      "date": "2026-08-28",
+      "dimension": "1",
+      "dimensionName": "งานวิเคราะห์ข้อมูลและสารสนเทศ",
+      "hours": 16,
+      "task": "วิเคราะห์โครงสร้างฐานข้อมูลและจัดทำ Data Dictionary สำหรับระบบสารสนเทศหน่วยงาน",
+      "output": "เอกสาร Data Dictionary จำนวน 1 ฉบับ ครอบคลุม 25 ตารางข้อมูล",
+      "link": "https://drive.google.com/drive/folders/sample-ojt-data-dict"
+    },
+    {
+      "id": "OJT-002",
+      "date": "2026-09-02",
+      "dimension": "2",
+      "dimensionName": "งานเอกสารราชการและสารบรรณ",
+      "hours": 18,
+      "task": "ร่างบันทึกข้อความขออนุมัติดำเนินโครงการดิจิทัล และจัดทำระเบียบวาระการประชุมคณะทำงาน",
+      "output": "บันทึกข้อความราชการ 3 ย่อหน้า และรายงานการประชุม 1 ฉบับ",
+      "link": "https://drive.google.com/drive/folders/sample-ojt-official-memo"
+    },
+    {
+      "id": "OJT-003",
+      "date": "2026-09-08",
+      "dimension": "3",
+      "dimensionName": "งานเทคนิค ระบบ และการพัฒนา",
+      "hours": 32,
+      "task": "พัฒนาสคริปต์ Python สำหรับตรวจสอบความถูกต้องของข้อมูล (Data Validation) และเชื่อมต่อ API",
+      "output": "โปรแกรม Automation Script ทำงานบน Docker และผ่านการทดสอบ 100%",
+      "link": "https://drive.google.com/drive/folders/sample-ojt-python-script"
+    },
+    {
+      "id": "OJT-004",
+      "date": "2026-09-15",
+      "dimension": "4",
+      "dimensionName": "งานประสานงาน บริการ และสื่อสาร",
+      "hours": 24,
+      "task": "ประสานงานกับผู้ใช้งานระบบเพื่อรวบรวมข้อกำหนดการใช้งาน และจัดทำคู่มือการใช้งานระบบดิจิทัล",
+      "output": "คู่มือผู้ใช้งาน (User Manual) และเอกสารสรุปความต้องการ 1 ชุด",
+      "link": "https://drive.google.com/drive/folders/sample-ojt-user-manual"
+    }
+  ],
+  "ojtChecklist": [
+    {
+      "id": "chk-1",
+      "title": "จัดทำแผนการฝึกงานรายบุคคล (Individual Training Plan) ร่วมกับพี่เลี้ยง",
+      "done": true
+    },
+    {
+      "id": "chk-2",
+      "title": "บันทึกเวลาปฏิบัติงานและสะสมชั่วโมงครบถ้วนในแต่ละสัปดาห์",
+      "done": true
+    },
+    {
+      "id": "chk-3",
+      "title": "รับการประเมินผลการปฏิบัติงานระหว่างฝึก (Mid-term Evaluation) จากพี่เลี้ยง",
+      "done": true
+    },
+    {
+      "id": "chk-4",
+      "title": "ปฏิบัติงานครอบคลุมครบทั้ง 4 ด้านงานตามโครงสร้างหลักสูตร",
+      "done": true
+    },
+    {
+      "id": "chk-5",
+      "title": "สะสมชั่วโมงการฝึกปฏิบัติงานจริงรวมไม่น้อยกว่า 90 ชั่วโมง (≥ 90 ชม.)",
+      "done": true
+    },
+    {
+      "id": "chk-6",
+      "title": "รวบรวมเอกสารลงนามรับรองชั่วโมงและส่งหลักฐานเบิกจ่ายเบี้ยเลี้ยง",
+      "done": true
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "ART-001",
+      "title": "ภาพการนำเสนอโครงงาน AI เพื่อบริการประชาชน ณ เซ็นทารา ไลฟ์",
+      "category": "TRAINING_13DAYS",
+      "altText": "นายเจคยืนนำเสนอสไลด์บรรยายเรื่องการประยุกต์ใช้ AI ในการบริการประชาชนหน้าห้องประชุมโรงแรมเซ็นทารา ไลฟ์",
+      "link": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&auto=format&fit=crop&q=60"
+    },
+    {
+      "id": "ART-002",
+      "title": "ภาพถ่ายการปฏิบัติงานวิเคราะห์ข้อมูลร่วมกับพี่เลี้ยง ณ DGA",
+      "category": "OJT_WORK",
+      "altText": "ภาพขณะกำลังตรวจสอบโค้ดภาษา Python และหน้าจอแดชบอร์ดร่วมกับพี่เลี้ยงประจำหน่วยงาน OJT",
+      "link": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&auto=format&fit=crop&q=60"
+    },
+    {
+      "id": "ART-003",
+      "title": "เกียรติบัตรผ่านการอบรมหลักสูตรเตรียมความพร้อมภาครัฐ รุ่นที่ 1",
+      "category": "CERTIFICATE",
+      "altText": "เกียรติบัตรรับรองการผ่านการฝึกอบรมหลักสูตรข้าราชการและพนักงานรัฐคนพิการ รุ่นที่ 1 ออกโดย BDI และ พก.",
+      "link": "https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=500&auto=format&fit=crop&q=60"
+    },
+    {
+      "id": "ART-004",
+      "title": "Infographic สรุปผลสัมฤทธิ์โครงการและการออกแบบเพื่อคนทั้งมวล",
+      "category": "PRESENTATION",
+      "altText": "แผ่นภาพอินโฟกราฟิกสรุป 4 มิติการพัฒนาตนเองและสถิติการฝึกปฏิบัติงาน 90 ชั่วโมง",
+      "link": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&auto=format&fit=crop&q=60"
+    }
+  ],
+  "traineesList": [
+    {
+      "id": "TR-001",
+      "name": "นายเจค นิติพัฒน์ คุ้มวงษ์",
+      "nickname": "เจค",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+      "ojtAgency": "สำนักงานพัฒนารัฐบาลดิจิทัล (องค์การมหาชน) - DGA",
+      "skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Prompt Engineering",
+        "System Analysis"
+      ],
+      "email": "nitipat.k@bdi.or.th",
+      "phone": "081-234-5678",
+      "accessibilityNeeds": "Visual Ergonomics / Screen Magnifier",
+      "status": "Active"
+    },
+    {
+      "id": "TR-002",
+      "name": "นางสาวกานดา ศรีสวัสดิ์",
+      "nickname": "กาน",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิเคราะห์นโยบายและแผน",
+      "organization": "สำนักงาน ก.พ.",
+      "ojtAgency": "กระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม (MDES)",
+      "skills": [
+        "Policy Analysis",
+        "Data Visualization",
+        "AI Governance",
+        "Public Speaking"
+      ],
+      "email": "kanda.s@ocsc.go.th",
+      "phone": "082-345-6789",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-003",
+      "name": "นายธนกฤต มงคลกุล",
+      "nickname": "กฤต",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักจัดการงานทั่วไป",
+      "organization": "กรมการพัฒนาชุมชน",
+      "ojtAgency": "สถาบันส่งเสริมการวิเคราะห์และบริหารข้อมูลขนาดใหญ่ภาครัฐ",
+      "skills": [
+        "Project Management",
+        "Tableau",
+        "Dashboard Design",
+        "Google Sheets"
+      ],
+      "email": "thanakrit.m@cdd.go.th",
+      "phone": "083-456-7890",
+      "accessibilityNeeds": "Mobility / Ramp Access",
+      "status": "Active"
+    },
+    {
+      "id": "TR-004",
+      "name": "นางสาวชลธิชา พงษ์ไพบูลย์",
+      "nickname": "น้ำ",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการปฏิบัติงาน",
+      "organization": "กรมสรรพากร",
+      "ojtAgency": "สำนักงานปลัดกระทรวงการคลัง",
+      "skills": [
+        "Office 365",
+        "Document Processing",
+        "Electronic Filing",
+        "Communication"
+      ],
+      "email": "chonticha.p@rd.go.th",
+      "phone": "084-567-8901",
+      "accessibilityNeeds": "Screen Reader (NVDA)",
+      "status": "Active"
+    },
+    {
+      "id": "TR-005",
+      "name": "นายปิยะวัฒน์ ทรัพย์สมบูรณ์",
+      "nickname": "ป๊อป",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "กรมที่ดิน",
+      "ojtAgency": "สำนักงานสถิติแห่งชาติ",
+      "skills": [
+        "GIS Analysis",
+        "Python",
+        "Spatial Data",
+        "Database Management"
+      ],
+      "email": "piyawat.s@dol.go.th",
+      "phone": "085-678-9012",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-006",
+      "name": "นางสาววรัญญา เลิศวิชัย",
+      "nickname": "ฟ้า",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "เจ้าหน้าที่สารสนเทศ",
+      "organization": "กรมการปกครอง",
+      "ojtAgency": "สำนักงานขับเคลื่อนการปฏิรูปประเทศ (ป.ย.ป.)",
+      "skills": [
+        "Canva Pro",
+        "Infographic Design",
+        "Content Strategy",
+        "AI Automation"
+      ],
+      "email": "waranya.l@dopa.go.th",
+      "phone": "086-789-0123",
+      "accessibilityNeeds": "Color Vision Support",
+      "status": "Active"
+    },
+    {
+      "id": "TR-007",
+      "name": "นายอนิรุธ เดชานันท์",
+      "nickname": "อาร์ม",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานการเงินและบัญชี",
+      "organization": "กรมบัญชีกลาง",
+      "ojtAgency": "กรมส่งเสริมการปกครองท้องถิ่น",
+      "skills": [
+        "GFMIS",
+        "Excel Formulas",
+        "Budget Control",
+        "Accounting"
+      ],
+      "email": "anirut.d@cgd.go.th",
+      "phone": "087-890-1234",
+      "accessibilityNeeds": "Hearing Support / Closed Captions",
+      "status": "Active"
+    },
+    {
+      "id": "TR-008",
+      "name": "นางสาวมนัสวี สุขเกษม",
+      "nickname": "บี",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "นักวิชาการประชาสัมพันธ์",
+      "organization": "กรมประชาสัมพันธ์",
+      "ojtAgency": "สำนักนายกรัฐมนตรี",
+      "skills": [
+        "Press Release",
+        "Short Video Production",
+        "CapCut",
+        "Copywriting"
+      ],
+      "email": "manaswee.s@prd.go.th",
+      "phone": "088-901-2345",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-009",
+      "name": "นายวีรภัทร ชาญวิทย์",
+      "nickname": "โอ",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิทยาศาสตร์ข้อมูล",
+      "organization": "สำนักงานส่งเสริมเศรษฐกิจดิจิทัล (depa)",
+      "ojtAgency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)",
+      "skills": [
+        "Machine Learning",
+        "Scikit-Learn",
+        "SQL",
+        "Data Pipeline"
+      ],
+      "email": "veerapat.c@depa.or.th",
+      "phone": "089-012-3456",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-010",
+      "name": "นางสาวนภัสสร อริยวงศ์",
+      "nickname": "พลอย",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการ",
+      "organization": "กรมควบคุมโรค",
+      "ojtAgency": "กรมสุขภาพจิต",
+      "skills": [
+        "Meeting Minutes",
+        "Document Routing",
+        "Google Workspace",
+        "Canva"
+      ],
+      "email": "napassorn.a@ddc.mail.go.th",
+      "phone": "090-123-4567",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-011",
+      "name": "นายกิตติคุณ รัตนโชติ",
+      "nickname": "หนึ่ง",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการสถิติ",
+      "organization": "สำนักงานสถิติแห่งชาติ",
+      "ojtAgency": "สภาพัฒนาการเศรษฐกิจและสังคมแห่งชาติ (สศช.)",
+      "skills": [
+        "R Programming",
+        "Survey Design",
+        "Power BI",
+        "Data Analytics"
+      ],
+      "email": "kittikhun.r@nso.go.th",
+      "phone": "091-234-5678",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-012",
+      "name": "นางสาวพิมพา สุวรรณเมธี",
+      "nickname": "พิมพ์",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "นักจัดการงานทั่วไป",
+      "organization": "สำนักงานปลัดกระทรวงแรงงาน",
+      "ojtAgency": "กรมพัฒนาฝีมือแรงงาน",
+      "skills": [
+        "Coordination",
+        "Presentation",
+        "Event Planning",
+        "Word Processing"
+      ],
+      "email": "pimpa.s@mol.go.th",
+      "phone": "092-345-6789",
+      "accessibilityNeeds": "High Contrast Screen Support",
+      "status": "Active"
+    },
+    {
+      "id": "TR-013",
+      "name": "นายศุภณัฐ วงศ์วิวัฒน์",
+      "nickname": "นัท",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "วิศวกรซอฟต์แวร์",
+      "organization": "ศูนย์เทคโนโลยีอิเล็กทรอนิกส์และคอมพิวเตอร์แห่งชาติ (NECTEC)",
+      "ojtAgency": "สวทช.",
+      "skills": [
+        "JavaScript",
+        "React",
+        "Node.js",
+        "Docker",
+        "REST API"
+      ],
+      "email": "suphanat.w@nectec.or.th",
+      "phone": "093-456-7890",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-014",
+      "name": "นางสาวจิดาภา มโนรมย์",
+      "nickname": "มิน",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานพัสดุ",
+      "organization": "กรมชลประทาน",
+      "ojtAgency": "กรมทรัพยากรน้ำ",
+      "skills": [
+        "e-GP System",
+        "Procurement Laws",
+        "Spreadsheet Management",
+        "Filing"
+      ],
+      "email": "jidapa.m@rid.go.th",
+      "phone": "094-567-8901",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-015",
+      "name": "นายรัชชานนท์ สว่างจิตต์",
+      "nickname": "นนท์",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "สำนักงานตำรวจแห่งชาติ",
+      "ojtAgency": "กรมสอบสวนคดีพิเศษ (DSI)",
+      "skills": [
+        "Cyber Security",
+        "Network Forensics",
+        "Python Scripting",
+        "Linux"
+      ],
+      "email": "ratchanon.s@royalthaipolice.go.th",
+      "phone": "095-678-9012",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-016",
+      "name": "นางสาวญาณิศา วรโชติ",
+      "nickname": "จูน",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการ",
+      "organization": "กรมศุลกากร",
+      "ojtAgency": "การท่าเรือแห่งประเทศไทย",
+      "skills": [
+        "Customer Service",
+        "Document Workflow",
+        "Google Forms",
+        "Thai Typing 60 wpm"
+      ],
+      "email": "yanisa.w@customs.go.th",
+      "phone": "096-789-0123",
+      "accessibilityNeeds": "Audio Assistive Tools",
+      "status": "Active"
+    },
+    {
+      "id": "TR-017",
+      "name": "นายเอกภพ นิลนาถ",
+      "nickname": "เอก",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "สำนักงานประกันสังคม",
+      "ojtAgency": "กระทรวงแรงงาน",
+      "skills": [
+        "Big Data Analytics",
+        "PostgreSQL",
+        "Cloud Computing",
+        "Power Automate"
+      ],
+      "email": "ekaphop.n@sso.go.th",
+      "phone": "097-890-1234",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-018",
+      "name": "นางสาวดาริกา อัครเดช",
+      "nickname": "ดา",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "นักทรัพยากรบุคคล",
+      "organization": "สำนักงาน ก.พ.ร.",
+      "ojtAgency": "สำนักเลขาธิการคณะรัฐมนตรี",
+      "skills": [
+        "HR Analytics",
+        "Training Coordination",
+        "Infographic Creation",
+        "Speech Drafting"
+      ],
+      "email": "darika.a@opdc.go.th",
+      "phone": "098-901-2345",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-019",
+      "name": "นายชยพล ภูมิวิวัฒน์",
+      "nickname": "ต้น",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักพัฒนาระบบราชการ",
+      "organization": "สำนักงาน กปร.",
+      "ojtAgency": "กรมป่าไม้",
+      "skills": [
+        "Process Automation",
+        "RPA",
+        "Open Data",
+        "Gemini API"
+      ],
+      "email": "chayapol.p@rdpb.go.th",
+      "phone": "099-012-3456",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-020",
+      "name": "นางสาวธัญญารัตน์ โพธิ์ทอง",
+      "nickname": "แตง",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการ",
+      "organization": "กรมส่งเสริมสหกรณ์",
+      "ojtAgency": "กรมส่งเสริมการเกษตร",
+      "skills": [
+        "Data Entry",
+        "Microsoft Excel",
+        "Canva",
+        "Public Relations"
+      ],
+      "email": "thanyarat.p@cpd.go.th",
+      "phone": "081-111-2233",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-021",
+      "name": "นายพิชญะ บูรณสมบัติ",
+      "nickname": "มิก",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "กรมวิทยาศาสตร์บริการ",
+      "ojtAgency": "กระทรวง อว.",
+      "skills": [
+        "Python",
+        "Flask",
+        "IoT Dashboard",
+        "API Integration"
+      ],
+      "email": "pichaya.b@dss.go.th",
+      "phone": "082-222-3344",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-022",
+      "name": "นางสาวศิรินภา ดวงดารา",
+      "nickname": "แพร",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานสารบรรณ",
+      "organization": "กรมศิลปากร",
+      "ojtAgency": "หอจดหมายเหตุแห่งชาติ",
+      "skills": [
+        "Archival Systems",
+        "Sarabun Typing",
+        "OCR Review",
+        "Metadata Tagging"
+      ],
+      "email": "sirinapa.d@finearts.go.th",
+      "phone": "083-333-4455",
+      "accessibilityNeeds": "Magnified Text UI",
+      "status": "Active"
+    },
+    {
+      "id": "TR-023",
+      "name": "นายสุทธิพงศ์ ธีระวัฒน์",
+      "nickname": "บอส",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิเคราะห์ระบบ",
+      "organization": "การไฟฟ้านครหลวง (กฟน.)",
+      "ojtAgency": "การไฟฟ้าส่วนภูมิภาค (กฟภ.)",
+      "skills": [
+        "Data Modeling",
+        "Business Process Flow",
+        "UML",
+        "Database Tuning"
+      ],
+      "email": "sutthipong.t@mea.or.th",
+      "phone": "084-444-5566",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-024",
+      "name": "นางสาวกุลธิดา วรรณประเสริฐ",
+      "nickname": "เกด",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "นักวิชาการเงินและบัญชี",
+      "organization": "กรมสรรพสามิต",
+      "ojtAgency": "สำนักงานเศรษฐกิจการคลัง",
+      "skills": [
+        "Excel Macros",
+        "Financial Reporting",
+        "Tax Analytics",
+        "Documentation"
+      ],
+      "email": "kulthida.w@excise.go.th",
+      "phone": "085-555-6677",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-025",
+      "name": "นายวรภพ เกียรติสกุล",
+      "nickname": "ภพ",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "กรมโรงงานอุตสาหกรรม",
+      "ojtAgency": "สำนักงานมาตรฐานผลิตภัณฑ์อุตสาหกรรม (สมอ.)",
+      "skills": [
+        "Web Development",
+        "PHP / Laravel",
+        "MySQL",
+        "Docker"
+      ],
+      "email": "woraphop.k@diw.go.th",
+      "phone": "086-666-7788",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-026",
+      "name": "นางสาวปิยธิดา จันทรา",
+      "nickname": "ปริม",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการ",
+      "organization": "กรมการขนส่งทางบก",
+      "ojtAgency": "สำนักงานปลัดกระทรวงคมนาคม",
+      "skills": [
+        "Digital Filing",
+        "Service Communication",
+        "Canva",
+        "Google Docs"
+      ],
+      "email": "piyathida.j@dlt.go.th",
+      "phone": "087-777-8899",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-027",
+      "name": "นายชินวัตร เจริญสุข",
+      "nickname": "ชิน",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิทยาการข้อมูล",
+      "organization": "สำนักงานคณะกรรมการอาหารและยา (อย.)",
+      "ojtAgency": "กรมวิทยาศาสตร์การแพทย์",
+      "skills": [
+        "Python Pandas",
+        "Data Cleaning",
+        "Tableau",
+        "GenAI Prompting"
+      ],
+      "email": "chinawat.c@fda.moph.go.th",
+      "phone": "088-888-9900",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-028",
+      "name": "นางสาวณัฐริกา สมบัติแก้ว",
+      "nickname": "นัทตี้",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "นักประชาสัมพันธ์",
+      "organization": "องค์การเภสัชกรรม (GPO)",
+      "ojtAgency": "สำนักงานหลักประกันสุขภาพแห่งชาติ (สปสช.)",
+      "skills": [
+        "Social Media Management",
+        "Infographic Design",
+        "Video Editing",
+        "Content Writing"
+      ],
+      "email": "nattarika.s@gpo.moph.go.th",
+      "phone": "089-999-0011",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-029",
+      "name": "นายธีรดนย์ ศรีกุล",
+      "nickname": "ดนย์",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "กรมเจ้าท่า",
+      "ojtAgency": "การท่าเรือแห่งประเทศไทย",
+      "skills": [
+        "IoT Dashboard",
+        "Python",
+        "Sensor Data Integration",
+        "SQL"
+      ],
+      "email": "theeradon.s@md.go.th",
+      "phone": "090-000-1122",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-030",
+      "name": "นางสาววารุณี แสงสว่าง",
+      "nickname": "รุณ",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานการเงินและบัญชี",
+      "organization": "กรมทางหลวง",
+      "ojtAgency": "กรมทางหลวงชนบท",
+      "skills": [
+        "Budgeting",
+        "Excel Pivot Table",
+        "Invoice Verification",
+        "Documentation"
+      ],
+      "email": "warunee.s@doh.go.th",
+      "phone": "091-111-3344",
+      "accessibilityNeeds": "High Contrast UI Support",
+      "status": "Active"
+    },
+    {
+      "id": "TR-031",
+      "name": "นายภาณุเดช เพียรชนะ",
+      "nickname": "เดช",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักจัดการงานไอที",
+      "organization": "สำนักงานส่งเสริมวิสาหกิจขนาดกลางและขนาดย่อม (สสว.)",
+      "ojtAgency": "กรมพัฒนาธุรกิจการค้า",
+      "skills": [
+        "AI Prompting",
+        "Workplace Automation",
+        "Google AppSheet",
+        "Data Analysis"
+      ],
+      "email": "phanudet.p@sme.go.th",
+      "phone": "092-222-4455",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-032",
+      "name": "นางสาวเบญจมาศ ทองสุข",
+      "nickname": "เบญ",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการ",
+      "organization": "สำนักงานนโยบายและแผนทรัพยากรธรรมชาติและสิ่งแวดล้อม (สผ.)",
+      "ojtAgency": "กรมควบคุมมลพิษ",
+      "skills": [
+        "Official Correspondence",
+        "Minutes Drafting",
+        "Canva",
+        "Google Drive Management"
+      ],
+      "email": "benjamas.t@onep.go.th",
+      "phone": "093-333-5566",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-033",
+      "name": "นายธวัชชัย รุ่งเรือง",
+      "nickname": "วัช",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "วิศวกรระบบข้อมูล",
+      "organization": "สถาบันวิจัยดาราศาสตร์แห่งชาติ (NARIT)",
+      "ojtAgency": "GISTDA",
+      "skills": [
+        "Data Pipeline",
+        "Python",
+        "Satellite Data",
+        "PostGIS"
+      ],
+      "email": "thawatchai.r@narit.or.th",
+      "phone": "094-444-6677",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-034",
+      "name": "นางสาวนภัสรัญชน์ สายชล",
+      "nickname": "เนย",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "นักวิชาการพัสดุ",
+      "organization": "กรมอุตุนิยมวิทยา",
+      "ojtAgency": "กระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม",
+      "skills": [
+        "Procurement Forms",
+        "Inventory Record",
+        "Spreadsheet Modeling",
+        "Coordination"
+      ],
+      "email": "napatsaran.s@tmd.go.th",
+      "phone": "095-555-7788",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-035",
+      "name": "นายก้องภพ อนันตชัย",
+      "nickname": "ก้อง",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "กรมคุมประพฤติ",
+      "ojtAgency": "กระทรวงยุติธรรม",
+      "skills": [
+        "Database Security",
+        "Python API",
+        "React",
+        "Server Administration"
+      ],
+      "email": "kongpop.a@probation.go.th",
+      "phone": "096-666-8899",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-036",
+      "name": "นางสาวมลธิรา ประเสริฐยิ่ง",
+      "nickname": "โม",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการ",
+      "organization": "สำนักงานเลขาธิการสภาผู้แทนราษฎร",
+      "ojtAgency": "สำนักงานเลขาธิการวุฒิสภา",
+      "skills": [
+        "Parliamentary Document",
+        "Speed Typing",
+        "Google Workspace",
+        "Public Service"
+      ],
+      "email": "monthira.p@parliament.go.th",
+      "phone": "097-777-9900",
+      "accessibilityNeeds": "Screen Reader Support",
+      "status": "Active"
+    },
+    {
+      "id": "TR-037",
+      "name": "นายอัครวินท์ ภิรมย์รักษ์",
+      "nickname": "วิน",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิเคราะห์ข้อมูลอัจฉริยะ",
+      "organization": "ธนาคารแห่งประเทศไทย (ธปท.)",
+      "ojtAgency": "สำนักงานเศรษฐกิจการคลัง (สศค.)",
+      "skills": [
+        "Time-series Forecasting",
+        "Python",
+        "Power BI",
+        "Financial Modeling"
+      ],
+      "email": "akarawin.p@bot.or.th",
+      "phone": "098-888-0011",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-038",
+      "name": "นางสาวศุภิสรา รัตนโกศล",
+      "nickname": "ฝน",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานประชาสัมพันธ์",
+      "organization": "องค์การกระจายเสียงและแพร่ภาพสาธารณะแห่งประเทศไทย (Thai PBS)",
+      "ojtAgency": "กรมประชาสัมพันธ์",
+      "skills": [
+        "Short Video Editing",
+        "Script Writing",
+        "Interviewing",
+        "Canva Infographics"
+      ],
+      "email": "supisara.r@thaipbs.or.th",
+      "phone": "099-999-1122",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-039",
+      "name": "นายจักรินทร์ พงศ์พิสุทธิ์",
+      "nickname": "แจ็คกี้",
+      "track": "ADV",
+      "trackName": "Advanced AI & Automation",
+      "position": "นักวิชาการคอมพิวเตอร์",
+      "organization": "กรมพัฒนาพลังงานทดแทนและอนุรักษ์พลังงาน (พพ.)",
+      "ojtAgency": "กระทรวงพลังงาน",
+      "skills": [
+        "Energy Dashboard",
+        "Automation Logic",
+        "Python",
+        "PostgreSQL"
+      ],
+      "email": "jakkarin.p@dede.go.th",
+      "phone": "081-444-8899",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    },
+    {
+      "id": "TR-040",
+      "name": "นางสาวอภิญญา วัฒนกิจ",
+      "nickname": "ปุ้ย",
+      "track": "FND",
+      "trackName": "Foundation Digital Skills",
+      "position": "เจ้าพนักงานธุรการ",
+      "organization": "สถาบันการแพทย์ฉุกเฉินแห่งชาติ (สพฉ.)",
+      "ojtAgency": "กรมควบคุมโรค",
+      "skills": [
+        "Emergency Data Log",
+        "Official Filing",
+        "Coordination",
+        "Google Forms"
+      ],
+      "email": "apinya.w@niems.go.th",
+      "phone": "082-555-9900",
+      "accessibilityNeeds": "None",
+      "status": "Active"
+    }
+  ]
+}
