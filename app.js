@@ -2659,17 +2659,19 @@ const DEFAULT_PIN = '2569';
 
 function initSecurityLock() {
     const isRemembered = localStorage.getItem(REMEMBER_DEVICE_KEY) === 'true';
-    const isSessionUnlocked = sessionStorage.getItem(AUTH_SESSION_KEY) === 'true';
+    const isSessionUnlocked = sessionStorage.getItem(AUTH_SESSION_KEY) === 'true' || localStorage.getItem(AUTH_SESSION_KEY) === 'true';
 
     const overlay = document.getElementById('lock-screen-overlay');
     if (!overlay) return;
 
     if (isRemembered || isSessionUnlocked) {
         overlay.classList.add('hidden');
+        overlay.style.display = 'none';
         document.body.classList.remove('is-locked');
         document.documentElement.classList.remove('is-locked');
     } else {
         overlay.classList.remove('hidden');
+        overlay.style.display = 'flex';
         document.body.classList.add('is-locked');
         document.documentElement.classList.add('is-locked');
         const pinInput = document.getElementById('lock-pin-input');
@@ -2703,7 +2705,7 @@ function updatePinDots() {
         let dotsHtml = '';
         for (let i = 0; i < len; i++) {
             const isFilled = i < val.length;
-            dotsHtml += `<div class="w-4 h-4 rounded-full border-2 transition-all duration-200 ${isFilled ? 'bg-govNavy border-govNavy scale-110' : 'border-slate-300 bg-white'}" id="dot-${i+1}"></div>`;
+            dotsHtml += `<div class="w-3.5 h-3.5 rounded-full border-2 transition-all duration-200 ${isFilled ? 'bg-govNavy border-govNavy scale-110' : 'border-slate-300 bg-white'}" id="dot-${i+1}"></div>`;
         }
         container.innerHTML = dotsHtml;
     }
@@ -2751,6 +2753,7 @@ function submitPinUnlock() {
 
     if (entered === correctPin) {
         sessionStorage.setItem(AUTH_SESSION_KEY, 'true');
+        localStorage.setItem(AUTH_SESSION_KEY, 'true');
         if (rememberChk && rememberChk.checked) {
             localStorage.setItem(REMEMBER_DEVICE_KEY, 'true');
         } else {
@@ -2762,11 +2765,8 @@ function submitPinUnlock() {
 
         if (errMsg) errMsg.classList.add('hidden');
         if (overlay) {
-            overlay.classList.add('opacity-0');
-            setTimeout(() => {
-                overlay.classList.add('hidden');
-                overlay.classList.remove('opacity-0');
-            }, 250);
+            overlay.style.display = 'none';
+            overlay.classList.add('hidden');
         }
         showToast('ปลดล็อคเข้าสู่ระบบสำเร็จ ยินดีต้อนรับครับ');
     } else {
@@ -2786,6 +2786,7 @@ function submitPinUnlock() {
 
 function lockAppImmediately() {
     sessionStorage.removeItem(AUTH_SESSION_KEY);
+    localStorage.removeItem(AUTH_SESSION_KEY);
     localStorage.removeItem(REMEMBER_DEVICE_KEY);
 
     document.body.classList.add('is-locked');
@@ -2802,6 +2803,7 @@ function lockAppImmediately() {
     updatePinDots();
 
     if (overlay) {
+        overlay.style.display = 'flex';
         overlay.classList.remove('hidden');
         setTimeout(() => {
             if (pinInput) pinInput.focus();

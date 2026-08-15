@@ -1969,8 +1969,8 @@
                     <div class="w-3.5 h-3.5 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-4"></div>
                 </div>
 
-                <form id="lock-screen-form" onsubmit="event.preventDefault(); submitPinUnlock();">
-                    <input type="password" id="lock-pin-input" autofocus maxlength="8" pattern="[0-9]*" inputmode="numeric" placeholder="แตะเพื่อพิมพ์รหัส PIN" class="w-full text-center tracking-[0.4em] font-mono text-lg py-2 px-3 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                <div id="lock-screen-form" class="space-y-2.5">
+                    <input type="password" id="lock-pin-input" autofocus maxlength="8" pattern="[0-9]*" inputmode="numeric" placeholder="แตะเพื่อพิมพ์รหัส PIN" class="w-full text-center tracking-[0.4em] font-mono text-lg py-2 px-3 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" onkeydown="if(event.key==='Enter'){event.preventDefault();submitPinUnlock();}">
                     
                     <div class="flex items-center justify-center space-x-2 mt-2 text-[11px] text-slate-600">
                         <input type="checkbox" id="lock-remember-device" checked class="rounded text-govNavy focus:ring-govNavy">
@@ -1997,11 +1997,11 @@
                         <i class="fa-solid fa-circle-exclamation mr-1"></i> รหัส PIN ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง
                     </div>
 
-                    <button type="submit" class="w-full mt-3 py-2.5 bg-govNavy hover:bg-govNavyDark active:scale-[0.98] text-white rounded-xl font-bold text-xs shadow-lg transition flex items-center justify-center space-x-2">
+                    <button type="button" onclick="submitPinUnlock()" class="w-full mt-3 py-2.5 bg-govNavy hover:bg-govNavyDark active:scale-[0.98] text-white rounded-xl font-bold text-xs shadow-lg transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>ปลดล็อคเข้าสู่ระบบ</span>
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
