@@ -481,7 +481,7 @@ const defaultAppData = {
     ojtLogs: [
         {
             id: "OJT-001",
-            date: "2026-08-28",
+            date: "2026-09-01",
             dimension: "1",
             dimensionName: "งานวิเคราะห์ข้อมูลและสารสนเทศ",
             hours: 16,
