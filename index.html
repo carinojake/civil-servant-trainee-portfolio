@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.4.0">
+    <link rel="stylesheet" href="styles.css?v=2.5.0">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -1089,25 +1089,59 @@
                     <div>
                         <div class="inline-flex items-center space-x-2 text-xs font-semibold text-cyan-700 bg-cyan-50 px-2.5 py-0.5 rounded-full mb-1">
                             <i class="fa-solid fa-folder-tree"></i>
-                            <span>คลังเก็บหลักฐานและภาพผลงานดิจิทัล (Artifacts & Cloud Drive)</span>
+                            <span>คลังเอกสาร สไลด์บรรยาย และภาพผลงานดิจิทัล (Artifacts & Lecture Hub)</span>
                         </div>
                         <h2 class="text-xl font-bold text-govNavy">
-                            คลังสื่อ ผลงาน และ Google Drive Storage
+                            คลังสื่อ เอกสารสไลด์ 13 วัน และ Google Drive Storage
                         </h2>
                         <p class="text-slate-500 text-xs mt-0.5">
-                            จัดเก็บภาพถ่ายกิจกรรม 13 วัน ณ เซ็นทารา ไลฟ์ และผลงาน OJT พร้อมระบุ <strong>Alt-Text</strong> ตามมาตรฐานคนตาบอด
+                            เข้าถึงสไลด์ประกอบการบรรยายครบ 13 วัน เซ็นทารา ไลฟ์ และจัดเก็บภาพผลงาน OJT พร้อม <strong>Alt-Text</strong>
                         </p>
                     </div>
-                    <button onclick="openNewArtifactModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow flex items-center space-x-2">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <span>เพิ่มภาพผลงาน / เอกสาร</span>
-                    </button>
+                    <div class="flex items-center space-x-2 flex-wrap gap-2">
+                        <button type="button" onclick="switchM5View('slides')" id="btn-m5-view-slides" class="bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-amber-300 cursor-pointer">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                            <span>คลังสไลด์บรรยาย 13 วัน</span>
+                        </button>
+                        <button type="button" onclick="switchM5View('artifacts')" id="btn-m5-view-artifacts" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-slate-300 cursor-pointer">
+                            <i class="fa-solid fa-images"></i>
+                            <span>ภาพผลงาน & สื่อดิจิทัล</span>
+                        </button>
+                        <button onclick="openNewArtifactModal()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition shadow flex items-center space-x-1.5 cursor-pointer">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <span>+ เพิ่มภาพผลงาน</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Artifacts Grid -->
-            <div class="app-card p-6">
-                <div class="flex justify-between items-center mb-4">
+            <!-- View 1: 13-Day Lecture Slides Hub (Active by default or toggled) -->
+            <div id="m5-slides-view-panel" class="space-y-4">
+                <div class="app-card p-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div class="flex items-center space-x-2 w-full sm:w-auto">
+                            <div class="relative flex-grow sm:w-72">
+                                <input type="text" id="m5-slide-search-input" placeholder="ค้นหาสไลด์ (เช่น สารบรรณ, PDPA, Excel, ห้อง BB)..." class="w-full p-2 pl-8 text-xs rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500" oninput="filterM5Slides()">
+                                <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 text-xs">
+                            <button type="button" onclick="filterM5SlideTrack('ALL')" id="filter-slide-ALL" class="px-2.5 py-1 rounded-lg font-bold bg-govNavy text-white shrink-0 cursor-pointer">ทั้งหมด (13 วัน)</button>
+                            <button type="button" onclick="filterM5SlideTrack('COMBINED')" id="filter-slide-COMBINED" class="px-2.5 py-1 rounded-lg font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer">รวม 40 คน</button>
+                            <button type="button" onclick="filterM5SlideTrack('PARALLEL')" id="filter-slide-PARALLEL" class="px-2.5 py-1 rounded-lg font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer">แยกสาย ADV & FND</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13-Day Lecture Cards Grid -->
+                <div id="m5-lecture-slides-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dynamically populated by renderM5LectureSlidesGrid() -->
+                </div>
+            </div>
+
+            <!-- View 2: Artifacts & Uploaded Media Grid -->
+            <div id="m5-artifacts-view-panel" class="app-card p-6 hidden space-y-4">
+                <div class="flex justify-between items-center">
                     <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
                         <i class="fa-solid fa-images text-cyan-600"></i>
                         <span>ภาพผลงานและเอกสารแนบในระบบ</span>
@@ -2205,6 +2239,88 @@
                     <button type="button" onclick="closeModal('modal-change-pin')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
                     <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow">บันทึกรหัสใหม่</button>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: 13-Day Lecture Slide Detail & AI Summary Viewer -->
+    <div id="modal-lecture-slide" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-start border-b border-slate-200 pb-3">
+                <div class="space-y-1">
+                    <div class="flex items-center space-x-2">
+                        <span id="modal-slide-day-badge" class="bg-govNavy text-white text-xs font-bold px-2.5 py-0.5 rounded-full">วันที่ 1</span>
+                        <span id="modal-slide-track-badge" class="bg-amber-100 text-amber-900 border border-amber-300 text-xs font-semibold px-2 py-0.5 rounded-full">รวมทุกหลักสูตร</span>
+                    </div>
+                    <h3 id="modal-slide-title" class="text-base sm:text-lg font-bold text-govNavy leading-snug">
+                        ชื่อหัวข้อบรรยาย
+                    </h3>
+                </div>
+                <button type="button" onclick="closeModal('modal-lecture-slide')" class="text-slate-400 hover:text-slate-600 text-xl p-1 shrink-0">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <!-- Lecturer & Venue Info -->
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-col sm:flex-row justify-between gap-2">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-chalkboard-user text-blue-600 text-sm"></i>
+                        <span class="text-slate-700"><strong>วิทยากร:</strong> <span id="modal-slide-lecturer">-</span></span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
+                        <span class="text-slate-700"><strong>สถานที่:</strong> <span id="modal-slide-room">-</span></span>
+                    </div>
+                </div>
+
+                <!-- Morning & Afternoon Key Points -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="p-3 bg-blue-50/70 rounded-xl border border-blue-200 space-y-1.5">
+                        <div class="font-bold text-blue-900 flex items-center space-x-1">
+                            <i class="fa-solid fa-sun text-amber-500"></i>
+                            <span>สาระสำคัญช่วงเช้า (09.00 - 12.00 น.)</span>
+                        </div>
+                        <p id="modal-slide-morning" class="text-slate-700 leading-relaxed text-[11px]"></p>
+                    </div>
+                    <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 space-y-1.5">
+                        <div class="font-bold text-emerald-900 flex items-center space-x-1">
+                            <i class="fa-solid fa-cloud-sun text-emerald-500"></i>
+                            <span>สาระสำคัญช่วงบ่าย (13.00 - 16.00 น.)</span>
+                        </div>
+                        <p id="modal-slide-afternoon" class="text-slate-700 leading-relaxed text-[11px]"></p>
+                    </div>
+                </div>
+
+                <!-- Exam Focus Points -->
+                <div class="p-3.5 bg-amber-50 rounded-xl border border-amber-200 space-y-1 text-amber-950">
+                    <div class="font-bold text-amber-900 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-key text-amber-600"></i>
+                        <span>จุดเน้นข้อสอบที่มักออก (Pre / Post-test Exam Focus):</span>
+                    </div>
+                    <p id="modal-slide-exam-focus" class="text-[11px] leading-relaxed text-amber-900"></p>
+                </div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-2 pt-3 border-t border-slate-200">
+                <button type="button" id="modal-btn-ask-ai" onclick="" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow transition flex items-center justify-center space-x-1.5 cursor-pointer">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>🤖 ให้ AI อธิบายสไลด์นี้แบบละเอียด</span>
+                </button>
+                <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
+                    <a id="modal-slide-link" href="#" target="_blank" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow transition flex items-center justify-center space-x-1.5 cursor-pointer">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>เปิดสไลด์ / Google Drive</span>
+                    </a>
+                    <button type="button" onclick="closeModal('modal-lecture-slide')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition">
+                        ปิด
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal: Set Gemini API Key -->
     <div id="modal-gemini-key" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="app-card max-w-md w-full p-6 shadow-2xl space-y-4">
@@ -2401,6 +2517,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.4.0"></script>
+    <script src="app.js?v=2.5.0"></script>
 </body>
 </html>

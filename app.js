@@ -660,6 +660,7 @@ function renderAllViews() {
     generateVideoScript('profile');
     updateRctfPrompt();
     renderM8QuizView();
+    renderM5LectureSlidesGrid();
 }
 
 function updateKpiMetrics() {
@@ -1887,19 +1888,13 @@ function renderScheduleList() {
                     <div class="p-2 rounded-lg bg-white border border-slate-200 flex flex-col justify-between">
                         <div class="flex items-center justify-between">
                             <span class="text-[10px] font-bold text-emerald-700">2. เอกสาร/สไลด์</span>
-                            <span class="text-[10px] text-slate-400 truncate max-w-[70px]">${dayItem.docTitle ? '✓ มีไฟล์' : '-'}</span>
+                            <span class="text-[10px] text-emerald-600 font-semibold">13 วัน</span>
                         </div>
                         <div class="mt-1.5">
-                            ${hasDoc ? `
-                                <a href="${dayItem.docUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 py-1 rounded text-[11px] font-semibold transition truncate">
-                                    <i class="fa-solid fa-file-pdf"></i>
-                                    <span>เปิดสไลด์</span>
-                                </a>
-                            ` : `
-                                <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-1 rounded text-[10px] hover:border-slate-400">
-                                    + ใส่ลิงก์
-                                </button>
-                            `}
+                            <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-1 rounded text-[11px] font-bold transition truncate cursor-pointer shadow-xs">
+                                <i class="fa-solid fa-book-open-reader text-emerald-600"></i>
+                                <span>สไลด์ & สรุป</span>
+                            </button>
                         </div>
                     </div>
 
@@ -3966,6 +3961,375 @@ window.resetSingleQuizAnswer = resetSingleQuizAnswer;
 window.resetQuizAnswers = resetQuizAnswers;
 window.submitM8QuickAIQuery = submitM8QuickAIQuery;
 window.renderM8QuizView = renderM8QuizView;
+
+/* ==========================================================================
+   12. M5: 13-DAY CENTARA LIFE LECTURE SLIDES & STUDY HUB
+   ========================================================================== */
+let activeM5SlideTrack = 'ALL';
+let activeM5SlideSearch = '';
+
+const master13DaysLectureSlides = [
+    {
+        day: 1,
+        date: "10 ส.ค. 2569",
+        title: "ปฐมนิเทศ & วินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ",
+        room: "ห้องประชุม BB 212",
+        track: "COMBINED",
+        trackLabel: "รวมทุกหลักสูตร (40 คน)",
+        lecturer: "สำนักงาน ก.พ. / กรมส่งเสริมและพัฒนาคุณภาพชีวิตคนพิการ",
+        summaryMorning: "กิจกรรมสร้างความคุ้นเคย (Ice Breaking), แนะนำโครงสร้างหลักสูตร 13 วัน, เกณฑ์การประเมินผลการเรียนรู้ และสำรวจความพร้อมของผู้เรียน",
+        summaryAfternoon: "วินัยและจรรยาบรรณข้าราชการพลเรือน พ.ศ. 2551, 5 สถานโทษทางวินัย (ภาคทัณฑ์, ตัดเงินเดือน, ลดเงินเดือน, ปลดออก, ไล่ออก), การรักษาผลประโยชน์ส่วนรวม และธรรมาภิบาลภาครัฐ",
+        examFocus: "จำ 5 สถานโทษทางวินัย (ภาค-ตัด-ลด-ปลด-ไล่), เกณฑ์ละทิ้งหน้าที่เกิน 15 วันเป็นวินัยร้ายแรง, และความแตกต่างระหว่างปลดออก (ได้บำนาญ) กับไล่ออก (ตัดสิทธิ)",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["ปฐมนิเทศ", "วินัย", "จริยธรรม", "ก.พ.", "โทษทางวินัย", "BB212"]
+    },
+    {
+        day: 2,
+        date: "11 ส.ค. 2569",
+        title: "การพัฒนาทักษะดิจิทัลและเครื่องมือสำนักงานภาครัฐ (Digital Literacy & Gov Tools)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "สถาบันข้อมูลขนาดใหญ่ (BDI) / ผู้เชี่ยวชาญด้านระบบสารสนเทศ",
+        summaryMorning: "การใช้งาน Google Workspace, การจัดการเอกสารบน Cloud Drive อย่างปลอดภัย, และมาตรฐานการตั้งชื่อไฟล์ดิจิทัล",
+        summaryAfternoon: "ADV: การใช้ฟังก์ชันขั้นสูงใน Google Sheets/Excel และการเชื่อมต่อ API เบื้องต้น | FND: ทักษะการจัดพิมพ์เอกสารราชการ การใช้แป้นพิมพ์ลัด และระบบงานเอกสารอิเล็กทรอนิกส์",
+        examFocus: "มาตรฐานการรักษาความปลอดภัยของบัญชีดิจิทัลภาครัฐ (2FA), การสำรองข้อมูลตามมาตรฐาน DGA, และความแตกต่างของรูปแบบไฟล์",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["ดิจิทัล", "Google Workspace", "Excel", "Sheets", "Cloud", "BB211", "BB202"]
+    },
+    {
+        day: 3,
+        date: "13 ส.ค. 2569",
+        title: "ทักษะการสื่อสารและบริการประชาชนอย่างมืออาชีพ (Service Mind & Interpersonal Skills)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "วิทยากรผู้เชี่ยวชาญด้านการพัฒนาบุคลิกภาพและการสื่อสารองค์กร",
+        summaryMorning: "จิตบริการ (Service Mind), เทคนิคการสื่อสารเชิงบวก (Positive Communication), และการประสานงานข้ามหน่วยงาน",
+        summaryAfternoon: "การรับมือกับสถานการณ์ข้อร้องเรียน, มารยาทการสื่อสารผ่านช่องทางดิจิทัล (Email/LINE Official), และการทำงานร่วมกับผู้มีความหลากหลาย",
+        examFocus: "หลักการบริการประชาชนด้วยความเสมอภาคตามระเบียบสำนักนายกฯ และกระบวนการจัดการข้อร้องเรียนอย่างเป็นธรรม",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["การสื่อสาร", "บริการ", "Service Mind", "ข้อร้องเรียน", "ประสานงาน"]
+    },
+    {
+        day: 4,
+        date: "14 ส.ค. 2569",
+        title: "ระเบียบงานสารบรรณและการเขียนหนังสือราชการ 3 ย่อหน้า (Official Correspondence)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "ผู้ทรงคุณวุฒิด้านระเบียบงานสารบรรณ สำนักนายกรัฐมนตรี",
+        summaryMorning: "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ พ.ศ. 2526 และที่แก้ไขเพิ่มเติม, ชนิดของหนังสือราชการ 6 ชนิด, คำขึ้นต้น-คำลงท้าย",
+        summaryAfternoon: "การฝึกเขียนบันทึกข้อความ 3 ย่อหน้า: ๑. เหตุผลความเป็นมา ๒. ข้อเท็จจริง/การดำเนินงาน ๓. ข้อพิจารณา/ข้อเสนอ พร้อมการใช้ภาษาทางการที่กระชับ ชัดเจน",
+        examFocus: "โครงสร้าง 3 ย่อหน้า (ต้นสาย-ปลายเหตุ-เสนอแนะ), คำขึ้นต้น/ลงท้ายถึงบุคคลธรรมดา (เรียน - ขอแสดงความนับถือ), ชั้นความเร็ว (ด่วนที่สุด/ด่วนมาก/ด่วน) และชั้นความลับ",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["สารบรรณ", "หนังสือราชการ", "3 ย่อหน้า", "บันทึกข้อความ", "คำขึ้นต้น", "ชั้นความเร็ว"]
+    },
+    {
+        day: 5,
+        date: "15 ส.ค. 2569",
+        title: "กฎหมายคุ้มครองข้อมูลส่วนบุคคล (PDPA) ในหน่วยงานภาครัฐ",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "ผู้เชี่ยวชาญจากสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.)",
+        summaryMorning: "หลักการสำคัญของ พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562, ฐานการประมวลผลข้อมูล (Legal Basis), สิทธิของเจ้าของข้อมูล (Data Subject Rights)",
+        summaryAfternoon: "ข้อมูลส่วนบุคคลอ่อนไหว (Sensitive Data มาตรา 26: ข้อมูลความพิการ/สุขภาพ), การ Masking ข้อมูล, และแนวปฏิบัติการส่งต่อข้อมูลในหน่วยงานภาครัฐ",
+        examFocus: "ข้อมูลความพิการและข้อมูลสุขภาพ = Sensitive Data, หลัก Data Minimization (เก็บเท่าที่จำเป็น), และโทษของการเปิดเผยข้อมูลโดยมิชอบ",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["PDPA", "ข้อมูลส่วนบุคคล", "Sensitive Data", "ความยินยอม", "Masking"]
+    },
+    {
+        day: 6,
+        date: "18 ส.ค. 2569",
+        title: "การบริหารจัดการข้อมูลและการวิเคราะห์สถิติในงานสารสนเทศ (Data Analysis & Excel)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "ทีม Data Analytics สถาบันข้อมูลขนาดใหญ่ (BDI)",
+        summaryMorning: "หลักการ Data Governance, การทำ Data Cleaning, การจัดการข้อมูลที่ซ้ำซ้อนและข้อมูลสูญหาย",
+        summaryAfternoon: "ADV: การสร้าง Dashboard สรุปตัวเลขด้วย Pivot Table และ Visualization | FND: การใช้สูตรคำนวณพื้นฐาน (SUM, AVERAGE, COUNTIF, VLOOKUP/XLOOKUP)",
+        examFocus: "วงจรชีวิตของข้อมูล (Data Lifecycle), การเลือกใช้ชาร์ตให้ตรงกับประเภทข้อมูล (Bar, Line, Pie), และการตรวจสอบความถูกต้องของข้อมูล",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["Data", "Excel", "Dashboard", "Pivot Table", "Analytics", "สถิติ"]
+    },
+    {
+        day: 7,
+        date: "19 ส.ค. 2569",
+        title: "การใช้ Generative AI และเครื่องมืออัตโนมัติในการปฏิบัติราชการ (AI in Government)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "ผู้เชี่ยวชาญด้าน AI & Prompt Engineering ภาครัฐ",
+        summaryMorning: "การทำงานของ Large Language Models (Gemini / Claude), ข้อจำกัดและข้อควรระวัง (AI Hallucination & Data Bias)",
+        summaryAfternoon: "การออกแบบ AI Prompt ด้วยโครงสร้าง R-C-T-F (Role, Context, Task, Format), การใช้ AI ช่วยสรุปรายงานและตรวจทานภาษาทางการ",
+        examFocus: "โครงสร้าง R-C-T-F, หลักการ Human-in-the-loop (คนต้องตรวจสอบและรับผิดชอบผลลัพธ์ของ AI เสมอ), และการไม่ใส่ข้อมูลลับลงใน AI สาธารณะ",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["AI", "Gemini", "Prompt", "RCTF", "Automation", "ปัญญาประดิษฐ์"]
+    },
+    {
+        day: 8,
+        date: "20 ส.ค. 2569",
+        title: "การเขียนรายงานสรุปและการนำเสนอข้อมูลต่อผู้บริหาร (Executive Reporting & Presentation)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "ผู้บริหารระดับสูงและวิทยากรด้านการสื่อสารเชิงกลยุทธ์",
+        summaryMorning: "เทคนิคการสรุปความแบบ Executive Summary (1 หน้ากระดาษ), การจัดลำดับความสำคัญของประเด็น (Pyramid Principle)",
+        summaryAfternoon: "การออกแบบสไลด์นำเสนอด้วยหลัก Visual Hierarchy, การเลือกคู่สี และเทคนิคการนำเสนออย่างมั่นใจ",
+        examFocus: "องค์ประกอบของ Executive Summary: วัตถุประสงค์ ผลการดำเนินงาน ข้อค้นพบ และข้อเสนอแนะเชิงนโยบาย",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["Executive Summary", "Presentation", "รายงานผู้บริหาร", "การนำเสนอ", "สไลด์"]
+    },
+    {
+        day: 9,
+        date: "21 ส.ค. 2569",
+        title: "การวางแผนและการบริหารจัดการโครงการภาครัฐ (Public Project Management)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "ผู้เชี่ยวชาญด้านการวางแผนและติดตามประเมินผลโครงการภาครัฐ",
+        summaryMorning: "วงจรโครงการ (Project Life Cycle), การจัดทำกรอบแนวคิดโครงการ (Logical Framework), การกำหนด KPI และ Milestone",
+        summaryAfternoon: "การจัดสรรทรัพยากรและงบประมาณ, การประเมินความเสี่ยง (Risk Management), และการติดตามผลการดำเนินงาน",
+        examFocus: "หลัก SMART KPI (Specific, Measurable, Achievable, Relevant, Time-bound) และขั้นตอนการควบคุมความเสี่ยง",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["โครงการ", "Project Management", "KPI", "Milestone", "งบประมาณ", "ความเสี่ยง"]
+    },
+    {
+        day: 10,
+        date: "22 ส.ค. 2569",
+        title: "การทำงานร่วมกันเป็นทีมในบริบทหน่วยงานภาครัฐ (Public Sector Teamwork)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "วิทยากรด้านการพัฒนาองค์กรและภาวะผู้นำ",
+        summaryMorning: "ทฤษฎีบทบาทในทีม (Belbin Team Roles), การสร้างความไว้วางใจ (Psychological Safety), และการสื่อสารเพื่อลดความขัดแย้ง",
+        summaryAfternoon: "กิจกรรมกลุ่มจำลองสถานการณ์การทำงานร่วมกัน (Team Simulation Game), การแก้ปัญหาเฉพาะหน้า และการถอดบทเรียน (AAR)",
+        examFocus: "กระบวนการ AAR (After Action Review): ๑. เป้าหมายคืออะไร ๒. เกิดอะไรขึ้นจริง ๓. แตกต่างอย่างไร ๔. จะปรับปรุงอย่างไร",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["Teamwork", "ทีม", "การทำงานร่วมกัน", "AAR", "ความขัดแย้ง"]
+    },
+    {
+        day: 11,
+        date: "25 ส.ค. 2569",
+        title: "การประเมินสมรรถนะและการเตรียมความพร้อมฝึกปฏิบัติงานจริง (OJT Preparation)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "คณะกรรมการกำกับดูแลการฝึกงาน OJT ภาครัฐ",
+        summaryMorning: "โครงสร้างการฝึกปฏิบัติงาน OJT 4 มิติ (เป้าหมาย 90 ชั่วโมง ในเดือนกันยายน), เกณฑ์การประเมินสมรรถนะรายบุคคล",
+        summaryAfternoon: "การจัดทำแผนการฝึกงานรายสัปดาห์ (OJT Action Plan), การบันทึก Log Book และการประสานงานกับพี่เลี้ยงในหน่วยงาน (Mentor)",
+        examFocus: "เกณฑ์การผ่าน OJT: เวลาสะสม ≥90 ชั่วโมง, ครอบคลุมครบทั้ง 4 ด้าน, และมีการประเมินผลจากผู้ควบคุมงาน",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["OJT", "ฝึกงาน", "สมรรถนะ", "90 ชั่วโมง", "4 มิติ", "พี่เลี้ยง"]
+    },
+    {
+        day: 12,
+        date: "26 ส.ค. 2569",
+        title: "การจัดทำแฟ้มสะสมผลงานดิจิทัลตามมาตรฐาน ก.พ. (Digital Portfolio Master)",
+        room: "ADV: BB 211 | FND: BB 202",
+        track: "PARALLEL",
+        trackLabel: "แยกสาย ADV & FND",
+        lecturer: "ผู้เชี่ยวชาญด้านการจัดทำ Portfolio และ Career Transition",
+        summaryMorning: "โครงสร้างแฟ้มผลงานมาตรฐาน 7 หน้า A4, การคัดเลือกผลงานและหลักฐานเชิงประจักษ์ (Artifacts)",
+        summaryAfternoon: "การเขียนข้อความแนะนำตนเอง ทักษะ และวิสัยทัศน์, การจัดรูปแบบ PDF และการพิมพ์เล่มส่งคณะกรรมการประเมิน",
+        examFocus: "มาตรฐานโครงสร้าง Portfolio 7 หน้า: ปก, สารบัญ, ประวัติ, สถิติอบรม 13 วัน, ผลงาน OJT 4 มิติ, สื่อผลงาน และการประเมินตนเอง",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["Portfolio", "แฟ้มผลงาน", "7 หน้า A4", "Artifacts", "ประวัติการทำงาน"]
+    },
+    {
+        day: 13,
+        date: "27 ส.ค. 2569",
+        title: "ปัจฉิมนิเทศ สรุปบทเรียน และการประเมินผลสัมฤทธิ์ (Post-test & Closing)",
+        room: "ห้องประชุม BB 212",
+        track: "COMBINED",
+        trackLabel: "รวมทุกหลักสูตร (40 คน)",
+        lecturer: "ผู้บริหารสถาบัน BDI, กรม พก. และคณะวิทยากรหลักสูตร",
+        summaryMorning: "การทำแบบทดสอบวัดผลสัมฤทธิ์หลังเรียน (Post-test), การประเมินความพึงพอใจหลักสูตร, และการนำเสนอผลงานกลุ่มตัวแทน",
+        summaryAfternoon: "พิธีปัจฉิมนิเทศ, การมอบประกาศนียบัตร, สรุปก้าวต่อไปสู่การฝึกงาน OJT 90 ชม. และการบรรจุงานในหน่วยงานภาครัฐ",
+        examFocus: "ข้อสอบ Post-test สรุปภาพรวมความรู้ทั้ง 13 วัน: งานสารบรรณ, วินัยข้าราชการ, PDPA, OJT 4 มิติ, และทักษะดิจิทัลภาครัฐ",
+        docUrl: "https://docs.google.com/presentation/d/1hvBHgT2JFdpKYP7OxAmJLW56I3jdHH9WIy64fFOaToY/edit",
+        keywords: ["ปัจฉิมนิเทศ", "Post-test", "ประกาศนียบัตร", "สรุปบทเรียน", "BB212", "ความสำเร็จ"]
+    }
+];
+
+function switchM5View(viewType) {
+    const slidesPanel = document.getElementById('m5-slides-view-panel');
+    const artifactsPanel = document.getElementById('m5-artifacts-view-panel');
+    const btnSlides = document.getElementById('btn-m5-view-slides');
+    const btnArtifacts = document.getElementById('btn-m5-view-artifacts');
+
+    if (viewType === 'slides') {
+        if (slidesPanel) slidesPanel.classList.remove('hidden');
+        if (artifactsPanel) artifactsPanel.classList.add('hidden');
+        if (btnSlides) btnSlides.className = 'bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-amber-300 cursor-pointer';
+        if (btnArtifacts) btnArtifacts.className = 'bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-slate-300 cursor-pointer';
+        renderM5LectureSlidesGrid();
+    } else {
+        if (slidesPanel) slidesPanel.classList.add('hidden');
+        if (artifactsPanel) artifactsPanel.classList.remove('hidden');
+        if (btnSlides) btnSlides.className = 'bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-slate-300 cursor-pointer';
+        if (btnArtifacts) btnArtifacts.className = 'bg-cyan-600 hover:bg-cyan-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-cyan-500 cursor-pointer';
+        renderArtifactsGrid();
+    }
+}
+
+function filterM5SlideTrack(track) {
+    activeM5SlideTrack = track;
+    ['ALL', 'COMBINED', 'PARALLEL'].forEach(t => {
+        const btn = document.getElementById(`filter-slide-${t}`);
+        if (btn) {
+            if (t === track) {
+                btn.className = 'px-2.5 py-1 rounded-lg font-bold bg-govNavy text-white shrink-0 cursor-pointer';
+            } else {
+                btn.className = 'px-2.5 py-1 rounded-lg font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer';
+            }
+        }
+    });
+    renderM5LectureSlidesGrid();
+}
+
+function filterM5Slides() {
+    const input = document.getElementById('m5-slide-search-input');
+    activeM5SlideSearch = input ? input.value.trim().toLowerCase() : '';
+    renderM5LectureSlidesGrid();
+}
+
+function renderM5LectureSlidesGrid() {
+    const container = document.getElementById('m5-lecture-slides-container');
+    if (!container) return;
+
+    let filtered = master13DaysLectureSlides.filter(slide => {
+        // Track Filter
+        if (activeM5SlideTrack !== 'ALL' && slide.track !== activeM5SlideTrack) {
+            return false;
+        }
+        // Search Query
+        if (activeM5SlideSearch) {
+            const fullText = `${slide.title} ${slide.room} ${slide.lecturer} ${slide.summaryMorning} ${slide.summaryAfternoon} ${slide.keywords.join(' ')}`.toLowerCase();
+            return fullText.includes(activeM5SlideSearch);
+        }
+        return true;
+    });
+
+    if (filtered.length === 0) {
+        container.innerHTML = `
+            <div class="col-span-full app-card p-8 text-center text-slate-500 space-y-2">
+                <i class="fa-solid fa-folder-open text-3xl text-slate-300"></i>
+                <div class="font-bold text-sm">ไม่พบสไลด์บรรยายที่ตรงกับคำค้นหา</div>
+                <div class="text-xs text-slate-400">ลองค้นหาด้วยคำอื่น เช่น สารบรรณ, PDPA, Excel, ห้อง BB</div>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = filtered.map(slide => {
+        const isCombined = slide.track === 'COMBINED';
+        return `
+            <div class="app-card p-5 lecture-slide-card border-t-4 ${isCombined ? 'border-govGold' : 'border-blue-600'} flex flex-col justify-between space-y-3">
+                <div class="space-y-2.5">
+                    <!-- Top Badges -->
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-govNavy text-white">
+                            วันที่ ${slide.day} (${slide.date})
+                        </span>
+                        <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold ${isCombined ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-blue-100 text-blue-900 border border-blue-200'}">
+                            ${escapeHtml(slide.trackLabel)}
+                        </span>
+                    </div>
+
+                    <!-- Title -->
+                    <h4 class="text-sm font-bold text-govNavy leading-snug">
+                        ${escapeHtml(slide.title)}
+                    </h4>
+
+                    <!-- Room & Lecturer -->
+                    <div class="text-[11px] text-slate-600 space-y-1 bg-slate-50 p-2.5 rounded-lg border border-slate-200/80">
+                        <div class="flex items-center space-x-1.5">
+                            <i class="fa-solid fa-location-dot text-rose-500 text-[11px]"></i>
+                            <span><strong>ห้อง:</strong> ${escapeHtml(slide.room)}</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5 truncate">
+                            <i class="fa-solid fa-chalkboard-user text-blue-600 text-[11px]"></i>
+                            <span class="truncate"><strong>วิทยากร:</strong> ${escapeHtml(slide.lecturer)}</span>
+                        </div>
+                    </div>
+
+                    <!-- Key Takeaway Preview -->
+                    <div class="text-xs text-slate-700 line-clamp-2 leading-relaxed">
+                        ${escapeHtml(slide.summaryMorning)}
+                    </div>
+
+                    <!-- Exam Focus Badge -->
+                    <div class="p-2 rounded-lg exam-focus-badge text-[11px] text-amber-950 flex items-start space-x-1.5">
+                        <i class="fa-solid fa-key text-amber-700 text-xs mt-0.5 shrink-0"></i>
+                        <div class="line-clamp-2"><strong>จุดเน้นข้อสอบ:</strong> ${escapeHtml(slide.examFocus)}</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
+                    <button type="button" onclick="openLectureSlideModal(${slide.day})" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg font-bold transition flex items-center justify-center space-x-1 cursor-pointer">
+                        <i class="fa-solid fa-eye text-slate-600"></i>
+                        <span>ดูสรุป & จุดเน้น</span>
+                    </button>
+                    <a href="${slide.docUrl}" target="_blank" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold transition flex items-center justify-center space-x-1 shadow-xs cursor-pointer">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>เปิดสไลด์</span>
+                    </a>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function openLectureSlideModal(dayNumber) {
+    const slide = master13DaysLectureSlides.find(s => s.day === dayNumber);
+    if (!slide) return;
+
+    setText('modal-slide-day-badge', `วันที่ ${slide.day} (${slide.date})`);
+    setText('modal-slide-track-badge', slide.trackLabel);
+    setText('modal-slide-title', slide.title);
+    setText('modal-slide-lecturer', slide.lecturer);
+    setText('modal-slide-room', slide.room);
+    setText('modal-slide-morning', slide.summaryMorning);
+    setText('modal-slide-afternoon', slide.summaryAfternoon);
+    setText('modal-slide-exam-focus', slide.examFocus);
+
+    const linkBtn = document.getElementById('modal-slide-link');
+    if (linkBtn) linkBtn.href = slide.docUrl;
+
+    const askAiBtn = document.getElementById('modal-btn-ask-ai');
+    if (askAiBtn) {
+        askAiBtn.onclick = () => askAISlideQuestion(slide.day);
+    }
+
+    openModal('modal-lecture-slide');
+}
+
+function askAISlideQuestion(dayNumber) {
+    const slide = master13DaysLectureSlides.find(s => s.day === dayNumber);
+    if (!slide) return;
+
+    closeModal('modal-lecture-slide');
+    toggleAIBuddyDrawer(true);
+
+    const promptText = `ช่วยสรุปเนื้อหาหลักและจุดเน้นข้อสอบของสไลด์บรรยาย วันที่ ${slide.day}: "${slide.title}" ให้กระชับ เข้าใจง่าย 3 ข้อ และยกตัวอย่างคำถามที่มักออกในข้อสอบข้าราชการ`;
+    const chatInput = document.getElementById('ai-chat-input');
+    if (chatInput) {
+        chatInput.value = promptText;
+        sendAIChatMessage();
+    }
+}
+
+// Window Bindings for Lecture Slides Hub
+window.switchM5View = switchM5View;
+window.filterM5SlideTrack = filterM5SlideTrack;
+window.filterM5Slides = filterM5Slides;
+window.renderM5LectureSlidesGrid = renderM5LectureSlidesGrid;
+window.openLectureSlideModal = openLectureSlideModal;
+window.askAISlideQuestion = askAISlideQuestion;
+
 
 
 

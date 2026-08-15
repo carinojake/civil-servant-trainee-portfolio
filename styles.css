@@ -503,3 +503,19 @@ html.is-locked, body.is-locked {
 .quiz-feedback-box {
     animation: fadeIn 0.3s ease-out;
 }
+
+/* 13-Day Lecture Slide Hub Styles */
+.lecture-slide-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lecture-slide-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+.exam-focus-badge {
+    background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+    border: 1px solid #F59E0B;
+}
+
