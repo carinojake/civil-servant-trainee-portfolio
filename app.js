@@ -659,6 +659,7 @@ function renderAllViews() {
     renderPortfolioPreview();
     generateVideoScript('profile');
     updateRctfPrompt();
+    renderM8QuizView();
 }
 
 function updateKpiMetrics() {
@@ -2743,6 +2744,8 @@ function switchTab(tabId) {
 
     if (tabId === 'm6') {
         renderPortfolioPreview();
+    } else if (tabId === 'm8') {
+        renderM8QuizView();
     }
 }
 
@@ -3477,5 +3480,492 @@ window.clearGeminiApiKey = clearGeminiApiKey;
 window.toggleAIVoiceRecognition = toggleAIVoiceRecognition;
 window.speakSingleAIChatMessage = speakSingleAIChatMessage;
 window.copyAIChatMessage = copyAIChatMessage;
+
+/* ==========================================================================
+   11. M8: INTERACTIVE CIVIL SERVICE QUIZ & STUDY HUB ENGINE
+   ========================================================================== */
+const QUIZ_ANSWERS_STORAGE = 'civil_servant_quiz_answers_v1';
+let activeQuizCategory = 'ALL';
+
+const masterCivilServiceQuizBank = [
+    // 1. SARABAN: งานสารบรรณ & หนังสือราชการ
+    {
+        id: 'Q-001',
+        category: 'SARABAN',
+        categoryName: 'งานสารบรรณ & 3 ย่อหน้า',
+        question: 'โครงสร้างการเขียนบันทึกข้อความหรือหนังสือราชการแบบมาตรฐาน 3 ย่อหน้า ประกอบด้วยส่วนใดตามลำดับ?',
+        options: [
+            '๑. เหตุผลความเป็นมา ๒. ข้อเท็จจริง/การดำเนินงาน ๓. ข้อพิจารณา/ข้อเสนอ',
+            '๑. ข้อเสนอ ๒. ข้อเท็จจริง ๓. บทลงโทษ',
+            '๑. บทนำ ๒. ผลประโยชน์ ๓. คำสั่งการ',
+            '๑. อ้างถึง ๒. สิ่งที่ส่งมาด้วย ๓. ลายมือชื่อ'
+        ],
+        correctIndex: 0,
+        explanation: 'โครงสร้างหนังสือราชการ 3 ย่อหน้าที่ถูกต้องตามระเบียบงานสารบรรณ คือ ย่อหน้าที่ 1: เหตุผล/ความเป็นมา (ด้วย/ตามที่/เนื่องจาก), ย่อหน้าที่ 2: ข้อเท็จจริง/การดำเนินงาน (ในการนี้/ข้อเท็จจริงปรากฏว่า), ย่อหน้าที่ 3: ข้อพิจารณา/ข้อเสนอ (จึงเรียนมาเพื่อโปรดพิจารณา/อนุมัติ)',
+        examTip: 'จำง่ายๆ: "ต้นสาย (เหตุ) - ปลายเหตุ (ข้อเท็จจริง) - เสนอแนะ (ขออนุมัติ)"'
+    },
+    {
+        id: 'Q-002',
+        category: 'SARABAN',
+        categoryName: 'งานสารบรรณ & 3 ย่อหน้า',
+        question: 'คำขึ้นต้นและคำลงท้ายของหนังสือราชการภายนอก ที่มีถึงบุคคลธรรมดาทั่วไป ข้อใดถูกต้องที่สุด?',
+        options: [
+            'คำขึ้นต้น "กราบเรียน" / คำลงท้าย "ขอแสดงความนับถืออย่างยิ่ง"',
+            'คำขึ้นต้น "เรียน" / คำลงท้าย "ขอแสดงความนับถือ"',
+            'คำขึ้นต้น "ถึง" / คำลงท้าย "ด้วยความเคารพ"',
+            'คำขึ้นต้น "เสนอ" / คำลงท้าย "นับถือ"'
+        ],
+        correctIndex: 1,
+        explanation: 'ตามระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ หนังสือราชการภายนอกถึงบุคคลธรรมดาทั่วไป ใช้คำขึ้นต้นว่า "เรียน" และคำลงท้ายว่า "ขอแสดงความนับถือ"',
+        examTip: 'บุคคลธรรมดาและตำแหน่งทั่วไปใช้ "เรียน - ขอแสดงความนับถือ" ส่วนประธานองคมนตรี/นายกฯ/ประธานรัฐสภา/ประธานศาลฎีกา ใช้ "กราบเรียน - ขอแสดงความนับถืออย่างยิ่ง"'
+    },
+    {
+        id: 'Q-003',
+        category: 'SARABAN',
+        categoryName: 'งานสารบรรณ & 3 ย่อหน้า',
+        question: 'ชั้นความเร็วของหนังสือราชการข้อใด กำหนดให้เจ้าหน้าที่ต้อง "ปฏิบัติในทันทีที่ได้รับหนังสือนั้น"?',
+        options: [
+            'ด่วน',
+            'ด่วนมาก',
+            'ด่วนที่สุด',
+            'ด่วนพิเศษ'
+        ],
+        correctIndex: 2,
+        explanation: 'ชั้นความเร็วตามระเบียบมี 3 ชั้น: ๑. "ด่วนที่สุด" ให้เจ้าหน้าที่ปฏิบัติในทันทีที่ได้รับหนังสือนั้น ๒. "ด่วนมาก" ให้ปฏิบัติโดยเร็ว ๓. "ด่วน" ให้ปฏิบัติเร็วกว่าปกติเท่าที่จะทำได้',
+        examTip: 'ด่วนที่สุด = ทันที | ด่วนมาก = โดยเร็ว | ด่วน = เร็วกว่าปกติ'
+    },
+    {
+        id: 'Q-004',
+        category: 'SARABAN',
+        categoryName: 'งานสารบรรณ & 3 ย่อหน้า',
+        question: 'ชั้นความลับของทางราชการตามระเบียบว่าด้วยการรักษาความลับของทางราชการ แบ่งออกเป็นกี่ชั้น?',
+        options: [
+            '2 ชั้น (ลับ, ลับมาก)',
+            '3 ชั้น (ลับ, ลับมาก, ลับที่สุด)',
+            '4 ชั้น (ลับเฉพาะ, ลับ, ลับมาก, ลับที่สุด)',
+            '5 ชั้น (ปกปิด, ลับเฉพาะ, ลับ, ลับมาก, ลับที่สุด)'
+        ],
+        correctIndex: 1,
+        explanation: 'ระเบียบว่าด้วยการรักษาความลับของทางราชการ พ.ศ. 2544 กำหนดชั้นความลับไว้ 3 ชั้น ได้แก่: ๑. ลับที่สุด (Top Secret) ๒. ลับมาก (Secret) ๓. ลับ (Confidential)',
+        examTip: 'จำ 3 ลำดับ: ลับที่สุด > ลับมาก > ลับ'
+    },
+
+    // 2. DISCIPLINE: วินัย จริยธรรม & กฎหมายข้าราชการ
+    {
+        id: 'Q-005',
+        category: 'DISCIPLINE',
+        categoryName: 'วินัย จริยธรรม & กฎหมาย',
+        question: 'โทษทางวินัยของข้าราชการพลเรือนตาม พ.ร.บ. ระเบียบข้าราชการพลเรือน พ.ศ. 2551 มีกี่สถาน อะไรบ้าง?',
+        options: [
+            '3 สถาน: ว่ากล่าวตักเตือน, ภาคทัณฑ์, ให้ออก',
+            '4 สถาน: ภาคทัณฑ์, ตัดเงินเดือน, ปลดออก, ไล่ออก',
+            '5 สถาน: ภาคทัณฑ์, ตัดเงินเดือน, ลดเงินเดือน, ปลดออก, ไล่ออก',
+            '6 สถาน: ทัณฑกรรม, กักยาม, ตัดเงินเดือน, ลดขั้น, ปลดออก, ไล่ออก'
+        ],
+        correctIndex: 2,
+        explanation: 'มาตรา 96 แห่ง พ.ร.บ. ระเบียบข้าราชการพลเรือน พ.ศ. 2551 กำหนดโทษทางวินัยมี 5 สถาน ได้แก่: วินัยไม่ร้ายแรง (ภาคทัณฑ์, ตัดเงินเดือน, ลดเงินเดือน) และวินัยร้ายแรง (ปลดออก, ไล่ออก)',
+        examTip: 'จำ 5 สถาน: "ภาค - ตัด - ลด - ปลด - ไล่"'
+    },
+    {
+        id: 'Q-006',
+        category: 'DISCIPLINE',
+        categoryName: 'วินัย จริยธรรม & กฎหมาย',
+        question: 'การละทิ้งหน้าที่ราชการติดต่อกันในคราวเดียวกันเป็นเวลากี่วัน โดยไม่มีเหตุผลอันสมควร ถือเป็นความผิดวินัยอย่างร้ายแรง?',
+        options: [
+            'เกินกว่า 3 วัน',
+            'เกินกว่า 7 วัน',
+            'เกินกว่า 15 วัน',
+            'เกินกว่า 30 วัน'
+        ],
+        correctIndex: 2,
+        explanation: 'มาตรา 85 (3) ระบุว่า การละทิ้งหรือทอดทิ้งหน้าที่ราชการติดต่อในคราวเดียวกันเป็นเวลาเกินกว่า 15 วัน โดยไม่มีเหตุผลอันสมควร หรือมีพฤติการณ์จงใจไม่ปฏิบัติตามระเบียบ ถือเป็นความผิดวินัยอย่างร้ายแรง',
+        examTip: 'เกณฑ์ละทิ้งหน้าที่วินัยร้ายแรง = "เกิน 15 วัน"'
+    },
+    {
+        id: 'Q-007',
+        category: 'DISCIPLINE',
+        categoryName: 'วินัย จริยธรรม & กฎหมาย',
+        question: 'ความแตกต่างระหว่างโทษ "ปลดออก" กับ "ไล่ออก" คือข้อใด?',
+        options: [
+            'ปลดออกไม่มีสิทธิได้รับบำเหน็จบำนาญ แต่ไล่ออกมีสิทธิได้รับ',
+            'ปลดออกมีสิทธิได้รับบำเหน็จบำนาญเสมือนลาออก ส่วนไล่ออกไม่มีสิทธิได้รับ',
+            'ทั้งปลดออกและไล่ออกได้รับบำเหน็จบำนาญเท่ากัน',
+            'ปลดออกกลับเข้ารับราชการได้ทันที ส่วนไล่ออกต้องรอ 5 ปี'
+        ],
+        correctIndex: 1,
+        explanation: 'ผู้ถูกลงโทษ "ปลดออก" ยังมีสิทธิได้รับบำเหน็จบำนาญเสมือนว่าเป็นผู้ลาออกจากราชการ แต่ผู้ถูกลงโทษ "ไล่ออก" จะไม่มีสิทธิได้รับบำเหน็จหรือบำนาญใดๆ ทั้งสิ้น',
+        examTip: 'ปลดออก = ได้บำเหน็จบำนาญ (เหมือนลาออก) | ไล่ออก = ตัดสิทธิบำเหน็จบำนาญทั้งหมด'
+    },
+
+    // 3. PDPA: การคุ้มครองข้อมูลส่วนบุคคล
+    {
+        id: 'Q-008',
+        category: 'PDPA',
+        categoryName: 'PDPA & คุ้มครองข้อมูล',
+        question: 'ข้อมูลประเภทใดต่อไปนี้ จัดเป็น "ข้อมูลส่วนบุคคลอ่อนไหว" (Sensitive Personal Data) ตามมาตรา 26 ของ PDPA?',
+        options: [
+            'ชื่อ-นามสกุล และเบอร์โทรศัพท์ที่ทำงาน',
+            'ข้อมูลความพิการ เชื้อชาติ ศาสนา ข้อมูลสุขภาพและพันธุกรรม',
+            'ตำแหน่งทางราชการ และสังกัดกอง/กรม',
+            'อีเมลราชการ (@go.th) และหมายเลขห้องทำงาน'
+        ],
+        correctIndex: 1,
+        explanation: 'มาตรา 26 แห่ง พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 กำหนดว่า ข้อมูลความพิการ เชื้อชาติ เผ่าพันธุ์ ความคิดเห็นทางการเมือง ศาสนา พฤติกรรมทางเพศ ประวัติอาชญากรรม ข้อมูลสุขภาพ พันธุกรรม เป็นข้อมูลส่วนบุคคลอ่อนไหวที่ต้องได้รับความยินยอมโดยชัดแจ้งและมีการคุ้มครองเข้มงวดเป็นพิเศษ',
+        examTip: 'ข้อมูลความพิการและข้อมูลสุขภาพ = Sensitive Data ชั้นสูงสุดตาม PDPA'
+    },
+    {
+        id: 'Q-009',
+        category: 'PDPA',
+        categoryName: 'PDPA & คุ้มครองข้อมูล',
+        question: 'การปฏิบัติงานเอกสารภาครัฐที่มีการส่งต่อรายชื่อผู้เข้าอบรม เพื่อความสอดคล้องกับ PDPA ควรปฏิบัติอย่างไร?',
+        options: [
+            'โพสต์ไฟล์ Excel ที่มีเลขบัตรประชาชน 13 หลักลงในกลุ่ม LINE สาธารณะ',
+            'ซ่อน (Mask) หรือตัดเลขบัตรประชาชน 13 หลัก และส่งเฉพาะข้อมูลที่จำเป็นต่อภารกิจ',
+            'เปิดเผยข้อมูลทั้งหมดเพื่อให้ตรวจสอบความโปร่งใสได้ง่าย',
+            'ส่งข้อมูลไปเก็บไว้ในเซิร์ฟเวอร์ต่างประเทศโดยไม่ต้องเข้ารหัส'
+        ],
+        correctIndex: 1,
+        explanation: 'หลักการ Data Minimization และ Privacy by Design กำหนดให้เปิดเผยและประมวลผลข้อมูลส่วนบุคคลเท่าที่จำเป็นต่อภารกิจเท่านั้น ควรทำการ Mask เลข 13 หลัก (เช่น 1-1002-xxxxx-xx-x) ก่อนการแชร์',
+        examTip: 'หลัก PDPA สำคัญ: "เก็บเท่าที่จำเป็น - ซ่อนข้อมูลอ่อนไหว - ไม่แชร์ในที่สาธารณะ"'
+    },
+
+    // 4. OJT: การฝึกปฏิบัติงาน 4 มิติ
+    {
+        id: 'Q-010',
+        category: 'OJT',
+        categoryName: 'การฝึกปฏิบัติ OJT 4 มิติ',
+        question: 'เกณฑ์ชั่วโมงการฝึกปฏิบัติงานจริง (OJT) ของหลักสูตรเตรียมความพร้อมสำหรับคนพิการในหน่วยงานภาครัฐ คือข้อใด?',
+        options: [
+            'ไม่น้อยกว่า 45 ชั่วโมง และครอบคลุมอย่างน้อย 1 ด้าน',
+            'ไม่น้อยกว่า 60 ชั่วโมง และครอบคลุมอย่างน้อย 2 ด้าน',
+            'ไม่น้อยกว่า 90 ชั่วโมง และต้องกระจายครอบคลุมทั้ง 4 มิติงาน',
+            'ไม่น้อยกว่า 120 ชั่วโมง เฉพาะด้านงานธุรการสารบรรณ'
+        ],
+        correctIndex: 2,
+        explanation: 'เกณฑ์มาตรฐานกำหนดให้ผู้เข้ารับการอบรมสะสมเวลาฝึกงาน OJT ในหน่วยงานจริงไม่น้อยกว่า 90 ชั่วโมง (ช่วงเดือนกันยายน) โดยต้องปฏิบัติงานครอบคลุมทั้ง 4 ด้าน เพื่อประเมินสมรรถนะความพร้อมรอบด้าน',
+        examTip: 'เป้าหมาย OJT = "≥90 ชั่วโมง ครบ 4 ด้าน"'
+    },
+    {
+        id: 'Q-011',
+        category: 'OJT',
+        categoryName: 'การฝึกปฏิบัติ OJT 4 มิติ',
+        question: 'ข้อใดคือตัวอย่างงานที่ตรงกับ "มิติที่ 1: ด้านงานวิเคราะห์ข้อมูลและสารสนเทศ" ในการฝึกงาน OJT?',
+        options: [
+            'การต้อนรับแขกผู้มาติดต่อหน่วยงาน',
+            'การจัดทำ Dashboard สรุปสถิติผู้รับบริการ และการทำ Data Cleaning ด้วย Excel/Python',
+            'การเดินส่งหนังสือเวียนตามโต๊ะทำงาน',
+            'การยกของและจัดเตรียมสถานที่ห้องประชุม'
+        ],
+        correctIndex: 1,
+        explanation: 'มิติที่ 1 มุ่งเน้นการจัดการข้อมูล สารสนเทศ การจัดทำ Dashboard สรุปตัวเลข การรายงานผลเชิงสถิติ และการวิเคราะห์แนวโน้มเพื่อสนับสนุนการตัดสินใจของผู้บริหาร',
+        examTip: 'มิติ 1 = Data, Excel, Dashboard, วิเคราะห์สถิติ'
+    },
+    {
+        id: 'Q-012',
+        category: 'OJT',
+        categoryName: 'การฝึกปฏิบัติ OJT 4 มิติ',
+        question: 'มิติที่ 4 ของการฝึกปฏิบัติงาน OJT "ด้านการประสานงาน บริการ และสื่อสาร" มีตัวบ่งชี้ความสำเร็จที่สำคัญคืออะไร?',
+        options: [
+            'การเขียนโค้ดพัฒนาเว็บไซต์ให้เสร็จสมบูรณ์',
+            'การสื่อสารอย่างสุภาพ ชัดเจน การให้บริการประชาชน และการประสานงานข้ามกองอย่างราบรื่น',
+            'การบันทึกสถิติข้อมูลลงฐานข้อมูลโดยไม่พูดคุยกับใคร',
+            'การอยู่เวรยามนอกเวลาราชการ'
+        ],
+        correctIndex: 1,
+        explanation: 'มิติที่ 4 เน้น Soft Skills ด้านการสื่อสารที่มีประสิทธิภาพ Service Mind การตอบข้อซักถาม การประสานงานกับหน่วยงานภายในและภายนอก และการนำเสนอรายงาน',
+        examTip: 'มิติ 4 = Service Mind, การสื่อสาร, การประสานงาน'
+    },
+
+    // 5. DIGITAL: ทักษะดิจิทัล & AI ภาครัฐ
+    {
+        id: 'Q-013',
+        category: 'DIGITAL',
+        categoryName: 'ทักษะดิจิทัล & AI ภาครัฐ',
+        question: 'กรอบโครงสร้างการเขียน Prompt สั่งงาน AI ที่มีประสิทธิภาพสูงตามหลัก "R-C-T-F" ย่อมาจากคำใด?',
+        options: [
+            'Role (บทบาท) - Context (บริบท) - Task (ภารกิจ) - Format (รูปแบบผลลัพธ์)',
+            'Read (การอ่าน) - Check (ตรวจสอบ) - Type (พิมพ์) - Finish (เสร็จสิ้น)',
+            'Rule (กฎระเบียบ) - Code (รหัส) - Test (ทดสอบ) - File (บันทึกไฟล์)',
+            'Run (ประมวลผล) - Create (สร้าง) - Transform (แปลง) - Forward (ส่งต่อ)'
+        ],
+        correctIndex: 0,
+        explanation: 'R-C-T-F เป็นโครงสร้าง Prompt มาตรฐานสากล: R (Role) ระบุบทบาทผู้เชี่ยวชาญ, C (Context) ให้ข้อมูลแวดล้อมและระเบียบที่เกี่ยวข้อง, T (Task) สั่งงานที่ชัดเจน, F (Format) กำหนดรูปแบบผลลัพธ์ เช่น 3 ย่อหน้า หรือตารางสรุป',
+        examTip: 'R-C-T-F = Role (บทบาท) + Context (บริบท) + Task (ภารกิจ) + Format (รูปแบบ)'
+    },
+    {
+        id: 'Q-014',
+        category: 'DIGITAL',
+        categoryName: 'ทักษะดิจิทัล & AI ภาครัฐ',
+        question: 'ตามแนวทางมาตรฐานการใช้ปัญญาประดิษฐ์ (AI) ภาครัฐอย่างมีธรรมาภิบาล ใครคือผู้รับผิดชอบสูงสุดในเนื้อหาของหนังสือราชการที่ AI ช่วยร่าง?',
+        options: [
+            'บริษัทผู้พัฒนาโมเดล AI (เช่น Google หรือ OpenAI)',
+            'ผู้ดูแลระบบเครือข่ายของหน่วยงาน (IT Admin)',
+            'ข้าราชการ/เจ้าหน้าที่ผู้ลงนามและผู้ส่งหนังสือราชการนั้น (Human in the Loop)',
+            'ไม่มีผู้ใดต้องรับผิดชอบเนื่องจากเป็นระบบอัตโนมัติ'
+        ],
+        correctIndex: 2,
+        explanation: 'หลักการ Human-in-the-Loop และ Accountability กำหนดว่า AI เป็นเพียงเครื่องมือช่วยอำนวยความสะดวก แต่ความถูกต้องทางกฎหมายและผลทางราชการทั้งหมดเป็นความรับผิดชอบของข้าราชการและผู้บริหารผู้ลงนาม',
+        examTip: 'หลัก AI ราชการ: "AI เป็นผู้ช่วย แต่คนเป็นผู้รับผิดชอบ (Human in the loop)"'
+    },
+    {
+        id: 'Q-015',
+        category: 'DIGITAL',
+        categoryName: 'ทักษะดิจิทัล & AI ภาครัฐ',
+        question: 'มาตรฐานสากลว่าด้วยการเข้าถึงเนื้อหาเว็บ (WCAG 2.1 Level AA) กำหนดเกณฑ์อัตราส่วนความต่างของสี (Contrast Ratio) สำหรับตัวอักษรขนาดปกติไว้อย่างน้อยเท่าใด?',
+        options: [
+            'อย่างน้อย 2.0 : 1',
+            'อย่างน้อย 3.0 : 1',
+            'อย่างน้อย 4.5 : 1',
+            'อย่างน้อย 7.0 : 1'
+        ],
+        correctIndex: 2,
+        explanation: 'WCAG 2.1 Level AA กำหนดให้อัตราส่วนความต่างของสี (Color Contrast Ratio) ระหว่างข้อความปกติกับพื้นหลังต้องไม่ต่ำกว่า 4.5 : 1 (ส่วนตัวอักษรขนาดใหญ่ต้องไม่ต่ำกว่า 3.0 : 1)',
+        examTip: 'WCAG Level AA: ตัวอักษรปกติ ≥ 4.5:1 | ตัวอักษรใหญ่ ≥ 3:1 | High Contrast AAA ≥ 7:1'
+    },
+    {
+        id: 'Q-016',
+        category: 'DIGITAL',
+        categoryName: 'ทักษะดิจิทัล & AI ภาครัฐ',
+        question: 'การพัฒนาเอกสารราชการและสื่อนำเสนอให้รองรับโปรแกรมอ่านจอภาพ (Screen Reader) สิ่งที่ต้องมีเสมอสำหรับรูปภาพและแผนภูมิคือข้อใด?',
+        options: [
+            'คำอธิบายภาพกำกับ (Alt-Text / Alternative Text)',
+            'การใส่เสียงเพลงบรรเลงประกอบ',
+            'การทำภาพให้เคลื่อนไหวตลอดเวลา',
+            'การแปลงข้อความทั้งหมดให้เป็นไฟล์รูปภาพ JPEG'
+        ],
+        correctIndex: 0,
+        explanation: 'โปรแกรม Screen Reader ไม่สามารถมองเห็นภาพได้ การใส่ Alt-Text (คำบรรยายภาพทางเลือก) ทำให้ระบบสามารถอ่านออกเสียงให้ผู้พิการทางสายตาทราบถึงความหมายและเนื้อหาในภาพได้ทันที',
+        examTip: 'ภาพและกราฟในเอกสารราชการ ต้องมี Alt-Text เสมอเพื่อผู้พิการทางสายตา'
+    }
+];
+
+function getQuizAnswersState() {
+    try {
+        const stored = localStorage.getItem(QUIZ_ANSWERS_STORAGE);
+        if (stored) return JSON.parse(stored);
+    } catch (e) {
+        console.warn('Error reading quiz answers state', e);
+    }
+    return {};
+}
+
+function saveQuizAnswersState(state) {
+    try {
+        localStorage.setItem(QUIZ_ANSWERS_STORAGE, JSON.stringify(state));
+    } catch (e) {
+        console.warn('Error saving quiz answers state', e);
+    }
+}
+
+function filterQuizCategory(cat) {
+    activeQuizCategory = cat;
+    ['ALL', 'SARABAN', 'DISCIPLINE', 'PDPA', 'OJT', 'DIGITAL'].forEach(c => {
+        const btn = document.getElementById(`filter-quiz-${c}`);
+        if (btn) {
+            if (c === cat) {
+                btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-sm shrink-0 cursor-pointer';
+            } else {
+                btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer';
+            }
+        }
+    });
+    renderM8QuizView();
+}
+
+function selectQuizAnswer(qId, selectedIdx) {
+    const state = getQuizAnswersState();
+    state[qId] = selectedIdx;
+    saveQuizAnswersState(state);
+    renderM8QuizView();
+
+    const q = masterCivilServiceQuizBank.find(item => item.id === qId);
+    if (q) {
+        if (selectedIdx === q.correctIndex) {
+            showToast(`✅ ตอบถูก: ${q.categoryName}`);
+        } else {
+            showToast(`❌ ยังไม่ถูกต้อง: มีคำอธิบายเฉลยด้านล่างข้อสอบ`);
+        }
+    }
+}
+
+function resetSingleQuizAnswer(qId) {
+    const state = getQuizAnswersState();
+    delete state[qId];
+    saveQuizAnswersState(state);
+    renderM8QuizView();
+    showToast('ล้างคำตอบข้อนี้แล้ว พร้อมให้ทำใหม่');
+}
+
+function resetQuizAnswers() {
+    if (!confirm('ต้องการล้างคำตอบข้อสอบทั้งหมดเพื่อเริ่มทำใหม่ใช่หรือไม่?')) return;
+    localStorage.removeItem(QUIZ_ANSWERS_STORAGE);
+    renderM8QuizView();
+    showToast('ล้างคำตอบข้อสอบทั้งหมดเรียบร้อยแล้ว');
+}
+
+function submitM8QuickAIQuery() {
+    const input = document.getElementById('m8-quick-ai-input');
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) return;
+
+    toggleAIBuddyDrawer(true);
+    const chatInput = document.getElementById('ai-chat-input');
+    if (chatInput) {
+        chatInput.value = text;
+        input.value = '';
+        sendAIChatMessage();
+    }
+}
+
+function renderM8QuizView() {
+    const container = document.getElementById('m8-quiz-cards-container');
+    if (!container) return;
+
+    const answersState = getQuizAnswersState();
+    const filteredQuestions = activeQuizCategory === 'ALL'
+        ? masterCivilServiceQuizBank
+        : masterCivilServiceQuizBank.filter(q => q.category === activeQuizCategory);
+
+    // Calculate Global Quiz KPI Stats
+    const totalAll = masterCivilServiceQuizBank.length;
+    const attemptedKeys = Object.keys(answersState);
+    const attemptedCount = attemptedKeys.length;
+    let correctCount = 0;
+
+    masterCivilServiceQuizBank.forEach(q => {
+        if (answersState[q.id] !== undefined && answersState[q.id] === q.correctIndex) {
+            correctCount++;
+        }
+    });
+
+    const attemptedPct = totalAll > 0 ? Math.round((attemptedCount / totalAll) * 100) : 0;
+    const accuracyPct = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
+
+    // Update KPI UI
+    setText('m8-total-questions', `${totalAll} ข้อ`);
+    setText('m8-attempted-count', `${attemptedCount} ข้อ`);
+    setText('m8-attempted-percent', `${attemptedPct}% ของข้อสอบทั้งหมด`);
+    setText('m8-correct-count', `${correctCount} ข้อ`);
+    setText('m8-correct-percent', `ความแม่นยำ ${accuracyPct}%`);
+
+    let readinessText = 'กำลังเริ่มต้น';
+    if (accuracyPct >= 80 && attemptedCount >= 10) {
+        readinessText = '🏆 พร้อมสอบระดับสูง (ดีเยี่ยม)';
+    } else if (accuracyPct >= 60 && attemptedCount >= 6) {
+        readinessText = '⭐ ผ่านเกณฑ์มาตรฐาน';
+    } else if (attemptedCount > 0) {
+        readinessText = '📖 กำลังฝึกฝนทบทวน';
+    }
+    setText('m8-readiness-level', readinessText);
+
+    setText('m8-filter-count-label', `แสดง ${filteredQuestions.length} จาก ${totalAll} ข้อ`);
+
+    // Render Question Cards
+    if (filteredQuestions.length === 0) {
+        container.innerHTML = `
+            <div class="app-card p-8 text-center text-slate-500 space-y-2">
+                <i class="fa-solid fa-clipboard-question text-3xl text-slate-300"></i>
+                <div class="font-bold text-sm">ไม่พบข้อสอบในหมวดนี้</div>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = filteredQuestions.map((q, idx) => {
+        const hasAnswered = answersState[q.id] !== undefined;
+        const userChoice = hasAnswered ? answersState[q.id] : null;
+        const isCorrect = hasAnswered && userChoice === q.correctIndex;
+        const optLetters = ['ก', 'ข', 'ค', 'ง'];
+
+        return `
+            <div class="app-card p-5 sm:p-6 quiz-card border-t-4 ${hasAnswered ? (isCorrect ? 'border-emerald-500' : 'border-rose-500') : 'border-slate-300'} space-y-4" id="quiz-card-${q.id}">
+                <!-- Question Header -->
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-7 h-7 rounded-lg bg-govNavy text-white flex items-center justify-center font-bold text-xs">
+                            ${idx + 1}
+                        </span>
+                        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                            ${escapeHtml(q.categoryName)}
+                        </span>
+                    </div>
+                    ${hasAnswered ? `
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold flex items-center space-x-1 ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                            <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-rose-600'}"></i>
+                            <span>${isCorrect ? 'ตอบถูกต้อง (+1)' : 'ยังไม่ถูกต้อง'}</span>
+                        </span>
+                    ` : `
+                        <span class="text-[11px] text-slate-400 font-medium">ยังไม่ได้ตอบ</span>
+                    `}
+                </div>
+
+                <!-- Question Body -->
+                <div class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    ${escapeHtml(q.question)}
+                </div>
+
+                <!-- Options -->
+                <div class="space-y-2 pt-1">
+                    ${q.options.map((opt, oIdx) => {
+                        let btnClass = 'quiz-option-btn w-full text-left p-3 rounded-xl text-xs sm:text-sm flex items-start space-x-3 transition';
+                        if (hasAnswered) {
+                            if (oIdx === q.correctIndex) {
+                                btnClass += ' quiz-option-correct';
+                            } else if (oIdx === userChoice) {
+                                btnClass += ' quiz-option-incorrect';
+                            } else {
+                                btnClass += ' opacity-50';
+                            }
+                        }
+
+                        return `
+                            <button type="button" onclick="selectQuizAnswer('${q.id}', ${oIdx})" class="${btnClass}" ${hasAnswered ? 'disabled' : ''}>
+                                <span class="w-6 h-6 rounded-lg ${hasAnswered && oIdx === q.correctIndex ? 'bg-emerald-600 text-white font-bold' : (hasAnswered && oIdx === userChoice ? 'bg-rose-600 text-white font-bold' : 'bg-slate-200 text-slate-700 font-bold')} flex items-center justify-center text-xs shrink-0 mt-0.5">
+                                    ${optLetters[oIdx]}
+                                </span>
+                                <span class="leading-relaxed flex-grow">${escapeHtml(opt)}</span>
+                                ${hasAnswered && oIdx === q.correctIndex ? '<i class="fa-solid fa-check text-emerald-600 text-sm mt-1 shrink-0"></i>' : ''}
+                                ${hasAnswered && oIdx === userChoice && !isCorrect ? '<i class="fa-solid fa-xmark text-rose-600 text-sm mt-1 shrink-0"></i>' : ''}
+                            </button>
+                        `;
+                    }).join('')}
+                </div>
+
+                <!-- Explanation & Memory Tip Alert (Shows when answered) -->
+                ${hasAnswered ? `
+                    <div class="p-4 rounded-xl text-xs space-y-2 quiz-feedback-box border ${isCorrect ? 'bg-emerald-50 border-emerald-200 text-slate-800' : 'bg-rose-50 border-rose-200 text-slate-800'}">
+                        <div class="font-bold flex items-center space-x-1.5 ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}">
+                            <i class="fa-solid ${isCorrect ? 'fa-circle-info' : 'fa-lightbulb'}"></i>
+                            <span>คำอธิบายระเบียบราชการที่ถูกต้อง (เฉลยข้อ ${optLetters[q.correctIndex]}):</span>
+                        </div>
+                        <p class="leading-relaxed text-slate-700">${escapeHtml(q.explanation)}</p>
+                        ${q.examTip ? `
+                            <div class="pt-1.5 border-t border-slate-200/60 text-[11px] text-amber-800 font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-key text-amber-600"></i>
+                                <span>เทคนิคช่วยจำ: ${escapeHtml(q.examTip)}</span>
+                            </div>
+                        ` : ''}
+                        <div class="pt-2 flex justify-end">
+                            <button type="button" onclick="resetSingleQuizAnswer('${q.id}')" class="text-xs text-blue-600 hover:text-blue-800 hover:underline font-semibold flex items-center gap-1 cursor-pointer">
+                                <i class="fa-solid fa-rotate-left text-[10px]"></i>
+                                <span>ทำข้อนี้ใหม่อีกครั้ง</span>
+                            </button>
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }).join('');
+}
+
+// Window Bindings for M8 Quiz Engine
+window.filterQuizCategory = filterQuizCategory;
+window.selectQuizAnswer = selectQuizAnswer;
+window.resetSingleQuizAnswer = resetSingleQuizAnswer;
+window.resetQuizAnswers = resetQuizAnswers;
+window.submitM8QuickAIQuery = submitM8QuickAIQuery;
+window.renderM8QuizView = renderM8QuizView;
+
 
 

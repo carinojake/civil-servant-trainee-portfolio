@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.3.0">
+    <link rel="stylesheet" href="styles.css?v=2.4.0">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -146,9 +146,13 @@
                     <i class="fa-solid fa-universal-access text-cyan-400"></i>
                     <span>M7: การเข้าถึง & PDPA</span>
                 </button>
+                <button onclick="switchTab('m8')" id="nav-m8" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition border border-amber-400/40 bg-amber-500/10 text-amber-300 hover:text-white" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+                    <span>M8: AI ติว & คลังข้อสอบ</span>
+                </button>
                 <button type="button" onclick="toggleAIBuddyDrawer()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-govNavy font-bold px-3.5 py-2 rounded-lg text-xs flex items-center space-x-2 transition shadow shadow-amber-500/30 border border-amber-200 cursor-pointer" title="เปิดหน้าต่าง AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน">
                     <i class="fa-solid fa-robot"></i>
-                    <span>AI Co-Pilot ผู้ช่วยติว</span>
+                    <span>AI Co-Pilot (Drawer)</span>
                 </button>
             </div>
         </nav>
@@ -1476,6 +1480,170 @@
             </div>
         </section>
 
+        <!-- ====================================================================
+             TAB 8 (M8): AI CO-PILOT STUDY CENTER & INTERACTIVE QUIZ ENGINE
+             ==================================================================== -->
+        <section id="tab-m8" class="tab-panel hidden space-y-6">
+            <!-- Header Executive Banner -->
+            <div class="app-card p-6 border-l-8 border-amber-500 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-gradient-to-r from-amber-500/5 via-white to-blue-900/5">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-semibold text-amber-800 bg-amber-100 px-3 py-1 rounded-full mb-1 border border-amber-300">
+                        <i class="fa-solid fa-graduation-cap text-amber-600"></i>
+                        <span>ศูนย์การเรียนรู้ & คลังข้อสอบเตรียมความพร้อมข้าราชการ (AI Study Hub)</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-govNavy">
+                        M8: AI Co-Pilot ผู้ช่วยติว & คลังข้อสอบอินเทอร์แอคทีฟ
+                    </h2>
+                    <p class="text-slate-500 text-xs sm:text-sm">
+                        ติวข้อสอบ Pre/Post-test 13 วัน เซ็นทารา ไลฟ์ และระเบียบงานสารบรรณ วินัยข้าราชการ PDPA พร้อมระบบเฉลยและอธิบายทันที
+                    </p>
+                </div>
+                <div class="flex items-center space-x-2 flex-wrap gap-2">
+                    <button type="button" onclick="openGeminiApiKeyModal()" class="bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-300 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-sm cursor-pointer" title="ตั้งค่า Gemini API Key สำหรับคุยสด">
+                        <i class="fa-solid fa-wand-magic-sparkles text-purple-600"></i>
+                        <span id="m8-gemini-status-btn">ตั้งค่า Gemini Key</span>
+                    </button>
+                    <button type="button" onclick="resetQuizAnswers()" class="bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-300 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-sm cursor-pointer" title="ล้างคำตอบข้อสอบทั้งหมดเพื่อเริ่มทำใหม่">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>ทำข้อสอบใหม่ทั้งหมด</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Performance Stats KPI Cards -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="app-card p-4 border-l-4 border-govNavy flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-semibold text-slate-500 uppercase">ข้อสอบทั้งหมด</div>
+                        <div class="text-2xl font-bold text-govNavy" id="m8-total-questions">0</div>
+                        <div class="text-[10px] text-slate-400">ครอบคลุม 13 วันอบรม</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-govNavy flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                    </div>
+                </div>
+
+                <div class="app-card p-4 border-l-4 border-blue-500 flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-semibold text-slate-500 uppercase">ทำแล้ว</div>
+                        <div class="text-2xl font-bold text-blue-600" id="m8-attempted-count">0</div>
+                        <div class="text-[10px] text-slate-400" id="m8-attempted-percent">0% ของข้อสอบ</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                </div>
+
+                <div class="app-card p-4 border-l-4 border-emerald-500 flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-semibold text-slate-500 uppercase">ตอบถูก</div>
+                        <div class="text-2xl font-bold text-emerald-600" id="m8-correct-count">0</div>
+                        <div class="text-[10px] text-emerald-700 font-semibold" id="m8-correct-percent">ความแม่นยำ 0%</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                </div>
+
+                <div class="app-card p-4 border-l-4 border-amber-500 flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] font-semibold text-slate-500 uppercase">ระดับความพร้อม</div>
+                        <div class="text-base sm:text-lg font-bold text-amber-600 truncate" id="m8-readiness-level">กำลังเริ่มต้น</div>
+                        <div class="text-[10px] text-slate-400">เกณฑ์มาตรฐาน ก.พ.</div>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Filter Selector -->
+            <div class="app-card p-4">
+                <div class="flex items-center justify-between flex-wrap gap-3 mb-3">
+                    <div class="flex items-center space-x-2 text-xs font-bold text-govNavy">
+                        <i class="fa-solid fa-filter text-blue-600"></i>
+                        <span>เลือกหมวดหมู่วิชาสำหรับติวข้อสอบ:</span>
+                    </div>
+                    <div class="text-xs text-slate-500 font-medium" id="m8-filter-count-label">แสดงทั้งหมด</div>
+                </div>
+                <div class="flex items-center gap-2 overflow-x-auto pb-1" id="m8-category-filters">
+                    <button type="button" onclick="filterQuizCategory('ALL')" id="filter-quiz-ALL" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-sm shrink-0 cursor-pointer">
+                        🌟 ทั้งหมด (ทุกหมวด)
+                    </button>
+                    <button type="button" onclick="filterQuizCategory('SARABAN')" id="filter-quiz-SARABAN" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer">
+                        📝 งานสารบรรณ & 3 ย่อหน้า
+                    </button>
+                    <button type="button" onclick="filterQuizCategory('DISCIPLINE')" id="filter-quiz-DISCIPLINE" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer">
+                        ⚖️ วินัย จริยธรรม & กฎหมาย
+                    </button>
+                    <button type="button" onclick="filterQuizCategory('PDPA')" id="filter-quiz-PDPA" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer">
+                        🛡️ PDPA & การคุ้มครองข้อมูล
+                    </button>
+                    <button type="button" onclick="filterQuizCategory('OJT')" id="filter-quiz-OJT" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer">
+                        💼 การฝึกปฏิบัติ OJT 4 มิติ
+                    </button>
+                    <button type="button" onclick="filterQuizCategory('DIGITAL')" id="filter-quiz-DIGITAL" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 shrink-0 cursor-pointer">
+                        💻 ทักษะดิจิทัล & AI ภาครัฐ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Questions Feed & AI Embedded Assistant Split Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left 2 Cols: Interactive Quiz Cards -->
+                <div class="lg:col-span-2 space-y-4" id="m8-quiz-cards-container">
+                    <!-- Dynamically populated by renderM8QuizView() -->
+                </div>
+
+                <!-- Right Col: Embedded AI Co-Pilot Assistant Panel -->
+                <div class="space-y-4">
+                    <div class="app-card p-5 border-t-4 border-govNavy sticky top-20 space-y-4 shadow-md">
+                        <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+                            <div class="w-10 h-10 rounded-2xl bg-govNavy text-amber-400 flex items-center justify-center text-lg shadow-md font-bold">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-govNavy">AI Co-Pilot ติวเตอร์ประจำตัว</h3>
+                                <div class="text-[11px] text-slate-500">ถามข้อสงสัยเรื่องข้อสอบและระเบียบได้ตลอดเวลา</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 Quick Actions inside M8 -->
+                        <div class="space-y-1.5">
+                            <div class="text-[11px] font-bold text-slate-600">⚡ คำสั่งด่วนยอดนิยม:</div>
+                            <button type="button" onclick="triggerQuickPrompt('memo3')" class="w-full text-left p-2.5 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-xl text-xs transition flex items-center justify-between text-slate-700 cursor-pointer">
+                                <span>📝 ร่างหนังสือราชการ 3 ย่อหน้า</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                            </button>
+                            <button type="button" onclick="triggerQuickPrompt('daily_summary')" class="w-full text-left p-2.5 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-xl text-xs transition flex items-center justify-between text-slate-700 cursor-pointer">
+                                <span>🎓 สรุปบทเรียน 13 วัน เซ็นทารา</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                            </button>
+                            <button type="button" onclick="triggerQuickPrompt('exam_prep')" class="w-full text-left p-2.5 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-xl text-xs transition flex items-center justify-between text-slate-700 cursor-pointer">
+                                <span>💡 ติวจุดเน้นข้อสอบ Pre/Post-test</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                            </button>
+                            <button type="button" onclick="triggerQuickPrompt('ojt_plan')" class="w-full text-left p-2.5 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-xl text-xs transition flex items-center justify-between text-slate-700 cursor-pointer">
+                                <span>💼 วางแผน OJT 90 ชม. 4 ด้าน</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                            </button>
+                        </div>
+
+                        <!-- Mini Direct Ask Input -->
+                        <div class="pt-2 border-t border-slate-100 space-y-2">
+                            <div class="text-[11px] font-bold text-slate-600">💬 พิมพ์ถาม AI โดยตรง:</div>
+                            <div class="relative">
+                                <input type="text" id="m8-quick-ai-input" placeholder="สงสัยข้อไหน พิมพ์ถาม AI ได้เลย..." class="w-full p-2.5 pr-8 text-xs rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500" onkeydown="if(event.key==='Enter'){event.preventDefault();submitM8QuickAIQuery();}">
+                                <button type="button" onclick="submitM8QuickAIQuery()" class="absolute right-2 top-2 text-govNavy hover:text-blue-600 p-1 cursor-pointer">
+                                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer Standard Thai Government Aesthetic -->
@@ -2233,6 +2401,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.3.0"></script>
+    <script src="app.js?v=2.4.0"></script>
 </body>
 </html>

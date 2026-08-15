@@ -95,6 +95,8 @@ if (fs.existsSync(indexPath)) {
     assert(html.includes('id="tab-m5"'), 'Contains M5: Drive & Artifacts panel');
     assert(html.includes('id="tab-m6"'), 'Contains M6: Portfolio Master Exporter panel');
     assert(html.includes('id="tab-m7"'), 'Contains M7: Accessibility Center & PDPA panel');
+    assert(html.includes('id="tab-m8"'), 'Contains M8: AI Co-Pilot & Quiz Engine panel');
+    assert(html.includes('id="m8-quiz-cards-container"'), 'Contains M8 Interactive Quiz Cards Container');
     assert(html.includes('btn-pview-table') && html.includes('btn-pview-card') && html.includes('btn-pview-analytics'), 'Contains M1 3-mode view switcher buttons (Table, Card, Analytics)');
     assert(html.includes('id="participantModal"'), 'Contains M1 Participant CRUD modal');
     assert(html.includes('id="aiCareerModal"'), 'Contains Gemini AI Career & OJT Recommendation modal');
@@ -130,6 +132,7 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('initSecurityLock') && js.includes('submitPinUnlock') && js.includes('lockAppImmediately'), 'Contains Passcode Security Lock & Unlock controllers');
     assert(js.includes('saveNewSecurityPin') && js.includes('clearRememberedDevice'), 'Contains PIN change and device remember management');
     assert(js.includes('toggleAIBuddyDrawer') && js.includes('sendAIChatMessage') && js.includes('triggerQuickPrompt'), 'Contains AI Study Buddy Drawer & Quick Prompts engine');
+    assert(js.includes('masterCivilServiceQuizBank') && js.includes('renderM8QuizView') && js.includes('selectQuizAnswer'), 'Contains M8 Civil Service Quiz Bank & Interactive Engine');
     assert(js.includes('generateAIStudyResponse') && js.includes('speakAIText') && js.includes('toggleAIVoiceRecognition'), 'Contains Hybrid Gemini / Built-in AI & Thai Voice/TTS controllers');
     assert(js.includes('BB 212') && js.includes('BB 211') && js.includes('BB 202') && js.includes('BB 205') && js.includes('BB 203'), 'Contains all 5 Centara Life conference rooms');
     assert(js.includes('ojtLogs'), 'Contains ojtLogs state collection');

@@ -461,5 +461,45 @@ html.is-locked, body.is-locked {
     animation: pulseGlow 2.5s infinite;
 }
 
+/* --------------------------------------------------------------------------
+   10. M8: Interactive Civil Service Quiz Engine Styles
+   -------------------------------------------------------------------------- */
+.quiz-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
+.quiz-card:hover {
+    box-shadow: 0 10px 25px -5px rgba(27, 54, 93, 0.08), 0 8px 10px -6px rgba(27, 54, 93, 0.04);
+}
 
+.quiz-option-btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1.5px solid #E2E8F0;
+    background-color: #F8FAFC;
+    color: #1E293B;
+    cursor: pointer;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+    border-color: #3B82F6;
+    background-color: #EFF6FF;
+    transform: translateX(4px);
+}
+
+.quiz-option-correct {
+    border-color: #10B981 !important;
+    background-color: #ECFDF5 !important;
+    color: #065F46 !important;
+    font-weight: 600;
+}
+
+.quiz-option-incorrect {
+    border-color: #EF4444 !important;
+    background-color: #FEF2F2 !important;
+    color: #991B1B !important;
+    font-weight: 600;
+}
+
+.quiz-feedback-box {
+    animation: fadeIn 0.3s ease-out;
+}
