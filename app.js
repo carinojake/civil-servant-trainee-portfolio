@@ -3031,20 +3031,39 @@ function saveAIChatHistory(history) {
     }
 }
 
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 function toggleAIBuddyDrawer() {
     const drawer = document.getElementById('ai-study-buddy-drawer');
+    const backdrop = document.getElementById('ai-study-buddy-backdrop');
     if (!drawer) return;
 
-    if (drawer.classList.contains('drawer-closed')) {
+    const isClosed = drawer.classList.contains('drawer-closed');
+
+    if (isClosed) {
         drawer.classList.remove('drawer-closed');
         drawer.classList.add('drawer-open');
-        renderAIChatFeed();
-        updateGeminiKeyStatusLabel();
+        if (backdrop) backdrop.classList.remove('hidden');
+        try {
+            renderAIChatFeed();
+            updateGeminiKeyStatusLabel();
+        } catch (e) {
+            console.error('Error rendering AI chat feed', e);
+        }
         const input = document.getElementById('ai-chat-input');
-        if (input) setTimeout(() => input.focus(), 300);
+        if (input) setTimeout(() => input.focus(), 250);
     } else {
         drawer.classList.remove('drawer-open');
         drawer.classList.add('drawer-closed');
+        if (backdrop) backdrop.classList.add('hidden');
         if (window.speechSynthesis && window.speechSynthesis.speaking) {
             window.speechSynthesis.cancel();
         }

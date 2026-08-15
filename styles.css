@@ -381,7 +381,7 @@ html.is-locked, body.is-locked {
     position: fixed;
     right: 1.5rem;
     bottom: 1.5rem;
-    z-index: 9999;
+    z-index: 9990;
     box-shadow: 0 12px 30px -4px rgba(27, 54, 93, 0.5), 0 8px 12px -6px rgba(245, 158, 11, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex !important;
@@ -392,20 +392,40 @@ html.is-locked, body.is-locked {
     box-shadow: 0 16px 36px -4px rgba(27, 54, 93, 0.6), 0 10px 16px -4px rgba(245, 158, 11, 0.5);
 }
 
+#ai-study-buddy-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+    transition: opacity 0.3s ease;
+}
+
+#ai-study-buddy-backdrop.hidden {
+    display: none !important;
+}
+
 #ai-study-buddy-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999 !important;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
 }
 
 #ai-study-buddy-drawer.drawer-closed {
-    transform: translateX(105%);
-    pointer-events: none;
-    opacity: 0;
+    transform: translateX(105%) !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    display: none !important;
 }
 
 #ai-study-buddy-drawer.drawer-open {
-    transform: translateX(0);
-    pointer-events: auto;
-    opacity: 1;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    display: flex !important;
 }
 
 .chat-bubble-ai {
