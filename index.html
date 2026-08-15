@@ -1945,59 +1945,59 @@
     </div>
 
     <!-- Passcode Security Lock Screen Overlay -->
-    <div id="lock-screen-overlay" class="fixed inset-0 z-[999] bg-govNavy flex items-center justify-center p-4 transition-opacity duration-300">
-        <div class="max-w-md w-full bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border-4 border-govGreen text-center space-y-5 animate-fade-in">
+    <div id="lock-screen-overlay" class="fixed inset-0 z-[99999] bg-govNavy flex items-center justify-center p-3 sm:p-4 transition-opacity duration-300">
+        <div class="max-w-xs sm:max-w-sm w-full bg-white rounded-3xl p-5 sm:p-6 shadow-2xl border-4 border-govGreen text-center space-y-3.5 animate-fade-in my-auto">
             <!-- Security Emblem -->
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-govNavy text-amber-400 text-2xl shadow-md">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-govNavy text-amber-400 text-xl shadow-md">
                 <i class="fa-solid fa-shield-halved"></i>
             </div>
 
             <div>
-                <h2 class="text-lg sm:text-xl font-bold text-govNavy">ระบบรักษาความปลอดภัยข้อมูลภาครัฐ</h2>
-                <div class="text-xs text-govGreen font-semibold mt-0.5">Civil Service Trainee Portfolio Security Lock</div>
-                <p class="text-slate-500 text-xs mt-2">
+                <h2 class="text-base sm:text-lg font-bold text-govNavy">ระบบรักษาความปลอดภัยข้อมูลภาครัฐ</h2>
+                <div class="text-[11px] text-govGreen font-semibold">Civil Service Trainee Portfolio Security Lock</div>
+                <p class="text-slate-500 text-[11px] mt-1">
                     กรุณาใส่รหัส PIN เพื่อยืนยันตัวตนก่อนเข้าใช้งาน
                 </p>
             </div>
 
             <!-- PIN Display & Input -->
-            <div class="space-y-3">
-                <div class="flex justify-center items-center space-x-3 py-2" id="pin-dots-container">
-                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-1"></div>
-                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-2"></div>
-                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-3"></div>
-                    <div class="w-4 h-4 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-4"></div>
+            <div class="space-y-2.5">
+                <div class="flex justify-center items-center space-x-2.5 py-1" id="pin-dots-container">
+                    <div class="w-3.5 h-3.5 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-1"></div>
+                    <div class="w-3.5 h-3.5 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-2"></div>
+                    <div class="w-3.5 h-3.5 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-3"></div>
+                    <div class="w-3.5 h-3.5 rounded-full border-2 border-slate-300 bg-white pin-dot" id="dot-4"></div>
                 </div>
 
                 <form id="lock-screen-form" onsubmit="event.preventDefault(); submitPinUnlock();">
-                    <input type="password" id="lock-pin-input" autofocus maxlength="8" pattern="[0-9]*" inputmode="numeric" placeholder="แตะเพื่อพิมพ์รหัส PIN" class="w-full text-center tracking-[0.4em] font-mono text-xl py-2.5 px-4 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    <input type="password" id="lock-pin-input" autofocus maxlength="8" pattern="[0-9]*" inputmode="numeric" placeholder="แตะเพื่อพิมพ์รหัส PIN" class="w-full text-center tracking-[0.4em] font-mono text-lg py-2 px-3 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                     
-                    <div class="flex items-center justify-center space-x-2 mt-3 text-xs text-slate-600">
+                    <div class="flex items-center justify-center space-x-2 mt-2 text-[11px] text-slate-600">
                         <input type="checkbox" id="lock-remember-device" checked class="rounded text-govNavy focus:ring-govNavy">
-                        <label for="lock-remember-device" class="cursor-pointer font-medium">จดจำอุปกรณ์นี้ 30 วัน (สำหรับ Mac / iPad / iPhone ส่วนตัว)</label>
+                        <label for="lock-remember-device" class="cursor-pointer font-medium">จดจำอุปกรณ์นี้ 30 วัน (สำหรับ Mac / iPad / iPhone)</label>
                     </div>
 
                     <!-- Touch Keypad for iPad & Mobile -->
-                    <div class="grid grid-cols-3 gap-2 pt-3 max-w-[260px] mx-auto text-sm font-bold">
-                        <button type="button" onclick="keypadPress('1')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">1</button>
-                        <button type="button" onclick="keypadPress('2')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">2</button>
-                        <button type="button" onclick="keypadPress('3')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">3</button>
-                        <button type="button" onclick="keypadPress('4')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">4</button>
-                        <button type="button" onclick="keypadPress('5')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">5</button>
-                        <button type="button" onclick="keypadPress('6')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">6</button>
-                        <button type="button" onclick="keypadPress('7')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">7</button>
-                        <button type="button" onclick="keypadPress('8')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">8</button>
-                        <button type="button" onclick="keypadPress('9')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">9</button>
-                        <button type="button" onclick="keypadClear()" class="p-3 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl transition text-xs font-semibold">ล้าง</button>
-                        <button type="button" onclick="keypadPress('0')" class="p-3 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">0</button>
-                        <button type="button" onclick="keypadBackspace()" class="p-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition"><i class="fa-solid fa-delete-left"></i></button>
+                    <div class="grid grid-cols-3 gap-1.5 pt-2 max-w-[240px] mx-auto text-sm font-bold">
+                        <button type="button" onclick="keypadPress('1')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">1</button>
+                        <button type="button" onclick="keypadPress('2')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">2</button>
+                        <button type="button" onclick="keypadPress('3')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">3</button>
+                        <button type="button" onclick="keypadPress('4')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">4</button>
+                        <button type="button" onclick="keypadPress('5')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">5</button>
+                        <button type="button" onclick="keypadPress('6')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">6</button>
+                        <button type="button" onclick="keypadPress('7')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">7</button>
+                        <button type="button" onclick="keypadPress('8')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">8</button>
+                        <button type="button" onclick="keypadPress('9')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">9</button>
+                        <button type="button" onclick="keypadClear()" class="p-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl transition text-xs font-semibold">ล้าง</button>
+                        <button type="button" onclick="keypadPress('0')" class="p-2.5 bg-slate-100 hover:bg-slate-200 active:bg-blue-100 rounded-xl text-slate-800 transition shadow-sm">0</button>
+                        <button type="button" onclick="keypadBackspace()" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition"><i class="fa-solid fa-delete-left"></i></button>
                     </div>
 
-                    <div id="lock-error-msg" class="text-rose-600 text-xs font-bold mt-3 hidden">
+                    <div id="lock-error-msg" class="text-rose-600 text-xs font-bold mt-2 hidden">
                         <i class="fa-solid fa-circle-exclamation mr-1"></i> รหัส PIN ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง
                     </div>
 
-                    <button type="submit" class="w-full mt-4 py-3 bg-govNavy hover:bg-govNavyDark active:scale-[0.98] text-white rounded-xl font-bold text-sm shadow-lg transition flex items-center justify-center space-x-2">
+                    <button type="submit" class="w-full mt-3 py-2.5 bg-govNavy hover:bg-govNavyDark active:scale-[0.98] text-white rounded-xl font-bold text-xs shadow-lg transition flex items-center justify-center space-x-2">
                         <i class="fa-solid fa-lock-open"></i>
                         <span>ปลดล็อคเข้าสู่ระบบ</span>
                     </button>

@@ -2666,8 +2666,12 @@ function initSecurityLock() {
 
     if (isRemembered || isSessionUnlocked) {
         overlay.classList.add('hidden');
+        document.body.classList.remove('is-locked');
+        document.documentElement.classList.remove('is-locked');
     } else {
         overlay.classList.remove('hidden');
+        document.body.classList.add('is-locked');
+        document.documentElement.classList.add('is-locked');
         const pinInput = document.getElementById('lock-pin-input');
         if (pinInput) {
             pinInput.value = '';
@@ -2753,6 +2757,9 @@ function submitPinUnlock() {
             localStorage.removeItem(REMEMBER_DEVICE_KEY);
         }
 
+        document.body.classList.remove('is-locked');
+        document.documentElement.classList.remove('is-locked');
+
         if (errMsg) errMsg.classList.add('hidden');
         if (overlay) {
             overlay.classList.add('opacity-0');
@@ -2780,6 +2787,9 @@ function submitPinUnlock() {
 function lockAppImmediately() {
     sessionStorage.removeItem(AUTH_SESSION_KEY);
     localStorage.removeItem(REMEMBER_DEVICE_KEY);
+
+    document.body.classList.add('is-locked');
+    document.documentElement.classList.add('is-locked');
 
     const overlay = document.getElementById('lock-screen-overlay');
     const pinInput = document.getElementById('lock-pin-input');
