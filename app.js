@@ -3041,17 +3041,31 @@ function escapeHtml(str) {
         .replace(/'/g, '&#039;');
 }
 
-function toggleAIBuddyDrawer() {
+function toggleAIBuddyDrawer(forceOpen = null) {
     const drawer = document.getElementById('ai-study-buddy-drawer');
     const backdrop = document.getElementById('ai-study-buddy-backdrop');
-    if (!drawer) return;
+    if (!drawer) {
+        console.error('ai-study-buddy-drawer element not found in DOM');
+        return;
+    }
 
-    const isClosed = drawer.classList.contains('drawer-closed');
+    const isClosed = drawer.classList.contains('drawer-closed') || drawer.style.display === 'none' || !drawer.classList.contains('drawer-open');
+    const shouldOpen = forceOpen !== null ? forceOpen : isClosed;
 
-    if (isClosed) {
+    if (shouldOpen) {
         drawer.classList.remove('drawer-closed');
         drawer.classList.add('drawer-open');
-        if (backdrop) backdrop.classList.remove('hidden');
+        drawer.style.display = 'flex';
+        drawer.style.transform = 'translateX(0)';
+        drawer.style.opacity = '1';
+        drawer.style.pointerEvents = 'auto';
+        drawer.style.zIndex = '99999';
+
+        if (backdrop) {
+            backdrop.classList.remove('hidden');
+            backdrop.style.display = 'block';
+            backdrop.style.zIndex = '99998';
+        }
         try {
             renderAIChatFeed();
             updateGeminiKeyStatusLabel();
@@ -3063,7 +3077,15 @@ function toggleAIBuddyDrawer() {
     } else {
         drawer.classList.remove('drawer-open');
         drawer.classList.add('drawer-closed');
-        if (backdrop) backdrop.classList.add('hidden');
+        drawer.style.display = 'none';
+        drawer.style.transform = 'translateX(105%)';
+        drawer.style.opacity = '0';
+        drawer.style.pointerEvents = 'none';
+
+        if (backdrop) {
+            backdrop.classList.add('hidden');
+            backdrop.style.display = 'none';
+        }
         if (window.speechSynthesis && window.speechSynthesis.speaking) {
             window.speechSynthesis.cancel();
         }
@@ -3328,6 +3350,7 @@ async function generateAIStudyResponse(userQuery) {
 }
 
 function triggerQuickPrompt(type) {
+    toggleAIBuddyDrawer(true);
     const input = document.getElementById('ai-chat-input');
     if (!input) return;
 

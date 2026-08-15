@@ -378,27 +378,28 @@ html.is-locked, body.is-locked {
    9. Floating AI Co-Pilot & Study Buddy Drawer
    -------------------------------------------------------------------------- */
 #ai-buddy-fab {
-    position: fixed;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    z-index: 9990;
-    box-shadow: 0 12px 30px -4px rgba(27, 54, 93, 0.5), 0 8px 12px -6px rgba(245, 158, 11, 0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: fixed !important;
+    right: 1.5rem !important;
+    bottom: 1.5rem !important;
+    z-index: 99990 !important;
+    box-shadow: 0 12px 30px -4px rgba(27, 54, 93, 0.5), 0 8px 12px -6px rgba(245, 158, 11, 0.4) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     display: flex !important;
 }
 
 #ai-buddy-fab:hover {
-    transform: translateY(-4px) scale(1.06);
-    box-shadow: 0 16px 36px -4px rgba(27, 54, 93, 0.6), 0 10px 16px -4px rgba(245, 158, 11, 0.5);
+    transform: translateY(-4px) scale(1.06) !important;
+    box-shadow: 0 16px 36px -4px rgba(27, 54, 93, 0.6), 0 10px 16px -4px rgba(245, 158, 11, 0.5) !important;
 }
 
 #ai-study-buddy-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.5);
-    backdrop-filter: blur(2px);
-    z-index: 9998;
-    transition: opacity 0.3s ease;
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(15, 23, 42, 0.6) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    z-index: 99998 !important;
+    transition: opacity 0.3s ease !important;
 }
 
 #ai-study-buddy-backdrop.hidden {
@@ -406,12 +407,17 @@ html.is-locked, body.is-locked {
 }
 
 #ai-study-buddy-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9999 !important;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-width: 100vw !important;
+    z-index: 99999 !important;
+    background-color: #FFFFFF !important;
+    box-shadow: -10px 0 35px rgba(15, 23, 42, 0.25) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease !important;
 }
 
 #ai-study-buddy-drawer.drawer-closed {
@@ -429,9 +435,15 @@ html.is-locked, body.is-locked {
 }
 
 .chat-bubble-ai {
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
-    border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 1.25rem 1.25rem 1.25rem 0.25rem !important;
+}
+
+.chat-bubble-user {
+    background: #1B365D !important;
+    color: #FFFFFF !important;
+    border-radius: 1.25rem 1.25rem 0.25rem 1.25rem !important;
 }
 
 .chat-bubble-user {
