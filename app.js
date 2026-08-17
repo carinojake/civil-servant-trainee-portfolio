@@ -686,6 +686,7 @@ function saveState() {
 // 3. UI View Rendering Engine
 // --------------------------------------------------------------------------
 function renderAllViews() {
+    renderAchievementBadges();
     renderPrePostChart();
     renderUserProfileForm();
     applyParticipantFilters();
@@ -7076,3 +7077,236 @@ function renderPortfolioQrCode() {
 }
 
 window.renderPortfolioQrCode = renderPortfolioQrCode;
+
+
+/* ==========================================================================
+   PHASE 2: PWA, ONBOARDING TOUR & ACHIEVEMENT BADGES ENGINE
+   ========================================================================== */
+
+// 1. Service Worker Registration (Task #5)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('[PWA] Service Worker registered successfully:', reg.scope))
+            .catch(err => console.warn('[PWA] Service Worker registration failed:', err));
+    });
+}
+
+// 2. Achievement Badges (Task #7)
+const MASTER_BADGES = [
+    {
+        id: 'badge-attend-7',
+        icon: 'fa-star',
+        color: 'text-amber-500 bg-amber-50 border-amber-300',
+        title: 'นักเรียนขยัน',
+        desc: 'เข้าเรียนครบอย่างน้อย 7 วัน',
+        check: (state) => state.attendance.filter(a => a.status === 'PRESENT' || a.status === 'ONLINE').length >= 7
+    },
+    {
+        id: 'badge-attend-13',
+        icon: 'fa-trophy',
+        color: 'text-yellow-600 bg-yellow-50 border-yellow-300',
+        title: 'เรียนจบครบ',
+        desc: 'เข้าเรียนครบทั้ง 13 วัน (100%)',
+        check: (state) => state.attendance.filter(a => a.status === 'PRESENT' || a.status === 'ONLINE').length >= 13
+    },
+    {
+        id: 'badge-reflection-5',
+        icon: 'fa-pen-nib',
+        color: 'text-blue-600 bg-blue-50 border-blue-300',
+        title: 'นักสะท้อนคิด',
+        desc: 'บันทึก Reflection ครบ 5 วัน',
+        check: (state) => state.attendance.filter(a => a.reflection && a.reflection.trim().length > 10).length >= 5
+    },
+    {
+        id: 'badge-quiz-master',
+        icon: 'fa-brain',
+        color: 'text-purple-600 bg-purple-50 border-purple-300',
+        title: 'สอบผ่านฉลุย',
+        desc: 'คะแนน Post-test เฉลี่ย ≥ 8.0 คะแนน',
+        check: (state) => {
+            const scores = state.attendance.map(a => a.afternoonPostTestScore || a.postTestScore).filter(s => s !== undefined);
+            if (scores.length === 0) return false;
+            const avg = scores.reduce((sum, s) => sum + s, 0) / scores.length;
+            return avg >= 8.0;
+        }
+    },
+    {
+        id: 'badge-ojt-30',
+        icon: 'fa-stopwatch',
+        color: 'text-emerald-600 bg-emerald-50 border-emerald-300',
+        title: 'OJT Starter',
+        desc: 'สะสมชั่วโมง OJT ครบ 30 ชม.',
+        check: (state) => {
+            const total = (state.ojtLogs || []).reduce((sum, l) => sum + (l.hours || 0), 0);
+            return total >= 30;
+        }
+    },
+    {
+        id: 'badge-ojt-90',
+        icon: 'fa-bullseye',
+        color: 'text-teal-600 bg-teal-50 border-teal-300',
+        title: 'OJT Master',
+        desc: 'สะสมชั่วโมง OJT ครบ 90 ชม. (ผ่านเกณฑ์)',
+        check: (state) => {
+            const total = (state.ojtLogs || []).reduce((sum, l) => sum + (l.hours || 0), 0);
+            return total >= 90;
+        }
+    },
+    {
+        id: 'badge-ai-explorer',
+        icon: 'fa-wand-magic-sparkles',
+        color: 'text-indigo-600 bg-indigo-50 border-indigo-300',
+        title: 'AI Explorer',
+        desc: 'ใช้งาน AI Co-Pilot & ขัดเกลาภาษา',
+        check: (state) => true
+    },
+    {
+        id: 'badge-knowledge-hub',
+        icon: 'fa-book-open-reader',
+        color: 'text-rose-600 bg-rose-50 border-rose-300',
+        title: 'คลังความรู้',
+        desc: 'เข้าถึงสไลด์และเอกสารการเรียนรู้',
+        check: (state) => true
+    }
+];
+
+function renderAchievementBadges() {
+    const container = document.getElementById('achievement-badges-grid');
+    const counterEl = document.getElementById('badge-unlocked-count');
+    if (!container) return;
+
+    let unlockedCount = 0;
+
+    container.innerHTML = MASTER_BADGES.map(badge => {
+        const isUnlocked = badge.check(appState);
+        if (isUnlocked) unlockedCount++;
+
+        if (isUnlocked) {
+            return `
+                <div class="p-3 rounded-2xl border ${badge.color} shadow-xs text-center flex flex-col items-center justify-between space-y-1.5 transition-all hover:scale-105" title="${badge.desc}">
+                    <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-base shadow-xs">
+                        <i class="fa-solid ${badge.icon}"></i>
+                    </div>
+                    <div class="font-bold text-xs text-slate-800 leading-tight">${badge.title}</div>
+                    <span class="text-[9px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded">✓ ปลดล็อค</span>
+                </div>
+            `;
+        } else {
+            return `
+                <div class="p-3 rounded-2xl border border-slate-200 bg-slate-100/70 opacity-60 text-center flex flex-col items-center justify-between space-y-1.5" title="${badge.desc}">
+                    <div class="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-base text-slate-400">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <div class="font-bold text-xs text-slate-600 leading-tight">${badge.title}</div>
+                    <span class="text-[9px] text-slate-400 bg-slate-200 px-1.5 py-0.2 rounded">ล็อกอยู่</span>
+                </div>
+            `;
+        }
+    }).join('');
+
+    if (counterEl) {
+        counterEl.innerText = `ปลดล็อค ${unlockedCount} / ${MASTER_BADGES.length} เหรียญ`;
+    }
+}
+
+// 3. Welcome Tour Engine (Task #4)
+let currentTourStep = 1;
+const TOUR_STEPS = [
+    {
+        step: 1,
+        title: '📊 แดชบอร์ดภาพรวม & ตัวชี้วัด KPI',
+        subtitle: 'ติดตามสถานะการเข้าเรียน, กราฟคะแนน Pre/Post-test 13 วัน และชั่วโมง OJT สะสม',
+        content: 'หน้าแรกจะสรุปผลความก้าวหน้าทั้งหมดของท่าน รวมถึงเกณฑ์การผ่านหลักสูตร (เข้าเรียน ≥80% และ OJT ≥90 ชม.) พร้อมกราฟเปรียบเทียบคะแนนและเหรียญรางวัลความสำเร็จ'
+    },
+    {
+        step: 2,
+        title: '📅 แท็บ M2: ตารางอบรม 13 วัน & Reflection',
+        subtitle: 'ศูนย์รวมตารางเรียน สไลด์จาก Google Drive และ Daily Action Hub',
+        content: 'ท่านสามารถดูรายละเอียดวิชาช่วงเช้า-บ่าย ห้องอบรมจริง วิทยากรผู้สอน ลิงก์ทำข้อสอบ Pre/Post-test และบันทึกสรุปการเรียนรู้ (Reflection) ประจำวันได้ที่นี่'
+    },
+    {
+        step: 3,
+        title: '🤖 ผู้ช่วยอัจฉริยะ AI Co-Pilot (น้องฟ้า)',
+        subtitle: 'ติวเตอร์ AI ถาม-ตอบเนื้อหาบทเรียน 13 วัน และช่วยร่างสคริปต์วิดีโอ',
+        content: 'กดปุ่ม AI Co-Pilot สีทองมุมขวาล่าง เพื่อเปิดหน้าต่างสนทนา ถามคำถามเกี่ยวกับข้อสอบ กฎระเบียบราชการ หรือให้ AI ช่วยสรุปเนื้อหาบทเรียนรายวันได้ตลอด 24 ชม.'
+    },
+    {
+        step: 4,
+        title: '📋 แท็บ M6: แฟ้มสะสมผลงานเล่มดิจิทัล 7 หน้า',
+        subtitle: 'รวมเล่มอัตโนมัติ พร้อมตราครุฑ QR Code ตรวจสอบเล่ม และพิมพ์ PDF A4',
+        content: 'ระบบจะนำประวัติ ผลงาน OJT และการสะท้อนคิดของท่านมาร้อยเรียงเป็นแฟ้มดิจิทัล 7 หน้ามาตรฐาน พร้อมปุ่มพิมพ์ PDF สำหรับส่งหน่วยงานต้นสังกัด'
+    },
+    {
+        step: 5,
+        title: '💾 สำรอง & กู้คืนข้อมูล (JSON Backup)',
+        subtitle: 'ความปลอดภัยและความเป็นส่วนตัว 100% ตามมาตรฐาน PDPA',
+        content: 'ข้อมูลทั้งหมดจะถูกบันทึกไว้ในเครื่องของท่านอย่างปลอดภัย ท่านสามารถกดปุ่ม [สำรอง JSON] ที่แถบด้านบนเพื่อเก็บไฟล์สำรองไว้ใช้งานบนอุปกรณ์อื่นได้ทุกเวลา'
+    }
+];
+
+function startWelcomeTour() {
+    currentTourStep = 1;
+    updateTourView();
+    const overlay = document.getElementById('welcome-tour-overlay');
+    if (overlay) overlay.classList.remove('hidden');
+}
+
+function closeWelcomeTour() {
+    const overlay = document.getElementById('welcome-tour-overlay');
+    if (overlay) overlay.classList.add('hidden');
+    localStorage.setItem('civil_tour_completed', 'true');
+}
+
+function updateTourView() {
+    const stepData = TOUR_STEPS.find(s => s.step === currentTourStep);
+    if (!stepData) return;
+
+    const badge = document.getElementById('tour-step-badge');
+    const title = document.getElementById('tour-step-title');
+    const subtitle = document.getElementById('tour-step-subtitle');
+    const content = document.getElementById('tour-step-content');
+    const btnPrev = document.getElementById('btn-tour-prev');
+    const btnNext = document.getElementById('btn-tour-next');
+
+    if (badge) badge.innerText = `ขั้นตอนที่ ${stepData.step} / ${TOUR_STEPS.length}`;
+    if (title) title.innerText = stepData.title;
+    if (subtitle) subtitle.innerText = stepData.subtitle;
+    if (content) content.innerHTML = `<p class="leading-relaxed">${stepData.content}</p>`;
+
+    if (btnPrev) {
+        if (currentTourStep > 1) btnPrev.classList.remove('hidden');
+        else btnPrev.classList.add('hidden');
+    }
+
+    if (btnNext) {
+        if (currentTourStep === TOUR_STEPS.length) {
+            btnNext.innerHTML = '<span>เสร็จสิ้นการแนะนำ 🎉</span>';
+        } else {
+            btnNext.innerHTML = '<span>ถัดไป</span><i class="fa-solid fa-arrow-right ml-1"></i>';
+        }
+    }
+}
+
+function nextTourStep() {
+    if (currentTourStep < TOUR_STEPS.length) {
+        currentTourStep++;
+        updateTourView();
+    } else {
+        closeWelcomeTour();
+        showToast('🎉 ยินดีด้วยค่ะ! ท่านพร้อมเริ่มต้นใช้งานระบบแล้ว', 'success');
+    }
+}
+
+function prevTourStep() {
+    if (currentTourStep > 1) {
+        currentTourStep--;
+        updateTourView();
+    }
+}
+
+window.renderAchievementBadges = renderAchievementBadges;
+window.startWelcomeTour = startWelcomeTour;
+window.closeWelcomeTour = closeWelcomeTour;
+window.nextTourStep = nextTourStep;
+window.prevTourStep = prevTourStep;
