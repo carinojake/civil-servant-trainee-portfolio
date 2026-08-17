@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.6.0">
+    <link rel="stylesheet" href="styles.css?v=2.7.0">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -1857,18 +1857,18 @@
             <form id="modal-day-links-form" onsubmit="event.preventDefault(); saveDayLinksFromModal();" class="space-y-4 text-xs">
                 <input type="hidden" id="modal-links-day">
 
-                <!-- 1. MORNING SESSION (ช่วงเช้า 09.00 - 12.00 น.) -->
+                <!-- 1. MORNING SESSION (ช่วงเช้า 09.30 - 12.00 น.) -->
                 <div class="p-3.5 bg-blue-50/80 rounded-xl border border-blue-200 space-y-3">
                     <div class="font-bold text-blue-900 flex items-center justify-between border-b border-blue-200/80 pb-2">
-                        <span class="text-xs flex items-center"><i class="fa-solid fa-sun text-amber-500 mr-1.5"></i>1. กิจกรรมช่วงเช้า (09.00 - 12.00 น.)</span>
-                        <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full font-semibold">Morning Session</span>
+                        <span class="text-xs flex items-center"><i class="fa-solid fa-sun text-amber-500 mr-1.5"></i>1. กิจกรรมช่วงเช้า (09.30 - 12.00 น.)</span>
+                        <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full font-semibold">Morning Session (09.30 น.)</span>
                     </div>
 
                     <!-- 1.1 Pre-test เช้า -->
                     <div class="p-2.5 bg-white rounded-lg border border-blue-100 space-y-2">
                         <div class="font-bold text-blue-800 text-[11px] flex items-center justify-between">
                             <span><i class="fa-solid fa-file-pen text-blue-600 mr-1"></i>1.1 แบบทดสอบก่อนเรียนช่วงเช้า (Pre-test เช้า)</span>
-                            <span class="text-[10px] text-slate-400 font-normal">ก่อน 09.00 น.</span>
+                            <span class="text-[10px] text-slate-400 font-normal">ก่อน 09.30 น.</span>
                         </div>
                         <div>
                             <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-pretest-url">URL แบบทดสอบ Pre-test เช้า (Google Form / LINE)</label>
@@ -1877,7 +1877,7 @@
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-pretest-score">คะแนนที่ได้</label>
-                                <input type="number" id="modal-links-morning-pretest-score" min="0" max="100" step="0.5" placeholder="เช่น 8" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                                <input type="number" id="modal-links-morning-pretest-score" min="0" max="100" step="0.5" placeholder="เช่น 7" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
                             </div>
                             <div>
                                 <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-pretest-max">คะแนนเต็ม</label>
@@ -1927,18 +1927,18 @@
                     </div>
                 </div>
 
-                <!-- 2. AFTERNOON SESSION (ช่วงบ่าย 13.00 - 16.00 น.) -->
+                <!-- 2. AFTERNOON SESSION (ช่วงบ่าย 13.30 - 16.00 น.) -->
                 <div class="p-3.5 bg-emerald-50/80 rounded-xl border border-emerald-200 space-y-3">
                     <div class="font-bold text-emerald-900 flex items-center justify-between border-b border-emerald-200/80 pb-2">
-                        <span class="text-xs flex items-center"><i class="fa-solid fa-cloud-sun text-emerald-600 mr-1.5"></i>2. กิจกรรมช่วงบ่าย (13.00 - 16.00 น.)</span>
-                        <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-semibold">Afternoon Session</span>
+                        <span class="text-xs flex items-center"><i class="fa-solid fa-cloud-sun text-emerald-600 mr-1.5"></i>2. กิจกรรมช่วงบ่าย (13.30 - 16.00 น.)</span>
+                        <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-semibold">Afternoon Session (13.30 น.)</span>
                     </div>
 
                     <!-- 2.1 Pre-test บ่าย -->
                     <div class="p-2.5 bg-white rounded-lg border border-emerald-100 space-y-2">
                         <div class="font-bold text-blue-800 text-[11px] flex items-center justify-between">
                             <span><i class="fa-solid fa-file-pen text-blue-600 mr-1"></i>2.1 แบบทดสอบก่อนเรียนช่วงบ่าย (Pre-test บ่าย)</span>
-                            <span class="text-[10px] text-slate-400 font-normal">ก่อน 13.00 น.</span>
+                            <span class="text-[10px] text-slate-400 font-normal">ก่อน 13.30 น.</span>
                         </div>
                         <div>
                             <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-pretest-url">URL แบบทดสอบ Pre-test บ่าย</label>
@@ -1949,6 +1949,12 @@
                                 <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-pretest-score">คะแนนที่ได้</label>
                                 <input type="number" id="modal-links-afternoon-pretest-score" min="0" max="100" step="0.5" placeholder="เช่น 8" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
                             </div>
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-pretest-max">คะแนนเต็ม</label>
+                                <input type="number" id="modal-links-afternoon-pretest-max" min="1" max="100" step="1" value="10" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                        </div>
+                    </div>
                             <div>
                                 <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-pretest-max">คะแนนเต็ม</label>
                                 <input type="number" id="modal-links-afternoon-pretest-max" min="1" max="100" step="1" value="10" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
@@ -2359,14 +2365,14 @@
                     <div class="p-3 bg-blue-50/70 rounded-xl border border-blue-200 space-y-1.5">
                         <div class="font-bold text-blue-900 flex items-center space-x-1">
                             <i class="fa-solid fa-sun text-amber-500"></i>
-                            <span>สาระสำคัญช่วงเช้า (09.00 - 12.00 น.)</span>
+                            <span>สาระสำคัญช่วงเช้า (09.30 - 12.00 น.)</span>
                         </div>
                         <p id="modal-slide-morning" class="text-slate-700 leading-relaxed text-[11px]"></p>
                     </div>
                     <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 space-y-1.5">
                         <div class="font-bold text-emerald-900 flex items-center space-x-1">
                             <i class="fa-solid fa-cloud-sun text-emerald-500"></i>
-                            <span>สาระสำคัญช่วงบ่าย (13.00 - 16.00 น.)</span>
+                            <span>สาระสำคัญช่วงบ่าย (13.30 - 16.00 น.)</span>
                         </div>
                         <p id="modal-slide-afternoon" class="text-slate-700 leading-relaxed text-[11px]"></p>
                     </div>
@@ -2597,6 +2603,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.6.0"></script>
+    <script src="app.js?v=2.7.0"></script>
 </body>
 </html>

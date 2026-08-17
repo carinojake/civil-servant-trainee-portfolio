@@ -137,6 +137,7 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('toggleAIBuddyDrawer') && js.includes('sendAIChatMessage') && js.includes('triggerQuickPrompt'), 'Contains AI Study Buddy Drawer & Quick Prompts engine');
     assert(js.includes('masterCivilServiceQuizBank') && js.includes('renderM8QuizView') && js.includes('selectQuizAnswer'), 'Contains M8 Civil Service Quiz Bank & Interactive Engine');
     assert(js.includes('master13DaysLectureSlides') && js.includes('renderM5LectureSlidesGrid') && js.includes('openLectureSlideModal'), 'Contains 13-Day Lecture Slides Hub Data & Controller');
+    assert(js.includes('openGeminiSpark'), 'Contains Gemini Spark Briefing & AI Quick Engine');
     assert(js.includes('generateAIStudyResponse') && js.includes('speakAIText') && js.includes('toggleAIVoiceRecognition'), 'Contains Hybrid Gemini / Built-in AI & Thai Voice/TTS controllers');
     assert(js.includes('BB 212') && js.includes('BB 211') && js.includes('BB 202') && js.includes('BB 205') && js.includes('BB 203'), 'Contains all 5 Centara Life conference rooms');
     assert(js.includes('ojtLogs'), 'Contains ojtLogs state collection');

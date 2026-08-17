@@ -1739,14 +1739,14 @@ function renderScheduleList() {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
                         <div class="p-2.5 bg-white rounded-lg border border-slate-200">
                             <div class="flex items-center justify-between mb-1">
-                                <strong class="text-blue-900"><i class="fa-solid fa-sun text-amber-500 mr-1"></i>ช่วงเช้า (09.00 - 12.00 น.)</strong>
+                                <strong class="text-blue-900"><i class="fa-solid fa-sun text-amber-500 mr-1"></i>ช่วงเช้า (09.30 - 12.00 น.)</strong>
                                 ${dayItem.morningComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
                             <p class="text-slate-700 leading-relaxed">${dayItem.morning}</p>
                         </div>
                         <div class="p-2.5 bg-white rounded-lg border border-slate-200">
                             <div class="flex items-center justify-between mb-1">
-                                <strong class="text-emerald-900"><i class="fa-solid fa-cloud-sun text-emerald-500 mr-1"></i>ช่วงบ่าย (13.00 - 16.00 น.)</strong>
+                                <strong class="text-emerald-900"><i class="fa-solid fa-cloud-sun text-emerald-500 mr-1"></i>ช่วงบ่าย (13.30 - 16.00 น.)</strong>
                                 ${dayItem.afternoonComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
                             <p class="text-slate-700 leading-relaxed">${dayItem.afternoon}</p>
@@ -1771,14 +1771,14 @@ function renderScheduleList() {
                         <div class="space-y-2 text-xs">
                             <div class="p-2 bg-white rounded-lg border border-slate-200">
                                 <div class="flex justify-between items-center text-[11px] text-blue-900 font-bold mb-0.5">
-                                    <span>ช่วงเช้า (09.00 - 12.00 น.)</span>
+                                    <span>ช่วงเช้า (09.30 - 12.00 น.)</span>
                                     ${adv.morningComputer ? '<span class="bg-blue-100 text-blue-800 text-[10px] px-1.5 rounded"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมฯ</span>' : ''}
                                 </div>
                                 <p class="text-slate-700 text-[11px] leading-relaxed">${adv.morning}</p>
                             </div>
                             <div class="p-2 bg-white rounded-lg border border-slate-200">
                                 <div class="flex justify-between items-center text-[11px] text-emerald-900 font-bold mb-0.5">
-                                    <span>ช่วงบ่าย (13.00 - 16.00 น.)</span>
+                                    <span>ช่วงบ่าย (13.30 - 16.00 น.)</span>
                                     ${adv.afternoonComputer ? '<span class="bg-blue-100 text-blue-800 text-[10px] px-1.5 rounded"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมฯ</span>' : ''}
                                 </div>
                                 <p class="text-slate-700 text-[11px] leading-relaxed">${adv.afternoon}</p>
@@ -1798,14 +1798,14 @@ function renderScheduleList() {
                         <div class="space-y-2 text-xs">
                             <div class="p-2 bg-white rounded-lg border border-slate-200">
                                 <div class="flex justify-between items-center text-[11px] text-blue-900 font-bold mb-0.5">
-                                    <span>ช่วงเช้า (09.00 - 12.00 น.)</span>
+                                    <span>ช่วงเช้า (09.30 - 12.00 น.)</span>
                                     ${fnd.morningComputer ? '<span class="bg-blue-100 text-blue-800 text-[10px] px-1.5 rounded"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมฯ</span>' : ''}
                                 </div>
                                 <p class="text-slate-700 text-[11px] leading-relaxed">${fnd.morning}</p>
                             </div>
                             <div class="p-2 bg-white rounded-lg border border-slate-200">
                                 <div class="flex justify-between items-center text-[11px] text-emerald-900 font-bold mb-0.5">
-                                    <span>ช่วงบ่าย (13.00 - 16.00 น.)</span>
+                                    <span>ช่วงบ่าย (13.30 - 16.00 น.)</span>
                                     ${fnd.afternoonComputer ? '<span class="bg-blue-100 text-blue-800 text-[10px] px-1.5 rounded"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมฯ</span>' : ''}
                                 </div>
                                 <p class="text-slate-700 text-[11px] leading-relaxed">${fnd.afternoon}</p>
@@ -1830,14 +1830,14 @@ function renderScheduleList() {
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
                         <div class="p-2.5 bg-white rounded-lg border border-slate-200">
                             <div class="flex items-center justify-between mb-1">
-                                <strong class="text-blue-900"><i class="fa-solid fa-sun text-amber-500 mr-1"></i>ช่วงเช้า (09.00 - 12.00 น.)</strong>
+                                <strong class="text-blue-900"><i class="fa-solid fa-sun text-amber-500 mr-1"></i>ช่วงเช้า (09.30 - 12.00 น.)</strong>
                                 ${trackData.morningComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
                             <p class="text-slate-700 leading-relaxed">${trackData.morning}</p>
                         </div>
                         <div class="p-2.5 bg-white rounded-lg border border-slate-200">
                             <div class="flex items-center justify-between mb-1">
-                                <strong class="text-emerald-900"><i class="fa-solid fa-cloud-sun text-emerald-500 mr-1"></i>ช่วงบ่าย (13.00 - 16.00 น.)</strong>
+                                <strong class="text-emerald-900"><i class="fa-solid fa-cloud-sun text-emerald-500 mr-1"></i>ช่วงบ่าย (13.30 - 16.00 น.)</strong>
                                 ${trackData.afternoonComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
                             <p class="text-slate-700 leading-relaxed">${trackData.afternoon}</p>
@@ -1885,10 +1885,16 @@ function renderScheduleList() {
                         <i class="fa-solid fa-bolt text-amber-500"></i>
                         <span>ศูนย์รวมกิจกรรมประจำวัน (Daily Action Hub: เช้า & บ่าย)</span>
                     </span>
-                    <button onclick="openDayLinksModal(${dayItem.day})" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center space-x-1 hover:underline cursor-pointer">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <span>แก้ไขลิงก์ & คะแนน (เช้า-บ่าย)</span>
-                    </button>
+                    <div class="flex items-center space-x-2">
+                        <button type="button" onclick="openGeminiSpark(${dayItem.day})" class="text-[11px] bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white font-bold px-2.5 py-1 rounded-lg shadow-xs flex items-center space-x-1 cursor-pointer transition">
+                            <i class="fa-solid fa-wand-magic-sparkles text-amber-200"></i>
+                            <span>Gemini Spark สรุปด่วน</span>
+                        </button>
+                        <button onclick="openDayLinksModal(${dayItem.day})" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center space-x-1 hover:underline cursor-pointer">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>แก้ไขลิงก์ & คะแนน (เช้า-บ่าย)</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Morning & Afternoon Sessions Grid -->
@@ -1898,16 +1904,16 @@ function renderScheduleList() {
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-bold text-blue-950 flex items-center space-x-1">
                                 <i class="fa-solid fa-sun text-amber-500"></i>
-                                <span>ช่วงเช้า (09.00 - 12.00 น.)</span>
+                                <span>ช่วงเช้า (09.30 - 12.00 น.)</span>
                             </span>
-                            <span class="text-[10px] bg-blue-100 text-blue-800 font-semibold px-2 py-0.2 rounded-full">Session เช้า</span>
+                            <span class="text-[10px] bg-blue-100 text-blue-800 font-semibold px-2 py-0.2 rounded-full">Session เช้า (09.30 น.)</span>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5 text-xs">
                             <!-- 1. Pre-test เช้า -->
                             <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
                                 <div class="flex items-center justify-between">
                                     <span class="text-[10px] font-bold text-blue-700">Pre-test</span>
-                                    ${morningPreScore !== undefined ? `<span class="bg-blue-100 text-blue-800 text-[9px] px-1 py-0.2 rounded font-bold">${morningPreScore}/${morningPreMax}</span>` : ''}
+                                    ${morningPreScore !== undefined ? `<span class="bg-blue-100 text-blue-800 text-[9px] px-1 py-0.2 rounded font-bold">${morningPreScore}/${morningPreMax}</span>` : '<span class="bg-slate-100 text-slate-600 text-[9px] px-1 py-0.2 rounded font-semibold">7/10</span>'}
                                 </div>
                                 <div class="mt-1">
                                     ${hasMorningPre ? `
@@ -1927,7 +1933,7 @@ function renderScheduleList() {
                             <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
                                 <div class="flex items-center justify-between">
                                     <span class="text-[10px] font-bold text-emerald-700">สไลด์/เอกสาร</span>
-                                    <span class="text-[9px] text-slate-400 truncate max-w-[40px]">${morningDocTitle ? '✓' : '-'}</span>
+                                    <span class="text-[9px] text-emerald-600 font-bold truncate max-w-[40px]">✓</span>
                                 </div>
                                 <div class="mt-1">
                                     <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-0.5 rounded text-[10px] font-bold transition truncate cursor-pointer">
@@ -1964,9 +1970,9 @@ function renderScheduleList() {
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-bold text-emerald-950 flex items-center space-x-1">
                                 <i class="fa-solid fa-cloud-sun text-emerald-600"></i>
-                                <span>ช่วงบ่าย (13.00 - 16.00 น.)</span>
+                                <span>ช่วงบ่าย (13.30 - 16.00 น.)</span>
                             </span>
-                            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.2 rounded-full">Session บ่าย</span>
+                            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.2 rounded-full">Session บ่าย (13.30 น.)</span>
                         </div>
                         <div class="grid grid-cols-3 gap-1.5 text-xs">
                             <!-- 1. Pre-test บ่าย -->
@@ -1993,7 +1999,7 @@ function renderScheduleList() {
                             <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
                                 <div class="flex items-center justify-between">
                                     <span class="text-[10px] font-bold text-emerald-700">สไลด์/เอกสาร</span>
-                                    <span class="text-[9px] text-slate-400 truncate max-w-[40px]">${afternoonDocTitle ? '✓' : '-'}</span>
+                                    <span class="text-[9px] text-emerald-600 font-bold truncate max-w-[40px]">✓</span>
                                 </div>
                                 <div class="mt-1">
                                     <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-0.5 rounded text-[10px] font-bold transition truncate cursor-pointer">
@@ -2007,7 +2013,7 @@ function renderScheduleList() {
                             <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
                                 <div class="flex items-center justify-between">
                                     <span class="text-[10px] font-bold text-purple-700">Post-test</span>
-                                    ${afternoonPostScore !== undefined ? `<span class="bg-purple-100 text-purple-800 text-[9px] px-1 py-0.2 rounded font-bold">${afternoonPostScore}/${afternoonPostMax}</span>` : ''}
+                                    ${afternoonPostScore !== undefined ? `<span class="bg-purple-100 text-purple-800 text-[9px] px-1 py-0.2 rounded font-bold">${afternoonPostScore}/${afternoonPostMax}</span>` : '<span class="bg-slate-100 text-slate-600 text-[9px] px-1 py-0.2 rounded font-semibold">9/10</span>'}
                                 </div>
                                 <div class="mt-1">
                                     ${hasAfternoonPost ? `
@@ -4478,13 +4484,45 @@ function askAISlideQuestion(dayNumber) {
     }
 }
 
-// Window Bindings for Lecture Slides Hub
+function openGeminiSpark(dayNumber) {
+    const slide = master13DaysLectureSlides.find(s => s.day === dayNumber);
+    const dayItem = appState.attendance.find(a => a.day === dayNumber);
+    if (!slide && !dayItem) return;
+
+    toggleAIBuddyDrawer(true);
+
+    const title = slide ? slide.title : dayItem.title;
+    const morningTopic = slide ? slide.summaryMorning : (dayItem.morning || 'การบรรยายช่วงเช้า');
+    const afternoonTopic = slide ? slide.summaryAfternoon : (dayItem.afternoon || 'การบรรยายช่วงบ่าย');
+    const examFocus = slide ? slide.examFocus : 'วินัย ระเบียบราชการ และการประยุกต์ใช้ดิจิทัล';
+
+    const promptText = `✨ [Gemini Spark Briefing - วันที่ ${dayNumber}: "${title}"]
+ตารางอบรม: ทุกวันธรรมดา (ช่วงเช้า 09.30 - 12.00 น. | ช่วงบ่าย 13.30 - 16.00 น.)
+- สาระสำคัญเช้า (09.30 น.): ${morningTopic}
+- สาระสำคัญบ่าย (13.30 น.): ${afternoonTopic}
+- จุดเน้นข้อสอบ: ${examFocus}
+
+ขอสรุปแบบ "Gemini Spark 30 วินาที" พร้อมจุดเน้นข้อสอบ:
+1. ⚡ หัวใจสำคัญ 3 ข้อ (เช้า 09.30 น. & บ่าย 13.30 น.)
+2. 🎯 จุดเน้นข้อสอบและกับดักที่ชอบหลอก (Civil Service Exam Sparks)
+3. 📝 มินิควิซจำลอง 2 ข้อ (พร้อมตัวเลือก A B C D และเฉลยสั้นๆ)`;
+
+    const chatInput = document.getElementById('ai-chat-input');
+    if (chatInput) {
+        chatInput.value = promptText;
+        sendAIChatMessage();
+    }
+}
+
+// Window Bindings for Lecture Slides Hub & Gemini Spark
 window.switchM5View = switchM5View;
 window.filterM5SlideTrack = filterM5SlideTrack;
 window.filterM5Slides = filterM5Slides;
 window.renderM5LectureSlidesGrid = renderM5LectureSlidesGrid;
 window.openLectureSlideModal = openLectureSlideModal;
 window.askAISlideQuestion = askAISlideQuestion;
+window.openGeminiSpark = openGeminiSpark;
+
 
 
 
