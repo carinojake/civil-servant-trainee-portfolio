@@ -847,6 +847,29 @@
                 </div>
             </div>
 
+            <!-- M2 Quick Action Toolbar: Google Drive & Admin Manage Files -->
+            <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-2.5 bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
+                <div class="flex items-center space-x-2">
+                    <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-bold">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </span>
+                    <div>
+                        <div class="text-xs font-bold text-govNavy">คลังเอกสาร & สไลด์การเรียนรู้รายวัน</div>
+                        <div class="text-[11px] text-slate-500">เปิดเอกสารสไลด์รวมจาก Google Drive หรือเปิดแยกตามช่วงเช้า/บ่าย</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2 flex-wrap">
+                    <a href="https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-600 text-govNavy shadow-xs transition flex items-center space-x-1.5 border border-amber-300">
+                        <i class="fa-brands fa-google-drive text-sm"></i>
+                        <span>📁 โฟลเดอร์ Google Drive รวม</span>
+                    </a>
+                    <button type="button" onclick="openManageSessionFilesModal(appState.currentDay || 5)" id="btn-admin-manage-files-m2" class="admin-only-btn hidden px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs transition flex items-center space-x-1.5 cursor-pointer">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        <span>⚙️ จัดการ/เพิ่มไฟล์เอกสาร</span>
+                    </button>
+                </div>
+            </div>
+
             <!-- Pre-Training Baseline & Readiness Assessment Hub (Overall Course Assessments) -->
             <div class="app-card p-5 bg-gradient-to-br from-amber-500/10 via-amber-50/60 to-orange-50/40 border border-amber-300 rounded-2xl space-y-3">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-amber-200/70 pb-2.5">
@@ -1195,9 +1218,17 @@
                         </p>
                     </div>
                     <div class="flex items-center space-x-2 flex-wrap gap-2">
-                        <button type="button" onclick="switchM5View('slides')" id="btn-m5-view-slides" class="bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-amber-300 cursor-pointer">
+                        <a href="https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h" target="_blank" rel="noopener noreferrer" class="bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3.5 py-2 rounded-xl text-xs transition shadow-xs flex items-center space-x-1.5 border border-amber-300">
+                            <i class="fa-brands fa-google-drive text-sm"></i>
+                            <span>📁 Google Drive สไลด์รวม</span>
+                        </a>
+                        <button type="button" onclick="openManageSessionFilesModal(appState.currentDay || 5)" id="btn-admin-manage-files-m5" class="admin-only-btn hidden bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition shadow-xs flex items-center space-x-1.5 cursor-pointer">
+                            <i class="fa-solid fa-file-circle-plus"></i>
+                            <span>⚙️ จัดการ/เพิ่มไฟล์สไลด์</span>
+                        </button>
+                        <button type="button" onclick="switchM5View('slides')" id="btn-m5-view-slides" class="bg-govNavy hover:bg-govNavy/90 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-slate-700 cursor-pointer">
                             <i class="fa-solid fa-book-open-reader"></i>
-                            <span>คลังสไลด์บรรยาย 13 วัน</span>
+                            <span>คลังสไลด์ 13 วัน</span>
                         </button>
                         <button type="button" onclick="switchM5View('artifacts')" id="btn-m5-view-artifacts" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3.5 py-2 rounded-xl text-xs transition shadow flex items-center space-x-1.5 border border-slate-300 cursor-pointer">
                             <i class="fa-solid fa-images"></i>
@@ -1815,10 +1846,18 @@
                         ค้นหาตามชื่อ หน่วยงาน หรือกลุ่มความเชี่ยวชาญได้ทันที · เลขลำดับในรายชื่อใช้สำหรับอ้างอิงจากแผนที่การเรียนรู้และเปิดไฟล์ Google Drive ได้ทันที
                     </p>
                 </div>
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2 flex-wrap gap-2">
+                    <a href="https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h" target="_blank" rel="noopener noreferrer" class="bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3.5 py-2 rounded-xl text-xs transition shadow-xs flex items-center space-x-1.5 border border-amber-300">
+                        <i class="fa-brands fa-google-drive text-sm"></i>
+                        <span>📁 Google Drive คลังเอกสาร & สไลด์</span>
+                    </a>
+                    <button type="button" onclick="openAddLecturerModal()" id="btn-admin-add-lecturer" class="admin-only-btn hidden bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition shadow-xs flex items-center space-x-1.5 cursor-pointer">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>+ เพิ่มวิทยากรใหม่</span>
+                    </button>
                     <div class="text-right bg-blue-50 px-3 py-2 rounded-xl border border-blue-200">
                         <div class="text-[10px] text-blue-800 font-bold">วิทยากรทั้งหมด</div>
-                        <div class="text-sm font-bold text-blue-900">17 ท่าน (8 หมวด)</div>
+                        <div id="m9-lecturers-total-count" class="text-sm font-bold text-blue-900">17 ท่าน (8 หมวด)</div>
                     </div>
                     <div class="text-right bg-emerald-50 px-3 py-2 rounded-xl border border-emerald-200">
                         <div class="text-[10px] text-emerald-800 font-bold">เซสชันการบรรยาย</div>
@@ -2731,6 +2770,223 @@
                 </button>
                 <button type="button" onclick="closeModal('modal-lecturer-profile')" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer">
                     ปิด
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Lecturer (Admin Only) -->
+    <div id="modal-add-lecturer" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <div class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </span>
+                    <div>
+                        <h3 id="modal-lecturer-form-title" class="text-base font-bold text-govNavy">เพิ่มวิทยากรท่านใหม่ในหลักสูตร</h3>
+                        <p class="text-[11px] text-slate-500">บันทึกข้อมูลเข้าสู่ทำเนียบวิทยากร M9 และเชื่อมโยง Traceability Matrix</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeModal('modal-add-lecturer')" class="text-slate-400 hover:text-slate-600 text-xl p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="form-lecturer-crud" onsubmit="event.preventDefault(); saveLecturerForm();" class="space-y-3.5 text-xs">
+                <input type="hidden" id="crud-lecturer-id" value="">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">ชื่อ-นามสกุล พร้อมคำนำหน้า <span class="text-rose-500">*</span></label>
+                        <input type="text" id="crud-lecturer-name" required placeholder="เช่น ดร.สมชาย ใจดี" class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">กลุ่มความเชี่ยวชาญ (Category) <span class="text-rose-500">*</span></label>
+                        <select id="crud-lecturer-category" required class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                            <option value="AI & ดิจิทัล">AI & ดิจิทัล</option>
+                            <option value="ข้อมูล">ข้อมูล (Data Science / BI)</option>
+                            <option value="บริหารราชการ">บริหารราชการ (Public Admin)</option>
+                            <option value="กฎหมาย & ราชการ">กฎหมาย & ราชการ (Law / Saraban)</option>
+                            <option value="ทักษะการทำงาน">ทักษะการทำงาน (Workplace / Teamwork)</option>
+                            <option value="คนพิการ & การเข้าถึง">คนพิการ & การเข้าถึง (Disability / Inclusion)</option>
+                            <option value="จิตวิทยา & การสื่อสาร">จิตวิทยา & การสื่อสาร (Psychology)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">ตำแหน่งงาน / ตำแหน่งวิชาการ</label>
+                        <input type="text" id="crud-lecturer-position" placeholder="เช่น อาจารย์ประจำภาควิชา / นิติกรชำนาญการ" class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">หน่วยงาน / สังกัด / มหาวิทยาลัย</label>
+                        <input type="text" id="crud-lecturer-agency" placeholder="เช่น มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี" class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">วันที่สอนหลัก (Day Number 1-13) <span class="text-rose-500">*</span></label>
+                        <input type="number" id="crud-lecturer-primary-day" min="1" max="13" required placeholder="เช่น 5" class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">ข้อความระบุวันที่สอน (Days Label)</label>
+                        <input type="text" id="crud-lecturer-days-label" placeholder="เช่น วันที่ 5, 11 หรือ วันที่ 8" class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="font-bold text-slate-700">ความถนัด & ประสบการณ์เฉพาะทาง (Expertise)</label>
+                    <textarea id="crud-lecturer-expertise" rows="2" placeholder="เช่น การเขียนหนังสือราชการ, PDPA, การประมวลผลข้อมูล Big Data..." class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">ไอคอนตัวแทน (FontAwesome Icon)</label>
+                        <select id="crud-lecturer-icon" class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                            <option value="fa-robot">fa-robot (AI / เทคโนโลยี)</option>
+                            <option value="fa-chart-pie">fa-chart-pie (ข้อมูล / BI)</option>
+                            <option value="fa-landmark">fa-landmark (บริหารราชการ)</option>
+                            <option value="fa-feather">fa-feather (สารบรรณ / กฎหมาย)</option>
+                            <option value="fa-comments">fa-comments (การสื่อสาร / จิตวิทยา)</option>
+                            <option value="fa-people-group">fa-people-group (การทำงานเป็นทีม)</option>
+                            <option value="fa-hands-asl-interpreting">fa-hands-asl-interpreting (การเข้าถึง / คนพิการ)</option>
+                            <option value="fa-shield-halved">fa-shield-halved (PDPA / ความมั่นคง)</option>
+                            <option value="fa-gamepad">fa-gamepad (เกมการเรียนรู้)</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">โทนสี Badge (ธีมการแสดงผล)</label>
+                        <select id="crud-lecturer-badge" class="w-full p-2 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                            <option value="bg-purple-100 text-purple-800 border-purple-200">สีม่วง (AI / ดิจิทัล)</option>
+                            <option value="bg-blue-100 text-blue-800 border-blue-200">สีน้ำเงิน (ข้อมูล Data)</option>
+                            <option value="bg-amber-100 text-amber-800 border-amber-200">สีเหลืองอำพัน (บริหารราชการ)</option>
+                            <option value="bg-rose-100 text-rose-800 border-rose-200">สีแดงกุหลาบ (กฎหมาย / สารบรรณ)</option>
+                            <option value="bg-cyan-100 text-cyan-800 border-cyan-200">สีฟ้าคราม (ทักษะ / สุขภาวะ)</option>
+                            <option value="bg-emerald-100 text-emerald-800 border-emerald-200">สีเขียวมรกต (การเข้าถึง / จิตวิทยา)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-2 pt-3 border-t border-slate-200">
+                    <button type="button" id="btn-crud-delete-lecturer" onclick="deleteCurrentCustomLecturer()" class="hidden w-full sm:w-auto px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs border border-rose-200 transition cursor-pointer">
+                        <i class="fa-solid fa-trash-can mr-1"></i> ลบวิทยากรท่านนี้
+                    </button>
+                    <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
+                        <button type="button" onclick="closeModal('modal-add-lecturer')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer">
+                            ยกเลิก
+                        </button>
+                        <button type="submit" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition shadow-xs cursor-pointer flex items-center space-x-1.5">
+                            <i class="fa-solid fa-check"></i>
+                            <span>บันทึกข้อมูลวิทยากร</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Manage Session Files (Admin Only) -->
+    <div id="modal-manage-session-files" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <div class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold text-sm">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                    </span>
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy">จัดการไฟล์เอกสาร & สไลด์ Google Drive</h3>
+                        <p class="text-[11px] text-slate-500">เพิ่มหรือแก้ไขลิงก์สไลด์รายวัน (M2, M5, M9)</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeModal('modal-manage-session-files')" class="text-slate-400 hover:text-slate-600 text-xl p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Day Selector -->
+            <div class="p-3 bg-indigo-50/70 rounded-xl border border-indigo-200 flex items-center justify-between">
+                <div class="text-xs font-bold text-indigo-950">
+                    <i class="fa-solid fa-calendar-day mr-1 text-indigo-600"></i>
+                    <span>เลือกวันที่ต้องการจัดการ:</span>
+                </div>
+                <select id="manage-file-day-select" onchange="onManageFileDayChange(this.value)" class="p-1.5 text-xs rounded-lg border border-indigo-300 bg-white font-bold text-indigo-900 focus:ring-2 focus:ring-indigo-500">
+                    <option value="1">วันที่ 1 (10 ส.ค.)</option>
+                    <option value="2">วันที่ 2 (11 ส.ค.)</option>
+                    <option value="3">วันที่ 3 (13 ส.ค.)</option>
+                    <option value="4">วันที่ 4 (14 ส.ค.)</option>
+                    <option value="5" selected>วันที่ 5 (17 ส.ค.)</option>
+                    <option value="6">วันที่ 6 (18 ส.ค.)</option>
+                    <option value="7">วันที่ 7 (19 ส.ค.)</option>
+                    <option value="8">วันที่ 8 (20 ส.ค.)</option>
+                    <option value="9">วันที่ 9 (24 ส.ค.)</option>
+                    <option value="10">วันที่ 10 (25 ส.ค.)</option>
+                    <option value="11">วันที่ 11 (26 ส.ค.)</option>
+                    <option value="12">วันที่ 12 (27 ส.ค.)</option>
+                    <option value="13">วันที่ 13 (28 ส.ค.)</option>
+                </select>
+            </div>
+
+            <!-- Existing Files List for Selected Day -->
+            <div class="space-y-2">
+                <div class="text-xs font-bold text-slate-700 flex items-center justify-between">
+                    <span>รายการไฟล์ปัจจุบันของวันนี้:</span>
+                    <span id="manage-files-current-count" class="text-[11px] text-slate-500 font-normal">2 ไฟล์</span>
+                </div>
+                <div id="manage-files-list-container" class="space-y-1.5 max-h-44 overflow-y-auto pr-1 text-xs">
+                    <!-- Dynamic List of Files -->
+                </div>
+            </div>
+
+            <!-- Add New File Form -->
+            <form id="form-add-session-file" onsubmit="event.preventDefault(); submitAddSessionFile();" class="space-y-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                <div class="font-bold text-govNavy flex items-center space-x-1.5">
+                    <i class="fa-solid fa-plus-circle text-indigo-600"></i>
+                    <span>เพิ่มไฟล์ใหม่ / ลิงก์สไลด์ใหม่:</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">ช่วงเวลา <span class="text-rose-500">*</span></label>
+                        <select id="new-file-session" required class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            <option value="MORNING">ช่วงเช้า (09.00 - 12.00 น.)</option>
+                            <option value="AFTERNOON">ช่วงบ่าย (13.00 - 16.00 น.)</option>
+                            <option value="ALL_DAY">เต็มวัน (09.00 - 16.00 น.)</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-700">สายการเรียน <span class="text-rose-500">*</span></label>
+                        <select id="new-file-track" required class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            <option value="BOTH">รวมทุกสาย (ADV & FND)</option>
+                            <option value="FND">หลักสูตรพื้นฐาน (Foundation)</option>
+                            <option value="ADV">หลักสูตรขั้นสูง (Advanced)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="font-bold text-slate-700">ชื่อไฟล์ / ชื่อเอกสาร <span class="text-rose-500">*</span></label>
+                    <input type="text" id="new-file-title" required placeholder="เช่น สไลด์บรรยาย e-Saraban_รอบเช้า.pdf" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="font-bold text-slate-700">URL / Google Drive Link <span class="text-rose-500">*</span></label>
+                    <input type="url" id="new-file-url" required placeholder="https://drive.google.com/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                </div>
+
+                <div class="flex justify-end pt-1">
+                    <button type="submit" class="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-xs transition flex items-center space-x-1.5 cursor-pointer">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>เพิ่มไฟล์นี้</span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="flex justify-end pt-2 border-t border-slate-200">
+                <button type="button" onclick="closeModal('modal-manage-session-files')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer">
+                    เสร็จสิ้น
                 </button>
             </div>
         </div>

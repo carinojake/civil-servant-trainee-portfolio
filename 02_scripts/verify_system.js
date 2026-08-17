@@ -118,6 +118,8 @@ if (fs.existsSync(indexPath)) {
     assert(html.includes('id="matrix-table-container"') && html.includes('id="lecturers-grid-container"'), 'Contains Matrix and Lecturers grid containers');
     assert(html.includes('btn-sort-lecturer-id') && html.includes('btn-sort-lecturer-name') && html.includes('btn-sort-lecturer-day'), 'Contains M9 Lecturer sorting buttons (ID, Name, Day)');
     assert(html.includes('id="modal-lecturer-profile"'), 'Contains Lecturer Profile modal');
+    assert(html.includes('id="modal-add-lecturer"'), 'Contains M9 Add/Edit Lecturer Modal');
+    assert(html.includes('id="modal-manage-session-files"'), 'Contains Manage Session Files Modal');
     assert(html.includes('id="mentor-active-banner"'), 'Contains Mentor Active Status Banner');
     assert(html.includes('id="modal-mentor-feedback"'), 'Contains Mentor Feedback & Endorsement Modal');
     assert(html.includes('btn-lock-role-trainee') && html.includes('btn-lock-role-mentor'), 'Contains Lock Screen Role Selectors (Trainee / Mentor)');
@@ -143,6 +145,9 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('setLockScreenRole') && js.includes('renderMentorStatusBanner') && js.includes('openMentorFeedbackModal'), 'Contains Mentor Portal and Dual-Role Auth controllers');
     assert(js.includes('saveMentorFeedback') && js.includes('copyMentorMagicLink'), 'Contains Mentor Feedback persistence and Magic Link generator');
     assert(js.includes('saveNewSecurityPin') && js.includes('clearRememberedDevice'), 'Contains PIN change and device remember management');
+    assert(js.includes('openAddLecturerModal') && js.includes('saveLecturerForm') && js.includes('deleteCurrentCustomLecturer'), 'Contains M9 Lecturer CRUD and LocalStorage persistence engine');
+    assert(js.includes('openManageSessionFilesModal') && js.includes('submitAddSessionFile') && js.includes('deleteCustomSessionFile'), 'Contains Session File Management engine');
+    assert(js.includes('masterLecturersList') && js.includes('masterCourseMatrixTraceability'), 'Contains M9 masterLecturersList (17 items) and Traceability Matrix data');
     assert(js.includes('toggleAIBuddyDrawer') && js.includes('sendAIChatMessage') && js.includes('triggerQuickPrompt'), 'Contains AI Study Buddy Drawer & Quick Prompts engine');
     assert(js.includes('masterCivilServiceQuizBank') && js.includes('renderM8QuizView') && js.includes('selectQuizAnswer'), 'Contains M8 Civil Service Quiz Bank & Interactive Engine');
     assert(js.includes('master13DaysLectureSlides') && js.includes('renderM5LectureSlidesGrid') && js.includes('openLectureSlideModal'), 'Contains 13-Day Lecture Slides Hub Data & Controller');
