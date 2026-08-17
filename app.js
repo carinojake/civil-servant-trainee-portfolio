@@ -6086,3 +6086,125 @@ window.onManageFileDayChange = onManageFileDayChange;
 window.submitAddSessionFile = submitAddSessionFile;
 window.deleteCustomSessionFile = deleteCustomSessionFile;
 window.updateAdminButtonsVisibility = updateAdminButtonsVisibility;
+
+
+/* ==========================================================================
+   14. M2 LECTURER HUB ENGINE & MULTI-VIEW CONTROLLER (HUB / CLASSIC / TREE)
+   ========================================================================== */
+const master13DaysHubSessions = undefined;
+
+let activeM2ViewMode = localStorage.getItem('civil_m2_view_mode') || 'HUB'; // 'HUB' | 'CLASSIC' | 'TREE'
+
+function setM2ViewMode(mode) {
+    activeM2ViewMode = mode;
+    localStorage.setItem('civil_m2_view_mode', mode);
+
+    const btnHub = document.getElementById('btn-m2-view-hub');
+    const btnClassic = document.getElementById('btn-m2-view-classic');
+    const btnTree = document.getElementById('btn-m2-view-tree');
+
+    [btnHub, btnClassic, btnTree].forEach(b => {
+        if (!b) return;
+        b.className = 'px-3 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 cursor-pointer';
+    });
+
+    if (mode === 'HUB' && btnHub) {
+        btnHub.className = 'px-3 py-1 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer';
+    } else if (mode === 'CLASSIC' && btnClassic) {
+        btnClassic.className = 'px-3 py-1 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer';
+    } else if (mode === 'TREE' && btnTree) {
+        btnTree.className = 'px-3 py-1 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer';
+    }
+
+    renderScheduleList();
+}
+
+function renderM2DriveTreeView(container, filteredAttendance) {
+    let html = `
+        <div class="app-card p-5 border-t-4 border-indigo-600 space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-200 pb-3">
+                <div>
+                    <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                        <i class="fa-solid fa-folder-tree text-indigo-600"></i>
+                        <span>📦 โครงสร้างโฟลเดอร์ Google Drive รวมหลักสูตร 13 วัน</span>
+                    </h3>
+                    <p class="text-xs text-slate-500">จัดหมวดหมู่แยกตามโฟลเดอร์วันที่ ช่วงเวลา (เช้า/บ่าย) ห้องอบรม และไฟล์สไลด์จริง</p>
+                </div>
+                <a href="https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h" target="_blank" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-govNavy font-bold text-xs shadow-xs transition flex items-center space-x-1.5 border border-amber-300">
+                    <i class="fa-brands fa-google-drive"></i>
+                    <span>เปิด Google Drive โฟลเดอร์หลัก ↗</span>
+                </a>
+            </div>
+
+            <div class="space-y-3">
+    `;
+
+    // Group master sessions by date
+    const grouped = {};
+    master13DaysHubSessions.forEach(session => {
+        if (!grouped[session.date]) {
+            grouped[session.date] = [];
+        }
+        grouped[session.date].push(session);
+    });
+
+    Object.keys(grouped).forEach(dateStr => {
+        const sessions = grouped[dateStr];
+        const dayNum = parseInt(dateStr.replace(/[^0-9]/g, ''), 10) || 1;
+
+        html += `
+            <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2.5">
+                <div class="flex items-center justify-between">
+                    <span class="font-bold text-govNavy text-xs flex items-center space-x-2">
+                        <i class="fa-solid fa-folder text-amber-500 text-sm"></i>
+                        <span>📁 ${dateStr}</span>
+                    </span>
+                    <span class="text-[10px] bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded-full">${sessions.length} รายการ</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pl-4 border-l-2 border-slate-300 ml-2">
+        `;
+
+        sessions.forEach(s => {
+            const isAdv = s.track === 'advanced';
+            const isFnd = s.track === 'foundation';
+            const trackBadgeClass = isAdv ? 'bg-blue-100 text-blue-800 border-blue-200' : isFnd ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-purple-100 text-purple-800 border-purple-200';
+
+            html += `
+                <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
+                            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded ${trackBadgeClass}">${s.track_label}</span>
+                            <span class="text-[10px] text-slate-500 font-medium">${s.period}</span>
+                            <span class="text-[10px] text-slate-600 font-semibold">${s.room}</span>
+                        </div>
+                        <div class="font-bold text-govNavy text-xs leading-snug">${s.subject}</div>
+                        <div class="text-[11px] text-slate-500 truncate" title="${s.file_name}">📄 ${s.file_name}</div>
+                    </div>
+                    <div class="pt-1 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-[10px] text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i>ยืนยันจากไฟล์</span>
+                        <a href="${s.file_url}" target="_blank" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center space-x-1">
+                            <i class="fa-brands fa-google-drive text-amber-500"></i>
+                            <span>เปิดไฟล์</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += `
+                </div>
+            </div>
+        `;
+    });
+
+    html += `
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+}
+
+window.setM2ViewMode = setM2ViewMode;
+window.master13DaysHubSessions = master13DaysHubSessions;

@@ -931,24 +931,38 @@
                 </div>
             </div>
 
-            <!-- Track Filter Bar for Schedule -->
-            <div class="app-card p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                <div class="flex items-center space-x-2 text-xs text-slate-700 font-bold">
-                    <i class="fa-solid fa-filter text-emerald-600"></i>
-                    <span>มุมมองตารางอบรม:</span>
-                </div>
-                <div class="flex items-center space-x-2 flex-wrap" role="group" aria-label="ตัวกรองตารางตามสายหลักสูตร">
-                    <button onclick="setScheduleTrackFilter('AUTO')" id="btn-sched-track-auto" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-sm">
+            <!-- Track Filter Bar for Schedule & Dual View Switcher -->
+            <div class="app-card p-4 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3">
+                <div class="flex items-center space-x-2 flex-wrap gap-y-2">
+                    <span class="text-xs text-slate-700 font-bold flex items-center space-x-1">
+                        <i class="fa-solid fa-filter text-emerald-600"></i>
+                        <span>สายหลักสูตร:</span>
+                    </span>
+                    <button onclick="setScheduleTrackFilter('AUTO')" id="btn-sched-track-auto" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs">
                         <i class="fa-solid fa-user-check mr-1"></i> ตามสายผู้เรียน (<span id="sched-active-track-label">ADV</span>)
                     </button>
                     <button onclick="setScheduleTrackFilter('ADV')" id="btn-sched-track-adv" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-700 hover:bg-slate-200">
-                        <i class="fa-solid fa-laptop-code mr-1 text-blue-600"></i> หลักสูตรขั้นสูง (Advanced)
+                        <i class="fa-solid fa-laptop-code mr-1 text-blue-600"></i> ขั้นสูง (ADV)
                     </button>
                     <button onclick="setScheduleTrackFilter('FND')" id="btn-sched-track-fnd" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-700 hover:bg-slate-200">
-                        <i class="fa-solid fa-book-open mr-1 text-emerald-600"></i> หลักสูตรขั้นพื้นฐาน (Foundation)
+                        <i class="fa-solid fa-book-open mr-1 text-emerald-600"></i> พื้นฐาน (FND)
                     </button>
                     <button onclick="setScheduleTrackFilter('BOTH')" id="btn-sched-track-both" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-700 hover:bg-slate-200">
-                        <i class="fa-solid fa-table-columns mr-1 text-purple-600"></i> เทียบเคียง 2 หลักสูตร
+                        <i class="fa-solid fa-table-columns mr-1 text-purple-600"></i> เทียบเคียง 2 สาย
+                    </button>
+                </div>
+
+                <!-- Display Mode Switcher (Hub vs Classic vs Drive Tree) -->
+                <div class="flex items-center space-x-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 w-full sm:w-auto justify-end">
+                    <span class="text-[11px] text-slate-500 font-semibold px-1.5 hidden sm:inline">โหมดแสดงผล:</span>
+                    <button type="button" onclick="setM2ViewMode('HUB')" id="btn-m2-view-hub" class="px-3 py-1 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer">
+                        <i class="fa-solid fa-layer-group mr-1 text-amber-400"></i> ละเอียด (Hub Style)
+                    </button>
+                    <button type="button" onclick="setM2ViewMode('CLASSIC')" id="btn-m2-view-classic" class="px-3 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 cursor-pointer">
+                        <i class="fa-solid fa-table-list mr-1"></i> กระชับ (Classic)
+                    </button>
+                    <button type="button" onclick="setM2ViewMode('TREE')" id="btn-m2-view-tree" class="px-3 py-1 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 cursor-pointer">
+                        <i class="fa-solid fa-folder-tree mr-1 text-indigo-600"></i> ไดรฟ์ (Drive Tree)
                     </button>
                 </div>
             </div>
