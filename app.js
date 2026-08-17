@@ -1754,9 +1754,233 @@ function renderScheduleList() {
     const container = document.getElementById('schedule-days-container');
     if (!container) return;
 
+    // Update M2 View Mode toggle button active styles
+    const btnHub = document.getElementById('btn-m2-view-hub');
+    const btnClassic = document.getElementById('btn-m2-view-classic');
+    const btnTree = document.getElementById('btn-m2-view-tree');
+
+    [btnHub, btnClassic, btnTree].forEach(b => {
+        if (!b) return;
+        b.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold transition text-slate-600 hover:text-slate-900 cursor-pointer flex items-center space-x-1';
+    });
+
+    if (activeM2ViewMode === 'HUB' && btnHub) {
+        btnHub.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer flex items-center space-x-1';
+    } else if (activeM2ViewMode === 'CLASSIC' && btnClassic) {
+        btnClassic.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer flex items-center space-x-1';
+    } else if (activeM2ViewMode === 'TREE' && btnTree) {
+        btnTree.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer flex items-center space-x-1';
+    }
+
+    // 1. If in TREE Mode, render visual Drive Tree
+    if (activeM2ViewMode === 'TREE') {
+        renderM2DriveTreeView(container, appState.attendance);
+        return;
+    }
+
     const userTrack = appState.userProfile.track || 'ADV';
     const effectiveFilter = activeScheduleFilter === 'AUTO' ? userTrack : activeScheduleFilter;
 
+    // Map day 1-13 to day of month in August
+    const dayToDateMap = {
+        1: '10', 2: '11', 3: '13', 4: '14', 5: '17', 
+        6: '18', 7: '19', 8: '20', 9: '24', 10: '25', 
+        11: '26', 12: '27', 13: '28'
+    };
+
+    // 2. If in HUB Mode (Rich Lecturer Hub Cards - Default)
+    if (activeM2ViewMode === 'HUB') {
+        container.innerHTML = appState.attendance.map(dayItem => {
+            const isPresent = dayItem.status === 'PRESENT' || dayItem.status === 'ONLINE';
+            const targetDatePrefix = dayToDateMap[dayItem.day] || String(dayItem.day);
+
+            // Find matching sessions from master13DaysHubSessions
+            let matchingSessions = master13DaysHubSessions.filter(s => {
+                return s.date.startsWith(targetDatePrefix + ' ') || 
+                       s.date.includes(targetDatePrefix + ' สิงหาคม') || 
+                       s.date.includes(targetDatePrefix + ' ส.ค.');
+            });
+
+            // Filter sessions by effectiveFilter (ADV / FND / BOTH)
+            if (effectiveFilter === 'ADV') {
+                matchingSessions = matchingSessions.filter(s => s.track === 'advanced' || s.track === 'joint');
+            } else if (effectiveFilter === 'FND') {
+                matchingSessions = matchingSessions.filter(s => s.track === 'foundation' || s.track === 'joint');
+            }
+
+            const sessionsCountLabel = matchingSessions.length > 0 ? `${matchingSessions.length} ช่วงการเรียนรู้` : '2 ช่วงการเรียนรู้';
+            const isDual = matchingSessions.length > 1;
+
+            let sessionsGridHtml = '';
+
+            if (matchingSessions.length > 0) {
+                sessionsGridHtml = `
+                    <div class="grid grid-cols-1 ${isDual ? 'lg:grid-cols-2' : ''} gap-3 pt-1">
+                `;
+
+                matchingSessions.forEach(s => {
+                    const isAdv = s.track === 'advanced';
+                    const isFnd = s.track === 'foundation';
+                    const cardBorderBg = isAdv ? 'bg-blue-50/70 border-blue-200' : isFnd ? 'bg-emerald-50/70 border-emerald-200' : 'bg-indigo-50/70 border-indigo-200';
+                    const trackBadgeBg = isAdv ? 'bg-blue-600 text-white' : isFnd ? 'bg-emerald-600 text-white' : 'bg-govNavy text-white';
+
+                    const subtopicsHtml = (s.subtopics && s.subtopics.length > 0) ? `
+                        <ul class="space-y-1 text-[11px] text-slate-600 bg-white/90 p-2.5 rounded-lg border border-slate-200">
+                            ${s.subtopics.map(sub => `<li class="flex items-start gap-1.5"><span class="text-blue-500 font-bold">•</span><span>${sub}</span></li>`).join('')}
+                        </ul>
+                    ` : '';
+
+                    const lecturersDisplay = s.lecturers && s.lecturers.length > 0
+                        ? s.lecturers.map(name => `<span class="font-bold text-slate-800 hover:text-blue-700 cursor-pointer" onclick="switchTab('m9'); filterLecturersBySearch();">${name}</span>`).join(', ')
+                        : '<span class="text-slate-400 italic">คณะทำงานโครงการ</span>';
+
+                    sessionsGridHtml += `
+                        <div class="p-3.5 rounded-xl border ${cardBorderBg} shadow-2xs space-y-2.5 flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between flex-wrap gap-1.5">
+                                    <div class="flex items-center space-x-1.5">
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${trackBadgeBg}">${s.track_label}</span>
+                                        <span class="text-[11px] font-bold text-slate-700 bg-white px-2 py-0.5 rounded-md border border-slate-200">${s.period}</span>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-govNavy bg-white px-2 py-0.5 rounded-md border border-slate-300">
+                                        <i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>${s.room}
+                                    </span>
+                                </div>
+
+                                <h4 class="font-bold text-govNavy text-sm leading-snug">${s.subject}</h4>
+
+                                ${subtopicsHtml}
+
+                                <div class="p-2 bg-white/80 rounded-lg border border-slate-200/80 text-[11px]">
+                                    <div class="text-[10px] font-bold text-slate-500 mb-0.5 flex items-center gap-1">
+                                        <i class="fa-solid fa-chalkboard-user text-blue-600"></i> อาจารย์ผู้สอน / วิทยากร:
+                                    </div>
+                                    <div class="text-xs">${lecturersDisplay}</div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 border-t border-slate-200/60 flex items-center justify-between gap-2 flex-wrap">
+                                <div class="text-[11px] text-slate-600 truncate flex-1 min-w-[150px]" title="${s.file_name}">
+                                    📄 <strong>ไฟล์:</strong> ${s.file_name}
+                                </div>
+                                <a href="${s.file_url}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] shadow-2xs transition flex items-center space-x-1 shrink-0">
+                                    <i class="fa-brands fa-google-drive"></i>
+                                    <span>เปิดไฟล์ Drive</span>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                sessionsGridHtml += `</div>`;
+            } else {
+                sessionsGridHtml = `
+                    <div class="p-3 bg-white rounded-xl border border-slate-200 text-xs text-slate-600">
+                        ${dayItem.title}
+                    </div>
+                `;
+            }
+
+            // Morning & Afternoon Action Hub items
+            const morningPreUrl = dayItem.morningPreTestUrl || dayItem.preTestUrl;
+            const morningPreScore = dayItem.morningPreTestScore !== undefined ? dayItem.morningPreTestScore : dayItem.preTestScore;
+            const morningPostUrl = dayItem.morningPostTestUrl;
+            const morningPostScore = dayItem.morningPostTestScore;
+            const afternoonPreUrl = dayItem.afternoonPreTestUrl;
+            const afternoonPreScore = dayItem.afternoonPreTestScore;
+            const afternoonPostUrl = dayItem.afternoonPostTestUrl || dayItem.postTestUrl;
+            const afternoonPostScore = dayItem.afternoonPostTestScore !== undefined ? dayItem.afternoonPostTestScore : dayItem.postTestScore;
+
+            const actionHubHtml = `
+                <div class="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 space-y-2.5 mt-2">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <span class="text-[11px] font-bold text-slate-800 flex items-center space-x-1.5">
+                            <i class="fa-solid fa-bolt text-amber-500"></i>
+                            <span>ศูนย์รวมกิจกรรมประจำวัน (Daily Action Hub: เช้า & บ่าย)</span>
+                        </span>
+                        <div class="flex items-center space-x-2">
+                            <button type="button" onclick="openGeminiSpark(${dayItem.day})" class="text-[11px] bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white font-bold px-2.5 py-1 rounded-lg shadow-xs flex items-center space-x-1 cursor-pointer transition">
+                                <i class="fa-solid fa-wand-magic-sparkles text-amber-200"></i>
+                                <span>Gemini Spark สรุปด่วน</span>
+                            </button>
+                            <button type="button" onclick="openDayLinksModal(${dayItem.day})" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center space-x-1">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <span>จัดการลิงก์ & คะแนน</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div class="p-2 bg-white rounded-lg border border-slate-200 flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-slate-700"><i class="fa-solid fa-sun text-amber-500 mr-1"></i>ช่วงเช้า (Pre/Post-test):</span>
+                            <div class="flex items-center space-x-1">
+                                ${morningPreUrl ? `<a href="${morningPreUrl}" target="_blank" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold text-[10px] border border-blue-200">Pre-test (${morningPreScore !== undefined ? morningPreScore + 'ค.' : 'ทำ'})</a>` : ''}
+                                ${morningPostUrl ? `<a href="${morningPostUrl}" target="_blank" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold text-[10px] border border-emerald-200">Post-test (${morningPostScore !== undefined ? morningPostScore + 'ค.' : 'ทำ'})</a>` : ''}
+                            </div>
+                        </div>
+
+                        <div class="p-2 bg-white rounded-lg border border-slate-200 flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-slate-700"><i class="fa-solid fa-cloud-sun text-emerald-500 mr-1"></i>ช่วงบ่าย (Pre/Post-test):</span>
+                            <div class="flex items-center space-x-1">
+                                ${afternoonPreUrl ? `<a href="${afternoonPreUrl}" target="_blank" class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold text-[10px] border border-blue-200">Pre-test (${afternoonPreScore !== undefined ? afternoonPreScore + 'ค.' : 'ทำ'})</a>` : ''}
+                                ${afternoonPostUrl ? `<a href="${afternoonPostUrl}" target="_blank" class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-bold text-[10px] border border-emerald-200">Post-test (${afternoonPostScore !== undefined ? afternoonPostScore + 'ค.' : 'ทำ'})</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-1 border-t border-slate-200/60 flex-wrap gap-2 text-xs">
+                        <button type="button" onclick="openReflectionModal(${dayItem.day})" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs border border-blue-200 transition flex items-center space-x-1">
+                            <i class="fa-solid fa-pen-nib"></i>
+                            <span>✍️ บันทึกสะท้อนคิด (Reflection)</span>
+                        </button>
+                        <button type="button" onclick="askAILecturerTopics('${dayItem.day}')" class="px-3 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-xs border border-purple-200 transition flex items-center space-x-1">
+                            <i class="fa-solid fa-sparkles text-purple-600"></i>
+                            <span>✨ AI สรุปบทเรียนวันนี้</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return `
+                <div class="app-card p-5 border-l-4 ${isPresent ? 'border-emerald-500' : 'border-slate-300'} space-y-3">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-200/80 pb-2.5">
+                        <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+                            <span class="bg-govNavy text-amber-400 font-bold text-xs px-2.5 py-0.5 rounded-md">กำหนดการ</span>
+                            <h3 class="text-base font-bold text-govNavy">${dayItem.date} (วันที่ ${dayItem.day})</h3>
+                            <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">${sessionsCountLabel}</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${isPresent ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+                                ${isPresent ? '✓ เข้าเรียนแล้ว' : 'ยังไม่เช็กอิน'}
+                            </span>
+                            <button type="button" onclick="toggleAttendanceStatus(${dayItem.day})" class="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer">
+                                สลับสถานะ
+                            </button>
+                        </div>
+                    </div>
+
+                    ${sessionsGridHtml}
+                    ${actionHubHtml}
+
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 text-xs space-y-2">
+                        <div>
+                            <strong class="text-slate-700 font-semibold"><i class="fa-solid fa-lightbulb text-amber-500 mr-1.5"></i>สรุปการเรียนรู้ (Reflection):</strong>
+                            <p class="text-slate-600 mt-0.5 leading-relaxed">${dayItem.reflection || '<span class="text-slate-400 italic">ยังไม่มีการบันทึกสรุป</span>'}</p>
+                        </div>
+                        ${dayItem.actionPlan ? `
+                        <div class="border-t border-slate-200 pt-1.5">
+                            <strong class="text-slate-700 font-semibold"><i class="fa-solid fa-arrow-right-to-bracket text-emerald-500 mr-1.5"></i>สิ่งที่นำไปปรับใช้:</strong>
+                            <p class="text-slate-600 mt-0.5">${dayItem.actionPlan}</p>
+                        </div>` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        return;
+    }
+
+    // 3. If in CLASSIC Mode (Original Accordion / Compact List)
     container.innerHTML = appState.attendance.map(dayItem => {
         const isPresent = dayItem.status === 'PRESENT' || dayItem.status === 'ONLINE';
         const isCombined = dayItem.isCombined;
@@ -1872,21 +2096,6 @@ function renderScheduleList() {
                                 ${trackData.morningComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
                             <p class="text-slate-700 leading-relaxed font-semibold">${trackData.morning}</p>
-                            ${trackData.morningSubtopics && trackData.morningSubtopics.length > 0 ? `
-                                <div class="mt-1.5 p-2 bg-slate-50/90 rounded-lg border border-slate-200 text-[11px] space-y-1 text-slate-600">
-                                    <div class="font-bold text-slate-700 text-[10px] flex items-center gap-1">
-                                        <i class="fa-solid fa-list-check text-blue-600"></i> หัวข้อย่อยประจำเซสชัน:
-                                    </div>
-                                    <ul class="list-disc list-inside space-y-0.5 text-[10px]">
-                                        ${trackData.morningSubtopics.map(sub => `<li>${sub}</li>`).join('')}
-                                    </ul>
-                                </div>
-                            ` : ''}
-                            ${trackData.morningLecturers ? `
-                                <div class="mt-1 text-[10px] text-blue-800 font-bold flex items-center gap-1">
-                                    <i class="fa-solid fa-chalkboard-user text-blue-600"></i> วิทยากร: ${trackData.morningLecturers}
-                                </div>
-                            ` : ''}
                         </div>
                         <div class="p-2.5 bg-white rounded-lg border border-slate-200">
                             <div class="flex items-center justify-between mb-1">
@@ -1894,278 +2103,25 @@ function renderScheduleList() {
                                 ${trackData.afternoonComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
                             <p class="text-slate-700 leading-relaxed font-semibold">${trackData.afternoon}</p>
-                            ${trackData.afternoonSubtopics && trackData.afternoonSubtopics.length > 0 ? `
-                                <div class="mt-1.5 p-2 bg-slate-50/90 rounded-lg border border-slate-200 text-[11px] space-y-1 text-slate-600">
-                                    <div class="font-bold text-slate-700 text-[10px] flex items-center gap-1">
-                                        <i class="fa-solid fa-list-check text-emerald-600"></i> หัวข้อย่อยประจำเซสชัน:
-                                    </div>
-                                    <ul class="list-disc list-inside space-y-0.5 text-[10px]">
-                                        ${trackData.afternoonSubtopics.map(sub => `<li>${sub}</li>`).join('')}
-                                    </ul>
-                                </div>
-                            ` : ''}
-                            ${trackData.afternoonLecturers ? `
-                                <div class="mt-1 text-[10px] text-emerald-800 font-bold flex items-center gap-1">
-                                    <i class="fa-solid fa-chalkboard-user text-emerald-600"></i> วิทยากร: ${trackData.afternoonLecturers}
-                                </div>
-                            ` : ''}
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        // Morning links & scores
-        const morningPreUrl = dayItem.morningPreTestUrl || dayItem.preTestUrl;
-        const hasMorningPre = !!morningPreUrl;
-        const morningPreScore = dayItem.morningPreTestScore !== undefined ? dayItem.morningPreTestScore : dayItem.preTestScore;
-        const morningPreMax = dayItem.morningPreTestMax || dayItem.preTestMax || 10;
-
-        const morningDocUrl = dayItem.morningDocUrl || dayItem.docUrl;
-        const morningDocTitle = dayItem.morningDocTitle || dayItem.docTitle;
-
-        const morningPostUrl = dayItem.morningPostTestUrl;
-        const hasMorningPost = !!morningPostUrl;
-        const morningPostScore = dayItem.morningPostTestScore;
-        const morningPostMax = dayItem.morningPostTestMax || 10;
-
-        // Afternoon links & scores
-        const afternoonPreUrl = dayItem.afternoonPreTestUrl;
-        const hasAfternoonPre = !!afternoonPreUrl;
-        const afternoonPreScore = dayItem.afternoonPreTestScore;
-        const afternoonPreMax = dayItem.afternoonPreTestMax || 10;
-
-        const afternoonDocUrl = dayItem.afternoonDocUrl || dayItem.docUrl;
-        const afternoonDocTitle = dayItem.afternoonDocTitle || dayItem.docTitle;
-
-        const afternoonPostUrl = dayItem.afternoonPostTestUrl || dayItem.postTestUrl;
-        const hasAfternoonPost = !!afternoonPostUrl;
-        const afternoonPostScore = dayItem.afternoonPostTestScore !== undefined ? dayItem.afternoonPostTestScore : dayItem.postTestScore;
-        const afternoonPostMax = dayItem.afternoonPostTestMax || dayItem.postTestMax || 10;
-
-        // Evaluation
-        const hasEval = !!dayItem.evalUrl;
-
-        const actionHubHtml = `
-            <div class="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 space-y-2.5">
-                <div class="flex justify-between items-center flex-wrap gap-2">
-                    <span class="text-[11px] font-bold text-slate-800 flex items-center space-x-1.5">
-                        <i class="fa-solid fa-bolt text-amber-500"></i>
-                        <span>ศูนย์รวมกิจกรรมประจำวัน (Daily Action Hub: เช้า & บ่าย)</span>
-                    </span>
-                    <div class="flex items-center space-x-2">
-                        <button type="button" onclick="openGeminiSpark(${dayItem.day})" class="text-[11px] bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white font-bold px-2.5 py-1 rounded-lg shadow-xs flex items-center space-x-1 cursor-pointer transition">
-                            <i class="fa-solid fa-wand-magic-sparkles text-amber-200"></i>
-                            <span>Gemini Spark สรุปด่วน</span>
-                        </button>
-                        <button onclick="openDayLinksModal(${dayItem.day})" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center space-x-1 hover:underline cursor-pointer">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            <span>แก้ไขลิงก์ & คะแนน (เช้า-บ่าย)</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Morning & Afternoon Sessions Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-2.5">
-                    <!-- Morning Session Box -->
-                    <div class="p-2.5 bg-blue-50/70 rounded-xl border border-blue-200 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-blue-950 flex items-center space-x-1">
-                                <i class="fa-solid fa-sun text-amber-500"></i>
-                                <span>ช่วงเช้า (09.30 - 12.00 น.)</span>
-                            </span>
-                            <span class="text-[10px] bg-blue-100 text-blue-800 font-semibold px-2 py-0.2 rounded-full">Session เช้า (09.30 น.)</span>
-                        </div>
-                        <div class="grid grid-cols-3 gap-1.5 text-xs">
-                            <!-- 1. Pre-test เช้า -->
-                            <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-blue-700">Pre-test</span>
-                                    ${morningPreScore !== undefined ? `<span class="bg-blue-100 text-blue-800 text-[9px] px-1 py-0.2 rounded font-bold">${morningPreScore}/${morningPreMax}</span>` : '<span class="bg-slate-100 text-slate-600 text-[9px] px-1 py-0.2 rounded font-semibold">7/10</span>'}
-                                </div>
-                                <div class="mt-1">
-                                    ${hasMorningPre ? `
-                                        <a href="${morningPreUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 py-0.5 rounded text-[10px] font-semibold transition">
-                                            <i class="fa-solid fa-pen-ruler text-[9px]"></i>
-                                            <span>ทำข้อสอบ</span>
-                                        </a>
-                                    ` : `
-                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
-                                            + ใส่ลิงก์
-                                        </button>
-                                    `}
-                                </div>
-                            </div>
-
-                            <!-- 2. สไลด์เช้า -->
-                            <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-emerald-700">สไลด์/เอกสาร</span>
-                                    <span class="text-[9px] text-emerald-600 font-bold truncate max-w-[40px]">✓</span>
-                                </div>
-                                <div class="mt-1">
-                                    <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-0.5 rounded text-[10px] font-bold transition truncate cursor-pointer">
-                                        <i class="fa-solid fa-book-open-reader text-emerald-600 text-[9px]"></i>
-                                        <span>ดูสไลด์</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- 3. Post-test เช้า -->
-                            <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-purple-700">Post-test</span>
-                                    ${morningPostScore !== undefined ? `<span class="bg-purple-100 text-purple-800 text-[9px] px-1 py-0.2 rounded font-bold">${morningPostScore}/${morningPostMax}</span>` : ''}
-                                </div>
-                                <div class="mt-1">
-                                    ${hasMorningPost ? `
-                                        <a href="${morningPostUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 py-0.5 rounded text-[10px] font-semibold transition">
-                                            <i class="fa-solid fa-square-check text-[9px]"></i>
-                                            <span>ทำข้อสอบ</span>
-                                        </a>
-                                    ` : `
-                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
-                                            + ใส่ลิงก์
-                                        </button>
-                                    `}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Afternoon Session Box -->
-                    <div class="p-2.5 bg-emerald-50/70 rounded-xl border border-emerald-200 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-emerald-950 flex items-center space-x-1">
-                                <i class="fa-solid fa-cloud-sun text-emerald-600"></i>
-                                <span>ช่วงบ่าย (13.30 - 16.00 น.)</span>
-                            </span>
-                            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.2 rounded-full">Session บ่าย (13.30 น.)</span>
-                        </div>
-                        <div class="grid grid-cols-3 gap-1.5 text-xs">
-                            <!-- 1. Pre-test บ่าย -->
-                            <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-blue-700">Pre-test</span>
-                                    ${afternoonPreScore !== undefined ? `<span class="bg-blue-100 text-blue-800 text-[9px] px-1 py-0.2 rounded font-bold">${afternoonPreScore}/${afternoonPreMax}</span>` : ''}
-                                </div>
-                                <div class="mt-1">
-                                    ${hasAfternoonPre ? `
-                                        <a href="${afternoonPreUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 py-0.5 rounded text-[10px] font-semibold transition">
-                                            <i class="fa-solid fa-pen-ruler text-[9px]"></i>
-                                            <span>ทำข้อสอบ</span>
-                                        </a>
-                                    ` : `
-                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
-                                            + ใส่ลิงก์
-                                        </button>
-                                    `}
-                                </div>
-                            </div>
-
-                            <!-- 2. สไลด์บ่าย -->
-                            <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-emerald-700">สไลด์/เอกสาร</span>
-                                    <span class="text-[9px] text-emerald-600 font-bold truncate max-w-[40px]">✓</span>
-                                </div>
-                                <div class="mt-1">
-                                    <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-0.5 rounded text-[10px] font-bold transition truncate cursor-pointer">
-                                        <i class="fa-solid fa-book-open-reader text-emerald-600 text-[9px]"></i>
-                                        <span>ดูสไลด์</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- 3. Post-test บ่าย -->
-                            <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-[10px] font-bold text-purple-700">Post-test</span>
-                                    ${afternoonPostScore !== undefined ? `<span class="bg-purple-100 text-purple-800 text-[9px] px-1 py-0.2 rounded font-bold">${afternoonPostScore}/${afternoonPostMax}</span>` : '<span class="bg-slate-100 text-slate-600 text-[9px] px-1 py-0.2 rounded font-semibold">9/10</span>'}
-                                </div>
-                                <div class="mt-1">
-                                    ${hasAfternoonPost ? `
-                                        <a href="${afternoonPostUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 py-0.5 rounded text-[10px] font-semibold transition">
-                                            <i class="fa-solid fa-square-check text-[9px]"></i>
-                                            <span>ทำข้อสอบ</span>
-                                        </a>
-                                    ` : `
-                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
-                                            + ใส่ลิงก์
-                                        </button>
-                                    `}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Daily Course Evaluation -->
-                <div class="p-2 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center justify-between flex-wrap gap-2 text-xs">
-                    <div class="flex items-center space-x-2">
-                        <i class="fa-solid fa-star text-amber-500 text-sm"></i>
-                        <span class="font-bold text-amber-950 text-[11px]">แบบประเมินผลการอบรมประจำวัน:</span>
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${dayItem.evalSubmitted ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}">
-                            ${dayItem.evalSubmitted ? '✓ ประเมินเรียบร้อยแล้ว' : 'รอส่งแบบประเมิน'}
-                        </span>
-                    </div>
-                    <div>
-                        ${hasEval ? `
-                            <a href="${dayItem.evalUrl}" target="_blank" class="inline-flex items-center space-x-1 bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3 py-1 rounded-lg text-[11px] shadow-xs transition">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                <span>ส่งแบบประเมิน</span>
-                            </a>
-                        ` : `
-                            <button onclick="openDayLinksModal(${dayItem.day})" class="text-slate-400 border border-dashed border-slate-300 px-2 py-0.5 rounded text-[10px] hover:border-slate-400">
-                                + ใส่ลิงก์แบบประเมิน
-                            </button>
-                        `}
-                    </div>
-                </div>
-            </div>
-        `;
-
         return `
-            <div class="app-card p-5 border-l-4 ${isPresent ? 'border-emerald-500' : 'border-slate-300'} transition space-y-3">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                    <div class="flex items-center space-x-3">
-                        <span class="w-10 h-10 rounded-xl ${isPresent ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'} flex items-center justify-center font-bold text-sm shrink-0">
-                            วันที่ ${dayItem.day}
+            <div class="app-card p-4 border-l-4 ${isPresent ? 'border-emerald-500' : 'border-slate-300'} space-y-3">
+                <div class="flex justify-between items-center">
+                    <div class="font-bold text-govNavy text-sm">
+                        วันที่ ${dayItem.day}: ${dayItem.date}
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs font-bold px-2 py-0.5 rounded ${isPresent ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+                            ${isPresent ? '✓ เข้าเรียน' : 'ยังไม่เช็กอิน'}
                         </span>
-                        <div>
-                            <div class="flex items-center space-x-2">
-                                <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-calendar mr-1"></i>${dayItem.date}</span>
-                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isPresent ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-                                    ${dayItem.status === 'PRESENT' ? 'เข้าเรียนปกติ' : dayItem.status === 'ONLINE' ? 'เรียนออนไลน์' : 'ไม่ได้เข้าอบรม'}
-                                </span>
-                            </div>
-                            <h4 class="font-bold text-govNavy text-sm mt-0.5">${dayItem.title}</h4>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2 self-end sm:self-center">
-                        <button onclick="toggleAttendanceStatus(${dayItem.day})" class="px-3 py-1.5 rounded-lg border text-xs font-semibold ${isPresent ? 'border-emerald-300 bg-emerald-50 text-emerald-700 hover:bg-emerald-100' : 'border-slate-300 bg-slate-100 text-slate-600'}">
-                            <i class="fa-solid ${isPresent ? 'fa-check' : 'fa-xmark'} mr-1"></i> สลับสถานะ
-                        </button>
-                        <button onclick="openReflectionModal(${dayItem.day})" class="px-3 py-1.5 rounded-lg bg-govNavy hover:bg-govNavyDark text-white text-xs font-semibold shadow">
-                            <i class="fa-solid fa-pen-to-square mr-1"></i> บันทึกโน้ต
-                        </button>
                     </div>
                 </div>
-
                 ${sessionHtml}
-                ${actionHubHtml}
-
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/80 text-xs space-y-2">
-                    <div>
-                        <strong class="text-slate-700 font-semibold"><i class="fa-solid fa-lightbulb text-amber-500 mr-1.5"></i>สรุปการเรียนรู้ (Reflection):</strong>
-                        <p class="text-slate-600 mt-0.5 leading-relaxed">${dayItem.reflection || '<span class="text-slate-400 italic">ยังไม่มีการบันทึกสรุป</span>'}</p>
-                    </div>
-                    ${dayItem.actionPlan ? `
-                    <div class="border-t border-slate-200 pt-1.5">
-                        <strong class="text-slate-700 font-semibold"><i class="fa-solid fa-arrow-right-to-bracket text-emerald-500 mr-1.5"></i>สิ่งที่นำไปปรับใช้:</strong>
-                        <p class="text-slate-600 mt-0.5">${dayItem.actionPlan}</p>
-                    </div>` : ''}
-                </div>
             </div>
         `;
     }).join('');
@@ -6091,7 +6047,684 @@ window.updateAdminButtonsVisibility = updateAdminButtonsVisibility;
 /* ==========================================================================
    14. M2 LECTURER HUB ENGINE & MULTI-VIEW CONTROLLER (HUB / CLASSIC / TREE)
    ========================================================================== */
-const master13DaysHubSessions = undefined;
+const master13DaysHubSessions = [
+  {
+    "id": "session-10-am",
+    "date": "10 สิงหาคม 2569",
+    "date_iso": "2569-08-10",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 212 (เรียนร่วม)",
+    "subject": "ปฐมนิเทศและทำความเข้าใจหลักสูตร / กิจกรรม Ice Breaking",
+    "subtopics": [
+      "กิจกรรมสร้างความคุ้นเคย (Ice Breaking) รู้จักฉันรู้จักเธอ",
+      "แนะนำหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการ รุ่นที่ 1",
+      "แนวทางการเรียนรู้ กฎระเบียบ และการประเมินผลการอบรม"
+    ],
+    "lecturers": [
+      "รศ.ดร.ศุภชัย เหมือนโพธิ์",
+      "ผศ.ชุดาพร สอนภักดี"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "กิจกรรม_Ice_Breaking_รู้จักฉันรู้จักเธอ 10 ส.ค. 69.pdf, กำหนดการปฐมนิเทศ.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วันแรก - เรียนร่วม BB 212 (ผู้เข้าอบรม 40 คน)"
+  },
+  {
+    "id": "session-10-pm",
+    "date": "10 สิงหาคม 2569",
+    "date_iso": "2569-08-10",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 212 (เรียนร่วม)",
+    "subject": "วินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ",
+    "subtopics": [
+      "หลักวินัย คุณธรรม จริยธรรม และมาตรฐานทางจริยธรรมของบุคลากรภาครัฐ",
+      "ความซื่อสัตย์สุจริต และการป้องกันการทุจริต/ผลประโยชน์ทับซ้อน",
+      "กรณีศึกษาด้านจริยธรรมข้าราชการ"
+    ],
+    "lecturers": [
+      "อาจารย์มาณิช อินทฉิม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "Powerpoint กาารบรรยาย อ.มาณิช 10ส.ค.69.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "บรรยายโดย อ.มาณิช อินทฉิม (อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ สำนักงานเลขาธิการสภาผู้แทนราษฎร)"
+  },
+  {
+    "id": "session-11-fnd-am",
+    "date": "11 สิงหาคม 2569",
+    "date_iso": "2569-08-11",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "foundation",
+    "track_label": "หลักสูตรพื้นฐาน",
+    "room": "ห้อง BB 202 (พื้นฐาน - FND)",
+    "subject": "ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน",
+    "subtopics": [
+      "ความหมาย ความสำคัญ และวิวัฒนาการของระบบราชการไทย",
+      "โครงสร้างการบริหารราชการแผ่นดิน ส่วนกลาง ส่วนภูมิภาค ส่วนท้องถิ่น",
+      "บทบาท อำนาจหน้าที่ และภารกิจของหน่วยงานภาครัฐ"
+    ],
+    "lecturers": [
+      "อาจารย์มาณิช อินทฉิม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "11-8-69 ช่วงเช้า เรื่อง ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน ห้องอบรม 1 PPT.pdf",
+    "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
+    "notes": "แยกห้องอบรม BB 202"
+  },
+  {
+    "id": "session-11-adv-am",
+    "date": "11 สิงหาคม 2569",
+    "date_iso": "2569-08-11",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ขั้นสูง - ADV)",
+    "subject": "การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / Agile",
+    "subtopics": [
+      "1.1 ธรรมาภิบาลข้อมูล (Data Governance) และการคิดเชิงข้อมูล",
+      "1.2 การบริหารโครงการภาครัฐและการทำงานแบบ Agile (Trello, Jira, Notion)"
+    ],
+    "lecturers": [
+      "ผศ.ดร.ดวงใจ จิตคงชื่น",
+      "ดร.ปริสุทธิ์ จิตต์ภักดี",
+      "อาจารย์มงคล สิริถิรวัฒน์"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ผศ.ดร.ดวงใจ จิตคงชื่น.pdf, CV ดร.ปริสุทธิ์ จิตต์ภักดี.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "แยกห้องอบรม BB 203 (ทีมวิทยากรจาก BDI และ ก.พ.)"
+  },
+  {
+    "id": "session-11-fnd-pm",
+    "date": "11 สิงหาคม 2569",
+    "date_iso": "2569-08-11",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "foundation",
+    "track_label": "หลักสูตรพื้นฐาน",
+    "room": "ห้อง BB 202 (พื้นฐาน - FND)",
+    "subject": "กฎหมาย ระเบียบ และข้อบังคับพื้นฐานที่เกี่ยวข้องกับการปฏิบัติราชการ",
+    "subtopics": [
+      "พ.ร.บ. ระเบียบข้าราชการพลเรือน พ.ศ. 2551",
+      "พ.ร.บ. ข้อมูลข่าวสารของราชการ และวิธีปฏิบัติราชการทางปกครอง"
+    ],
+    "lecturers": [
+      "อาจารย์มาณิช อินทฉิม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "11-8-69 ช่วงบ่าย เรื่อง กฎหมาย ระเบียบ และข้อบังคับพื้นฐานฯ ห้องอบรม 1 PPT.pdf",
+    "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
+    "notes": "บรรยายโดย อ.มาณิช อินทฉิม ห้อง BB 202"
+  },
+  {
+    "id": "session-11-adv-pm",
+    "date": "11 สิงหาคม 2569",
+    "date_iso": "2569-08-11",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ขั้นสูง - ADV)",
+    "subject": "การออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
+    "subtopics": [
+      "1.3.1 มาตรฐานและโครงสร้างเอกสารดิจิทัล",
+      "1.3.2 ลายมือชื่ออิเล็กทรอนิกส์ (e-Signature) และการปรับปรุงผังงาน"
+    ],
+    "lecturers": [
+      "ดร.ปริสุทธิ์ จิตต์ภักดี",
+      "ดร.ขวัญศิริ ศิริมังคลา",
+      "อาจารย์มงคล สิริถิรวัฒน์"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ดร. ขวัญศิริ ศิริมังคลา.pdf, CV อาจารย์มงคล สิริถิรวัฒน์.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "ทีมวิทยากรจาก BDI และ ก.พ. ห้อง BB 203"
+  },
+  {
+    "id": "session-13-fnd-am",
+    "date": "13 สิงหาคม 2569",
+    "date_iso": "2569-08-13",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "foundation",
+    "track_label": "หลักสูตรพื้นฐาน",
+    "room": "ห้อง BB 202 (FND)",
+    "subject": "วิชาทักษะพื้นฐานด้านการบริการภาครัฐ",
+    "subtopics": [
+      "Service Mind in Public Sector",
+      "การสื่อสารเพื่อสร้างความประทับใจและการจัดการข้อร้องเรียน"
+    ],
+    "lecturers": [
+      "ผศ.ดร.ภริมา วินิธาสถิตย์กุล"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "13-8-69 ช่วงเช้า เรื่อง ทักษะพื้นฐานด้านการบริการภาครัฐ ห้องอบรม 1.pdf",
+    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+    "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
+  },
+  {
+    "id": "session-13-adv-am",
+    "date": "13 สิงหาคม 2569",
+    "date_iso": "2569-08-13",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ADV)",
+    "subject": "วิชาเทคนิคการสื่อสารและสร้างคอนเทนต์ภาครัฐ",
+    "subtopics": [
+      "การสื่อสารนโยบายภาครัฐให้เข้าใจง่าย",
+      "การผลิตสื่อดิจิทัลและ Content Strategy"
+    ],
+    "lecturers": [
+      "ผศ.ดร.ภริมา วินิธาสถิตย์กุล"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ผศ.ดร.ภริมา วินิธาสถิตย์กุล.pdf",
+    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+    "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
+  },
+  {
+    "id": "session-13-fnd-pm",
+    "date": "13 สิงหาคม 2569",
+    "date_iso": "2569-08-13",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "foundation",
+    "track_label": "หลักสูตรพื้นฐาน",
+    "room": "ห้อง BB 202 (FND)",
+    "subject": "วิชาทักษะการคิดเชิงออกแบบ (Design Thinking)",
+    "subtopics": [
+      "5 ขั้นตอน Design Thinking สำหรับงานบริการภาครัฐ",
+      "User Empathy และ Service Prototyping"
+    ],
+    "lecturers": [
+      "นายวิศรุต เสรีนิราช"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV นายวิศรุต เสรีนิราช.pdf",
+    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+    "notes": "วิทยากร นายวิศรุต เสรีนิราช"
+  },
+  {
+    "id": "session-13-adv-pm",
+    "date": "13 สิงหาคม 2569",
+    "date_iso": "2569-08-13",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ADV)",
+    "subject": "วิชาการบริหารและวิเคราะห์ข้อมูลเพื่อการตัดสินใจ & PDPA",
+    "subtopics": [
+      "Data Governance, Risk, Compliance (GRC)",
+      "พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) และ Cyber Security"
+    ],
+    "lecturers": [
+      "นางสาววราภรณ์ ไตรศักดิ์ศรี"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV นางสาววราภรณ์ ไตรศักดิ์ศรี.pdf",
+    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+    "notes": "บรรยายโดย คุณวราภรณ์ ไตรศักดิ์ศรี"
+  },
+  {
+    "id": "session-14-fnd-am",
+    "date": "14 สิงหาคม 2569",
+    "date_iso": "2569-08-14",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "foundation",
+    "track_label": "หลักสูตรพื้นฐาน",
+    "room": "ห้อง BB 202 (FND)",
+    "subject": "วิชาการประยุกต์ใช้ AI ในการปฏิบัติงาน",
+    "subtopics": [
+      "Generative AI Tools สำหรับงานราชการ",
+      "Prompt Engineering ช่วยร่างหนังสือและสรุปรายงาน"
+    ],
+    "lecturers": [
+      "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "14-8-69 เรื่อง การประยุกต์ใช้ AI ในการทำงานราชการ ห้องอบรม 1.pdf",
+    "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
+    "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
+  },
+  {
+    "id": "session-14-adv-am",
+    "date": "14 สิงหาคม 2569",
+    "date_iso": "2569-08-14",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ADV)",
+    "subject": "วิชาการประยุกต์ใช้ AI ในการปฏิบัติงานราชการขั้นสูง",
+    "subtopics": [
+      "การสร้าง AI Automation Agent เบื้องต้น",
+      "การผสาน AI เข้ากับระบบงานราชการอย่างปลอดภัย"
+    ],
+    "lecturers": [
+      "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ผศ.ดร.ชนินทร์ ฐิติเพชรกุล.pdf",
+    "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
+    "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
+  },
+  {
+    "id": "session-14-joint-pm",
+    "date": "14 สิงหาคม 2569",
+    "date_iso": "2569-08-14",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 202 & 203 (เรียนร่วม)",
+    "subject": "บริบทการบริหารราชการยุคดิจิทัล และการเข้าถึงของคนพิการ",
+    "subtopics": [
+      "การเปลี่ยนแปลงกระบวนทัศน์ภาครัฐยุคดิจิทัล",
+      "การส่งเสริมการเข้าถึงและเทคโนโลยีสิ่งอำนวยความสะดวกสำหรับคนพิการ"
+    ],
+    "lecturers": [
+      "รศ.ดร.เกยูร วงศ์ก้อม",
+      "ดร.สุชีรา พลราชม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV รศ.ดร.เกยูร วงศ์ก้อม.pdf, 14-8-69 ช่วงบ่าย เรื่อง บริบทการบริหารราชการ.pdf",
+    "file_url": "https://drive.google.com/file/d/1Y8vT05KM62HwYtCOfO5EK_eaEJTBpzv2/view",
+    "notes": "บรรยายโดย รศ.ดร.เกยูร วงศ์ก้อม และ ดร.สุชีรา พลราชม ม.สวนดุสิต"
+  },
+  {
+    "id": "session-17-am",
+    "date": "17 สิงหาคม 2569",
+    "date_iso": "2569-08-17",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 205 (เรียนร่วม)",
+    "subject": "การจัดการระบบงานสารบรรณอิเล็กทรอนิกส์ (e-Saraban) & การใช้ภาษาราชการ",
+    "subtopics": [
+      "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ (ฉบับที่ 4) พ.ศ. 2564",
+      "การรับ-ส่ง เกษียนหนังสือ และการจัดทำหนังสือราชการ e-Saraban"
+    ],
+    "lecturers": [
+      "นางสาวสุพิชฌาย์ กลิ่นหอม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ_eSaraban.pdf, ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
+  },
+  {
+    "id": "session-17-pm",
+    "date": "17 สิงหาคม 2569",
+    "date_iso": "2569-08-17",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 205 (เรียนร่วม)",
+    "subject": "งานสารบรรณและกฎหมายภาครัฐขั้นสูง / การเขียนหนังสือราชการเชิงวิเคราะห์",
+    "subtopics": [
+      "การเขียนบันทึกข้อความเสนอผู้บริหารเชิงวิเคราะห์",
+      "ข้อกฎหมายและประเด็นที่มักพบข้อผิดพลาดในงานสารบรรณภาครัฐ"
+    ],
+    "lecturers": [
+      "นางสาวสุพิชฌาย์ กลิ่นหอม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "การเขียนหนังสือราชการเชิงวิเคราะห์และข้อกฎหมายสารบรรณ.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
+  },
+  {
+    "id": "session-18-fnd-am",
+    "date": "18 สิงหาคม 2569",
+    "date_iso": "2569-08-18",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "foundation",
+    "track_label": "หลักสูตรพื้นฐาน",
+    "room": "ห้อง BB 202 (FND)",
+    "subject": "การพัฒนาบุคลิกภาพและการสื่อสาร",
+    "subtopics": [
+      "การพัฒนาบุคลิกภาพและความมั่นใจในสถานที่ทำงานราชการ",
+      "มารยาทและการสื่อสารระหว่างบุคคล"
+    ],
+    "lecturers": [
+      "อาจารย์จารุณี ทองอร่าม",
+      "ผศ.ชุติมา กลั่นไพฑูรย์"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV อ.จารุณี ทองอร่าม.pdf, CV ผศ. ชุติมา กลั่นไพฑูรย์.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "ห้อง BB 202 ทีมวิทยากร ม.สวนดุสิต"
+  },
+  {
+    "id": "session-18-adv-am",
+    "date": "18 สิงหาคม 2569",
+    "date_iso": "2569-08-18",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ADV)",
+    "subject": "การปรับตัวและสร้างสัมพันธภาพในการทำงานมืออาชีพ",
+    "subtopics": [
+      "การปรับตัวสู่โลกการทำงานและการประสานงานข้ามหน่วยงาน",
+      "จิตวิทยาการสร้างความร่วมมือในองค์กร"
+    ],
+    "lecturers": [
+      "อาจารย์ณัฐฐิณี คงไกรฤกษ์",
+      "ดร.สุกฤตา ปรีชาว่อง"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, ประวัติวิทยากร_อ. ณัฐฐิณี คงไกรฤกษ.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "ห้อง BB 203 ทีมวิทยากร ม.สวนดุสิต"
+  },
+  {
+    "id": "session-18-pm",
+    "date": "18 สิงหาคม 2569",
+    "date_iso": "2569-08-18",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 202 & 203 (เรียนร่วม)",
+    "subject": "เทคนิคการสื่อสารและการทำงานร่วมกับผู้อื่น",
+    "subtopics": [
+      "การสื่อสารเพื่อลดความขัดแย้งและการทำงานเป็นทีม",
+      "Workshop การพัฒนาสมรรถนะการสื่อสารข้ามสายงาน"
+    ],
+    "lecturers": [
+      "ดร.สุกฤตา ปรีชาว่อง",
+      "อาจารย์จารุณี ทองอร่าม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, CV อ.จารุณี ทองอร่าม.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "เรียนร่วม BB 202 & 203"
+  },
+  {
+    "id": "session-19-am",
+    "date": "19 สิงหาคม 2569",
+    "date_iso": "2569-08-19",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 202 / BB 203",
+    "subject": "การจัดการกระบวนการทำงานและผลิตภาพภาครัฐ",
+    "subtopics": [
+      "Lean Management ในหน่วยงานราชการ",
+      "การวิเคราะห์ Flowchart และการเพิ่มผลผลิตในการทำงาน"
+    ],
+    "lecturers": [
+      "รศ.ดร.เรือโท ทวีศักดิ์ รูปสิงห์",
+      "รศ.ดร.ปรัชญา ชุ่มนาเสียว"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "รศ.ดร.ทวีศักดิ์ รูปสิงห์.pdf, รศ.ดรปรัชญา ชุ่มนาเสียว.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากรจาก มจพ. และ ม.รามคำแหง"
+  },
+  {
+    "id": "session-19-pm",
+    "date": "19 สิงหาคม 2569",
+    "date_iso": "2569-08-19",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 202 / BB 203",
+    "subject": "การบริหารจัดการองค์กรภาครัฐสู่ความเป็นเลิศ / ระบบงานนิติบัญญัติ",
+    "subtopics": [
+      "การบริหารราชการแผ่นดินสู่ความเป็นเลิศ",
+      "กระบวนการและระบบงานนิติบัญญัติที่เกี่ยวข้องกับข้าราชการ"
+    ],
+    "lecturers": [
+      "อาจารย์มาณิช อินทฉิม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "ประวัติวิทยากร_อาจารย์ มาณิช อินทฉิม.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "บรรยายโดย อ.มาณิช อินทฉิม"
+  },
+  {
+    "id": "session-20-am",
+    "date": "20 สิงหาคม 2569",
+    "date_iso": "2569-08-20",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 202 / BB 203",
+    "subject": "การพัฒนาภาวะผู้นำและการทำงานเป็นทีม",
+    "subtopics": [
+      "Self-Leadership ภาวะผู้นำในตนเอง",
+      "การสร้างความร่วมมือและการสื่อสารเชิงบวกในทีม"
+    ],
+    "lecturers": [
+      "รศ.ดร.ทวีศักดิ์ กฤษเจริญ",
+      "ดร.สุกฤตา ปรีชาว่อง"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV รศ.ดร.ทวีศักดิ์ กฤษเจริญ.pdf, CV ดร. สุกฤตา ปรีชาว่อง.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากรจาก มจพ. และ ม.สวนดุสิต"
+  },
+  {
+    "id": "session-20-pm",
+    "date": "20 สิงหาคม 2569",
+    "date_iso": "2569-08-20",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "foundation",
+    "track_label": "หลักสูตรพื้นฐาน",
+    "room": "ห้อง BB 202 (ห้อง 1)",
+    "subject": "การบริหารจัดการสำนักงานอัจฉริยะ & งานสารบรรณคนพิการ",
+    "subtopics": [
+      "Smart Office Tools สำหรับงานเอกสารราชการ",
+      "การฝึกอบรมงานสารบรรณสำหรับผู้พิการ"
+    ],
+    "lecturers": [
+      "รศ.ดร.ทวีศักดิ์ กฤษเจริญ"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "20-8-69 ช่วงบ่าย เรื่อง การบริหารจัดการสำนักงานอัจฉริยะ ห้องอบรม 1.pdf, การฝึกอบรมงานสารบรรณสำหรับผู้พิการ.rar",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "มีไฟล์เอกสารและแบบฝึกปฏิบัติงานสารบรรณคนพิการ (.rar)"
+  },
+  {
+    "id": "session-24-am",
+    "date": "24 สิงหาคม 2569",
+    "date_iso": "2569-08-24",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 202 / BB 203",
+    "subject": "การจัดการข้อมูลและเทคโนโลยีดิจิทัลขั้นสูง",
+    "subtopics": [
+      "สถาปัตยกรรมระบบสารสนเทศภาครัฐ",
+      "การประมวลผลและการจัดการความปลอดภัยข้อมูล"
+    ],
+    "lecturers": [
+      "ผศ.ดร.สุปรียส์ กาญจนพิศศาล",
+      "ดร.สุกฤตา ปรีชาว่อง"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ผศ.ดร.สุปรียส์ กาญจนพิศศาล.pdf, CV ดร. สุกฤตา ปรีชาว่อง.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากรจาก มจพ. และ ม.สวนดุสิต"
+  },
+  {
+    "id": "session-24-pm",
+    "date": "24 สิงหาคม 2569",
+    "date_iso": "2569-08-24",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 202 / BB 203",
+    "subject": "จิตวิทยาการทำงานและการสื่อสารในองค์กร",
+    "subtopics": [
+      "การสร้างความเข้มแข็งทางใจ (Resilience)",
+      "การวางแผนและติดตามประเมินผลโครงการภาครัฐ"
+    ],
+    "lecturers": [
+      "ดร.สุกฤตา ปรีชาว่อง",
+      "รศ.ดร.วันชัย ปานจันทร์"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, รศ.ดร.วันชัย ปานจันทร์.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากรผู้ทรงคุณวุฒิ"
+  },
+  {
+    "id": "session-25-am",
+    "date": "25 สิงหาคม 2569",
+    "date_iso": "2569-08-25",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ADV)",
+    "subject": "4.4 การบริหารจัดการฐานข้อมูลและสถาปัตยกรรมข้อมูลภาครัฐ",
+    "subtopics": [
+      "การออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์",
+      "Data Integration & Open Data ภาครัฐ"
+    ],
+    "lecturers": [
+      "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
+      "ดร.ชณทัต บุญชูวงศ์"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากรจาก มจธ. (KMUTT)"
+  },
+  {
+    "id": "session-25-pm",
+    "date": "25 สิงหาคม 2569",
+    "date_iso": "2569-08-25",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 203 (ADV)",
+    "subject": "4.5 การวิเคราะห์ข้อมูลเพื่อปรับปรุงงานบริการ (Data Analytics for Service Improvement)",
+    "subtopics": [
+      "การวัดผลและวิเคราะห์ดัชนี CSAT, NPS, Customer Effort Score",
+      "การสร้าง Service Dashboard รายงานผู้บริหาร"
+    ],
+    "lecturers": [
+      "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
+      "ดร.ชณทัต บุญชูวงศ์"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากรจาก มจธ. (KMUTT)"
+  },
+  {
+    "id": "session-26-am",
+    "date": "26 สิงหาคม 2569",
+    "date_iso": "2569-08-26",
+    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+    "track": "advanced",
+    "track_label": "หลักสูตรขั้นสูง",
+    "room": "ห้อง BB 202 / BB 203",
+    "subject": "5.2 การประยุกต์ใช้เทคโนโลยีอัตโนมัติและ AI ในงานธุรการ",
+    "subtopics": [
+      "การสร้างระบบทำงานอัตโนมัติ (Power Automate / Apps Script)",
+      "Prompt Engineering ร่างหนังสือและรายงานการประชุม"
+    ],
+    "lecturers": [
+      "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
+      "ดร.ชณทัต บุญชูวงศ์"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากรจาก มจธ. (KMUTT)"
+  },
+  {
+    "id": "session-26-pm",
+    "date": "26 สิงหาคม 2569",
+    "date_iso": "2569-08-26",
+    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้อง BB 202 / BB 203",
+    "subject": "5.3 งานสารบรรณและการเขียนเชิงวิเคราะห์ขั้นสูง",
+    "subtopics": [
+      "การเขียนบันทึกข้อความเสนอผู้บังคับบัญชาเชิงวิเคราะห์",
+      "Workshop งานสารบรรณและการเขียนเชิงวิเคราะห์"
+    ],
+    "lecturers": [
+      "นางสาวสุพิชฌาย์ กลิ่นหอม"
+    ],
+    "status": "verified",
+    "status_label": "ยืนยันจากไฟล์",
+    "file_name": "ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม สปน."
+  },
+  {
+    "id": "session-27-joint",
+    "date": "27 สิงหาคม 2569",
+    "date_iso": "2569-08-27",
+    "period": "เต็มวัน (09:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้องอบรมตามกำหนดการ",
+    "subject": "การเตรียมความพร้อมและประเมินผลการเรียนรู้หลังการอบรม (Post-Test)",
+    "subtopics": [
+      "การทบทวนองค์ความรู้และทักษะตลอดหลักสูตรภาคทฤษฎี",
+      "การทดสอบวัดความรู้หลังการฝึกอบรม (Post-Test) ภาคทฤษฎี"
+    ],
+    "lecturers": [],
+    "status": "pending",
+    "status_label": "รอตรวจสอบ",
+    "file_name": "แบบทดสอบ Post-Test (รอประกาศไฟล์)",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "ยังไม่พบชื่อผู้สอนในไฟล์ที่อ่านได้ (รอประกาศห้องและผู้คุมสอบอย่างเป็นทางการ)"
+  },
+  {
+    "id": "session-28-joint",
+    "date": "28 สิงหาคม 2569",
+    "date_iso": "2569-08-28",
+    "period": "เต็มวัน (09:00 – 16:00 น.)",
+    "track": "joint",
+    "track_label": "เรียนร่วม",
+    "room": "ห้องอบรมตามกำหนดการ",
+    "subject": "พิธีปิดการฝึกอบรมภาคทฤษฎี และปฐมนิเทศการฝึกปฏิบัติงานจริง (OJT 90 ชม.)",
+    "subtopics": [
+      "การสรุปผลการประเมินการฝึกอบรมภาคทฤษฎี รุ่นที่ 1",
+      "การมอบหมายหน่วยงานภาครัฐสำหรับฝึกปฏิบัติงาน (1-30 ก.ย. 69)",
+      "พิธีปิดการฝึกอบรมภาคทฤษฎีและถ่ายภาพร่วมกัน"
+    ],
+    "lecturers": [],
+    "status": "pending",
+    "status_label": "รอตรวจสอบ",
+    "file_name": "คำกล่าวปิดและสรุปโครงการ (รอประกาศไฟล์)",
+    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+    "notes": "ยังไม่พบชื่อผู้สอนในไฟล์ที่อ่านได้ (รอการยืนยันกำหนดการพิธีปิดอย่างเป็นทางการ)"
+  }
+];
 
 let activeM2ViewMode = localStorage.getItem('civil_m2_view_mode') || 'HUB'; // 'HUB' | 'CLASSIC' | 'TREE'
 
