@@ -688,7 +688,7 @@ function saveState() {
 function renderAllViews() {
     renderUserProfileForm();
     applyParticipantFilters();
-    renderScheduleList();
+    setM2ViewMode(activeM2ViewMode);
     renderOjtTable();
     renderOjtChecklist();
     renderArtifactsGrid();
