@@ -568,6 +568,23 @@ const defaultAppData = {
             link: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&auto=format&fit=crop&q=60"
         }
     ],
+    mentorProfile: {
+        fullName: "นายสมชาย พิทักษ์ราชการ",
+        position: "นักวิเคราะห์นโยบายและแผนชำนาญการพิเศษ",
+        agency: "สำนักงานปลัดกระทรวงการคลัง (พี่เลี้ยงประจำตัว)",
+        feedbackNotes: "มีความมุ่งมั่นตั้งใจในการปฏิบัติงาน เรียนรู้เทคโนโลยี AI และระบบสารบรรณราชการได้อย่างรวดเร็ว มีมนุษยสัมพันธ์ดีเยี่ยมและพร้อมรับการทดลองปฏิบัติราชการ",
+        competencies: {
+            c1: 5,
+            c2: 5,
+            c3: 5,
+            c4: 5,
+            c5: 5,
+            c6: 4
+        },
+        isEndorsed: true,
+        endorsedDate: "2026-09-30",
+        mentorPin: "8888"
+    },
     participants: [...initialMasterParticipants]
 };
 
@@ -586,8 +603,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.history.replaceState({path: cleanUrl}, '', cleanUrl);
     }
 
-    initSecurityLock();
     loadSavedState();
+    initSecurityLock();
     loadParticipantsData();
     renderAllViews();
     setupRctfPromptListener();
@@ -604,6 +621,11 @@ function loadSavedState() {
             // Upgrade to authentic 13-year resume data if previously using sample mock data
             if (!parsed.userProfile || parsed.userProfile.email === 'nitipat.k@bdi.or.th' || !parsed.userProfile.experiences || parsed.userProfile.experiences.length < 3) {
                 appState.userProfile = JSON.parse(JSON.stringify(defaultAppData.userProfile));
+            }
+
+            // Ensure mentorProfile is populated
+            if (!parsed.mentorProfile) {
+                appState.mentorProfile = JSON.parse(JSON.stringify(defaultAppData.mentorProfile));
             }
 
             // Ensure attendance data includes the updated rich structure & daily action hub properties
@@ -2750,8 +2772,26 @@ function renderPortfolioPreview() {
         `;
     }
 
-    // Page 7: Sign-off
+    // Page 7: Sign-off & Mentor Guidance
     setText('pv-p7-sign-name', p.fullName);
+    const m = appState.mentorProfile || defaultAppData.mentorProfile;
+    if (m) {
+        setText('pv-p7-mentor-notes', m.feedbackNotes ? `"${m.feedbackNotes}"` : '"มีความมุ่งมั่นตั้งใจในการปฏิบัติงาน เรียนรู้เทคโนโลยี AI และระบบสารบรรณราชการได้อย่างรวดเร็ว มีมนุษยสัมพันธ์ดีเยี่ยมและพร้อมรับการทดลองปฏิบัติราชการ"');
+        setText('pv-p7-mentor-name-title', m.fullName);
+        setText('pv-p7-mentor-agency', m.agency);
+        setText('pv-p7-mentor-sign-name', m.fullName);
+        setText('pv-p7-endorse-date', m.endorsedDate || '30 กันยายน 2569');
+        const mentorBadge = document.getElementById('pv-p7-mentor-badge');
+        if (mentorBadge) {
+            if (m.isEndorsed) {
+                mentorBadge.innerText = '✓ ผ่านการรับรองผล';
+                mentorBadge.className = 'text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold';
+            } else {
+                mentorBadge.innerText = '⏳ อยู่ระหว่างการประเมิน';
+                mentorBadge.className = 'text-[10px] bg-amber-500 text-white px-2 py-0.5 rounded-full font-bold';
+            }
+        }
+    }
 }
 
 function copyFullPortfolioText() {
@@ -2955,16 +2995,71 @@ function copyToClipboard(elementId) {
 }
 
 // --------------------------------------------------------------------------
-// 12. Security & Passcode Access Control Engine
+// 12. Security & Dual-Role Passcode Access Control Engine (Trainee / Mentor)
 // --------------------------------------------------------------------------
 const PIN_CODE_KEY = 'civil_servant_security_pin';
 const AUTH_SESSION_KEY = 'civil_servant_session_unlocked';
+const AUTH_ROLE_KEY = 'civil_servant_auth_role';
 const REMEMBER_DEVICE_KEY = 'civil_servant_remember_device';
 const DEFAULT_PIN = '2569';
+const DEFAULT_MENTOR_PIN = '8888';
+
+let currentAuthRole = 'trainee'; // 'trainee' | 'mentor'
+let currentLockScreenRole = 'trainee'; // 'trainee' | 'mentor'
+
+function setLockScreenRole(role) {
+    currentLockScreenRole = role;
+    const btnTrainee = document.getElementById('btn-lock-role-trainee');
+    const btnMentor = document.getElementById('btn-lock-role-mentor');
+    const pinInput = document.getElementById('lock-pin-input');
+    const instruction = document.getElementById('lock-screen-instruction');
+    const err = document.getElementById('lock-error-msg');
+
+    if (err) err.classList.add('hidden');
+
+    if (role === 'mentor') {
+        if (btnMentor) btnMentor.className = 'flex-1 py-1.5 rounded-lg bg-blue-900 text-white shadow-xs transition flex items-center justify-center gap-1 font-bold';
+        if (btnTrainee) btnTrainee.className = 'flex-1 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1 font-medium';
+        if (pinInput) pinInput.placeholder = 'PIN พี่เลี้ยง (เริ่มต้น: 8888)';
+        if (instruction) instruction.innerText = 'โหมดข้าราชการพี่เลี้ยง: ใส่รหัส PIN เพื่อเข้าตรวจประเมิน';
+    } else {
+        if (btnTrainee) btnTrainee.className = 'flex-1 py-1.5 rounded-lg bg-govNavy text-white shadow-xs transition flex items-center justify-center gap-1 font-bold';
+        if (btnMentor) btnMentor.className = 'flex-1 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1 font-medium';
+        if (pinInput) pinInput.placeholder = 'แตะเพื่อพิมพ์รหัส PIN';
+        if (instruction) instruction.innerText = 'โหมดข้าราชการผู้เรียน: กรุณาใส่รหัส PIN เพื่อยืนยันตัวตน';
+    }
+
+    if (pinInput) {
+        pinInput.value = '';
+        updatePinDots();
+        pinInput.focus();
+    }
+}
 
 function initSecurityLock() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isMentorUrlParam = urlParams.get('role') === 'mentor' || urlParams.get('mentor') === '1';
+
+    if (isMentorUrlParam) {
+        currentAuthRole = 'mentor';
+        sessionStorage.setItem(AUTH_ROLE_KEY, 'mentor');
+        sessionStorage.setItem(AUTH_SESSION_KEY, 'true');
+        const overlay = document.getElementById('lock-screen-overlay');
+        if (overlay) {
+            overlay.classList.add('hidden');
+            overlay.style.display = 'none';
+        }
+        document.body.classList.remove('is-locked');
+        document.documentElement.classList.remove('is-locked');
+        renderMentorStatusBanner();
+        showToast('✨ ยินดีต้อนรับท่านข้าราชการพี่เลี้ยง เข้าสู่ระบบติดตามและประเมินผล');
+        return;
+    }
+
     const isRemembered = localStorage.getItem(REMEMBER_DEVICE_KEY) === 'true';
     const isSessionUnlocked = sessionStorage.getItem(AUTH_SESSION_KEY) === 'true' || localStorage.getItem(AUTH_SESSION_KEY) === 'true';
+    const savedRole = sessionStorage.getItem(AUTH_ROLE_KEY) || 'trainee';
+    currentAuthRole = savedRole;
 
     const overlay = document.getElementById('lock-screen-overlay');
     if (!overlay) return;
@@ -2974,28 +3069,20 @@ function initSecurityLock() {
         overlay.style.display = 'none';
         document.body.classList.remove('is-locked');
         document.documentElement.classList.remove('is-locked');
+        renderMentorStatusBanner();
     } else {
         overlay.classList.remove('hidden');
         overlay.style.display = 'flex';
         document.body.classList.add('is-locked');
         document.documentElement.classList.add('is-locked');
-        const pinInput = document.getElementById('lock-pin-input');
-        if (pinInput) {
-            pinInput.value = '';
-            pinInput.addEventListener('input', () => {
-                updatePinDots();
-                const currentPin = getStoredPin();
-                if (pinInput.value.length === currentPin.length) {
-                    submitPinUnlock();
-                }
-            });
-            setTimeout(() => pinInput.focus(), 200);
-        }
-        updatePinDots();
+        setLockScreenRole('trainee');
     }
 }
 
 function getStoredPin() {
+    if (currentLockScreenRole === 'mentor') {
+        return appState.mentorProfile?.mentorPin || DEFAULT_MENTOR_PIN;
+    }
     return localStorage.getItem(PIN_CODE_KEY) || DEFAULT_PIN;
 }
 
@@ -3010,7 +3097,8 @@ function updatePinDots() {
         let dotsHtml = '';
         for (let i = 0; i < len; i++) {
             const isFilled = i < val.length;
-            dotsHtml += `<div class="w-3.5 h-3.5 rounded-full border-2 transition-all duration-200 ${isFilled ? 'bg-govNavy border-govNavy scale-110' : 'border-slate-300 bg-white'}" id="dot-${i+1}"></div>`;
+            const activeBg = currentLockScreenRole === 'mentor' ? 'bg-blue-700 border-blue-700 scale-110' : 'bg-govNavy border-govNavy scale-110';
+            dotsHtml += `<div class="w-3.5 h-3.5 rounded-full border-2 transition-all duration-200 ${isFilled ? activeBg : 'border-slate-300 bg-white'}" id="dot-${i+1}"></div>`;
         }
         container.innerHTML = dotsHtml;
     }
@@ -3057,8 +3145,11 @@ function submitPinUnlock() {
     const rememberChk = document.getElementById('lock-remember-device');
 
     if (entered === correctPin) {
+        currentAuthRole = currentLockScreenRole;
+        sessionStorage.setItem(AUTH_ROLE_KEY, currentAuthRole);
         sessionStorage.setItem(AUTH_SESSION_KEY, 'true');
         localStorage.setItem(AUTH_SESSION_KEY, 'true');
+
         if (rememberChk && rememberChk.checked) {
             localStorage.setItem(REMEMBER_DEVICE_KEY, 'true');
         } else {
@@ -3073,7 +3164,14 @@ function submitPinUnlock() {
             overlay.style.display = 'none';
             overlay.classList.add('hidden');
         }
-        showToast('ปลดล็อคเข้าสู่ระบบสำเร็จ ยินดีต้อนรับครับ');
+
+        renderMentorStatusBanner();
+
+        if (currentAuthRole === 'mentor') {
+            showToast('👤 เข้าสู่โหมดข้าราชการพี่เลี้ยงสำเร็จ ยินดีต้อนรับครับ');
+        } else {
+            showToast('ปลดล็อคเข้าสู่ระบบสำเร็จ ยินดีต้อนรับครับ');
+        }
     } else {
         if (errMsg) {
             errMsg.classList.remove('hidden');
@@ -3087,6 +3185,93 @@ function submitPinUnlock() {
             }, 600);
         }
     }
+}
+
+function renderMentorStatusBanner() {
+    const banner = document.getElementById('mentor-active-banner');
+    if (!banner) return;
+
+    if (currentAuthRole === 'mentor') {
+        banner.classList.remove('hidden');
+        const m = appState.mentorProfile || defaultAppData.mentorProfile;
+        const p = appState.userProfile || defaultAppData.userProfile;
+        setText('mentor-banner-name', m.fullName || 'นายสมชาย พิทักษ์ราชการ');
+        setText('mentor-banner-trainee-name', `${p.fullName} (${p.nickname ? 'น้อง' + p.nickname : 'ADV'})`);
+        const badge = document.getElementById('mentor-banner-endorsed-badge');
+        if (badge) {
+            if (m.isEndorsed) {
+                badge.innerText = '✓ รับรองผลแล้ว';
+                badge.className = 'text-[10px] bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 px-2 py-0.2 rounded-full font-semibold';
+            } else {
+                badge.innerText = '⏳ รอการประเมิน';
+                badge.className = 'text-[10px] bg-amber-500/30 text-amber-300 border border-amber-400/40 px-2 py-0.2 rounded-full font-semibold';
+            }
+        }
+    } else {
+        banner.classList.add('hidden');
+    }
+}
+
+function switchBackToTraineeLogin() {
+    currentAuthRole = 'trainee';
+    sessionStorage.removeItem(AUTH_ROLE_KEY);
+    renderMentorStatusBanner();
+    lockAppImmediately();
+}
+
+function openMentorFeedbackModal() {
+    const m = appState.mentorProfile || defaultAppData.mentorProfile;
+    setInputValue('mentor-input-name', m.fullName);
+    setInputValue('mentor-input-position', m.position);
+    setInputValue('mentor-input-agency', m.agency);
+    setInputValue('mentor-input-notes', m.feedbackNotes);
+    setInputValue('mentor-score-c1', m.competencies?.c1 || 5);
+    setInputValue('mentor-score-c2', m.competencies?.c2 || 5);
+    setInputValue('mentor-score-c3', m.competencies?.c3 || 5);
+    setInputValue('mentor-score-c4', m.competencies?.c4 || 5);
+    setInputValue('mentor-score-c5', m.competencies?.c5 || 5);
+    setInputValue('mentor-score-c6', m.competencies?.c6 || 4);
+    setInputValue('mentor-input-date', m.endorsedDate || '2026-09-30');
+    setInputValue('mentor-input-pin', m.mentorPin || '8888');
+
+    const chk = document.getElementById('mentor-chk-endorsed');
+    if (chk) chk.checked = m.isEndorsed !== false;
+
+    openModal('modal-mentor-feedback');
+}
+
+function saveMentorFeedback() {
+    const m = appState.mentorProfile || {};
+    m.fullName = getInputValue('mentor-input-name');
+    m.position = getInputValue('mentor-input-position');
+    m.agency = getInputValue('mentor-input-agency');
+    m.feedbackNotes = getInputValue('mentor-input-notes');
+    m.competencies = {
+        c1: parseInt(getInputValue('mentor-score-c1')) || 5,
+        c2: parseInt(getInputValue('mentor-score-c2')) || 5,
+        c3: parseInt(getInputValue('mentor-score-c3')) || 5,
+        c4: parseInt(getInputValue('mentor-score-c4')) || 5,
+        c5: parseInt(getInputValue('mentor-score-c5')) || 5,
+        c6: parseInt(getInputValue('mentor-score-c6')) || 4
+    };
+    m.endorsedDate = getInputValue('mentor-input-date') || '2026-09-30';
+    m.mentorPin = getInputValue('mentor-input-pin') || '8888';
+
+    const chk = document.getElementById('mentor-chk-endorsed');
+    m.isEndorsed = chk ? chk.checked : true;
+
+    appState.mentorProfile = m;
+    saveState();
+    renderPortfolioPreview();
+    renderMentorStatusBanner();
+    closeModal('modal-mentor-feedback');
+    showToast('💾 บันทึกคำแนะนำและการประเมินผลของข้าราชการพี่เลี้ยงเรียบร้อยแล้ว');
+}
+
+function copyMentorMagicLink() {
+    const url = window.location.origin + window.location.pathname + '?role=mentor';
+    navigator.clipboard.writeText(url);
+    showToast('🔗 คัดลอก Magic Link สำหรับส่งให้พี่เลี้ยงทาง LINE แล้ว');
 }
 
 function lockAppImmediately() {
@@ -3105,14 +3290,11 @@ function lockAppImmediately() {
     if (pinInput) {
         pinInput.value = '';
     }
-    updatePinDots();
 
     if (overlay) {
         overlay.style.display = 'flex';
         overlay.classList.remove('hidden');
-        setTimeout(() => {
-            if (pinInput) pinInput.focus();
-        }, 200);
+        setLockScreenRole('trainee');
     }
     showToast('ล็อคหน้าจอระบบเรียบร้อยแล้ว');
 }
@@ -5526,8 +5708,10 @@ window.openLectureSlideModal = openLectureSlideModal;
 window.askAISlideQuestion = askAISlideQuestion;
 window.openGeminiSpark = openGeminiSpark;
 
-
-
-
-
-
+// Window Bindings for Mentor Portal & Dual-Role Access
+window.setLockScreenRole = setLockScreenRole;
+window.renderMentorStatusBanner = renderMentorStatusBanner;
+window.switchBackToTraineeLogin = switchBackToTraineeLogin;
+window.openMentorFeedbackModal = openMentorFeedbackModal;
+window.saveMentorFeedback = saveMentorFeedback;
+window.copyMentorMagicLink = copyMentorMagicLink;

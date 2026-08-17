@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.8.1">
+    <link rel="stylesheet" href="styles.css?v=2.9.0">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -161,6 +161,37 @@
             </div>
         </nav>
     </header>
+
+    <!-- Mentor Active Status Banner (Visible only in Mentor Role) -->
+    <div id="mentor-active-banner" class="hidden bg-gradient-to-r from-blue-900 via-indigo-900 to-govNavy text-white py-2.5 px-4 sm:px-8 border-b-2 border-amber-400 text-xs shadow-md no-print">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5">
+            <div class="flex items-center space-x-2.5">
+                <span class="w-7 h-7 rounded-lg bg-amber-400 text-govNavy flex items-center justify-center font-bold text-xs shadow-xs">
+                    <i class="fa-solid fa-user-tie"></i>
+                </span>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold text-white">โหมดข้าราชการพี่เลี้ยง (Mentor / Supervisor View):</span>
+                        <span id="mentor-banner-name" class="text-amber-300 font-bold">นายสมชาย พิทักษ์ราชการ</span>
+                        <span id="mentor-banner-endorsed-badge" class="text-[10px] bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 px-2 py-0.2 rounded-full font-semibold">✓ รับรองผลแล้ว</span>
+                    </div>
+                    <div class="text-[11px] text-blue-200">
+                        ท่านกำลังดูแลและติดตามการอบรมของ: <strong class="text-white" id="mentor-banner-trainee-name">นายเจค (ADV)</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 shrink-0">
+                <button type="button" onclick="openMentorFeedbackModal()" class="px-3 py-1.5 bg-amber-400 hover:bg-amber-300 active:scale-95 text-govNavy font-bold rounded-xl transition text-xs flex items-center space-x-1.5 shadow cursor-pointer">
+                    <i class="fa-solid fa-clipboard-check text-govNavy"></i>
+                    <span>บันทึกคำแนะนำ & ประเมินผล</span>
+                </button>
+                <button type="button" onclick="switchBackToTraineeLogin()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 active:scale-95 text-white rounded-xl transition text-xs flex items-center space-x-1 border border-white/20 cursor-pointer" title="ออกจากโหมดพี่เลี้ยงกลับสู่หน้าหลัก">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>ออกจากโหมดพี่เลี้ยง</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content Container -->
     <main id="main-content" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -1420,17 +1451,39 @@
                                     ยึดมั่นในหลักธรรมาภิบาล ความโปร่งใส ความคุ้มค่าทางงบประมาณ และการสร้างสรรค์นวัตกรรมบริการที่ทุกคนเข้าถึงได้อย่างเท่าเทียม (Universal Accessibility)
                                 </p>
                             </div>
+                            <!-- Section 3: Mentor's Guidance & Endorsement -->
+                            <div class="p-4 bg-blue-50/70 rounded-xl border border-blue-200 space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-govNavy flex items-center gap-1.5">
+                                        <i class="fa-solid fa-user-tie text-blue-600"></i>
+                                        <span>3. ข้อคิดเห็นและคำแนะนำจากข้าราชการพี่เลี้ยง (Mentor's Guidance)</span>
+                                    </h3>
+                                    <span id="pv-p7-mentor-badge" class="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded-full font-bold">✓ ผ่านการรับรองผล</span>
+                                </div>
+                                <p id="pv-p7-mentor-notes" class="text-slate-700 leading-relaxed italic bg-white p-3 rounded-lg border border-blue-100">
+                                    "มีความมุ่งมั่นตั้งใจในการปฏิบัติงาน เรียนรู้เทคโนโลยี AI และระบบสารบรรณราชการได้อย่างรวดเร็ว มีมนุษยสัมพันธ์ดีเยี่ยมและพร้อมรับการทดลองปฏิบัติราชการ"
+                                </p>
+                                <div class="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                                    <span>พี่เลี้ยง: <strong id="pv-p7-mentor-name-title" class="text-slate-700">นายสมชาย พิทักษ์ราชการ</strong></span>
+                                    <span id="pv-p7-mentor-agency" class="text-slate-500">สำนักงานปลัดกระทรวงฯ</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Sign-off Seal -->
-                    <div class="border-t border-slate-200 pt-6 mt-8 flex justify-between items-end text-xs">
-                        <div>
-                            <div class="text-slate-400">วันที่รับรองเอกสาร: 30 กันยายน 2569</div>
-                            <div class="text-[11px] text-slate-400">ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล (Certified Copy)</div>
+                    <!-- Dual Sign-off Seal -->
+                    <div class="border-t border-slate-200 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-center gap-6 text-xs">
+                        <div class="text-center space-y-1 w-48">
+                            <div class="border-b border-slate-400 pb-8 text-slate-300">(ลงชื่อข้าราชการพี่เลี้ยง)</div>
+                            <div id="pv-p7-mentor-sign-name" class="font-bold text-slate-800">นายสมชาย พิทักษ์ราชการ</div>
+                            <div class="text-[11px] text-slate-500">ข้าราชการพี่เลี้ยง / ผู้ดูแลประจำตัว</div>
                         </div>
-                        <div class="text-center space-y-1">
-                            <div class="w-40 border-b border-slate-400 pb-8 text-slate-300">(ลงชื่อผู้เข้าอบรม)</div>
+                        <div class="text-center space-y-1 text-slate-400 text-[10px]">
+                            <div>วันที่รับรองเอกสาร: <span id="pv-p7-endorse-date">30 กันยายน 2569</span></div>
+                            <div>ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล (Certified Copy)</div>
+                        </div>
+                        <div class="text-center space-y-1 w-48">
+                            <div class="border-b border-slate-400 pb-8 text-slate-300">(ลงชื่อผู้เข้าอบรม)</div>
                             <div id="pv-p7-sign-name" class="font-bold text-slate-800">นายนิติพัฒน์ คุ้มวงษ์</div>
                             <div class="text-[11px] text-slate-500">ผู้จัดทำแฟ้มสะสมผลงาน</div>
                         </div>
@@ -2725,6 +2778,162 @@
     </div>
 
 
+    <!-- MODAL: MENTOR FEEDBACK, COMPETENCY RATING & DIGITAL ENDORSEMENT -->
+    <div id="modal-mentor-feedback" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4 overflow-y-auto">
+        <div class="app-card max-w-2xl w-full p-6 shadow-2xl space-y-4 my-8">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy">แบบบันทึกคำแนะนำและการประเมินผลของข้าราชการพี่เลี้ยง</h3>
+                        <p class="text-[11px] text-slate-500">สำหรับข้าราชการพี่เลี้ยง / ผู้ดูแลประจำตัว เพื่อประกอบการประเมินผลทดลองงาน</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeModal('modal-mentor-feedback')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="form-mentor-feedback" onsubmit="event.preventDefault(); saveMentorFeedback();" class="space-y-4 text-xs">
+                <!-- Mentor Identity -->
+                <div class="p-3 bg-blue-50/50 rounded-xl border border-blue-100 space-y-3">
+                    <h4 class="font-bold text-govNavy flex items-center gap-1.5">
+                        <i class="fa-solid fa-id-card text-blue-600"></i>
+                        <span>1. ข้อมูลข้าราชการพี่เลี้ยง (Supervisor Profile)</span>
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1" for="mentor-input-name">ชื่อ - นามสกุลพี่เลี้ยง *</label>
+                            <input type="text" id="mentor-input-name" required placeholder="เช่น นายสมชาย พิทักษ์ราชการ" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1" for="mentor-input-position">ตำแหน่ง *</label>
+                            <input type="text" id="mentor-input-position" required placeholder="เช่น นักวิเคราะห์นโยบายและแผนชำนาญการพิเศษ" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1" for="mentor-input-agency">หน่วยงาน / สังกัด *</label>
+                        <input type="text" id="mentor-input-agency" required placeholder="เช่น สำนักงานปลัดกระทรวงการคลัง (พี่เลี้ยงประจำตัว)" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Competency Evaluation (6 Pillars) -->
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-govNavy flex items-center gap-1.5">
+                            <i class="fa-solid fa-star text-amber-500"></i>
+                            <span>2. การประเมินสมรรถนะหลัก 6 ด้าน (1-5 คะแนน)</span>
+                        </h4>
+                        <span class="text-[10px] text-slate-500">เกณฑ์: 5 = ดีเด่น, 4 = ดีมาก, 3 = ผ่านเกณฑ์</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-200">
+                            <span class="font-medium text-slate-700">1. ความซื่อสัตย์สุจริต & จริยธรรม</span>
+                            <select id="mentor-score-c1" class="font-bold text-govNavy border rounded px-2 py-0.5 bg-slate-50">
+                                <option value="5">5 (ดีเด่น)</option>
+                                <option value="4">4 (ดีมาก)</option>
+                                <option value="3">3 (ผ่าน)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-200">
+                            <span class="font-medium text-slate-700">2. การมุ่งผลสัมฤทธิ์ของงาน</span>
+                            <select id="mentor-score-c2" class="font-bold text-govNavy border rounded px-2 py-0.5 bg-slate-50">
+                                <option value="5">5 (ดีเด่น)</option>
+                                <option value="4">4 (ดีมาก)</option>
+                                <option value="3">3 (ผ่าน)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-200">
+                            <span class="font-medium text-slate-700">3. จิตสำนึกและการบริการที่ดี</span>
+                            <select id="mentor-score-c3" class="font-bold text-govNavy border rounded px-2 py-0.5 bg-slate-50">
+                                <option value="5">5 (ดีเด่น)</option>
+                                <option value="4">4 (ดีมาก)</option>
+                                <option value="3">3 (ผ่าน)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-200">
+                            <span class="font-medium text-slate-700">4. การทำงานเป็นทีม & มนุษยสัมพันธ์</span>
+                            <select id="mentor-score-c4" class="font-bold text-govNavy border rounded px-2 py-0.5 bg-slate-50">
+                                <option value="5">5 (ดีเด่น)</option>
+                                <option value="4">4 (ดีมาก)</option>
+                                <option value="3">3 (ผ่าน)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-200">
+                            <span class="font-medium text-slate-700">5. ทักษะดิจิทัล & การปรับใช้ AI</span>
+                            <select id="mentor-score-c5" class="font-bold text-govNavy border rounded px-2 py-0.5 bg-slate-50">
+                                <option value="5">5 (ดีเด่น)</option>
+                                <option value="4">4 (ดีมาก)</option>
+                                <option value="3">3 (ผ่าน)</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between p-2 bg-white rounded-lg border border-slate-200">
+                            <span class="font-medium text-slate-700">6. การสื่อสารและการแก้ปัญหา</span>
+                            <select id="mentor-score-c6" class="font-bold text-govNavy border rounded px-2 py-0.5 bg-slate-50">
+                                <option value="5">5 (ดีเด่น)</option>
+                                <option value="4">4 (ดีมาก)</option>
+                                <option value="3">3 (ผ่าน)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentor Feedback & Guidance Notes -->
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1" for="mentor-input-notes">
+                        <i class="fa-solid fa-comment-dots text-emerald-600 mr-1"></i>3. ความคิดเห็น ข้อเสนอแนะ และคำแนะนำสำหรับการปฏิบัติราชการ *
+                    </label>
+                    <textarea id="mentor-input-notes" rows="4" required placeholder="ระบุข้อคิดเห็น ชื่นชมจุดเด่น และให้คำแนะนำในการพัฒนาศักยภาพ..." class="w-full p-2.5 rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500 leading-relaxed"></textarea>
+                </div>
+
+                <!-- Digital Endorsement Stamp & Pin Settings -->
+                <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-emerald-900 flex items-center gap-1.5">
+                                <i class="fa-solid fa-stamp text-emerald-600"></i>
+                                <span>4. การประทับตรารับรองผล (Digital Endorsement)</span>
+                            </div>
+                            <div class="text-[11px] text-emerald-700">รับรองว่าผู้เข้าอบรมผ่านเกณฑ์การฝึกอบรมและปฏิบัติงานครบถ้วน</div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="mentor-chk-endorsed" checked class="sr-only peer">
+                            <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                        </label>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-emerald-200/60">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1" for="mentor-input-date">วันที่รับรองผล</label>
+                            <input type="date" id="mentor-input-date" class="w-full p-2 rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1" for="mentor-input-pin">รหัส PIN พี่เลี้ยง (สำหรับ Login)</label>
+                            <input type="password" id="mentor-input-pin" maxlength="8" placeholder="ค่าเริ่มต้น: 8888" class="w-full p-2 rounded-lg border border-slate-300 bg-white font-mono text-center">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex justify-between items-center pt-2 border-t border-slate-200">
+                    <button type="button" onclick="copyMentorMagicLink()" class="px-3 py-2 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold border border-indigo-200 flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-link"></i>
+                        <span>คัดลอก Magic Link พี่เลี้ยง</span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <button type="button" onclick="closeModal('modal-mentor-feedback')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
+                        <button type="submit" class="px-5 py-2 rounded-lg bg-govNavy hover:bg-govNavyDark text-white font-bold shadow flex items-center gap-1.5">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>บันทึกข้อมูลพี่เลี้ยง</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <!-- Passcode Security Lock Screen Overlay -->
     <div id="lock-screen-overlay" class="fixed inset-0 z-[99999] bg-govNavy flex items-center justify-center p-3 sm:p-4 transition-opacity duration-300">
         <div class="max-w-xs sm:max-w-sm w-full bg-white rounded-3xl p-5 sm:p-6 shadow-2xl border-4 border-govGreen text-center space-y-3.5 animate-fade-in my-auto">
@@ -2736,9 +2945,21 @@
             <div>
                 <h2 class="text-base sm:text-lg font-bold text-govNavy">ระบบรักษาความปลอดภัยข้อมูลภาครัฐ</h2>
                 <div class="text-[11px] text-govGreen font-semibold">Civil Service Trainee Portfolio Security Lock</div>
-                <p class="text-slate-500 text-[11px] mt-1">
-                    กรุณาใส่รหัส PIN เพื่อยืนยันตัวตนก่อนเข้าใช้งาน
+                <p class="text-slate-500 text-[11px] mt-1" id="lock-screen-instruction">
+                    กรุณาเลือกบทบาทและใส่รหัส PIN เพื่อเข้าใช้งาน
                 </p>
+            </div>
+
+            <!-- Role Selector Tabs -->
+            <div class="flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold">
+                <button type="button" id="btn-lock-role-trainee" onclick="setLockScreenRole('trainee')" class="flex-1 py-1.5 rounded-lg bg-govNavy text-white shadow-xs transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>ข้าราชการผู้เรียน</span>
+                </button>
+                <button type="button" id="btn-lock-role-mentor" onclick="setLockScreenRole('mentor')" class="flex-1 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-user-tie text-blue-600"></i>
+                    <span>พี่เลี้ยง (Mentor)</span>
+                </button>
             </div>
 
             <!-- PIN Display & Input -->
@@ -2879,6 +3100,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.8.1"></script>
+    <script src="app.js?v=2.9.0"></script>
 </body>
 </html>

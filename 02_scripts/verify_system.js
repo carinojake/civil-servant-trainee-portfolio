@@ -118,6 +118,9 @@ if (fs.existsSync(indexPath)) {
     assert(html.includes('id="matrix-table-container"') && html.includes('id="lecturers-grid-container"'), 'Contains Matrix and Lecturers grid containers');
     assert(html.includes('btn-sort-lecturer-id') && html.includes('btn-sort-lecturer-name') && html.includes('btn-sort-lecturer-day'), 'Contains M9 Lecturer sorting buttons (ID, Name, Day)');
     assert(html.includes('id="modal-lecturer-profile"'), 'Contains Lecturer Profile modal');
+    assert(html.includes('id="mentor-active-banner"'), 'Contains Mentor Active Status Banner');
+    assert(html.includes('id="modal-mentor-feedback"'), 'Contains Mentor Feedback & Endorsement Modal');
+    assert(html.includes('btn-lock-role-trainee') && html.includes('btn-lock-role-mentor'), 'Contains Lock Screen Role Selectors (Trainee / Mentor)');
 }
 
 // 5. Audit JavaScript Logic Engine & Calculations (app.js)
@@ -128,6 +131,7 @@ assert(fs.existsSync(appJsPath), 'app.js exists');
 if (fs.existsSync(appJsPath)) {
     const js = fs.readFileSync(appJsPath, 'utf8');
     assert(js.includes('attendance'), 'Contains attendance state collection');
+    assert(js.includes('mentorProfile'), 'Contains mentorProfile state collection');
     assert(js.includes('switchParticipantView') && js.includes('applyParticipantFilters'), 'Contains M1 3-mode view switcher and filter controllers');
     assert(js.includes('openParticipantModal') && js.includes('handleParticipantFormSubmit') && js.includes('confirmDeleteParticipant'), 'Contains M1 participant CRUD engine');
     assert(js.includes('recommendAICareer') && js.includes('generateAIExecutiveSummary') && js.includes('polishInterestsWithAI'), 'Contains Gemini AI Career, Executive Summary, and Polish engines');
@@ -136,6 +140,8 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('morningPreTestUrl') && js.includes('afternoonPostTestUrl'), 'Contains Morning & Afternoon Pre/Post-test and Slide link management');
     assert(js.includes('preTestUrl') && js.includes('postTestUrl') && js.includes('evalSubmitted'), 'Contains Pre/Post test URLs, scores, and evaluation tracking');
     assert(js.includes('initSecurityLock') && js.includes('submitPinUnlock') && js.includes('lockAppImmediately'), 'Contains Passcode Security Lock & Unlock controllers');
+    assert(js.includes('setLockScreenRole') && js.includes('renderMentorStatusBanner') && js.includes('openMentorFeedbackModal'), 'Contains Mentor Portal and Dual-Role Auth controllers');
+    assert(js.includes('saveMentorFeedback') && js.includes('copyMentorMagicLink'), 'Contains Mentor Feedback persistence and Magic Link generator');
     assert(js.includes('saveNewSecurityPin') && js.includes('clearRememberedDevice'), 'Contains PIN change and device remember management');
     assert(js.includes('toggleAIBuddyDrawer') && js.includes('sendAIChatMessage') && js.includes('triggerQuickPrompt'), 'Contains AI Study Buddy Drawer & Quick Prompts engine');
     assert(js.includes('masterCivilServiceQuizBank') && js.includes('renderM8QuizView') && js.includes('selectQuizAnswer'), 'Contains M8 Civil Service Quiz Bank & Interactive Engine');
