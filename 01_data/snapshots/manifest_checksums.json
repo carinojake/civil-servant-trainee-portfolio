@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-17T12:47:48.605Z",
+  "generatedAt": "2026-08-17T14:25:50.529Z",
   "snapshotFile": "snapshot_baseline_v1.json",
   "fileManifest": {
     "index.html": {
       "sizeBytes": 261387,
-      "sha256": "c948f737bebc948d1de5c4aafe4773e06ade2e74fc057adeda645e1a715709eb"
+      "sha256": "a8afc2b81386bba27eb631af8132afc6f2029cf7c7e443ef8efcae86e6b3de89"
     },
     "app.js": {
-      "sizeBytes": 366904,
-      "sha256": "691e0d49c2c648bec0f297acb23ecef769592c5461ecb3380cc2adf80dde356c"
+      "sizeBytes": 367583,
+      "sha256": "7692e0fa9abb3a807f809fba5fac083f5c09c1adcff21cdfd9aa94ad8d4006f4"
     },
     "styles.css": {
       "sizeBytes": 14976,
