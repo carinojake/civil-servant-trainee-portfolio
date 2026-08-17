@@ -130,6 +130,7 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('recommendAICareer') && js.includes('generateAIExecutiveSummary') && js.includes('polishInterestsWithAI'), 'Contains Gemini AI Career, Executive Summary, and Polish engines');
     assert(js.includes('setScheduleTrackFilter'), 'Contains M2 dynamic schedule track filter controller');
     assert(js.includes('openDayLinksModal') && js.includes('saveDayLinksFromModal'), 'Contains Daily Action Hub modal controllers');
+    assert(js.includes('morningPreTestUrl') && js.includes('afternoonPostTestUrl'), 'Contains Morning & Afternoon Pre/Post-test and Slide link management');
     assert(js.includes('preTestUrl') && js.includes('postTestUrl') && js.includes('evalSubmitted'), 'Contains Pre/Post test URLs, scores, and evaluation tracking');
     assert(js.includes('initSecurityLock') && js.includes('submitPinUnlock') && js.includes('lockAppImmediately'), 'Contains Passcode Security Lock & Unlock controllers');
     assert(js.includes('saveNewSecurityPin') && js.includes('clearRememberedDevice'), 'Contains PIN change and device remember management');

@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.5.0">
+    <link rel="stylesheet" href="styles.css?v=2.6.0">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -1839,93 +1839,173 @@
         </div>
     </div>
 
-    <!-- Modal: Edit Daily Links & Scores (Pre/Post Test, Slides, Evaluation) -->
+    <!-- Modal: Edit Daily Links & Scores (Pre/Post Test, Slides, Evaluation - Morning & Afternoon) -->
     <div id="modal-day-links" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
-        <div class="app-card max-w-xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="app-card max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-200 pb-3">
                 <div>
                     <h3 class="text-base font-bold text-govNavy flex items-center space-x-2" id="modal-day-links-title">
                         <i class="fa-solid fa-link text-emerald-600"></i>
-                        <span>จัดการลิงก์ & ผลการประเมินประจำวัน</span>
+                        <span>จัดการลิงก์ & คะแนนประจำวัน (เช้า & บ่าย)</span>
                     </h3>
-                    <p class="text-[11px] text-slate-500 mt-0.5">บันทึก URL แบบทดสอบ สไลด์บรรยายจาก LINE และคะแนนทดสอบ</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">บันทึก URL แบบทดสอบ Pre/Post-test สไลด์บรรยาย และคะแนนแยกช่วงเช้า-ช่วงบ่าย</p>
                 </div>
-                <button onclick="closeModal('modal-day-links')" class="text-slate-400 hover:text-slate-600 text-lg">
+                <button onclick="closeModal('modal-day-links')" class="text-slate-400 hover:text-slate-600 text-lg cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <form id="modal-day-links-form" onsubmit="event.preventDefault(); saveDayLinksFromModal();" class="space-y-4 text-xs">
                 <input type="hidden" id="modal-links-day">
 
-                <!-- 1. Pre-Test Section -->
-                <div class="p-3 bg-blue-50/70 rounded-xl border border-blue-200 space-y-2">
-                    <div class="font-bold text-blue-900 flex items-center justify-between">
-                        <span><i class="fa-solid fa-file-pen text-blue-600 mr-1.5"></i>1. แบบทดสอบก่อนเรียน (Pre-test)</span>
-                        <span class="text-[10px] text-blue-700 font-normal">ทำก่อน 09.00 น.</span>
+                <!-- 1. MORNING SESSION (ช่วงเช้า 09.00 - 12.00 น.) -->
+                <div class="p-3.5 bg-blue-50/80 rounded-xl border border-blue-200 space-y-3">
+                    <div class="font-bold text-blue-900 flex items-center justify-between border-b border-blue-200/80 pb-2">
+                        <span class="text-xs flex items-center"><i class="fa-solid fa-sun text-amber-500 mr-1.5"></i>1. กิจกรรมช่วงเช้า (09.00 - 12.00 น.)</span>
+                        <span class="text-[10px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded-full font-semibold">Morning Session</span>
                     </div>
-                    <div>
-                        <label class="block text-slate-700 font-semibold mb-1" for="modal-links-pretest-url">URL แบบทดสอบก่อนเรียน (Google Form / ลิงก์จาก LINE)</label>
-                        <input type="url" id="modal-links-pretest-url" placeholder="https://forms.gle/..." class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-slate-700 font-semibold mb-1" for="modal-links-pretest-score">คะแนนที่ได้</label>
-                            <input type="number" id="modal-links-pretest-score" min="0" max="100" step="1" placeholder="เช่น 8" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+
+                    <!-- 1.1 Pre-test เช้า -->
+                    <div class="p-2.5 bg-white rounded-lg border border-blue-100 space-y-2">
+                        <div class="font-bold text-blue-800 text-[11px] flex items-center justify-between">
+                            <span><i class="fa-solid fa-file-pen text-blue-600 mr-1"></i>1.1 แบบทดสอบก่อนเรียนช่วงเช้า (Pre-test เช้า)</span>
+                            <span class="text-[10px] text-slate-400 font-normal">ก่อน 09.00 น.</span>
                         </div>
                         <div>
-                            <label class="block text-slate-700 font-semibold mb-1" for="modal-links-pretest-max">คะแนนเต็ม</label>
-                            <input type="number" id="modal-links-pretest-max" min="1" max="100" step="1" value="10" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                            <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-pretest-url">URL แบบทดสอบ Pre-test เช้า (Google Form / LINE)</label>
+                            <input type="url" id="modal-links-morning-pretest-url" placeholder="https://forms.gle/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-pretest-score">คะแนนที่ได้</label>
+                                <input type="number" id="modal-links-morning-pretest-score" min="0" max="100" step="0.5" placeholder="เช่น 8" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-pretest-max">คะแนนเต็ม</label>
+                                <input type="number" id="modal-links-morning-pretest-max" min="1" max="100" step="1" value="10" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1.2 สไลด์/เอกสาร เช้า -->
+                    <div class="p-2.5 bg-white rounded-lg border border-blue-100 space-y-2">
+                        <div class="font-bold text-emerald-800 text-[11px] flex items-center justify-between">
+                            <span><i class="fa-solid fa-file-pdf text-emerald-600 mr-1"></i>1.2 เอกสาร / สไลด์บรรยายช่วงเช้า</span>
+                            <span class="text-[10px] text-slate-400 font-normal">Canva / PDF / Drive</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-doc-url">URL สไลด์เช้า</label>
+                                <input type="url" id="modal-links-morning-doc-url" placeholder="https://drive.google.com/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-doc-title">ชื่อไฟล์ / หัวข้อสไลด์เช้า</label>
+                                <input type="text" id="modal-links-morning-doc-title" placeholder="เช่น สไลด์บรรยายเช้า.pdf" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1.3 Post-test เช้า -->
+                    <div class="p-2.5 bg-white rounded-lg border border-blue-100 space-y-2">
+                        <div class="font-bold text-purple-800 text-[11px] flex items-center justify-between">
+                            <span><i class="fa-solid fa-square-poll-vertical text-purple-600 mr-1"></i>1.3 แบบทดสอบหลังเรียนช่วงเช้า (Post-test เช้า)</span>
+                            <span class="text-[10px] text-slate-400 font-normal">หลัง 12.00 น.</span>
+                        </div>
+                        <div>
+                            <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-posttest-url">URL แบบทดสอบ Post-test เช้า</label>
+                            <input type="url" id="modal-links-morning-posttest-url" placeholder="https://forms.gle/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-posttest-score">คะแนนที่ได้</label>
+                                <input type="number" id="modal-links-morning-posttest-score" min="0" max="100" step="0.5" placeholder="เช่น 9" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-posttest-max">คะแนนเต็ม</label>
+                                <input type="number" id="modal-links-morning-posttest-max" min="1" max="100" step="1" value="10" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. Course Materials & Slides Section -->
-                <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 space-y-2">
-                    <div class="font-bold text-emerald-900 flex items-center justify-between">
-                        <span><i class="fa-solid fa-file-pdf text-emerald-600 mr-1.5"></i>2. เอกสารบรรยาย / สไลด์ / เวิร์กชอป</span>
-                        <span class="text-[10px] text-emerald-700 font-normal">Canva / PDF / Drive</span>
+                <!-- 2. AFTERNOON SESSION (ช่วงบ่าย 13.00 - 16.00 น.) -->
+                <div class="p-3.5 bg-emerald-50/80 rounded-xl border border-emerald-200 space-y-3">
+                    <div class="font-bold text-emerald-900 flex items-center justify-between border-b border-emerald-200/80 pb-2">
+                        <span class="text-xs flex items-center"><i class="fa-solid fa-cloud-sun text-emerald-600 mr-1.5"></i>2. กิจกรรมช่วงบ่าย (13.00 - 16.00 น.)</span>
+                        <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-semibold">Afternoon Session</span>
                     </div>
-                    <div>
-                        <label class="block text-slate-700 font-semibold mb-1" for="modal-links-doc-url">URL เอกสาร / สไลด์บรรยาย</label>
-                        <input type="url" id="modal-links-doc-url" placeholder="https://canva.link/... หรือ https://drive.google.com/..." class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+
+                    <!-- 2.1 Pre-test บ่าย -->
+                    <div class="p-2.5 bg-white rounded-lg border border-emerald-100 space-y-2">
+                        <div class="font-bold text-blue-800 text-[11px] flex items-center justify-between">
+                            <span><i class="fa-solid fa-file-pen text-blue-600 mr-1"></i>2.1 แบบทดสอบก่อนเรียนช่วงบ่าย (Pre-test บ่าย)</span>
+                            <span class="text-[10px] text-slate-400 font-normal">ก่อน 13.00 น.</span>
+                        </div>
+                        <div>
+                            <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-pretest-url">URL แบบทดสอบ Pre-test บ่าย</label>
+                            <input type="url" id="modal-links-afternoon-pretest-url" placeholder="https://forms.gle/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-pretest-score">คะแนนที่ได้</label>
+                                <input type="number" id="modal-links-afternoon-pretest-score" min="0" max="100" step="0.5" placeholder="เช่น 8" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-pretest-max">คะแนนเต็ม</label>
+                                <input type="number" id="modal-links-afternoon-pretest-max" min="1" max="100" step="1" value="10" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-slate-700 font-semibold mb-1" for="modal-links-doc-title">ชื่อเอกสาร / รายละเอียดไฟล์</label>
-                        <input type="text" id="modal-links-doc-title" placeholder="เช่น สไลด์บรรยาย Canva, Workshop.xlsx" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+
+                    <!-- 2.2 สไลด์/เอกสาร บ่าย -->
+                    <div class="p-2.5 bg-white rounded-lg border border-emerald-100 space-y-2">
+                        <div class="font-bold text-emerald-800 text-[11px] flex items-center justify-between">
+                            <span><i class="fa-solid fa-file-pdf text-emerald-600 mr-1"></i>2.2 เอกสาร / สไลด์บรรยายช่วงบ่าย</span>
+                            <span class="text-[10px] text-slate-400 font-normal">Canva / PDF / Drive</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-doc-url">URL สไลด์บ่าย</label>
+                                <input type="url" id="modal-links-afternoon-doc-url" placeholder="https://drive.google.com/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-doc-title">ชื่อไฟล์ / หัวข้อสไลด์บ่าย</label>
+                                <input type="text" id="modal-links-afternoon-doc-title" placeholder="เช่น สไลด์บรรยายบ่าย.pdf" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2.3 Post-test บ่าย -->
+                    <div class="p-2.5 bg-white rounded-lg border border-emerald-100 space-y-2">
+                        <div class="font-bold text-purple-800 text-[11px] flex items-center justify-between">
+                            <span><i class="fa-solid fa-square-poll-vertical text-purple-600 mr-1"></i>2.3 แบบทดสอบหลังเรียนช่วงบ่าย (Post-test บ่าย)</span>
+                            <span class="text-[10px] text-slate-400 font-normal">หลัง 16.00 น.</span>
+                        </div>
+                        <div>
+                            <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-posttest-url">URL แบบทดสอบ Post-test บ่าย</label>
+                            <input type="url" id="modal-links-afternoon-posttest-url" placeholder="https://forms.gle/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-posttest-score">คะแนนที่ได้</label>
+                                <input type="number" id="modal-links-afternoon-posttest-score" min="0" max="100" step="0.5" placeholder="เช่น 10" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-posttest-max">คะแนนเต็ม</label>
+                                <input type="number" id="modal-links-afternoon-posttest-max" min="1" max="100" step="1" value="10" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 3. Post-Test Section -->
-                <div class="p-3 bg-purple-50/70 rounded-xl border border-purple-200 space-y-2">
-                    <div class="font-bold text-purple-900 flex items-center justify-between">
-                        <span><i class="fa-solid fa-square-poll-vertical text-purple-600 mr-1.5"></i>3. แบบทดสอบหลังเรียน (Post-test)</span>
-                        <span class="text-[10px] text-purple-700 font-normal">ทำหลัง 16.00 น.</span>
-                    </div>
-                    <div>
-                        <label class="block text-slate-700 font-semibold mb-1" for="modal-links-posttest-url">URL แบบทดสอบหลังเรียน (Google Form)</label>
-                        <input type="url" id="modal-links-posttest-url" placeholder="https://forms.gle/..." class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-slate-700 font-semibold mb-1" for="modal-links-posttest-score">คะแนนที่ได้</label>
-                            <input type="number" id="modal-links-posttest-score" min="0" max="100" step="1" placeholder="เช่น 10" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-slate-700 font-semibold mb-1" for="modal-links-posttest-max">คะแนนเต็ม</label>
-                            <input type="number" id="modal-links-posttest-max" min="1" max="100" step="1" value="10" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Daily Course Evaluation Form -->
-                <div class="p-3 bg-amber-50/70 rounded-xl border border-amber-200 space-y-2">
+                <!-- 3. DAILY EVALUATION (แบบประเมินประจำวัน) -->
+                <div class="p-3.5 bg-amber-50/80 rounded-xl border border-amber-200 space-y-2">
                     <div class="font-bold text-amber-900 flex items-center justify-between">
-                        <span><i class="fa-solid fa-star text-amber-500 mr-1.5"></i>4. แบบประเมินผลการอบรมประจำวัน</span>
-                        <span class="text-[10px] text-amber-700 font-normal">ส่งก่อนปิดคลาส</span>
+                        <span class="text-xs flex items-center"><i class="fa-solid fa-star text-amber-500 mr-1.5"></i>3. แบบประเมินผลการอบรมประจำวัน</span>
+                        <span class="text-[10px] text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full font-semibold">Daily Evaluation</span>
                     </div>
                     <div>
-                        <label class="block text-slate-700 font-semibold mb-1" for="modal-links-eval-url">URL แบบประเมินผลการอบรม (Google Form)</label>
-                        <input type="url" id="modal-links-eval-url" placeholder="https://forms.gle/..." class="w-full p-2.5 rounded-lg border border-slate-300 bg-white">
+                        <label class="block text-slate-600 font-semibold mb-1" for="modal-links-eval-url">URL แบบประเมินผลการอบรม (Google Form)</label>
+                        <input type="url" id="modal-links-eval-url" placeholder="https://forms.gle/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
                     </div>
                     <label class="flex items-center space-x-2 pt-1 cursor-pointer">
                         <input type="checkbox" id="modal-links-eval-done" class="rounded text-amber-600 focus:ring-amber-500">
@@ -1934,8 +2014,8 @@
                 </div>
 
                 <div class="flex justify-end space-x-2 pt-2 border-t border-slate-100">
-                    <button type="button" onclick="closeModal('modal-day-links')" class="px-3.5 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold">ยกเลิก</button>
-                    <button type="submit" class="px-4 py-2 rounded-lg bg-emerald-600 text-white font-semibold shadow">บันทึกลิงก์ & คะแนน</button>
+                    <button type="button" onclick="closeModal('modal-day-links')" class="px-4 py-2 rounded-lg bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer">ยกเลิก</button>
+                    <button type="submit" class="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow transition cursor-pointer">บันทึกลิงก์ & คะแนน (เช้า-บ่าย)</button>
                 </div>
             </form>
         </div>
@@ -2517,6 +2597,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.5.0"></script>
+    <script src="app.js?v=2.6.0"></script>
 </body>
 </html>

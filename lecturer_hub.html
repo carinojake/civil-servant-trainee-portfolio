@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lecturer Hub - ศูนย์อ้างอิงหลักสูตรและวิทยากรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1 ตรวจสอบวัน เวลา วิชา อาจารย์ผู้สอน และลิงก์ไฟล์ Google Drive">
+  <meta name="theme-color" content="#123C5A">
+  <title>Lecturer Hub | ศูนย์อ้างอิงหลักสูตรและวิทยากรภาครัฐ รุ่นที่ 1</title>
+
+  <!-- Google Fonts: Prompt, Sarabun -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="lecturer_hub.css">
+</head>
+<body>
+
+  <!-- Screen Reader Announcement Region -->
+  <div id="a11y-live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- 1. Accessibility Toolbar -->
+  <aside class="a11y-bar" aria-label="เครื่องมือช่วยเหลือการเข้าถึงเว็บไซต์">
+    <div class="container a11y-inner">
+      <div class="a11y-left">
+        <span class="a11y-badge" aria-hidden="true">Accessibility</span>
+        <span>ระบบสนับสนุนการเข้าถึงสำหรับทุกคน (WCAG 2.1 AA)</span>
+      </div>
+      <div class="a11y-controls" role="toolbar" aria-label="ตัวควบคุมการแสดงผล">
+        <span style="font-size: 0.75rem; color: #CBD5E1; margin-right: 4px;">ขนาดตัวอักษร:</span>
+        <button type="button" class="a11y-btn" id="font-decrease-btn" aria-label="ลดขนาดตัวอักษร">A-</button>
+        <button type="button" class="a11y-btn" id="font-reset-btn" aria-label="ขนาดตัวอักษรมาตรฐาน">A</button>
+        <button type="button" class="a11y-btn" id="font-increase-btn" aria-label="เพิ่มขนาดตัวอักษร">A+</button>
+        <button type="button" class="a11y-btn" id="contrast-toggle-btn" aria-label="สลับโหมดความคมชัดสูง High Contrast">
+          <span>🌓</span> คมชัดสูง
+        </button>
+        <button type="button" class="a11y-btn" id="spacing-toggle-btn" aria-label="สลับระยะบรรทัดอ่านง่าย Dyslexic Friendly">
+          <span>📖</span> ระยะอ่านง่าย
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. Header & Navigation -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="brand-wrapper">
+        <a href="#hero" class="brand-logo" aria-label="หน้าหลัก Lecturer Hub">
+          <div class="logo-icon" aria-hidden="true">LH</div>
+          <div class="logo-text">
+            <h1>Lecturer Hub</h1>
+            <span class="logo-tag">ศูนย์อ้างอิงหลักสูตรคนพิการ รุ่นที่ 1</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="site-nav" role="navigation" aria-label="เมนูหลัก">
+        <ul class="nav-menu">
+          <li><a href="#summary-section" class="nav-link">ข้อมูลหลักสูตร</a></li>
+          <li><a href="#lecturers-section" class="nav-link">ทำเนียบวิทยากร</a></li>
+          <li><a href="#learning-map-section" class="nav-link">วัน–วิชา–อาจารย์–ไฟล์</a></li>
+          <li><a href="#sources-section" class="nav-link">เอกสารต้นทาง</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-meta">
+        <div class="update-badge" title="สถานะข้อมูลล่าสุด">
+          <span class="update-dot" aria-hidden="true"></span>
+          <span>อัปเดตล่าสุด 16 ส.ค. 2569</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" role="main">
+
+    <!-- 3. Hero Section -->
+    <section id="hero" class="hero-section" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-pill">
+            <span>🏛️</span>
+            <span>หลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1</span>
+          </div>
+
+          <h2 id="hero-title" class="hero-title">
+            รู้จักคนสอน ก่อนเข้าเรียน
+          </h2>
+
+          <p class="hero-desc">
+            ศูนย์อ้างอิงวิทยากรและเนื้อหาการอบรม ช่วยให้ผู้เข้าอบรมเปิดดูได้อย่างรวดเร็วว่า <strong>“วันไหนเรียนอะไร เรียนกับอาจารย์คนไหน และไฟล์อยู่ที่ไหน”</strong> ทั้งบนมือถือ แท็บเล็ต และคอมพิวเตอร์
+          </p>
+
+          <div class="hero-actions">
+            <button type="button" class="btn-primary" id="jump-lecturers-btn">
+              <span>👥</span> เปิดดูวิทยากร
+            </button>
+            <button type="button" class="btn-secondary" id="jump-curriculum-btn">
+              <span>📚</span> ดูเนื้อหาหลักสูตร
+            </button>
+            <button type="button" class="btn-accent" id="jump-map-btn">
+              <span>🗺️</span> ดูแผนที่การเรียนรู้
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Summary Section -->
+    <section id="summary-section" class="summary-section" aria-labelledby="summary-heading">
+      <div class="container">
+        <div class="summary-grid">
+          
+          <!-- Course Overview Card -->
+          <article class="summary-card">
+            <div class="summary-header">
+              <span style="font-size: 1.5rem;" aria-hidden="true">📋</span>
+              <h2 id="summary-heading">กำหนดการและสถานที่จัดอบรม</h2>
+            </div>
+
+            <div class="timeline-box">
+              <div class="timeline-item">
+                <div class="timeline-date">10–28 ส.ค. 2569</div>
+                <div class="timeline-label">ภาคทฤษฎี (อบรมเข้มข้น)</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-date">1–30 ก.ย. 2569</div>
+                <div class="timeline-label">ภาคปฏิบัติงานจริง (On-the-Job Training)</div>
+              </div>
+            </div>
+
+            <div class="venue-box">
+              <div><strong>📍 สถานที่หลัก:</strong> โรงแรมเซ็นทารา ไลฟ์ ศูนย์ราชการและคอนเวนชันเซ็นเตอร์ แจ้งวัฒนะ กรุงเทพฯ</div>
+              <div class="venue-rooms">
+                <span class="room-pill">ห้อง BB 202 (ห้อง 1)</span>
+                <span class="room-pill">ห้อง BB 203 (ห้อง 2)</span>
+                <span class="room-pill">ห้อง BB 205</span>
+                <span class="room-pill">ห้อง BB 211</span>
+                <span class="room-pill">ห้อง BB 212 (ห้องรวม)</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Metrics Counters Card -->
+          <article class="summary-card">
+            <div class="summary-header">
+              <span style="font-size: 1.5rem;" aria-hidden="true">📊</span>
+              <h2>สถิติข้อมูลในระบบ</h2>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-number">31</div>
+                <div class="stat-label">วิทยากรในฐานข้อมูล</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">31</div>
+                <div class="stat-label">หัวข้อการอบรม</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number verified">29</div>
+                <div class="stat-label">ยืนยันชื่อผู้สอนแล้ว</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number pending">2</div>
+                <div class="stat-label">รอตรวจสอบห้อง/ไฟล์</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Filter & Search Control Center -->
+    <section class="filter-section" aria-label="เครื่องมือค้นหาและกรองข้อมูล">
+      <div class="container">
+        
+        <!-- Search Bar -->
+        <div class="search-bar-wrapper">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input 
+            type="search" 
+            id="search-input" 
+            class="search-input" 
+            placeholder="ค้นหาชื่ออาจารย์, ตำแหน่ง, หน่วยงาน, ความเชี่ยวชาญ หรือชื่อวิชา..." 
+            aria-label="ค้นหาวิทยากรและรายวิชา">
+        </div>
+
+        <!-- Track Filters -->
+        <div class="filter-group-track" role="tablist" aria-label="เลือกสายหลักสูตร">
+          <button type="button" class="track-tab-btn active" data-track="all" role="tab" aria-selected="true">
+            🌐 ทุกสายหลักสูตร
+          </button>
+          <button type="button" class="track-tab-btn" data-track="foundation" role="tab" aria-selected="false">
+            📘 หลักสูตรพื้นฐาน (Foundation)
+          </button>
+          <button type="button" class="track-tab-btn" data-track="advanced" role="tab" aria-selected="false">
+            🚀 หลักสูตรขั้นสูง (Advanced)
+          </button>
+          <button type="button" class="track-tab-btn" data-track="joint" role="tab" aria-selected="false">
+            🤝 เรียนร่วม (Joint Sessions)
+          </button>
+        </div>
+
+        <!-- Category Tag Filters -->
+        <div class="filter-group-categories" id="category-filters" aria-label="กรองตามกลุ่มความเชี่ยวชาญ">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Live Results Status -->
+        <div class="filter-results-status" id="result-stats" aria-live="polite">
+          กำลังโหลดข้อมูล...
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. Lecturer Directory Section -->
+    <section id="lecturers-section" class="lecturers-section" aria-labelledby="lecturers-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 id="lecturers-heading" class="section-title">ทำเนียบวิทยากรและผู้ทรงคุณวุฒิ</h2>
+            <div class="section-subtitle">ข้อมูลประวัติ ความเชี่ยวชาญ และรายวิชาที่รับผิดชอบ ยืนยันจากเอกสารหลักสูตรจริง</div>
+          </div>
+        </div>
+
+        <div class="lecturers-grid" id="lecturer-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Learning Map Section (วัน-วิชา-อาจารย์-ไฟล์) -->
+    <section id="learning-map-section" class="map-section" aria-labelledby="map-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 id="map-heading" class="section-title">แผนที่การเรียนรู้ (วัน–วิชา–อาจารย์–ไฟล์)</h2>
+            <div class="section-subtitle">ตารางกำหนดการแยกสายหลักสูตรพื้นฐาน ขั้นสูง และเรียนร่วม พร้อมปุ่มเปิดไฟล์ Google Drive ตรง</div>
+          </div>
+        </div>
+
+        <div class="learning-timeline" id="learning-timeline">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Source Documents Section -->
+    <section id="sources-section" class="sources-section" aria-labelledby="sources-heading">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 id="sources-heading" class="section-title">เอกสารอ้างอิงจาก Google Drive</h2>
+            <div class="section-subtitle">ลิงก์ต้นทางของกำหนดการหลัก โฟลเดอร์รวมสไลด์ และเอกสารประกอบการบรรยาย</div>
+          </div>
+        </div>
+
+        <div class="sources-grid" id="source-docs-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lecturer Profile Modal Dialog -->
+  <div id="lecturer-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-lecturer-title">
+    <div class="modal-dialog">
+      <header class="modal-header">
+        <h2 id="modal-lecturer-title" style="font-size: 1.15rem; color: var(--color-navy-dark);">ข้อมูลประวัติวิทยากร</h2>
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="ปิดหน้าต่าง">✕</button>
+      </header>
+      <div class="modal-body" id="modal-content-body">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Lecturer Hub - ศูนย์อ้างอิงหลักสูตรและวิทยากร</h3>
+          <p class="footer-desc">
+            พัฒนาขึ้นเพื่อเป็นศูนย์กลางข้อมูลวิทยากร แผนที่การเรียนรู้ และคลังเอกสารประกอบการบรรยาย สำหรับหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1 โดยยึดหลักความถูกต้องของข้อมูลตามกฎเหล็กข้อ 14 (ไม่เดาชื่อผู้สอน) และมาตรฐานการเข้าถึง WCAG 2.1 AA
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>โครงสร้างหลักสูตร</h3>
+          <ul class="footer-links">
+            <li><a href="#learning-map-section">หลักสูตรพื้นฐาน (Foundation Course)</a></li>
+            <li><a href="#learning-map-section">หลักสูตรขั้นสูง (Advanced Course)</a></li>
+            <li><a href="#learning-map-section">กิจกรรมและวิชาเรียนร่วม</a></li>
+            <li><a href="#sources-section">คลังไฟล์สไลด์ Google Drive</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>ลิงก์ด่วน</h3>
+          <ul class="footer-links">
+            <li><a href="https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h" target="_blank" rel="noopener noreferrer">โฟลเดอร์หลัก Google Drive ↗</a></li>
+            <li><a href="https://docs.google.com/document/d/1rft38A4CNbxH9RFM9RDRAiZbN1RXjSr6/edit" target="_blank" rel="noopener noreferrer">เอกสารกำหนดการหลัก ↗</a></li>
+            <li><a href="#main-content">กลับขึ้นด้านบนสุด ↑</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2569 โครงการเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ รุ่นที่ 1</div>
+        <div>ระบบรองรับการแสดงผลทุกขนาดหน้าจอ (Mobile / Tablet / Desktop)</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="01_data/lecturers_hub_data.js"></script>
+  <script src="lecturer_hub.js"></script>
+</body>
+</html>

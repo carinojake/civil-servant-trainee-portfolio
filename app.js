@@ -1847,93 +1847,205 @@ function renderScheduleList() {
             `;
         }
 
-        const hasPreTest = !!dayItem.preTestUrl;
-        const hasPostTest = !!dayItem.postTestUrl;
-        const hasDoc = !!dayItem.docUrl;
+        // Morning links & scores
+        const morningPreUrl = dayItem.morningPreTestUrl || dayItem.preTestUrl;
+        const hasMorningPre = !!morningPreUrl;
+        const morningPreScore = dayItem.morningPreTestScore !== undefined ? dayItem.morningPreTestScore : dayItem.preTestScore;
+        const morningPreMax = dayItem.morningPreTestMax || dayItem.preTestMax || 10;
+
+        const morningDocUrl = dayItem.morningDocUrl || dayItem.docUrl;
+        const morningDocTitle = dayItem.morningDocTitle || dayItem.docTitle;
+
+        const morningPostUrl = dayItem.morningPostTestUrl;
+        const hasMorningPost = !!morningPostUrl;
+        const morningPostScore = dayItem.morningPostTestScore;
+        const morningPostMax = dayItem.morningPostTestMax || 10;
+
+        // Afternoon links & scores
+        const afternoonPreUrl = dayItem.afternoonPreTestUrl;
+        const hasAfternoonPre = !!afternoonPreUrl;
+        const afternoonPreScore = dayItem.afternoonPreTestScore;
+        const afternoonPreMax = dayItem.afternoonPreTestMax || 10;
+
+        const afternoonDocUrl = dayItem.afternoonDocUrl || dayItem.docUrl;
+        const afternoonDocTitle = dayItem.afternoonDocTitle || dayItem.docTitle;
+
+        const afternoonPostUrl = dayItem.afternoonPostTestUrl || dayItem.postTestUrl;
+        const hasAfternoonPost = !!afternoonPostUrl;
+        const afternoonPostScore = dayItem.afternoonPostTestScore !== undefined ? dayItem.afternoonPostTestScore : dayItem.postTestScore;
+        const afternoonPostMax = dayItem.afternoonPostTestMax || dayItem.postTestMax || 10;
+
+        // Evaluation
         const hasEval = !!dayItem.evalUrl;
 
         const actionHubHtml = `
-            <div class="p-3 bg-slate-50/80 rounded-xl border border-slate-200/80 space-y-2">
+            <div class="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 space-y-2.5">
                 <div class="flex justify-between items-center flex-wrap gap-2">
-                    <span class="text-[11px] font-bold text-slate-700 flex items-center space-x-1.5">
+                    <span class="text-[11px] font-bold text-slate-800 flex items-center space-x-1.5">
                         <i class="fa-solid fa-bolt text-amber-500"></i>
-                        <span>ศูนย์รวมกิจกรรมประจำวัน (Daily Action Hub)</span>
+                        <span>ศูนย์รวมกิจกรรมประจำวัน (Daily Action Hub: เช้า & บ่าย)</span>
                     </span>
-                    <button onclick="openDayLinksModal(${dayItem.day})" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center space-x-1 hover:underline">
+                    <button onclick="openDayLinksModal(${dayItem.day})" class="text-[11px] text-blue-600 hover:text-blue-800 font-bold flex items-center space-x-1 hover:underline cursor-pointer">
                         <i class="fa-solid fa-pen-to-square"></i>
-                        <span>แก้ไขลิงก์ & คะแนน</span>
+                        <span>แก้ไขลิงก์ & คะแนน (เช้า-บ่าย)</span>
                     </button>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                    <div class="p-2 rounded-lg bg-white border border-slate-200 flex flex-col justify-between">
+                <!-- Morning & Afternoon Sessions Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-2.5">
+                    <!-- Morning Session Box -->
+                    <div class="p-2.5 bg-blue-50/70 rounded-xl border border-blue-200 space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-blue-700">1. Pre-test</span>
-                            ${dayItem.preTestScore !== undefined ? `<span class="bg-blue-100 text-blue-800 text-[10px] px-1.5 py-0.2 rounded font-bold">${dayItem.preTestScore}/${dayItem.preTestMax || 10}</span>` : ''}
+                            <span class="text-xs font-bold text-blue-950 flex items-center space-x-1">
+                                <i class="fa-solid fa-sun text-amber-500"></i>
+                                <span>ช่วงเช้า (09.00 - 12.00 น.)</span>
+                            </span>
+                            <span class="text-[10px] bg-blue-100 text-blue-800 font-semibold px-2 py-0.2 rounded-full">Session เช้า</span>
                         </div>
-                        <div class="mt-1.5">
-                            ${hasPreTest ? `
-                                <a href="${dayItem.preTestUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 py-1 rounded text-[11px] font-semibold transition">
-                                    <i class="fa-solid fa-pen-ruler"></i>
-                                    <span>ทำ Pre-test</span>
-                                </a>
-                            ` : `
-                                <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-1 rounded text-[10px] hover:border-slate-400">
-                                    + ใส่ลิงก์
-                                </button>
-                            `}
+                        <div class="grid grid-cols-3 gap-1.5 text-xs">
+                            <!-- 1. Pre-test เช้า -->
+                            <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-blue-700">Pre-test</span>
+                                    ${morningPreScore !== undefined ? `<span class="bg-blue-100 text-blue-800 text-[9px] px-1 py-0.2 rounded font-bold">${morningPreScore}/${morningPreMax}</span>` : ''}
+                                </div>
+                                <div class="mt-1">
+                                    ${hasMorningPre ? `
+                                        <a href="${morningPreUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 py-0.5 rounded text-[10px] font-semibold transition">
+                                            <i class="fa-solid fa-pen-ruler text-[9px]"></i>
+                                            <span>ทำข้อสอบ</span>
+                                        </a>
+                                    ` : `
+                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
+                                            + ใส่ลิงก์
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+
+                            <!-- 2. สไลด์เช้า -->
+                            <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-emerald-700">สไลด์/เอกสาร</span>
+                                    <span class="text-[9px] text-slate-400 truncate max-w-[40px]">${morningDocTitle ? '✓' : '-'}</span>
+                                </div>
+                                <div class="mt-1">
+                                    <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-0.5 rounded text-[10px] font-bold transition truncate cursor-pointer">
+                                        <i class="fa-solid fa-book-open-reader text-emerald-600 text-[9px]"></i>
+                                        <span>ดูสไลด์</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 3. Post-test เช้า -->
+                            <div class="p-1.5 rounded-lg bg-white border border-blue-100 flex flex-col justify-between">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-purple-700">Post-test</span>
+                                    ${morningPostScore !== undefined ? `<span class="bg-purple-100 text-purple-800 text-[9px] px-1 py-0.2 rounded font-bold">${morningPostScore}/${morningPostMax}</span>` : ''}
+                                </div>
+                                <div class="mt-1">
+                                    ${hasMorningPost ? `
+                                        <a href="${morningPostUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 py-0.5 rounded text-[10px] font-semibold transition">
+                                            <i class="fa-solid fa-square-check text-[9px]"></i>
+                                            <span>ทำข้อสอบ</span>
+                                        </a>
+                                    ` : `
+                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
+                                            + ใส่ลิงก์
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="p-2 rounded-lg bg-white border border-slate-200 flex flex-col justify-between">
+                    <!-- Afternoon Session Box -->
+                    <div class="p-2.5 bg-emerald-50/70 rounded-xl border border-emerald-200 space-y-2">
                         <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-emerald-700">2. เอกสาร/สไลด์</span>
-                            <span class="text-[10px] text-emerald-600 font-semibold">13 วัน</span>
+                            <span class="text-xs font-bold text-emerald-950 flex items-center space-x-1">
+                                <i class="fa-solid fa-cloud-sun text-emerald-600"></i>
+                                <span>ช่วงบ่าย (13.00 - 16.00 น.)</span>
+                            </span>
+                            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.2 rounded-full">Session บ่าย</span>
                         </div>
-                        <div class="mt-1.5">
-                            <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-1 rounded text-[11px] font-bold transition truncate cursor-pointer shadow-xs">
-                                <i class="fa-solid fa-book-open-reader text-emerald-600"></i>
-                                <span>สไลด์ & สรุป</span>
+                        <div class="grid grid-cols-3 gap-1.5 text-xs">
+                            <!-- 1. Pre-test บ่าย -->
+                            <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-blue-700">Pre-test</span>
+                                    ${afternoonPreScore !== undefined ? `<span class="bg-blue-100 text-blue-800 text-[9px] px-1 py-0.2 rounded font-bold">${afternoonPreScore}/${afternoonPreMax}</span>` : ''}
+                                </div>
+                                <div class="mt-1">
+                                    ${hasAfternoonPre ? `
+                                        <a href="${afternoonPreUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 py-0.5 rounded text-[10px] font-semibold transition">
+                                            <i class="fa-solid fa-pen-ruler text-[9px]"></i>
+                                            <span>ทำข้อสอบ</span>
+                                        </a>
+                                    ` : `
+                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
+                                            + ใส่ลิงก์
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+
+                            <!-- 2. สไลด์บ่าย -->
+                            <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-emerald-700">สไลด์/เอกสาร</span>
+                                    <span class="text-[9px] text-slate-400 truncate max-w-[40px]">${afternoonDocTitle ? '✓' : '-'}</span>
+                                </div>
+                                <div class="mt-1">
+                                    <button type="button" onclick="openLectureSlideModal(${dayItem.day})" class="w-full inline-flex items-center justify-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 py-0.5 rounded text-[10px] font-bold transition truncate cursor-pointer">
+                                        <i class="fa-solid fa-book-open-reader text-emerald-600 text-[9px]"></i>
+                                        <span>ดูสไลด์</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 3. Post-test บ่าย -->
+                            <div class="p-1.5 rounded-lg bg-white border border-emerald-100 flex flex-col justify-between">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-bold text-purple-700">Post-test</span>
+                                    ${afternoonPostScore !== undefined ? `<span class="bg-purple-100 text-purple-800 text-[9px] px-1 py-0.2 rounded font-bold">${afternoonPostScore}/${afternoonPostMax}</span>` : ''}
+                                </div>
+                                <div class="mt-1">
+                                    ${hasAfternoonPost ? `
+                                        <a href="${afternoonPostUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 py-0.5 rounded text-[10px] font-semibold transition">
+                                            <i class="fa-solid fa-square-check text-[9px]"></i>
+                                            <span>ทำข้อสอบ</span>
+                                        </a>
+                                    ` : `
+                                        <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-0.5 rounded text-[9px] hover:border-slate-400">
+                                            + ใส่ลิงก์
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Course Evaluation -->
+                <div class="p-2 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center justify-between flex-wrap gap-2 text-xs">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-star text-amber-500 text-sm"></i>
+                        <span class="font-bold text-amber-950 text-[11px]">แบบประเมินผลการอบรมประจำวัน:</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${dayItem.evalSubmitted ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}">
+                            ${dayItem.evalSubmitted ? '✓ ประเมินเรียบร้อยแล้ว' : 'รอส่งแบบประเมิน'}
+                        </span>
+                    </div>
+                    <div>
+                        ${hasEval ? `
+                            <a href="${dayItem.evalUrl}" target="_blank" class="inline-flex items-center space-x-1 bg-amber-500 hover:bg-amber-600 text-govNavy font-bold px-3 py-1 rounded-lg text-[11px] shadow-xs transition">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>ส่งแบบประเมิน</span>
+                            </a>
+                        ` : `
+                            <button onclick="openDayLinksModal(${dayItem.day})" class="text-slate-400 border border-dashed border-slate-300 px-2 py-0.5 rounded text-[10px] hover:border-slate-400">
+                                + ใส่ลิงก์แบบประเมิน
                             </button>
-                        </div>
-                    </div>
-
-                    <div class="p-2 rounded-lg bg-white border border-slate-200 flex flex-col justify-between">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-purple-700">3. Post-test</span>
-                            ${dayItem.postTestScore !== undefined ? `<span class="bg-purple-100 text-purple-800 text-[10px] px-1.5 py-0.2 rounded font-bold">${dayItem.postTestScore}/${dayItem.postTestMax || 10}</span>` : ''}
-                        </div>
-                        <div class="mt-1.5">
-                            ${hasPostTest ? `
-                                <a href="${dayItem.postTestUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 py-1 rounded text-[11px] font-semibold transition">
-                                    <i class="fa-solid fa-square-check"></i>
-                                    <span>ทำ Post-test</span>
-                                </a>
-                            ` : `
-                                <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-1 rounded text-[10px] hover:border-slate-400">
-                                    + ใส่ลิงก์
-                                </button>
-                            `}
-                        </div>
-                    </div>
-
-                    <div class="p-2 rounded-lg bg-white border border-slate-200 flex flex-col justify-between">
-                        <div class="flex items-center justify-between">
-                            <span class="text-[10px] font-bold text-amber-700">4. แบบประเมิน</span>
-                            <span class="text-[10px] font-bold ${dayItem.evalSubmitted ? 'text-emerald-600' : 'text-slate-400'}">${dayItem.evalSubmitted ? '✓ ประเมินแล้ว' : 'รอส่ง'}</span>
-                        </div>
-                        <div class="mt-1.5">
-                            ${hasEval ? `
-                                <a href="${dayItem.evalUrl}" target="_blank" class="w-full inline-flex items-center justify-center space-x-1 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 py-1 rounded text-[11px] font-semibold transition">
-                                    <i class="fa-solid fa-star"></i>
-                                    <span>ทำแบบประเมิน</span>
-                                </a>
-                            ` : `
-                                <button onclick="openDayLinksModal(${dayItem.day})" class="w-full text-slate-400 border border-dashed border-slate-300 py-1 rounded text-[10px] hover:border-slate-400">
-                                    + ใส่ลิงก์
-                                </button>
-                            `}
-                        </div>
+                        `}
                     </div>
                 </div>
             </div>
@@ -2075,21 +2187,37 @@ function openDayLinksModal(dayNum) {
     if (titleEl) {
         titleEl.innerHTML = `
             <i class="fa-solid fa-link text-emerald-600 mr-1.5"></i>
-            <span>จัดการกิจกรรม & ลิงก์วันที่ ${item.day} (${item.date})</span>
+            <span>จัดการลิงก์ & คะแนนวันที่ ${item.day} (${item.date})</span>
         `;
     }
 
-    setInputValue('modal-links-pretest-url', item.preTestUrl || '');
-    setInputValue('modal-links-pretest-score', item.preTestScore !== undefined ? item.preTestScore : '');
-    setInputValue('modal-links-pretest-max', item.preTestMax || 10);
+    // 1. Morning Session (เช้า)
+    setInputValue('modal-links-morning-pretest-url', item.morningPreTestUrl || item.preTestUrl || '');
+    const mPreScore = item.morningPreTestScore !== undefined ? item.morningPreTestScore : (item.preTestScore !== undefined ? item.preTestScore : '');
+    setInputValue('modal-links-morning-pretest-score', mPreScore);
+    setInputValue('modal-links-morning-pretest-max', item.morningPreTestMax || item.preTestMax || 10);
 
-    setInputValue('modal-links-doc-url', item.docUrl || '');
-    setInputValue('modal-links-doc-title', item.docTitle || '');
+    setInputValue('modal-links-morning-doc-url', item.morningDocUrl || item.docUrl || '');
+    setInputValue('modal-links-morning-doc-title', item.morningDocTitle || item.docTitle || '');
 
-    setInputValue('modal-links-posttest-url', item.postTestUrl || '');
-    setInputValue('modal-links-posttest-score', item.postTestScore !== undefined ? item.postTestScore : '');
-    setInputValue('modal-links-posttest-max', item.postTestMax || 10);
+    setInputValue('modal-links-morning-posttest-url', item.morningPostTestUrl || '');
+    setInputValue('modal-links-morning-posttest-score', item.morningPostTestScore !== undefined ? item.morningPostTestScore : '');
+    setInputValue('modal-links-morning-posttest-max', item.morningPostTestMax || 10);
 
+    // 2. Afternoon Session (บ่าย)
+    setInputValue('modal-links-afternoon-pretest-url', item.afternoonPreTestUrl || '');
+    setInputValue('modal-links-afternoon-pretest-score', item.afternoonPreTestScore !== undefined ? item.afternoonPreTestScore : '');
+    setInputValue('modal-links-afternoon-pretest-max', item.afternoonPreTestMax || 10);
+
+    setInputValue('modal-links-afternoon-doc-url', item.afternoonDocUrl || '');
+    setInputValue('modal-links-afternoon-doc-title', item.afternoonDocTitle || '');
+
+    setInputValue('modal-links-afternoon-posttest-url', item.afternoonPostTestUrl || item.postTestUrl || '');
+    const aPostScore = item.afternoonPostTestScore !== undefined ? item.afternoonPostTestScore : (item.postTestScore !== undefined ? item.postTestScore : '');
+    setInputValue('modal-links-afternoon-posttest-score', aPostScore);
+    setInputValue('modal-links-afternoon-posttest-max', item.afternoonPostTestMax || item.postTestMax || 10);
+
+    // 3. Daily Evaluation
     setInputValue('modal-links-eval-url', item.evalUrl || '');
     const evalDoneChk = document.getElementById('modal-links-eval-done');
     if (evalDoneChk) evalDoneChk.checked = !!item.evalSubmitted;
@@ -2102,19 +2230,47 @@ function saveDayLinksFromModal() {
     const item = appState.attendance.find(a => a.day === dayNum);
     if (!item) return;
 
-    item.preTestUrl = getInputValue('modal-links-pretest-url');
-    const preScore = getInputValue('modal-links-pretest-score');
-    item.preTestScore = preScore !== '' ? parseFloat(preScore) : undefined;
-    item.preTestMax = parseFloat(getInputValue('modal-links-pretest-max')) || 10;
+    // 1. Morning Session Save
+    item.morningPreTestUrl = getInputValue('modal-links-morning-pretest-url');
+    const mPreScore = getInputValue('modal-links-morning-pretest-score');
+    item.morningPreTestScore = mPreScore !== '' ? parseFloat(mPreScore) : undefined;
+    item.morningPreTestMax = parseFloat(getInputValue('modal-links-morning-pretest-max')) || 10;
 
-    item.docUrl = getInputValue('modal-links-doc-url');
-    item.docTitle = getInputValue('modal-links-doc-title');
+    item.morningDocUrl = getInputValue('modal-links-morning-doc-url');
+    item.morningDocTitle = getInputValue('modal-links-morning-doc-title');
 
-    item.postTestUrl = getInputValue('modal-links-posttest-url');
-    const postScore = getInputValue('modal-links-posttest-score');
-    item.postTestScore = postScore !== '' ? parseFloat(postScore) : undefined;
-    item.postTestMax = parseFloat(getInputValue('modal-links-posttest-max')) || 10;
+    item.morningPostTestUrl = getInputValue('modal-links-morning-posttest-url');
+    const mPostScore = getInputValue('modal-links-morning-posttest-score');
+    item.morningPostTestScore = mPostScore !== '' ? parseFloat(mPostScore) : undefined;
+    item.morningPostTestMax = parseFloat(getInputValue('modal-links-morning-posttest-max')) || 10;
 
+    // 2. Afternoon Session Save
+    item.afternoonPreTestUrl = getInputValue('modal-links-afternoon-pretest-url');
+    const aPreScore = getInputValue('modal-links-afternoon-pretest-score');
+    item.afternoonPreTestScore = aPreScore !== '' ? parseFloat(aPreScore) : undefined;
+    item.afternoonPreTestMax = parseFloat(getInputValue('modal-links-afternoon-pretest-max')) || 10;
+
+    item.afternoonDocUrl = getInputValue('modal-links-afternoon-doc-url');
+    item.afternoonDocTitle = getInputValue('modal-links-afternoon-doc-title');
+
+    item.afternoonPostTestUrl = getInputValue('modal-links-afternoon-posttest-url');
+    const aPostScore = getInputValue('modal-links-afternoon-posttest-score');
+    item.afternoonPostTestScore = aPostScore !== '' ? parseFloat(aPostScore) : undefined;
+    item.afternoonPostTestMax = parseFloat(getInputValue('modal-links-afternoon-posttest-max')) || 10;
+
+    // 3. Backward Compatibility & Primary pointers
+    item.preTestUrl = item.morningPreTestUrl || item.afternoonPreTestUrl || '';
+    item.preTestScore = item.morningPreTestScore !== undefined ? item.morningPreTestScore : item.afternoonPreTestScore;
+    item.preTestMax = item.morningPreTestMax || 10;
+
+    item.postTestUrl = item.afternoonPostTestUrl || item.morningPostTestUrl || '';
+    item.postTestScore = item.afternoonPostTestScore !== undefined ? item.afternoonPostTestScore : item.morningPostTestScore;
+    item.postTestMax = item.afternoonPostTestMax || 10;
+
+    item.docUrl = item.morningDocUrl || item.afternoonDocUrl || '';
+    item.docTitle = item.morningDocTitle || item.afternoonDocTitle || '';
+
+    // 4. Daily Evaluation Save
     item.evalUrl = getInputValue('modal-links-eval-url');
     const evalDoneChk = document.getElementById('modal-links-eval-done');
     item.evalSubmitted = evalDoneChk ? evalDoneChk.checked : false;
@@ -2122,7 +2278,7 @@ function saveDayLinksFromModal() {
     saveState();
     closeModal('modal-day-links');
     renderScheduleList();
-    showToast(`บันทึกลิงก์และผลการทดสอบวันที่ ${dayNum} เรียบร้อยแล้ว`);
+    showToast(`บันทึกลิงก์และคะแนน (เช้า-บ่าย) วันที่ ${dayNum} เรียบร้อยแล้ว`);
 }
 
 // --------------------------------------------------------------------------
