@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.8.0">
+    <link rel="stylesheet" href="styles.css?v=2.8.1">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -1874,6 +1874,24 @@
                             <i class="fa-solid fa-user-gear mr-1 text-cyan-600"></i> ทักษะการทำงาน (3)
                         </button>
                     </div>
+
+                    <!-- Sorting Bar for Lecturers -->
+                    <div class="flex items-center justify-between flex-wrap gap-2 pt-2 border-t border-slate-100 text-xs">
+                        <div class="flex items-center space-x-1.5 flex-wrap">
+                            <span class="font-bold text-slate-700 flex items-center mr-1">
+                                <i class="fa-solid fa-arrow-down-short-wide text-blue-600 mr-1.5"></i>เรียงตาม:
+                            </span>
+                            <button onclick="setLecturerSort('ID')" id="btn-sort-lecturer-id" class="px-2.5 py-1 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-2xs cursor-pointer">
+                                ลำดับ 01 - 17
+                            </button>
+                            <button onclick="setLecturerSort('NAME')" id="btn-sort-lecturer-name" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                                <i class="fa-solid fa-arrow-down-a-z mr-1 text-emerald-600"></i>ชื่อวิทยากร (ก - ฮ)
+                            </button>
+                            <button onclick="setLecturerSort('DAY')" id="btn-sort-lecturer-day" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                                <i class="fa-solid fa-calendar-day mr-1 text-amber-600"></i>วันที่สอน (วัน 1 - 13)
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Lecturers Grid 17 Cards -->
@@ -2861,6 +2879,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.8.0"></script>
+    <script src="app.js?v=2.8.1"></script>
 </body>
 </html>

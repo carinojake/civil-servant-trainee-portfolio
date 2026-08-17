@@ -116,6 +116,7 @@ if (fs.existsSync(indexPath)) {
     assert(html.includes('id="m5-lecture-slides-container"'), 'Contains M5 13-Day Lecture Slides Grid Container');
     assert(html.includes('id="tab-m9"'), 'Contains M9: Lecturers Directory & Matrix Traceability panel');
     assert(html.includes('id="matrix-table-container"') && html.includes('id="lecturers-grid-container"'), 'Contains Matrix and Lecturers grid containers');
+    assert(html.includes('btn-sort-lecturer-id') && html.includes('btn-sort-lecturer-name') && html.includes('btn-sort-lecturer-day'), 'Contains M9 Lecturer sorting buttons (ID, Name, Day)');
     assert(html.includes('id="modal-lecturer-profile"'), 'Contains Lecturer Profile modal');
 }
 
@@ -142,6 +143,7 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('openGeminiSpark'), 'Contains Gemini Spark Briefing & AI Quick Engine');
     assert(js.includes('masterLecturersList') && js.includes('masterCourseMatrixTraceability'), 'Contains M9 masterLecturersList (17 items) and Traceability Matrix data');
     assert(js.includes('renderM9Views') && js.includes('jumpToLecturerCard') && js.includes('openLecturerModal'), 'Contains M9 Renderers, Cross-linking Jump engine and Modal controllers');
+    assert(js.includes('setLecturerSort') && js.includes('currentLecturerSort'), 'Contains M9 Lecturer sorting engine by ID, Name (ก-ฮ), and Teaching Day (1-13)');
     assert(js.includes('generateAIStudyResponse') && js.includes('speakAIText') && js.includes('toggleAIVoiceRecognition'), 'Contains Hybrid Gemini / Built-in AI & Thai Voice/TTS controllers');
     assert(js.includes('BB 212') && js.includes('BB 211') && js.includes('BB 202') && js.includes('BB 205') && js.includes('BB 203'), 'Contains all 5 Centara Life conference rooms');
     assert(js.includes('ojtLogs'), 'Contains ojtLogs state collection');

@@ -4530,7 +4530,9 @@ const masterLecturersList = [
         agency: 'จุฬาลงกรณ์ฯ และมหาวิทยาลัยที่เกี่ยวข้อง',
         expertise: 'AI-integrated learning, Digital Literacy, สื่อดิจิทัล และการเรียนรู้ด้วยเทคโนโลยี',
         badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-robot'
+        icon: 'fa-robot',
+        primaryDay: 2,
+        daysLabel: 'วันที่ 2'
     },
     {
         id: '02',
@@ -4540,7 +4542,9 @@ const masterLecturersList = [
         agency: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี',
         expertise: 'รัฐประศาสนศาสตร์ นโยบายสาธารณะ การบริหารองค์กร และการเปลี่ยนแปลงเชิงระบบ',
         badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
-        icon: 'fa-landmark'
+        icon: 'fa-landmark',
+        primaryDay: 1,
+        daysLabel: 'วันที่ 1'
     },
     {
         id: '03',
@@ -4550,7 +4554,9 @@ const masterLecturersList = [
         agency: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี',
         expertise: 'AI เพื่อการเรียนการสอน เกมการเรียนรู้ ความคิดเชิงคำนวณ และสื่อการเรียนรู้สมัยใหม่',
         badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-gamepad'
+        icon: 'fa-gamepad',
+        primaryDay: 13,
+        daysLabel: 'วันที่ 13'
     },
     {
         id: '04',
@@ -4560,7 +4566,9 @@ const masterLecturersList = [
         agency: 'สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)',
         expertise: 'AI, Data Science, Business Analytics, Machine Learning และ Data Visualization',
         badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-        icon: 'fa-chart-pie'
+        icon: 'fa-chart-pie',
+        primaryDay: 4,
+        daysLabel: 'วันที่ 4'
     },
     {
         id: '05',
@@ -4570,7 +4578,9 @@ const masterLecturersList = [
         agency: 'สถาบันข้อมูลขนาดใหญ่ (BDI)',
         expertise: 'คณิตศาสตร์ประยุกต์ การพยากรณ์ข้อมูล และการสื่อสารข้อมูลด้วย BI/Visualization',
         badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-        icon: 'fa-chart-line'
+        icon: 'fa-chart-line',
+        primaryDay: 4,
+        daysLabel: 'วันที่ 4'
     },
     {
         id: '06',
@@ -4580,7 +4590,9 @@ const masterLecturersList = [
         agency: 'สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)',
         expertise: 'Data Science, Machine Learning, NLP, Image Mining, Data Governance และ BI',
         badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-        icon: 'fa-database'
+        icon: 'fa-database',
+        primaryDay: 5,
+        daysLabel: 'วันที่ 5'
     },
     {
         id: '07',
@@ -4590,7 +4602,9 @@ const masterLecturersList = [
         agency: 'องค์กรพัฒนาบุคลากรและการเรียนรู้ (อิสระ)',
         expertise: 'การโค้ช พัฒนาบุคลากร ภาวะผู้นำ การให้คำปรึกษา และการจัดกระบวนการเรียนรู้',
         badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-        icon: 'fa-comments'
+        icon: 'fa-comments',
+        primaryDay: 11,
+        daysLabel: 'วันที่ 11'
     },
     {
         id: '08',
@@ -4600,7 +4614,9 @@ const masterLecturersList = [
         agency: 'สำนักงานสถิติแห่งชาติ',
         expertise: 'PDPA, Microsoft Office/Excel, Cybersecurity Awareness, แบบสอบถามออนไลน์ และ Infographic',
         badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-shield-halved'
+        icon: 'fa-shield-halved',
+        primaryDay: 6,
+        daysLabel: 'วันที่ 6'
     },
     {
         id: '09',
@@ -4610,7 +4626,9 @@ const masterLecturersList = [
         agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
         expertise: 'การศึกษาพิเศษ การวิจัยเพื่อคนพิการ และการส่งเสริมศักยภาพคนหูหนวก',
         badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-        icon: 'fa-hands-asl-interpreting'
+        icon: 'fa-hands-asl-interpreting',
+        primaryDay: 7,
+        daysLabel: 'วันที่ 7'
     },
     {
         id: '10',
@@ -4620,7 +4638,9 @@ const masterLecturersList = [
         agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
         expertise: 'จิตวิทยา การศึกษาพิเศษ ภาษามือไทย และการสื่อสารเชิงสร้างสรรค์',
         badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-        icon: 'fa-heart'
+        icon: 'fa-heart',
+        primaryDay: 7,
+        daysLabel: 'วันที่ 7'
     },
     {
         id: '11',
@@ -4630,7 +4650,9 @@ const masterLecturersList = [
         agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
         expertise: 'AI เพื่อการทำงานและการศึกษา IT Service Management และสื่อดิจิทัลเพื่อการเข้าถึง',
         badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-laptop-code'
+        icon: 'fa-laptop-code',
+        primaryDay: 10,
+        daysLabel: 'วันที่ 10'
     },
     {
         id: '12',
@@ -4640,7 +4662,9 @@ const masterLecturersList = [
         agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
         expertise: 'Web/Mobile App, Google Workspace, Photoshop/Illustrator, Excel และ Content Marketing',
         badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-palette'
+        icon: 'fa-palette',
+        primaryDay: 8,
+        daysLabel: 'วันที่ 8'
     },
     {
         id: '13',
@@ -4650,7 +4674,9 @@ const masterLecturersList = [
         agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
         expertise: 'การออกแบบฐานข้อมูล การพัฒนาโปรแกรม และการวิเคราะห์/ออกแบบระบบ',
         badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-network-wired'
+        icon: 'fa-network-wired',
+        primaryDay: 9,
+        daysLabel: 'วันที่ 9'
     },
     {
         id: '14',
@@ -4660,7 +4686,9 @@ const masterLecturersList = [
         agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
         expertise: 'Visual Studio .NET, Word/Excel, Google Workspace, Cloud Collaboration และ UI/UX',
         badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-cloud'
+        icon: 'fa-cloud',
+        primaryDay: 8,
+        daysLabel: 'วันที่ 8'
     },
     {
         id: '15',
@@ -4670,7 +4698,9 @@ const masterLecturersList = [
         agency: 'สสส. ประจำสำนักงานเลขาธิการสภาผู้แทนราษฎร',
         expertise: 'รัฐประศาสนศาสตร์ การสร้างเสริมสุขภาวะ การทำงานเป็นทีม และการจัดกระบวนการ',
         badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-        icon: 'fa-people-group'
+        icon: 'fa-people-group',
+        primaryDay: 11,
+        daysLabel: 'วันที่ 11'
     },
     {
         id: '16',
@@ -4680,7 +4710,9 @@ const masterLecturersList = [
         agency: 'สำนักงานเลขาธิการสภาผู้แทนราษฎร',
         expertise: 'ระบบงานนิติบัญญัติ กฎหมาย นโยบายสาธารณะ หน้าที่พลเมือง และการบริหารราชการ',
         badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
-        icon: 'fa-scale-balanced'
+        icon: 'fa-scale-balanced',
+        primaryDay: 12,
+        daysLabel: 'วันที่ 12'
     },
     {
         id: '17',
@@ -4690,7 +4722,9 @@ const masterLecturersList = [
         agency: 'ส่วนระเบียบกลาง กองกฎหมายและระเบียบกลาง สำนักงานปลัดสำนักนายกรัฐมนตรี',
         expertise: 'กฎหมายและระเบียบงานสารบรรณ งานสารบรรณอิเล็กทรอนิกส์ และการเขียนหนังสือราชการเชิงวิเคราะห์',
         badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
-        icon: 'fa-feather'
+        icon: 'fa-feather',
+        primaryDay: 3,
+        daysLabel: 'วันที่ 3'
     }
 ];
 
@@ -5224,6 +5258,22 @@ function filterMatrixBySearch() {
     renderCourseMatrixList();
 }
 
+let currentLecturerSort = 'ID'; // 'ID' | 'NAME' | 'DAY'
+
+function setLecturerSort(sortType) {
+    currentLecturerSort = sortType;
+    ['id', 'name', 'day'].forEach(s => {
+        const btn = document.getElementById(`btn-sort-lecturer-${s}`);
+        if (!btn) return;
+        if (s.toUpperCase() === sortType) {
+            btn.className = 'px-2.5 py-1 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-2xs cursor-pointer';
+        } else {
+            btn.className = 'px-2.5 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer';
+        }
+    });
+    renderLecturersDirectory();
+}
+
 function renderLecturersDirectory() {
     const container = document.getElementById('lecturers-grid-container');
     const badgeEl = document.getElementById('lecturers-count-badge');
@@ -5232,7 +5282,7 @@ function renderLecturersDirectory() {
     const searchInput = document.getElementById('lecturer-search-input');
     const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-    const filtered = masterLecturersList.filter(l => {
+    let filtered = masterLecturersList.filter(l => {
         // Category filter
         if (currentLecturerCategoryFilter !== 'ALL') {
             if (l.category !== currentLecturerCategoryFilter) {
@@ -5242,11 +5292,26 @@ function renderLecturersDirectory() {
 
         // Search query
         if (searchVal) {
-            const text = `${l.id} ${l.name} ${l.position} ${l.agency} ${l.category} ${l.expertise}`.toLowerCase();
+            const text = `${l.id} ${l.name} ${l.position} ${l.agency} ${l.category} ${l.expertise} ${l.daysLabel}`.toLowerCase();
             return text.includes(searchVal);
         }
 
         return true;
+    });
+
+    // Sort logic
+    filtered.sort((a, b) => {
+        if (currentLecturerSort === 'NAME') {
+            return a.name.localeCompare(b.name, 'th');
+        } else if (currentLecturerSort === 'DAY') {
+            const dayA = a.primaryDay || 99;
+            const dayB = b.primaryDay || 99;
+            if (dayA !== dayB) return dayA - dayB;
+            return a.id.localeCompare(b.id);
+        } else {
+            // Default ID 01 - 17
+            return a.id.localeCompare(b.id);
+        }
     });
 
     if (badgeEl) {
@@ -5268,10 +5333,13 @@ function renderLecturersDirectory() {
             <div id="lecturer-card-${l.id}" class="lecturer-card p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs space-y-3 flex flex-col justify-between">
                 <div class="space-y-2">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
                             <span class="w-8 h-8 rounded-lg bg-govNavy text-amber-400 font-black text-xs flex items-center justify-center shadow-2xs">${l.id}</span>
-                            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${l.badgeColor}">
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${l.badgeColor}">
                                 <i class="fa-solid ${l.icon} mr-1"></i>${l.category}
+                            </span>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-900 border border-amber-200">
+                                <i class="fa-solid fa-calendar-day text-amber-600 mr-1"></i>${l.daysLabel}
                             </span>
                         </div>
                         <button type="button" onclick="openLecturerModal('${l.id}')" class="text-slate-400 hover:text-blue-600 text-sm p-1 cursor-pointer" title="ดูรายละเอียดวิทยากร">
@@ -5442,6 +5510,7 @@ window.filterMatrixBySearch = filterMatrixBySearch;
 window.renderLecturersDirectory = renderLecturersDirectory;
 window.filterLecturersByCategory = filterLecturersByCategory;
 window.filterLecturersBySearch = filterLecturersBySearch;
+window.setLecturerSort = setLecturerSort;
 window.openLecturerModal = openLecturerModal;
 window.jumpToLecturerCard = jumpToLecturerCard;
 window.askAILecturerTopics = askAILecturerTopics;
