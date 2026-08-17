@@ -2,11 +2,11 @@
   "schemaVersion": "2.0.0",
   "snapshotId": "SNAPSHOT-BASELINE-V1",
   "snapshotName": "Mission 002 Baseline Freeze",
-  "createdAt": "2026-08-17T04:14:51.121Z",
+  "createdAt": "2026-08-17T05:45:20.833Z",
   "fileManifest": {
     "index.html": {
-      "sizeBytes": 215956,
-      "sha256": "42d3632cdcb21bec32d7df9bebbaa138943e6448013dcc0c66a7cc82cc72edb6"
+      "sizeBytes": 218095,
+      "sha256": "95acd16d68228ea509377c3ba3933ac452c0c4b77353ad2e39a212f093d0d7be"
     },
     "app.js": {
       "sizeBytes": 302589,
