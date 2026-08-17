@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.7.2">
+    <link rel="stylesheet" href="styles.css?v=2.7.3">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -812,24 +812,64 @@
                 </div>
             </div>
 
-            <!-- Pre-Training Readiness Survey Banner (Overall Course Assessment) -->
-            <div class="app-card p-4 bg-gradient-to-r from-amber-500/10 via-amber-50 to-orange-50/50 border border-amber-300/80 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                <div class="space-y-1">
+            <!-- Pre-Training Baseline & Readiness Assessment Hub (Overall Course Assessments) -->
+            <div class="app-card p-5 bg-gradient-to-br from-amber-500/10 via-amber-50/60 to-orange-50/40 border border-amber-300 rounded-2xl space-y-3">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-amber-200/70 pb-2.5">
                     <div class="flex items-center space-x-2">
-                        <span class="bg-amber-500 text-govNavy text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        <span class="bg-amber-500 text-govNavy text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
                             <i class="fa-solid fa-star mr-1"></i> ประเมินก่อนเริ่มหลักสูตร
                         </span>
-                        <span class="text-xs font-bold text-amber-950">แบบประเมินความพร้อมรายบุคคลก่อนการอบรม (Pre-Training Evaluation)</span>
+                        <h3 class="text-sm font-bold text-amber-950">ศูนย์รวมแบบประเมินก่อนเริ่มการอบรม (Pre-Course Baseline Assessments)</h3>
                     </div>
-                    <p class="text-[11px] text-slate-600">
-                        แบบประเมินความพร้อมและสำรวจความต้องการสนับสนุนเป็นรายบุคคลก่อนเริ่มหลักสูตร <span class="font-semibold text-amber-900">(ทำครั้งเดียวก่อนเริ่มการอบรม ไม่ใช่แบบประเมินประจำวัน)</span>
-                    </p>
+                    <span class="text-[11px] text-amber-800 font-semibold bg-amber-100/80 px-2.5 py-0.5 rounded-full">
+                        <i class="fa-solid fa-circle-info mr-1"></i>ทำเพียงครั้งเดียวก่อนเริ่มการอบรม (ไม่ใช่แบบประเมินรายวัน)
+                    </span>
                 </div>
-                <div class="flex items-center space-x-2 shrink-0">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7Xwnk_w-Q7sTFjl0rT6BM8K16U7ojT1nMx2BOMU158T3wyA/viewform" target="_blank" class="px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-govNavy font-bold rounded-xl text-xs shadow-sm transition flex items-center space-x-1.5 cursor-pointer">
-                        <i class="fa-solid fa-clipboard-question"></i>
-                        <span>ทำแบบประเมินก่อนอบรม</span>
-                    </a>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                    <!-- Form 1: Readiness Survey -->
+                    <div class="p-3.5 bg-white rounded-xl border border-amber-200 shadow-xs flex flex-col justify-between space-y-2">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-bold text-govNavy mb-1">
+                                <span class="flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-clipboard-user text-amber-600"></i>
+                                    <span>1. แบบประเมินความพร้อมรายบุคคล</span>
+                                </span>
+                                <span class="text-[10px] bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.2 rounded-full font-bold">ความพร้อม & สิ่งอำนวยความสะดวก</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed">
+                                สำรวจความพร้อม ความต้องการสนับสนุน และสิ่งอำนวยความสะดวกเฉพาะบุคคลก่อนเริ่มเข้าคลาส
+                            </p>
+                        </div>
+                        <div class="pt-2">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7Xwnk_w-Q7sTFjl0rT6BM8K16U7ojT1nMx2BOMU158T3wyA/viewform" target="_blank" class="w-full py-2 bg-amber-500 hover:bg-amber-600 text-govNavy font-bold rounded-lg text-xs shadow-xs transition flex items-center justify-center space-x-1.5 cursor-pointer">
+                                <i class="fa-solid fa-clipboard-question"></i>
+                                <span>เปิดทำแบบประเมินความพร้อม</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Form 2: Knowledge & Experience Pre-test -->
+                    <div class="p-3.5 bg-white rounded-xl border border-blue-200 shadow-xs flex flex-col justify-between space-y-2">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-bold text-govNavy mb-1">
+                                <span class="flex items-center space-x-1.5">
+                                    <i class="fa-solid fa-brain text-blue-600"></i>
+                                    <span>2. แบบประเมินความรู้พื้นฐาน & ประสบการณ์เดิม</span>
+                                </span>
+                                <span class="text-[10px] bg-blue-50 text-blue-800 border border-blue-200 px-2 py-0.2 rounded-full font-bold">Pre-test หลักสูตร</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed">
+                                ประเมินระดับความรู้พื้นฐาน ทักษะไอที และประสบการณ์การทำงานก่อนเริ่มเข้าสู่บทเรียน 13 วัน
+                            </p>
+                        </div>
+                        <div class="pt-2">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZVqHoygqXVHKI2Lp_GlvmzElU6VwNDiirnkg6jmCYuMsCFg/viewform" target="_blank" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg text-xs shadow-xs transition flex items-center justify-center space-x-1.5 cursor-pointer">
+                                <i class="fa-solid fa-pen-ruler"></i>
+                                <span>เปิดทำแบบประเมินความรู้พื้นฐาน</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2618,6 +2658,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.7.2"></script>
+    <script src="app.js?v=2.7.3"></script>
 </body>
 </html>
