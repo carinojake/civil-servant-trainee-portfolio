@@ -35,7 +35,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css?v=2.7.3">
+    <link rel="stylesheet" href="styles.css?v=2.8.0">
 </head>
 <body class="theme-dynamic font-normal antialiased min-h-screen flex flex-col">
 
@@ -149,6 +149,10 @@
                 <button onclick="switchTab('m8')" id="nav-m8" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition border border-amber-400/40 bg-amber-500/10 text-amber-300 hover:text-white" role="tab" aria-selected="false">
                     <i class="fa-solid fa-graduation-cap text-amber-400"></i>
                     <span>M8: AI ติว & คลังข้อสอบ</span>
+                </button>
+                <button onclick="switchTab('m9')" id="nav-m9" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition border border-emerald-400/40 bg-emerald-500/10 text-emerald-300 hover:text-white" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-chalkboard-user text-emerald-400"></i>
+                    <span>M9: วิทยากร & วัน-วิชา-ไฟล์</span>
                 </button>
                 <button type="button" onclick="toggleAIBuddyDrawer()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-govNavy font-bold px-3.5 py-2 rounded-lg text-xs flex items-center space-x-2 transition shadow shadow-amber-500/30 border border-amber-200 cursor-pointer" title="เปิดหน้าต่าง AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน">
                     <i class="fa-solid fa-robot"></i>
@@ -1739,6 +1743,146 @@
             </div>
         </section>
 
+
+        <!-- ====================================================================
+             TAB 9 (M9): LECTURERS DIRECTORY & DAY-SUBJECT-INSTRUCTOR-FILE MATRIX
+             ==================================================================== -->
+        <section id="tab-m9" class="tab-panel hidden space-y-6">
+            <!-- M9 Header Card -->
+            <div class="app-card p-6 border-t-4 border-emerald-600 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full mb-1">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                        <span>ทำเนียบวิทยากรผู้ทรงคุณวุฒิ & แผนที่ตรวจสอบย้อนหลังหลักสูตร</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-govNavy">
+                        ทำเนียบวิทยากร 17 ท่าน & แมทริกซ์ "วัน–วิชา–อาจารย์–ไฟล์"
+                    </h2>
+                    <p class="text-slate-500 text-xs mt-0.5">
+                        ค้นหาตามชื่อ หน่วยงาน หรือกลุ่มความเชี่ยวชาญได้ทันที · เลขลำดับในรายชื่อใช้สำหรับอ้างอิงจากแผนที่การเรียนรู้และเปิดไฟล์ Google Drive ได้ทันที
+                    </p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="text-right bg-blue-50 px-3 py-2 rounded-xl border border-blue-200">
+                        <div class="text-[10px] text-blue-800 font-bold">วิทยากรทั้งหมด</div>
+                        <div class="text-sm font-bold text-blue-900">17 ท่าน (8 หมวด)</div>
+                    </div>
+                    <div class="text-right bg-emerald-50 px-3 py-2 rounded-xl border border-emerald-200">
+                        <div class="text-[10px] text-emerald-800 font-bold">เซสชันการบรรยาย</div>
+                        <div class="text-sm font-bold text-emerald-900">13 วัน (26 คาบ)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 SECTION 1: MATRIX TRACEABILITY (วัน–วิชา–อาจารย์–ไฟล์)
+                 ================================================================ -->
+            <div class="app-card p-6 space-y-4 border border-slate-200 shadow-sm">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b border-slate-200 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                            <i class="fa-solid fa-table-list text-emerald-600"></i>
+                            <span>1. แผนที่ตรวจสอบย้อนหลัง "วัน–วิชา–อาจารย์–ไฟล์" (Traceability Matrix)</span>
+                        </h3>
+                        <p class="text-slate-500 text-xs mt-0.5">
+                            ใช้ตรวจย้อนหลัง วันที่และช่วงเวลาเรียน (เช้า 09.30 น. / บ่าย 13.30 น.), วิชา, อาจารย์ผู้สอน, ลิงก์เปิด Google Drive และสถานะการตรวจสอบ
+                        </p>
+                    </div>
+                    <!-- Matrix Controls (Track Switcher) -->
+                    <div class="flex items-center space-x-1.5 flex-wrap">
+                        <button onclick="setMatrixTrackFilter('ALL')" id="btn-matrix-track-all" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer">
+                            <i class="fa-solid fa-layer-group mr-1"></i> ทุกสาย
+                        </button>
+                        <button onclick="setMatrixTrackFilter('FND')" id="btn-matrix-track-fnd" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-book-open mr-1 text-emerald-600"></i> หลักสูตรพื้นฐาน
+                        </button>
+                        <button onclick="setMatrixTrackFilter('ADV')" id="btn-matrix-track-adv" class="px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-laptop-code mr-1 text-blue-600"></i> หลักสูตรขั้นสูง
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Matrix Filter Bar & Search -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs">
+                    <div class="flex items-center space-x-2 w-full sm:w-auto">
+                        <span class="font-bold text-slate-700 shrink-0">สถานะ:</span>
+                        <div class="flex space-x-1">
+                            <button onclick="setMatrixStatusFilter('ALL')" id="btn-matrix-status-all" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-white border border-slate-300 text-slate-800 shadow-2xs cursor-pointer">ทั้งหมด</button>
+                            <button onclick="setMatrixStatusFilter('VERIFIED')" id="btn-matrix-status-verified" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 cursor-pointer">✓ ยืนยันจากไฟล์</button>
+                            <button onclick="setMatrixStatusFilter('PENDING')" id="btn-matrix-status-pending" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 cursor-pointer">⏳ รอตรวจสอบ</button>
+                        </div>
+                    </div>
+                    <div class="relative w-full sm:w-72">
+                        <input type="text" id="matrix-search-input" oninput="filterMatrixBySearch()" placeholder="⌕ ค้นหาวัน, วิชา, อาจารย์, ไฟล์..." class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-hidden">
+                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Matrix Table / Cards Container -->
+                <div id="matrix-table-container" class="space-y-2.5">
+                    <!-- Dynamic Matrix Rows Rendered via JS -->
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 SECTION 2: LECTURERS DIRECTORY (วิทยากรในหลักสูตร 17 ท่าน)
+                 ================================================================ -->
+            <div class="app-card p-6 space-y-5 border border-slate-200 shadow-sm" id="lecturers-directory-section">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b border-slate-200 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy flex items-center space-x-2">
+                            <i class="fa-solid fa-users-viewfinder text-blue-600"></i>
+                            <span>2. ทำเนียบวิทยากรในหลักสูตร (Lecturers Directory 17 ท่าน)</span>
+                        </h3>
+                        <p class="text-slate-500 text-xs mt-0.5">
+                            ค้นหาตามชื่อ หน่วยงาน หรือกลุ่มความเชี่ยวชาญได้ทันที · เลขลำดับในรายชื่อใช้สำหรับอ้างอิงจากแผนที่การเรียนรู้
+                        </p>
+                    </div>
+                    <div id="lecturers-count-badge" class="px-3 py-1 bg-blue-50 border border-blue-200 text-blue-800 rounded-full text-xs font-bold">
+                        พบ 17 รายการ
+                    </div>
+                </div>
+
+                <!-- Lecturer Search & Category Badges -->
+                <div class="space-y-3">
+                    <div class="relative">
+                        <input type="text" id="lecturer-search-input" oninput="filterLecturersBySearch()" placeholder="⌕ ค้นหาชื่อ ตำแหน่ง หน่วยงาน หรือหัวข้อ..." class="w-full pl-9 pr-4 py-2.5 text-xs rounded-xl border border-slate-300 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-hidden shadow-2xs">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-slate-400 text-sm"></i>
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="flex items-center gap-1.5 flex-wrap text-xs" id="lecturer-category-pills">
+                        <button onclick="filterLecturersByCategory('ALL')" class="lecturer-cat-btn active px-3 py-1 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-2xs cursor-pointer">
+                            ทั้งหมด (17)
+                        </button>
+                        <button onclick="filterLecturersByCategory('AI & ดิจิทัล')" class="lecturer-cat-btn px-3 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-robot mr-1 text-purple-600"></i> AI & ดิจิทัล (6)
+                        </button>
+                        <button onclick="filterLecturersByCategory('ข้อมูล')" class="lecturer-cat-btn px-3 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-database mr-1 text-blue-600"></i> ข้อมูล (3)
+                        </button>
+                        <button onclick="filterLecturersByCategory('บริหารราชการ')" class="lecturer-cat-btn px-3 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-landmark mr-1 text-amber-600"></i> บริหารราชการ (1)
+                        </button>
+                        <button onclick="filterLecturersByCategory('กฎหมาย & ราชการ')" class="lecturer-cat-btn px-3 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-scale-balanced mr-1 text-rose-600"></i> กฎหมาย & ราชการ (2)
+                        </button>
+                        <button onclick="filterLecturersByCategory('คนพิการ & การเข้าถึง')" class="lecturer-cat-btn px-3 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-universal-access mr-1 text-emerald-600"></i> คนพิการ & การเข้าถึง (2)
+                        </button>
+                        <button onclick="filterLecturersByCategory('ทักษะการทำงาน')" class="lecturer-cat-btn px-3 py-1 rounded-lg text-xs font-semibold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                            <i class="fa-solid fa-user-gear mr-1 text-cyan-600"></i> ทักษะการทำงาน (3)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lecturers Grid 17 Cards -->
+                <div id="lecturers-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                    <!-- Dynamic Lecturer Cards (01 - 17) rendered via JS -->
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer Standard Thai Government Aesthetic -->
@@ -2462,6 +2606,65 @@
         </div>
     </div>
 
+    <!-- Modal: Lecturer Detail Profile (ทำเนียบวิทยากร 17 ท่าน) -->
+    <div id="modal-lecturer-profile" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto border border-slate-200">
+            <div class="flex justify-between items-start border-b border-slate-200 pb-3">
+                <div class="flex items-center space-x-3">
+                    <span id="modal-lecturer-id-badge" class="w-10 h-10 rounded-xl bg-govNavy text-amber-400 font-black text-base flex items-center justify-center shadow-xs">01</span>
+                    <div>
+                        <span id="modal-lecturer-cat-badge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200 uppercase">AI & ดิจิทัล</span>
+                        <h3 id="modal-lecturer-name" class="text-base font-bold text-govNavy mt-0.5">ชื่อ-นามสกุลวิทยากร</h3>
+                    </div>
+                </div>
+                <button type="button" onclick="closeModal('modal-lecturer-profile')" class="text-slate-400 hover:text-slate-600 text-xl p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-semibold">ตำแหน่งวิชาการ / ตำแหน่งงาน:</div>
+                        <div id="modal-lecturer-position" class="font-bold text-slate-800 text-xs">อาจารย์ / นักวิจัย</div>
+                    </div>
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-semibold">หน่วยงาน / มหาวิทยาลัย:</div>
+                        <div id="modal-lecturer-agency" class="font-semibold text-slate-700 text-xs">สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)</div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-amber-50/80 rounded-xl border border-amber-200 space-y-1 text-amber-950">
+                    <div class="font-bold text-amber-900 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-award text-amber-600"></i>
+                        <span>ความถนัด & ความเชี่ยวชาญเฉพาะทาง:</span>
+                    </div>
+                    <p id="modal-lecturer-expertise" class="text-slate-700 leading-relaxed text-[11px]"></p>
+                </div>
+
+                <div class="p-3 bg-blue-50/80 rounded-xl border border-blue-200 space-y-1.5 text-blue-950">
+                    <div class="font-bold text-blue-900 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-calendar-check text-blue-600"></i>
+                        <span>วิชาที่บรรยายในหลักสูตร 13 วัน:</span>
+                    </div>
+                    <div id="modal-lecturer-courses-list" class="space-y-1 text-[11px]">
+                        <!-- Dynamic list of courses taught by this lecturer -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-2 pt-3 border-t border-slate-200">
+                <button type="button" onclick="askAILecturerTopics()" class="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-800 font-bold text-xs border border-purple-200 transition flex items-center justify-center space-x-1.5 cursor-pointer">
+                    <i class="fa-solid fa-sparkles text-purple-600"></i>
+                    <span>✨ สรุปเนื้อหาที่อาจารย์ท่านนี้สอนด้วย AI</span>
+                </button>
+                <button type="button" onclick="closeModal('modal-lecturer-profile')" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition cursor-pointer">
+                    ปิด
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal: Set Gemini API Key -->
     <div id="modal-gemini-key" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
         <div class="app-card max-w-md w-full p-6 shadow-2xl space-y-4">
@@ -2658,6 +2861,6 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=2.7.3"></script>
+    <script src="app.js?v=2.8.0"></script>
 </body>
 </html>

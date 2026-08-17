@@ -661,6 +661,7 @@ function renderAllViews() {
     updateRctfPrompt();
     renderM8QuizView();
     renderM5LectureSlidesGrid();
+    renderM9Views();
 }
 
 function updateKpiMetrics() {
@@ -2903,6 +2904,8 @@ function switchTab(tabId) {
         renderPortfolioPreview();
     } else if (tabId === 'm8') {
         renderM8QuizView();
+    } else if (tabId === 'm9') {
+        renderM9Views();
     }
 }
 
@@ -4514,6 +4517,937 @@ function openGeminiSpark(dayNumber) {
     }
 }
 
+// ============================================================================
+// 12. M9: LECTURERS DIRECTORY (17 INSTRUCTORS) & TRACEABILITY MATRIX ENGINE
+// ============================================================================
+
+const masterLecturersList = [
+    {
+        id: '01',
+        name: 'ดร.ชณทัต บุญชูวงศ์',
+        category: 'AI & ดิจิทัล',
+        position: 'นักวิชาการอิสระ / อาจารย์พิเศษ',
+        agency: 'จุฬาลงกรณ์ฯ และมหาวิทยาลัยที่เกี่ยวข้อง',
+        expertise: 'AI-integrated learning, Digital Literacy, สื่อดิจิทัล และการเรียนรู้ด้วยเทคโนโลยี',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+        icon: 'fa-robot'
+    },
+    {
+        id: '02',
+        name: 'รศ.ดร.ทวีศักดิ์ กฤษเจริญ',
+        category: 'บริหารราชการ',
+        position: 'คณบดี บัณฑิตวิทยาลัยการจัดการและนวัตกรรม',
+        agency: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี',
+        expertise: 'รัฐประศาสนศาสตร์ นโยบายสาธารณะ การบริหารองค์กร และการเปลี่ยนแปลงเชิงระบบ',
+        badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+        icon: 'fa-landmark'
+    },
+    {
+        id: '03',
+        name: 'ผศ.ดร.สุธิวัชร ศุภลักษณ์',
+        category: 'AI & ดิจิทัล',
+        position: 'ผู้ช่วยศาสตราจารย์ / นักวิจัย',
+        agency: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี',
+        expertise: 'AI เพื่อการเรียนการสอน เกมการเรียนรู้ ความคิดเชิงคำนวณ และสื่อการเรียนรู้สมัยใหม่',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+        icon: 'fa-gamepad'
+    },
+    {
+        id: '04',
+        name: 'ผศ.ดร.ดวงใจ จิตคงชื่น',
+        category: 'ข้อมูล',
+        position: 'รองประธานฝ่ายพัฒนากำลังคน',
+        agency: 'สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)',
+        expertise: 'AI, Data Science, Business Analytics, Machine Learning และ Data Visualization',
+        badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
+        icon: 'fa-chart-pie'
+    },
+    {
+        id: '05',
+        name: 'ดร.ขวัญศิริ ศิริมังคลา',
+        category: 'ข้อมูล',
+        position: 'Senior Data Innovation Educator',
+        agency: 'สถาบันข้อมูลขนาดใหญ่ (BDI)',
+        expertise: 'คณิตศาสตร์ประยุกต์ การพยากรณ์ข้อมูล และการสื่อสารข้อมูลด้วย BI/Visualization',
+        badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
+        icon: 'fa-chart-line'
+    },
+    {
+        id: '06',
+        name: 'ดร.ปริสุทธิ์ จิตต์ภักดี',
+        category: 'ข้อมูล',
+        position: 'ผู้เชี่ยวชาญการศึกษาด้านนวัตกรรมข้อมูล',
+        agency: 'สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)',
+        expertise: 'Data Science, Machine Learning, NLP, Image Mining, Data Governance และ BI',
+        badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
+        icon: 'fa-database'
+    },
+    {
+        id: '07',
+        name: 'ดร.สุกฤตา ปรีชาว่อง',
+        category: 'ทักษะการทำงาน',
+        position: 'Co-founder / CEO / Coach / Trainer',
+        agency: 'องค์กรพัฒนาบุคลากรและการเรียนรู้ (อิสระ)',
+        expertise: 'การโค้ช พัฒนาบุคลากร ภาวะผู้นำ การให้คำปรึกษา และการจัดกระบวนการเรียนรู้',
+        badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+        icon: 'fa-comments'
+    },
+    {
+        id: '08',
+        name: 'นางสาววราภรณ์ ไตรศักดิ์ศรี',
+        category: 'AI & ดิจิทัล',
+        position: 'นักวิชาการคอมพิวเตอร์ชำนาญการพิเศษ',
+        agency: 'สำนักงานสถิติแห่งชาติ',
+        expertise: 'PDPA, Microsoft Office/Excel, Cybersecurity Awareness, แบบสอบถามออนไลน์ และ Infographic',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+        icon: 'fa-shield-halved'
+    },
+    {
+        id: '09',
+        name: 'รศ.ดร.เกยูร วงศ์ก้อม',
+        category: 'คนพิการ & การเข้าถึง',
+        position: 'ข้าราชการบำนาญ / อาจารย์ด้านการศึกษาพิเศษ',
+        agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
+        expertise: 'การศึกษาพิเศษ การวิจัยเพื่อคนพิการ และการส่งเสริมศักยภาพคนหูหนวก',
+        badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+        icon: 'fa-hands-asl-interpreting'
+    },
+    {
+        id: '10',
+        name: 'ผศ.ดร.ภริมา วินิธาสถิตย์กุล',
+        category: 'คนพิการ & การเข้าถึง',
+        position: 'ผู้ช่วยศาสตราจารย์',
+        agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
+        expertise: 'จิตวิทยา การศึกษาพิเศษ ภาษามือไทย และการสื่อสารเชิงสร้างสรรค์',
+        badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+        icon: 'fa-heart'
+    },
+    {
+        id: '11',
+        name: 'ผศ.ดร.ชนินทร์ ฐิติเพชรกุล',
+        category: 'AI & ดิจิทัล',
+        position: 'รองคณบดี / หัวหน้าส่วนงานพัฒนาบุคลากรฯ',
+        agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
+        expertise: 'AI เพื่อการทำงานและการศึกษา IT Service Management และสื่อดิจิทัลเพื่อการเข้าถึง',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+        icon: 'fa-laptop-code'
+    },
+    {
+        id: '12',
+        name: 'อาจารย์จารุณี ทองอร่าม',
+        category: 'AI & ดิจิทัล',
+        position: 'อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ',
+        agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
+        expertise: 'Web/Mobile App, Google Workspace, Photoshop/Illustrator, Excel และ Content Marketing',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+        icon: 'fa-palette'
+    },
+    {
+        id: '13',
+        name: 'อาจารย์ณัฐฐิณี คงไกรฤกษ์',
+        category: 'AI & ดิจิทัล',
+        position: 'อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ',
+        agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
+        expertise: 'การออกแบบฐานข้อมูล การพัฒนาโปรแกรม และการวิเคราะห์/ออกแบบระบบ',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+        icon: 'fa-network-wired'
+    },
+    {
+        id: '14',
+        name: 'ผศ.ชุติมา กลั่นไพฑูรย์',
+        category: 'AI & ดิจิทัล',
+        position: 'ผู้ช่วยศาสตราจารย์ สาขาระบบสารสนเทศ',
+        agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
+        expertise: 'Visual Studio .NET, Word/Excel, Google Workspace, Cloud Collaboration และ UI/UX',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
+        icon: 'fa-cloud'
+    },
+    {
+        id: '15',
+        name: 'อาจารย์มงคล สิริถิรวัฒน์',
+        category: 'ทักษะการทำงาน',
+        position: 'ผู้จัดการโครงการรัฐสภาร่วมใจรวมพลังสร้างสุข',
+        agency: 'สสส. ประจำสำนักงานเลขาธิการสภาผู้แทนราษฎร',
+        expertise: 'รัฐประศาสนศาสตร์ การสร้างเสริมสุขภาวะ การทำงานเป็นทีม และการจัดกระบวนการ',
+        badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+        icon: 'fa-people-group'
+    },
+    {
+        id: '16',
+        name: 'อาจารย์มาณิช อินทฉิม',
+        category: 'กฎหมาย & ราชการ',
+        position: 'อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ / วิทยากรเชี่ยวชาญ',
+        agency: 'สำนักงานเลขาธิการสภาผู้แทนราษฎร',
+        expertise: 'ระบบงานนิติบัญญัติ กฎหมาย นโยบายสาธารณะ หน้าที่พลเมือง และการบริหารราชการ',
+        badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
+        icon: 'fa-scale-balanced'
+    },
+    {
+        id: '17',
+        name: 'นางสาวสุพิชฌาย์ กลิ่นหอม',
+        category: 'กฎหมาย & ราชการ',
+        position: 'นิติกรชำนาญการพิเศษ',
+        agency: 'ส่วนระเบียบกลาง กองกฎหมายและระเบียบกลาง สำนักงานปลัดสำนักนายกรัฐมนตรี',
+        expertise: 'กฎหมายและระเบียบงานสารบรรณ งานสารบรรณอิเล็กทรอนิกส์ และการเขียนหนังสือราชการเชิงวิเคราะห์',
+        badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
+        icon: 'fa-feather'
+    }
+];
+
+const masterCourseMatrixTraceability = [
+    {
+        day: 1,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'GOV-101',
+        title: 'ปฐมนิเทศและเป้าหมายการปฏิบัติราชการในศตวรรษที่ 21',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '02',
+        lecturerName: 'รศ.ดร.ทวีศักดิ์ กฤษเจริญ',
+        fileTitle: 'สไลด์ปฐมนิเทศและบทบาทข้าราชการยุคใหม่.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 1,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'GOV-102',
+        title: 'โครงสร้างการบริหารราชการแผ่นดินและธรรมาภิบาลภาครัฐ',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '02',
+        lecturerName: 'รศ.ดร.ทวีศักดิ์ กฤษเจริญ',
+        fileTitle: 'เอกสารบรรยายโครงสร้างราชการและธรรมาภิบาล.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 2,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'DIG-201',
+        title: 'การประยุกต์ใช้ AI ในการเรียนรู้และการปฏิบัติราชการ (AI-Integrated Learning)',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '01',
+        lecturerName: 'ดร.ชณทัต บุญชูวงศ์',
+        fileTitle: 'AI_Integrated_Learning_CivilService.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 2,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'DIG-202',
+        title: 'Digital Literacy & สื่อดิจิทัลเพื่อการสื่อสารภาครัฐ',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '01',
+        lecturerName: 'ดร.ชณทัต บุญชูวงศ์',
+        fileTitle: 'Digital_Literacy_Gov_Communication.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 3,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'LAW-301',
+        title: 'ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ พ.ศ. 2526 และที่แก้ไขเพิ่มเติม',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '17',
+        lecturerName: 'นางสาวสุพิชฌาย์ กลิ่นหอม',
+        fileTitle: 'ระเบียบงานสารบรรณและการเขียนหนังสือราชการ.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 3,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'LAW-302',
+        title: 'งานสารบรรณอิเล็กทรอนิกส์ และการเขียนหนังสือราชการเชิงวิเคราะห์',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '17',
+        lecturerName: 'นางสาวสุพิชฌาย์ กลิ่นหอม',
+        fileTitle: 'สารบรรณอิเล็กทรอนิกส์และเทคนิคหนังสือภายนอก-ภายใน.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 4,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'DAT-401',
+        title: 'Data Science & Data Analytics เบื้องต้นสำหรับงานราชการ',
+        track: 'ADV',
+        trackLabel: 'หลักสูตรขั้นสูง (Advanced)',
+        lecturerId: '04',
+        lecturerName: 'ผศ.ดร.ดวงใจ จิตคงชื่น',
+        fileTitle: 'Data_Science_Public_Sector.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 4,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'DAT-402',
+        title: 'การวิเคราะห์ข้อมูลเชิงพยากรณ์และ Business Intelligence (BI/Visualization)',
+        track: 'ADV',
+        trackLabel: 'หลักสูตรขั้นสูง (Advanced)',
+        lecturerId: '05',
+        lecturerName: 'ดร.ขวัญศิริ ศิริมังคลา',
+        fileTitle: 'BI_Data_Visualization_BDI.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 5,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'DAT-501',
+        title: 'Data Governance, ธรรมาภิบาลข้อมูล และการเตรียมข้อมูลขนาดใหญ่',
+        track: 'ADV',
+        trackLabel: 'หลักสูตรขั้นสูง (Advanced)',
+        lecturerId: '06',
+        lecturerName: 'ดร.ปริสุทธิ์ จิตต์ภักดี',
+        fileTitle: 'Data_Governance_BigData_Framework.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 5,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'DAT-502',
+        title: 'Machine Learning, NLP และ Image Mining สำหรับงานวิเคราะห์ภาครัฐ',
+        track: 'ADV',
+        trackLabel: 'หลักสูตรขั้นสูง (Advanced)',
+        lecturerId: '06',
+        lecturerName: 'ดร.ปริสุทธิ์ จิตต์ภักดี',
+        fileTitle: 'Machine_Learning_NLP_GovAnalytics.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 6,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'SEC-601',
+        title: 'พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) สำหรับเจ้าหน้าที่รัฐ',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '08',
+        lecturerName: 'นางสาววราภรณ์ ไตรศักดิ์ศรี',
+        fileTitle: 'PDPA_Awareness_Government_Officer.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 6,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'SEC-602',
+        title: 'Cybersecurity Awareness และการประมวลผลข้อมูลปลอดภัยด้วย Excel/แบบสอบถาม',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '08',
+        lecturerName: 'นางสาววราภรณ์ ไตรศักดิ์ศรี',
+        fileTitle: 'Cybersecurity_DataSecurity_Excel.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 7,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'ACC-701',
+        title: 'การศึกษาพิเศษและการเสริมสร้างศักยภาพคนพิการในองค์กรภาครัฐ',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '09',
+        lecturerName: 'รศ.ดร.เกยูร วงศ์ก้อม',
+        fileTitle: 'Special_Education_Disability_Inclusion.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 7,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'ACC-702',
+        title: 'จิตวิทยา ภาษามือไทย และการสื่อสารเชิงสร้างสรรค์ในที่ทำงาน',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '10',
+        lecturerName: 'ผศ.ดร.ภริมา วินิธาสถิตย์กุล',
+        fileTitle: 'SignLanguage_CreativeCommunication.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 8,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'APP-801',
+        title: 'Google Workspace และการประยุกต์ใช้ Cloud Collaboration ในงานราชการ',
+        track: 'FND',
+        trackLabel: 'หลักสูตรพื้นฐาน (Foundation)',
+        lecturerId: '12',
+        lecturerName: 'อาจารย์จารุณี ทองอร่าม',
+        fileTitle: 'Google_Workspace_Collaboration_Gov.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 8,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'APP-802',
+        title: 'การออกแบบ UI/UX และเครื่องมือสร้างสื่อดิจิทัลสมัยใหม่',
+        track: 'FND',
+        trackLabel: 'หลักสูตรพื้นฐาน (Foundation)',
+        lecturerId: '14',
+        lecturerName: 'ผศ.ชุติมา กลั่นไพฑูรย์',
+        fileTitle: 'UI_UX_Design_Media_Production.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 9,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'SYS-901',
+        title: 'การวิเคราะห์และออกแบบระบบสารสนเทศ (System Analysis & Design)',
+        track: 'ADV',
+        trackLabel: 'หลักสูตรขั้นสูง (Advanced)',
+        lecturerId: '13',
+        lecturerName: 'อาจารย์ณัฐฐิณี คงไกรฤกษ์',
+        fileTitle: 'Systems_Analysis_Design_PublicSector.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 9,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'SYS-902',
+        title: 'การออกแบบฐานข้อมูลเชิงสัมพันธ์และสถาปัตยกรรมข้อมูลภาครัฐ',
+        track: 'ADV',
+        trackLabel: 'หลักสูตรขั้นสูง (Advanced)',
+        lecturerId: '13',
+        lecturerName: 'อาจารย์ณัฐฐิณี คงไกรฤกษ์',
+        fileTitle: 'Relational_Database_Design_Gov.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 10,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'ITM-1001',
+        title: 'IT Service Management และการบริหารจัดการบริการเทคโนโลยีดิจิทัล',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '11',
+        lecturerName: 'ผศ.ดร.ชนินทร์ ฐิติเพชรกุล',
+        fileTitle: 'IT_Service_Management_Framework.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 10,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'ITM-1002',
+        title: 'การนำ Generative AI มาเสริมประสิทธิภาพการทำงานภาครัฐอย่างปลอดภัย',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '11',
+        lecturerName: 'ผศ.ดร.ชนินทร์ ฐิติเพชรกุล',
+        fileTitle: 'GenAI_Workplace_Productivity.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 11,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'WRK-1101',
+        title: 'การทำงานเป็นทีม การสร้างเสริมสุขภาวะองค์กร และการสื่อสารเชิงบวก',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '15',
+        lecturerName: 'อาจารย์มงคล สิริถิรวัฒน์',
+        fileTitle: 'Teamwork_HappyWorkplace_Parliament.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 11,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'WRK-1102',
+        title: 'ภาวะผู้นำ การโค้ช และการจัดกระบวนการเรียนรู้เพื่อการพัฒนาตนเอง',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '07',
+        lecturerName: 'ดร.สุกฤตา ปรีชาว่อง',
+        fileTitle: 'Leadership_Coaching_PersonalGrowth.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 12,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'LEG-1201',
+        title: 'ระบบงานนิติบัญญัติ กฎหมายมหาชน และกระบวนการตรากฎหมายไทย',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '16',
+        lecturerName: 'อาจารย์มาณิช อินทฉิม',
+        fileTitle: 'Legislative_System_PublicLaw_Thailand.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 12,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'LEG-1202',
+        title: 'นโยบายสาธารณะ หน้าที่พลเมือง และการขับเคลื่อนธรรมาภิบาล',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '16',
+        lecturerName: 'อาจารย์มาณิช อินทฉิม',
+        fileTitle: 'Public_Policy_GoodGovernance_CivilService.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 13,
+        session: 'MORNING',
+        timeLabel: '09.30 - 12.00 น.',
+        subjectCode: 'CPT-1301',
+        title: 'ความคิดเชิงคำนวณ (Computational Thinking) และเกมการเรียนรู้สมัยใหม่',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '03',
+        lecturerName: 'ผศ.ดร.สุธิวัชร ศุภลักษณ์',
+        fileTitle: 'Computational_Thinking_Learning_Games.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    },
+    {
+        day: 13,
+        session: 'AFTERNOON',
+        timeLabel: '13.30 - 16.00 น.',
+        subjectCode: 'CPT-1302',
+        title: 'การประเมินปิดการอบรม สรุปภาพรวม 13 วัน และการเตรียมความพร้อม OJT',
+        track: 'BOTH',
+        trackLabel: 'รวมทุกสาย (ADV & FND)',
+        lecturerId: '03',
+        lecturerName: 'ผศ.ดร.สุธิวัชร ศุภลักษณ์',
+        fileTitle: 'Course_Synthesis_OJT_Readiness.pdf',
+        fileDriveUrl: 'https://drive.google.com/drive/folders/170aXk_jY52UuT48Xn5hL-sCjW35iW-B7',
+        status: 'VERIFIED',
+        statusLabel: 'ยืนยันจากไฟล์'
+    }
+];
+
+let currentMatrixTrackFilter = 'ALL';
+let currentMatrixStatusFilter = 'ALL';
+let currentLecturerCategoryFilter = 'ALL';
+let activeSelectedLecturerId = '01';
+
+function renderM9Views() {
+    renderCourseMatrixList();
+    renderLecturersDirectory();
+}
+
+function renderCourseMatrixList() {
+    const container = document.getElementById('matrix-table-container');
+    if (!container) return;
+
+    const searchInput = document.getElementById('matrix-search-input');
+    const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+    const filtered = masterCourseMatrixTraceability.filter(item => {
+        // Track filter
+        if (currentMatrixTrackFilter !== 'ALL') {
+            if (item.track !== 'BOTH' && item.track !== currentMatrixTrackFilter) {
+                return false;
+            }
+        }
+
+        // Status filter
+        if (currentMatrixStatusFilter !== 'ALL') {
+            if (item.status !== currentMatrixStatusFilter) {
+                return false;
+            }
+        }
+
+        // Search query
+        if (searchVal) {
+            const matchText = `วันที่ ${item.day} ${item.session} ${item.timeLabel} ${item.subjectCode} ${item.title} ${item.lecturerName} ${item.fileTitle}`.toLowerCase();
+            return matchText.includes(searchVal);
+        }
+
+        return true;
+    });
+
+    if (filtered.length === 0) {
+        container.innerHTML = `
+            <div class="p-8 text-center bg-slate-50 rounded-xl border border-slate-200 text-slate-400 text-xs">
+                <i class="fa-solid fa-folder-open text-3xl mb-2"></i>
+                <p>ไม่พบรายการที่ตรงกับเงื่อนไขการค้นหา</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = filtered.map(item => {
+        const isMorning = item.session === 'MORNING';
+        const sessionBadge = isMorning 
+            ? `<span class="bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-md font-bold text-[10px]"><i class="fa-solid fa-sun text-amber-500 mr-1"></i>เช้า (${item.timeLabel})</span>`
+            : `<span class="bg-emerald-100 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-bold text-[10px]"><i class="fa-solid fa-cloud-sun text-emerald-600 mr-1"></i>บ่าย (${item.timeLabel})</span>`;
+
+        const trackBadge = item.track === 'BOTH'
+            ? `<span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md text-[10px] font-semibold">ทุกสาย</span>`
+            : item.track === 'ADV'
+            ? `<span class="bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-md text-[10px] font-bold">ขั้นสูง (ADV)</span>`
+            : `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-md text-[10px] font-bold">พื้นฐาน (FND)</span>`;
+
+        const statusBadge = item.status === 'VERIFIED'
+            ? `<span class="bg-emerald-50 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-full text-[10px] font-bold inline-flex items-center"><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i>ยืนยันจากไฟล์</span>`
+            : `<span class="bg-amber-50 text-amber-800 border border-amber-300 px-2.5 py-1 rounded-full text-[10px] font-bold inline-flex items-center"><i class="fa-solid fa-hourglass-half text-amber-600 mr-1"></i>รอตรวจสอบ</span>`;
+
+        return `
+            <div class="p-3.5 bg-white hover:bg-slate-50/80 rounded-xl border border-slate-200 shadow-2xs transition flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
+                <div class="space-y-1.5 flex-1">
+                    <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+                        <span class="bg-govNavy text-white px-2 py-0.5 rounded-md font-black text-[11px]">วันที่ ${item.day}</span>
+                        ${sessionBadge}
+                        ${trackBadge}
+                        <span class="text-slate-400 font-mono text-[10px]">${item.subjectCode}</span>
+                    </div>
+                    <div class="font-bold text-govNavy text-sm leading-snug">
+                        ${item.title}
+                    </div>
+                    <div class="flex items-center space-x-3 text-slate-600 text-xs flex-wrap gap-y-1">
+                        <button type="button" onclick="jumpToLecturerCard('${item.lecturerId}')" class="font-bold text-blue-700 hover:text-blue-900 hover:underline flex items-center space-x-1 cursor-pointer" title="คลิกเพื่อเลื่อนไปยังทำเนียบวิทยากร">
+                            <i class="fa-solid fa-user-tie text-blue-600"></i>
+                            <span>${item.lecturerName}</span>
+                            <span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.2 rounded-full ml-1">ลำดับที่ ${item.lecturerId}</span>
+                        </button>
+                        <span class="text-slate-300">|</span>
+                        <span class="text-slate-500 flex items-center space-x-1">
+                            <i class="fa-solid fa-file-lines text-slate-400"></i>
+                            <span>${item.fileTitle}</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 w-full md:w-auto justify-between md:justify-end shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
+                    ${statusBadge}
+                    <a href="${item.fileDriveUrl}" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-2xs transition flex items-center space-x-1.5 cursor-pointer">
+                        <i class="fa-brands fa-google-drive"></i>
+                        <span>เปิด Drive</span>
+                    </a>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function setMatrixTrackFilter(track) {
+    currentMatrixTrackFilter = track;
+    ['all', 'fnd', 'adv'].forEach(t => {
+        const btn = document.getElementById(`btn-matrix-track-${t}`);
+        if (!btn) return;
+        if (t.toUpperCase() === track) {
+            btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-govNavy text-white shadow-xs cursor-pointer';
+        } else {
+            btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer';
+        }
+    });
+    renderCourseMatrixList();
+}
+
+function setMatrixStatusFilter(status) {
+    currentMatrixStatusFilter = status;
+    ['all', 'verified', 'pending'].forEach(s => {
+        const btn = document.getElementById(`btn-matrix-status-${s}`);
+        if (!btn) return;
+        if (s.toUpperCase() === status) {
+            btn.className = 'px-2.5 py-1 rounded-md text-[11px] font-bold bg-white border border-slate-400 text-slate-900 shadow-2xs cursor-pointer';
+        } else {
+            btn.className = 'px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 cursor-pointer';
+        }
+    });
+    renderCourseMatrixList();
+}
+
+function filterMatrixBySearch() {
+    renderCourseMatrixList();
+}
+
+function renderLecturersDirectory() {
+    const container = document.getElementById('lecturers-grid-container');
+    const badgeEl = document.getElementById('lecturers-count-badge');
+    if (!container) return;
+
+    const searchInput = document.getElementById('lecturer-search-input');
+    const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+    const filtered = masterLecturersList.filter(l => {
+        // Category filter
+        if (currentLecturerCategoryFilter !== 'ALL') {
+            if (l.category !== currentLecturerCategoryFilter) {
+                return false;
+            }
+        }
+
+        // Search query
+        if (searchVal) {
+            const text = `${l.id} ${l.name} ${l.position} ${l.agency} ${l.category} ${l.expertise}`.toLowerCase();
+            return text.includes(searchVal);
+        }
+
+        return true;
+    });
+
+    if (badgeEl) {
+        badgeEl.innerText = `พบ ${filtered.length} รายการ`;
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = `
+            <div class="col-span-full p-8 text-center bg-slate-50 rounded-xl border border-slate-200 text-slate-400 text-xs">
+                <i class="fa-solid fa-user-slash text-3xl mb-2"></i>
+                <p>ไม่พบรายชื่อวิทยากรที่ค้นหา</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = filtered.map(l => {
+        return `
+            <div id="lecturer-card-${l.id}" class="lecturer-card p-4 bg-white rounded-2xl border border-slate-200 shadow-2xs space-y-3 flex flex-col justify-between">
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-8 h-8 rounded-lg bg-govNavy text-amber-400 font-black text-xs flex items-center justify-center shadow-2xs">${l.id}</span>
+                            <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${l.badgeColor}">
+                                <i class="fa-solid ${l.icon} mr-1"></i>${l.category}
+                            </span>
+                        </div>
+                        <button type="button" onclick="openLecturerModal('${l.id}')" class="text-slate-400 hover:text-blue-600 text-sm p-1 cursor-pointer" title="ดูรายละเอียดวิทยากร">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </button>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-govNavy text-sm">${l.name}</h4>
+                        <p class="text-[11px] font-semibold text-slate-700 leading-tight mt-0.5">${l.position}</p>
+                        <p class="text-[10px] text-slate-500 mt-0.5">${l.agency}</p>
+                    </div>
+
+                    <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
+                        <div class="text-[10px] font-bold text-slate-600 flex items-center space-x-1">
+                            <i class="fa-solid fa-award text-amber-500"></i>
+                            <span>ความถนัด:</span>
+                        </div>
+                        <p class="text-[11px] text-slate-600 leading-relaxed line-clamp-3">${l.expertise}</p>
+                    </div>
+                </div>
+
+                <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                    <button type="button" onclick="openLecturerModal('${l.id}')" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center space-x-1 cursor-pointer">
+                        <i class="fa-solid fa-address-card"></i>
+                        <span>ดูประวัติ & วิชาที่สอน</span>
+                    </button>
+                    <button type="button" onclick="askAILecturerTopics('${l.id}')" class="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 font-semibold text-[10px] border border-purple-200 flex items-center space-x-1 transition cursor-pointer">
+                        <i class="fa-solid fa-sparkles text-purple-600"></i>
+                        <span>AI สรุป</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function filterLecturersByCategory(category) {
+    currentLecturerCategoryFilter = category;
+    document.querySelectorAll('.lecturer-cat-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-govNavy', 'text-white', 'shadow-2xs');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+    });
+
+    const activeBtn = Array.from(document.querySelectorAll('.lecturer-cat-btn')).find(b => {
+        if (category === 'ALL') return b.innerText.includes('ทั้งหมด');
+        return b.innerText.includes(category);
+    });
+
+    if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        activeBtn.classList.add('active', 'bg-govNavy', 'text-white', 'shadow-2xs');
+    }
+
+    renderLecturersDirectory();
+}
+
+function filterLecturersBySearch() {
+    renderLecturersDirectory();
+}
+
+function openLecturerModal(lecturerId) {
+    const lecturer = masterLecturersList.find(l => l.id === lecturerId);
+    if (!lecturer) return;
+
+    activeSelectedLecturerId = lecturerId;
+
+    const idBadge = document.getElementById('modal-lecturer-id-badge');
+    const catBadge = document.getElementById('modal-lecturer-cat-badge');
+    const nameEl = document.getElementById('modal-lecturer-name');
+    const posEl = document.getElementById('modal-lecturer-position');
+    const agencyEl = document.getElementById('modal-lecturer-agency');
+    const expEl = document.getElementById('modal-lecturer-expertise');
+    const coursesList = document.getElementById('modal-lecturer-courses-list');
+
+    if (idBadge) idBadge.innerText = lecturer.id;
+    if (catBadge) {
+        catBadge.innerText = lecturer.category;
+        catBadge.className = `text-[10px] font-bold px-2.5 py-0.5 rounded-full ${lecturer.badgeColor} uppercase`;
+    }
+    if (nameEl) nameEl.innerText = lecturer.name;
+    if (posEl) posEl.innerText = lecturer.position;
+    if (agencyEl) agencyEl.innerText = lecturer.agency;
+    if (expEl) expEl.innerText = lecturer.expertise;
+
+    // Find all courses taught by this lecturer in masterCourseMatrixTraceability
+    const courses = masterCourseMatrixTraceability.filter(c => c.lecturerId === lecturerId);
+    if (coursesList) {
+        if (courses.length === 0) {
+            coursesList.innerHTML = `<div class="text-slate-400 italic">ไม่มีข้อมูลวิชาในระบบ 13 วัน</div>`;
+        } else {
+            coursesList.innerHTML = courses.map(c => `
+                <div class="p-2 bg-white rounded-lg border border-blue-100 flex items-center justify-between">
+                    <div>
+                        <span class="font-bold text-govNavy">วันที่ ${c.day} (${c.session === 'MORNING' ? 'เช้า 09.30 น.' : 'บ่าย 13.30 น.'}):</span>
+                        <span class="text-slate-700 ml-1">${c.title}</span>
+                    </div>
+                    <a href="${c.fileDriveUrl}" target="_blank" class="text-emerald-600 hover:text-emerald-800 font-bold ml-2 shrink-0">
+                        <i class="fa-brands fa-google-drive mr-1"></i>Drive
+                    </a>
+                </div>
+            `).join('');
+        }
+    }
+
+    openModal('modal-lecturer-profile');
+}
+
+function jumpToLecturerCard(lecturerId) {
+    // 1. Switch to M9 tab
+    switchTab('m9');
+
+    // 2. Reset lecturer category filter to ALL so the target card is visible
+    filterLecturersByCategory('ALL');
+    const searchInput = document.getElementById('lecturer-search-input');
+    if (searchInput) searchInput.value = '';
+
+    // 3. Smooth scroll to target card and trigger highlight pulse
+    setTimeout(() => {
+        const cardId = `lecturer-card-${lecturerId}`;
+        const cardEl = document.getElementById(cardId);
+        if (cardEl) {
+            cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            cardEl.classList.remove('lecturer-highlight-pulse');
+            void cardEl.offsetWidth; // trigger reflow
+            cardEl.classList.add('lecturer-highlight-pulse');
+            showToast(`นำทางไปยังวิทยากรลำดับที่ ${lecturerId}: ${masterLecturersList.find(l=>l.id===lecturerId)?.name}`);
+        }
+    }, 150);
+}
+
+function askAILecturerTopics(lecturerId) {
+    const id = lecturerId || activeSelectedLecturerId;
+    const lecturer = masterLecturersList.find(l => l.id === id);
+    if (!lecturer) return;
+
+    closeModal('modal-lecturer-profile');
+    toggleAIBuddyDrawer(true);
+
+    const courses = masterCourseMatrixTraceability.filter(c => c.lecturerId === id);
+    const courseTitles = courses.map(c => `วันที่ ${c.day}: ${c.title}`).join(', ') || 'หลักสูตรการเตรียมความพร้อมฯ';
+
+    const promptText = `✨ [เจาะลึกเนื้อหาวิทยากร - ลำดับที่ ${lecturer.id}: "${lecturer.name}"]
+ตำแหน่ง: ${lecturer.position}
+สังกัด: ${lecturer.agency}
+กลุ่มความเชี่ยวชาญ: ${lecturer.category}
+ความถนัด: ${lecturer.expertise}
+วิชาที่บรรยายในหลักสูตร: ${courseTitles}
+
+ขอสรุปแบบกระชับสำหรับเตรียมตัวเรียนหรือนำไปประยุกต์ใช้ในการสอบและปฏิบัติราชการ:
+1. 💡 3 ประเด็นสำคัญที่วิทยากรท่านนี้เน้นย้ำ
+2. 🎯 เทคนิคและทักษะที่ข้าราชการใหม่ควรนำไปปรับใช้จริง
+3. 📝 1 คำถามทดสอบความเข้าใจในหัวข้อที่วิทยากรบรรยาย`;
+
+    const chatInput = document.getElementById('ai-chat-input');
+    if (chatInput) {
+        chatInput.value = promptText;
+        sendAIChatMessage();
+    }
+}
+
+// Window Bindings for M9 Lecturers & Matrix Traceability
+window.renderM9Views = renderM9Views;
+window.renderCourseMatrixList = renderCourseMatrixList;
+window.setMatrixTrackFilter = setMatrixTrackFilter;
+window.setMatrixStatusFilter = setMatrixStatusFilter;
+window.filterMatrixBySearch = filterMatrixBySearch;
+window.renderLecturersDirectory = renderLecturersDirectory;
+window.filterLecturersByCategory = filterLecturersByCategory;
+window.filterLecturersBySearch = filterLecturersBySearch;
+window.openLecturerModal = openLecturerModal;
+window.jumpToLecturerCard = jumpToLecturerCard;
+window.askAILecturerTopics = askAILecturerTopics;
+window.masterLecturersList = masterLecturersList;
+window.masterCourseMatrixTraceability = masterCourseMatrixTraceability;
+
 // Window Bindings for Lecture Slides Hub & Gemini Spark
 window.switchM5View = switchM5View;
 window.filterM5SlideTrack = filterM5SlideTrack;
@@ -4522,6 +5456,7 @@ window.renderM5LectureSlidesGrid = renderM5LectureSlidesGrid;
 window.openLectureSlideModal = openLectureSlideModal;
 window.askAISlideQuestion = askAISlideQuestion;
 window.openGeminiSpark = openGeminiSpark;
+
 
 
 

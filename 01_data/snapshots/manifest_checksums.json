@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-08-17T06:03:42.986Z",
+  "generatedAt": "2026-08-17T06:54:41.520Z",
   "snapshotFile": "snapshot_baseline_v1.json",
   "fileManifest": {
     "index.html": {
-      "sizeBytes": 221561,
-      "sha256": "c06699d3ec6fdb3853c1cb7c82dbefcf79d5de9ac83f4a24e2f10d91ad461e00"
+      "sizeBytes": 239588,
+      "sha256": "f6ee6d63d8c8223d2c419733ef026c77cf924a560c5bdaee9483335f58d61199"
     },
     "app.js": {
-      "sizeBytes": 302589,
-      "sha256": "4c85713f18c70b86048ce06b217d83081558b430762eed8009cb1918b840d1df"
+      "sizeBytes": 353650,
+      "sha256": "79a2e7b8732730e673ac85e41a0e3f3c0003fbd60c38eb32d5bb6abb05dee880"
     },
     "styles.css": {
-      "sizeBytes": 14109,
-      "sha256": "622ce7e4807f2550feb982d46ba6e3825576feedb823f172371132e9287345f0"
+      "sizeBytes": 14976,
+      "sha256": "b87d75a91cc133ce2125e2be985ba3a76f6afbe729fe52a46a1842431131e7c3"
     },
     "system_requirements_blueprint.html": {
       "sizeBytes": 35398,

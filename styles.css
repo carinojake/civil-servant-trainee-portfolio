@@ -519,3 +519,38 @@ html.is-locked, body.is-locked {
     border: 1px solid #F59E0B;
 }
 
+/* M9: Lecturers & Traceability Matrix Styles */
+@keyframes lecturerHighlightPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+        border-color: #F59E0B;
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 0 12px rgba(245, 158, 11, 0);
+        border-color: #D97706;
+        transform: scale(1.02);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+        border-color: #F59E0B;
+        transform: scale(1);
+    }
+}
+
+.lecturer-highlight-pulse {
+    animation: lecturerHighlightPulse 1.8s ease-in-out 3;
+    border: 2px solid #F59E0B !important;
+    background-color: #FFFBEB !important;
+}
+
+.lecturer-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.lecturer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -6px rgba(0, 0, 0, 0.08);
+}
+
+
