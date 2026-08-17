@@ -400,6 +400,143 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
+  // 5.1 Render Visual Drive Tree View
+  // --------------------------------------------------------------------------
+  const driveTreeContainer = document.getElementById('drive-tree-container');
+  const viewTimelineBtn = document.getElementById('view-timeline-btn');
+  const viewTreeBtn = document.getElementById('view-tree-btn');
+
+  function renderDriveTreeView(filteredSessions) {
+    if (!driveTreeContainer) return;
+
+    // Group by date
+    const grouped = {};
+    filteredSessions.forEach(session => {
+      if (!grouped[session.date]) {
+        grouped[session.date] = [];
+      }
+      grouped[session.date].push(session);
+    });
+
+    let html = `
+      <div class="tree-root-header">
+        <div>
+          <h3 style="font-size: 1.15rem; color: var(--color-navy); margin-bottom: 2px;">📦 Google Drive: คลังเอกสารประกอบการบรรยาย</h3>
+          <span style="font-size: 0.8125rem; color: var(--text-secondary);">จัดหมวดหมู่แยกตามโฟลเดอร์วันที่ ช่วงเวลา (เช้า/บ่าย) ห้องอบรม และไฟล์จริง</span>
+        </div>
+        <a href="${data.app_info.google_drive_folder}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-accent">
+          เปิด Google Drive โฟลเดอร์หลัก ↗
+        </a>
+      </div>
+    `;
+
+    Object.keys(grouped).forEach(dateStr => {
+      const sessions = grouped[dateStr];
+      const morningSessions = sessions.filter(s => s.period.includes('เช้า') || s.period.includes('เต็มวัน'));
+      const afternoonSessions = sessions.filter(s => s.period.includes('บ่าย'));
+
+      html += `
+        <div class="tree-folder-group">
+          <div class="tree-folder-title">
+            <span>📁 ${dateStr}</span>
+            <span style="font-size: 0.75rem; font-weight: normal; color: var(--text-muted);">${sessions.length} รายการ</span>
+          </div>
+      `;
+
+      if (morningSessions.length > 0) {
+        html += `
+          <div class="tree-period-block">
+            <div class="tree-period-header">
+              <span>🌅</span>
+              <span>[ช่วงเช้า 09:00 - 12:00 น.]</span>
+            </div>
+        `;
+        morningSessions.forEach(s => {
+          html += `
+            <div class="tree-session-item">
+              <div class="tree-item-title">
+                <span class="track-badge ${s.track}" style="font-size: 0.7rem; margin-right: 4px;">${s.track_label}</span>
+                ${s.subject}
+              </div>
+              <div class="tree-item-meta">
+                <span>🏢 <strong>ห้อง:</strong> ${s.room}</span>
+                <span>👨‍🏫 <strong>ผู้สอน:</strong> ${s.lecturers.length > 0 ? s.lecturers.join(', ') : 'ยังไม่พบชื่อ (รอตรวจสอบ)'}</span>
+              </div>
+              <div class="tree-item-files">
+                <span>📄 <strong>ไฟล์:</strong> ${s.file_name}</span>
+                <a href="${s.file_url}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-secondary" style="font-size: 0.75rem; padding: 2px 8px;">
+                  เปิดไฟล์ ↗
+                </a>
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      }
+
+      if (afternoonSessions.length > 0) {
+        html += `
+          <div class="tree-period-block">
+            <div class="tree-period-header">
+              <span>🌇</span>
+              <span>[ช่วงบ่าย 13:00 - 16:00 น.]</span>
+            </div>
+        `;
+        afternoonSessions.forEach(s => {
+          html += `
+            <div class="tree-session-item">
+              <div class="tree-item-title">
+                <span class="track-badge ${s.track}" style="font-size: 0.7rem; margin-right: 4px;">${s.track_label}</span>
+                ${s.subject}
+              </div>
+              <div class="tree-item-meta">
+                <span>🏢 <strong>ห้อง:</strong> ${s.room}</span>
+                <span>👨‍🏫 <strong>ผู้สอน:</strong> ${s.lecturers.length > 0 ? s.lecturers.join(', ') : 'ยังไม่พบชื่อ (รอตรวจสอบ)'}</span>
+              </div>
+              <div class="tree-item-files">
+                <span>📄 <strong>ไฟล์:</strong> ${s.file_name}</span>
+                <a href="${s.file_url}" target="_blank" rel="noopener noreferrer" class="btn-sm btn-secondary" style="font-size: 0.75rem; padding: 2px 8px;">
+                  เปิดไฟล์ ↗
+                </a>
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      }
+
+      html += `</div>`;
+    });
+
+    driveTreeContainer.innerHTML = html;
+  }
+
+  // View Switcher Handlers
+  if (viewTimelineBtn && viewTreeBtn) {
+    viewTimelineBtn.addEventListener('click', () => {
+      viewTimelineBtn.classList.add('active');
+      viewTimelineBtn.setAttribute('aria-pressed', 'true');
+      viewTreeBtn.classList.remove('active');
+      viewTreeBtn.setAttribute('aria-pressed', 'false');
+
+      learningTimeline.style.display = 'flex';
+      driveTreeContainer.style.display = 'none';
+      announceForScreenReader('สลับไปยังมุมมองไทม์ไลน์รายวัน');
+    });
+
+    viewTreeBtn.addEventListener('click', () => {
+      viewTreeBtn.classList.add('active');
+      viewTreeBtn.setAttribute('aria-pressed', 'true');
+      viewTimelineBtn.classList.remove('active');
+      viewTimelineBtn.setAttribute('aria-pressed', 'false');
+
+      learningTimeline.style.display = 'none';
+      driveTreeContainer.style.display = 'block';
+      announceForScreenReader('สลับไปยังมุมมองโครงสร้างโฟลเดอร์ Google Drive');
+    });
+  }
+
+  // --------------------------------------------------------------------------
   // 6. Render Source Documents Grid
   // --------------------------------------------------------------------------
   function renderSourceDocuments() {
@@ -514,6 +651,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderLecturers(filteredLecturers);
     renderLearningMap(filteredSessions);
+    renderDriveTreeView(filteredSessions);
 
     if (resultStats) {
       resultStats.textContent = `พบวิทยากร ${filteredLecturers.length} ท่าน | พบเซสชันเรียนรู้ ${filteredSessions.length} รายการ`;

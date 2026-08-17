@@ -137,18 +137,33 @@ const defaultAppData = {
             title: "ระบบราชการ & กฎหมาย (FND) / วิเคราะห์ข้อมูล & Agile & ออกแบบกระบวนงานดิจิทัล (ADV)",
             isCombined: false,
             foundation: {
-                room: "ห้องประชุม BB 212",
+                room: "ห้องอบรม 1 (BB 202)",
                 morning: "รายวิชาความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน",
                 morningComputer: true,
+                morningLecturers: "อาจารย์มาณิช อินทฉิม",
                 afternoon: "รายวิชากฎหมาย ระเบียบ และข้อบังคับพื้นฐานที่เกี่ยวข้องกับการปฏิบัติราชการ",
-                afternoonComputer: true
+                afternoonComputer: true,
+                afternoonLecturers: "อาจารย์มาณิช อินทฉิม"
             },
             advanced: {
-                room: "ห้องประชุม BB 211",
-                morning: "รายวิชาการวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / รายวิชาการบริหารโครงการภาครัฐและการทำงานแบบ Agile",
+                room: "ห้องอบรม 2 (BB 203)",
+                morning: "การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล & การบริหารโครงการแบบ Agile",
                 morningComputer: true,
-                afternoon: "รายวิชาการออกแบบกระบวนงานดิจิทัล",
-                afternoonComputer: true
+                morningLecturers: "ผศ.ดร.ดวงใจ จิตคงชื่น, ดร.ปริสุทธิ์ จิตต์ภักดี, ดร.ขวัญศิริ ศิริมังคลา",
+                morningSubtopics: [
+                    "1.1.1 ธรรมาภิบาลข้อมูล (Data Governance) และระบบฐานข้อมูลภาครัฐ",
+                    "1.1.2 การคิดเชิงข้อมูล (Data-Driven Thinking) และการจัดเตรียมข้อมูล",
+                    "1.1.3 สูตรคำนวณขั้นสูงและการวิเคราะห์ข้อมูลเชิงลึก (Data Analytics)",
+                    "1.1.4 การสร้างแดชบอร์ดและการสรุปผลเพื่อการตัดสินใจของผู้บริหาร",
+                    "1.2 การบริหารโครงการภาครัฐและการทำงานแบบ Agile (Trello, Jira, Notion)"
+                ],
+                afternoon: "รายวิชาการออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
+                afternoonComputer: true,
+                afternoonLecturers: "ดร.ปริสุทธิ์ จิตต์ภักดี, ดร.ขวัญศิริ ศิริมังคลา, อาจารย์มงคล สิริถิรวัฒน์",
+                afternoonSubtopics: [
+                    "1.3.1 มาตรฐานและโครงสร้างเอกสารดิจิทัล",
+                    "1.3.2 ลายมือชื่ออิเล็กทรอนิกส์ (e-Signature) และการปรับปรุงผังงาน"
+                ]
             },
             status: "PRESENT",
             reflection: "เรียนรู้การวิเคราะห์ข้อมูลภาครัฐ การบริหารโครงการแบบ Agile และการออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
@@ -1856,14 +1871,44 @@ function renderScheduleList() {
                                 <strong class="text-blue-900"><i class="fa-solid fa-sun text-amber-500 mr-1"></i>ช่วงเช้า (09.30 - 12.00 น.)</strong>
                                 ${trackData.morningComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
-                            <p class="text-slate-700 leading-relaxed">${trackData.morning}</p>
+                            <p class="text-slate-700 leading-relaxed font-semibold">${trackData.morning}</p>
+                            ${trackData.morningSubtopics && trackData.morningSubtopics.length > 0 ? `
+                                <div class="mt-1.5 p-2 bg-slate-50/90 rounded-lg border border-slate-200 text-[11px] space-y-1 text-slate-600">
+                                    <div class="font-bold text-slate-700 text-[10px] flex items-center gap-1">
+                                        <i class="fa-solid fa-list-check text-blue-600"></i> หัวข้อย่อยประจำเซสชัน:
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-0.5 text-[10px]">
+                                        ${trackData.morningSubtopics.map(sub => `<li>${sub}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            ${trackData.morningLecturers ? `
+                                <div class="mt-1 text-[10px] text-blue-800 font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-chalkboard-user text-blue-600"></i> วิทยากร: ${trackData.morningLecturers}
+                                </div>
+                            ` : ''}
                         </div>
                         <div class="p-2.5 bg-white rounded-lg border border-slate-200">
                             <div class="flex items-center justify-between mb-1">
                                 <strong class="text-emerald-900"><i class="fa-solid fa-cloud-sun text-emerald-500 mr-1"></i>ช่วงบ่าย (13.30 - 16.00 น.)</strong>
                                 ${trackData.afternoonComputer ? '<span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-bold"><i class="fa-solid fa-laptop mr-1"></i>ใช้คอมพิวเตอร์</span>' : ''}
                             </div>
-                            <p class="text-slate-700 leading-relaxed">${trackData.afternoon}</p>
+                            <p class="text-slate-700 leading-relaxed font-semibold">${trackData.afternoon}</p>
+                            ${trackData.afternoonSubtopics && trackData.afternoonSubtopics.length > 0 ? `
+                                <div class="mt-1.5 p-2 bg-slate-50/90 rounded-lg border border-slate-200 text-[11px] space-y-1 text-slate-600">
+                                    <div class="font-bold text-slate-700 text-[10px] flex items-center gap-1">
+                                        <i class="fa-solid fa-list-check text-emerald-600"></i> หัวข้อย่อยประจำเซสชัน:
+                                    </div>
+                                    <ul class="list-disc list-inside space-y-0.5 text-[10px]">
+                                        ${trackData.afternoonSubtopics.map(sub => `<li>${sub}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            ${trackData.afternoonLecturers ? `
+                                <div class="mt-1 text-[10px] text-emerald-800 font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-chalkboard-user text-emerald-600"></i> วิทยากร: ${trackData.afternoonLecturers}
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                 </div>
@@ -3663,6 +3708,24 @@ async function generateAIStudyResponse(userQuery) {
 • หนังสือราชการทั่วไป: *"จึงเรียนมาเพื่อโปรดทราบ / จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติ"*`;
     }
 
+    if (queryLower.includes('วันที่ 2') || queryLower.includes('11 ส.ค.') || queryLower.includes('data governance') || queryLower.includes('agile') || queryLower.includes('ดวงใจ') || queryLower.includes('bb 203')) {
+        return `📊 **สรุปเนื้อหาบทเรียนวันที่ 2 (11 ส.ค. 2569) - สาย Advanced AI (ห้อง BB 203):**
+
+**ช่วงเช้า (09.00 - 12.00 น.):**
+วิชา: *การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล & การบริหารโครงการแบบ Agile*
+วิทยากร: ผศ.ดร.ดวงใจ จิตคงชื่น, ดร.ปริสุทธิ์ จิตต์ภักดี, ดร.ขวัญศิริ ศิริมังคลา
+
+🔹 **1.1.1 ธรรมาภิบาลข้อมูล (Data Governance) และระบบฐานข้อมูลภาครัฐ:** โครงสร้างความปลอดภัยของข้อมูลภาครัฐ สิทธิ์การเข้าถึง และการบูรณาการระบบฐานข้อมูล
+🔹 **1.1.2 การคิดเชิงข้อมูล (Data-Driven Thinking):** การเปลี่ยนปัญหาเชิงนโยบายให้เป็นโจทย์ข้อมูล และการจัดเตรียมข้อมูล (Data Cleansing)
+🔹 **1.1.3 สูตรคำนวณขั้นสูงและการวิเคราะห์ข้อมูลเชิงลึก (Data Analytics):** การใช้สูตร Excel / SQL / Power BI ในการวิเคราะห์แนวโน้ม
+🔹 **1.1.4 การสร้างแดชบอร์ดและการสรุปผลเพื่อการตัดสินใจ:** Data Visualization สำหรับรายงานผู้บริหาร
+🔹 **1.2 การบริหารโครงการภาครัฐแบบ Agile:** การประยุกต์ใช้ Trello, Jira, Notion เพื่อควบคุมงานแบบรวดเร็วและยืดหยุ่น
+
+**ช่วงบ่าย (13.00 - 16.00 น.):**
+วิชา: *การออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)*
+วิทยากร: ดร.ปริสุทธิ์ จิตต์ภักดี, ดร.ขวัญศิริ ศิริมังคลา, อาจารย์มงคล สิริถิรวัฒน์`;
+    }
+
     if (queryLower.includes('สรุป') || queryLower.includes('บทเรียน') || queryLower.includes('เซ็นทารา') || queryLower.includes('13 วัน')) {
         return `🎓 **สรุปภาพรวมบทเรียน 13 วัน ณ โรงแรมเซ็นทารา ไลฟ์:**
 
@@ -4966,11 +5029,11 @@ const masterCourseMatrixTraceability = [
         session: 'MORNING',
         timeLabel: '09.00 - 12.00 น.',
         subjectCode: 'DAT-201',
-        title: 'การวิเคราะห์ข้อมูลและเทคโนโลยีการบริหารราชการยุคดิจิทัล (ADV) / ระบบราชการไทย (FND)',
+        title: 'การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล & การบริหารโครงการแบบ Agile (BB 203)',
         track: 'BOTH',
         trackLabel: 'รวมทุกสาย (ADV & FND)',
         lecturerId: '04',
-        lecturerName: 'ผศ.ดร.ดวงใจ จิตคงชื่น / ดร.ปริสุทธิ์ จิตต์ภักดี / อาจารย์มงคล สิริถิรวัฒน์',
+        lecturerName: 'ผศ.ดร.ดวงใจ จิตคงชื่น / ดร.ปริสุทธิ์ จิตต์ภักดี / ดร.ขวัญศิริ ศิริมังคลา',
         fileTitle: 'การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล.pdf',
         fileDriveUrl: 'https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h',
         status: 'VERIFIED',

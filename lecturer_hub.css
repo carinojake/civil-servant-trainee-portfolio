@@ -1193,6 +1193,117 @@ button {
   max-width: 200px;
 }
 
+/* View Mode Toggle */
+.view-mode-toggle {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.view-mode-toggle .btn-sm.active {
+  background-color: var(--color-navy);
+  color: #FFFFFF;
+  border-color: var(--color-navy);
+}
+
+/* Directory Tree View (Google Drive Visual Explorer) */
+.drive-tree-view {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-body);
+}
+
+.tree-root-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--color-cream);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.tree-folder-group {
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--color-paper);
+  overflow: hidden;
+}
+
+.tree-folder-title {
+  background-color: var(--color-cream);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-navy-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tree-period-block {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tree-period-block:last-child {
+  border-bottom: none;
+}
+
+.tree-period-header {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-teal);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tree-session-item {
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  margin-top: 6px;
+}
+
+.tree-item-title {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+}
+
+.tree-item-meta {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tree-item-files {
+  margin-top: 6px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.8125rem;
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 /* --------------------------------------------------------------------------
    11. Source Documents Section (Section 12)
    -------------------------------------------------------------------------- */

@@ -241,9 +241,23 @@
             <h2 id="map-heading" class="section-title">แผนที่การเรียนรู้ (วัน–วิชา–อาจารย์–ไฟล์)</h2>
             <div class="section-subtitle">ตารางกำหนดการแยกสายหลักสูตรพื้นฐาน ขั้นสูง และเรียนร่วม พร้อมปุ่มเปิดไฟล์ Google Drive ตรง</div>
           </div>
+          <div class="view-mode-toggle" role="group" aria-label="สลับมุมมอง">
+            <button type="button" class="btn-sm btn-secondary active" id="view-timeline-btn" aria-pressed="true">
+              📅 ไทม์ไลน์รายวัน
+            </button>
+            <button type="button" class="btn-sm btn-secondary" id="view-tree-btn" aria-pressed="false">
+              📦 โครงสร้างโฟลเดอร์ Drive
+            </button>
+          </div>
         </div>
 
+        <!-- Timeline View Container -->
         <div class="learning-timeline" id="learning-timeline">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Directory Tree View Container -->
+        <div class="drive-tree-view" id="drive-tree-container" style="display: none;">
           <!-- Populated by JS -->
         </div>
       </div>
