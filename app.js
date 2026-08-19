@@ -1844,9 +1844,15 @@ function renderScheduleList() {
                                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${trackBadgeBg}">${s.track_label}</span>
                                         <span class="text-[11px] font-bold text-slate-700 bg-white px-2 py-0.5 rounded-md border border-slate-200">${s.period}</span>
                                     </div>
-                                    <span class="text-[10px] font-bold text-govNavy bg-white px-2 py-0.5 rounded-md border border-slate-300">
-                                        <i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>${s.room}
-                                    </span>
+                                    <div class="flex items-center space-x-1">
+                                        <span class="text-[10px] font-bold text-govNavy bg-white px-2 py-0.5 rounded-md border border-slate-300 shadow-2xs">
+                                            <i class="fa-solid fa-location-dot text-rose-500 mr-1"></i>${s.room}
+                                        </span>
+                                        <button type="button" onclick="openEditRoomModal('${s.id}')" class="text-[10px] text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-1.5 py-0.5 rounded border border-blue-200 transition cursor-pointer font-bold flex items-center space-x-1" title="คลิกเพื่อแก้ไขห้องเรียน">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            <span>ย้ายห้อง</span>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <h4 class="font-bold text-govNavy text-sm leading-snug">${s.subject}</h4>
@@ -7698,3 +7704,89 @@ function exportMentorCohortCsv() {
 window.openMentorCohortDashboard = openMentorCohortDashboard;
 window.filterMentorCohortTable = filterMentorCohortTable;
 window.exportMentorCohortCsv = exportMentorCohortCsv;
+
+
+/* ==========================================================================
+   EDIT SESSION ROOM & NOTES CONTROLLER (On-the-Fly Customization)
+   ========================================================================== */
+function openEditRoomModal(sessionId) {
+    const session = master13DaysHubSessions.find(s => s.id === sessionId);
+    if (!session) return;
+
+    setInputValue('edit-room-session-id', sessionId);
+    setText('edit-room-date-label', `กำหนดการ ${session.date} (${session.period})`);
+    setText('edit-room-subject-display', session.subject);
+    
+    const presetSelect = document.getElementById('edit-room-preset-select');
+    const customInput = document.getElementById('edit-room-custom-input');
+    const notesInput = document.getElementById('edit-room-notes-input');
+
+    if (customInput) customInput.value = session.room || '';
+    if (notesInput) notesInput.value = session.notes || '';
+    if (presetSelect) {
+        presetSelect.value = '';
+        Array.from(presetSelect.options).forEach(opt => {
+            if (opt.value === session.room) presetSelect.value = opt.value;
+        });
+    }
+
+    openModal('modal-edit-session-room');
+}
+
+function onPresetRoomSelected(val) {
+    const customInput = document.getElementById('edit-room-custom-input');
+    if (!customInput) return;
+    if (val && val !== 'CUSTOM') {
+        customInput.value = val;
+    }
+}
+
+function saveEditedSessionRoom() {
+    const sessionId = document.getElementById('edit-room-session-id')?.value;
+    const session = master13DaysHubSessions.find(s => s.id === sessionId);
+    if (!session) return;
+
+    const newRoom = document.getElementById('edit-room-custom-input')?.value?.trim();
+    const newNotes = document.getElementById('edit-room-notes-input')?.value?.trim();
+
+    if (!newRoom) {
+        showToast('กรุณาระบุชื่อห้องเรียน', 'error');
+        return;
+    }
+
+    session.room = newRoom;
+    session.notes = newNotes;
+
+    // Save custom session overrides to localStorage
+    try {
+        const savedOverrides = JSON.parse(localStorage.getItem('civil_custom_sessions') || '{}');
+        savedOverrides[sessionId] = { room: newRoom, notes: newNotes };
+        localStorage.setItem('civil_custom_sessions', JSON.stringify(savedOverrides));
+    } catch (e) {
+        console.warn('Could not persist room override to localStorage:', e);
+    }
+
+    closeModal('modal-edit-session-room');
+    renderScheduleList();
+    showToast(`อัปเดตห้องเป็น "${newRoom}" เรียบร้อยแล้ว 🎉`, 'success');
+}
+
+// Load persisted room overrides on startup
+(function loadPersistedRoomOverrides() {
+    try {
+        const savedOverrides = JSON.parse(localStorage.getItem('civil_custom_sessions') || '{}');
+        Object.keys(savedOverrides).forEach(id => {
+            const s = master13DaysHubSessions.find(sess => sess.id === id);
+            if (s) {
+                if (savedOverrides[id].room) s.room = savedOverrides[id].room;
+                if (savedOverrides[id].notes) s.notes = savedOverrides[id].notes;
+            }
+        });
+    } catch (e) {
+        console.warn('Could not load room overrides:', e);
+    }
+})();
+
+window.openEditRoomModal = openEditRoomModal;
+window.onPresetRoomSelected = onPresetRoomSelected;
+window.saveEditedSessionRoom = saveEditedSessionRoom;
