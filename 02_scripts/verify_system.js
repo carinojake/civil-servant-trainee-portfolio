@@ -123,6 +123,9 @@ if (fs.existsSync(indexPath)) {
     assert(html.includes('id="mentor-active-banner"'), 'Contains Mentor Active Status Banner');
     assert(html.includes('id="modal-mentor-feedback"'), 'Contains Mentor Feedback & Endorsement Modal');
     assert(html.includes('btn-lock-role-trainee') && html.includes('btn-lock-role-mentor'), 'Contains Lock Screen Role Selectors (Trainee / Mentor)');
+    assert(html.includes('id="tab-m10"') && html.includes('id="pa-metric-cards-container"') && html.includes('id="pa-aspects-accordion-container"'), 'Contains M10: PA Evidence panel and containers');
+    assert(html.includes('id="paDonutChart"') && html.includes('id="paHorizontalBarChart"') && html.includes('id="paStackedBarChart"'), 'Contains M10 3-Dimensional Chart.js canvases');
+    assert(html.includes('id="modal-pa-evidence-detail"'), 'Contains M10 PA Evidence Detail modal');
 }
 
 // 5. Audit JavaScript Logic Engine & Calculations (app.js)
@@ -165,6 +168,8 @@ if (fs.existsSync(appJsPath)) {
     assert(js.includes('startVoiceInput'), 'Contains Web Speech API voice input function');
     assert(js.includes('exportDataJSON') && js.includes('importDataJSON'), 'Contains JSON Backup/Restore engine');
     assert(js.includes('setTheme') && js.includes('setFontSize'), 'Contains theme and font accessibility controllers');
+    assert(js.includes('renderPaEvidenceView') && js.includes('calculatePaMetrics') && js.includes('openPaEvidenceModal'), 'Contains M10 PA Evidence calculation and render engine');
+    assert(js.includes('masterPaEvidenceData'), 'Contains masterPaEvidenceData 5-aspect 146-items dataset');
 }
 
 // 6. Test Mathematical Logic & Business Rules

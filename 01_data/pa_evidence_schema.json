@@ -1,0 +1,377 @@
+{
+  "schemaVersion": "1.0.0",
+  "fiscalYear": "2569",
+  "totalItems": 146,
+  "aspects": [
+    {
+      "id": "aspect-1",
+      "number": 1,
+      "name": "ด้านการบริหารวิชาการและความเป็นผู้นำทางวิชาการ",
+      "color": "blue",
+      "badgeClass": "bg-blue-600",
+      "lightBgClass": "bg-blue-50",
+      "textClass": "text-blue-600",
+      "borderClass": "border-blue-200",
+      "totalIndicators": 8,
+      "totalEvidenceItems": 58,
+      "indicators": [
+        {
+          "id": "ind-1-1",
+          "code": "1.1",
+          "title": "การพัฒนาและบริหารหลักสูตรสถานศึกษา",
+          "targetItems": 8,
+          "status": "COMPLETED",
+          "evidenceTitle": "หลักสูตรฝึกอบรมข้าราชการ ก.พ. และแผนการจัดการเรียนรู้ดิจิทัล",
+          "evidenceUrl": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+          "notes": "จัดทำและปรับปรุงหลักสูตรให้สอดคล้องกับมาตรฐานดิจิทัลภาครัฐ"
+        },
+        {
+          "id": "ind-1-2",
+          "code": "1.2",
+          "title": "การวางแผนและพัฒนาคุณภาพการจัดการเรียนรู้",
+          "targetItems": 7,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-1-3",
+          "code": "1.3",
+          "title": "การส่งเสริม สนับสนุน การพัฒนาสื่อ นวัตกรรม และเทคโนโลยี",
+          "targetItems": 8,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-1-4",
+          "code": "1.4",
+          "title": "การนิเทศ กำกับ ติดตาม การจัดการเรียนรู้ทางวิชาการ",
+          "targetItems": 7,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-1-5",
+          "code": "1.5",
+          "title": "การวัดและประเมินผลการเรียนรู้ของผู้เรียน",
+          "targetItems": 7,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-1-6",
+          "code": "1.6",
+          "title": "การวิจัยเพื่อพัฒนาคุณภาพการจัดการเรียนรู้ในองค์กร",
+          "targetItems": 7,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-1-7",
+          "code": "1.7",
+          "title": "การประสานความร่วมมือในการพัฒนาวิชาการกับเครือข่าย",
+          "targetItems": 7,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-1-8",
+          "code": "1.8",
+          "title": "การสร้างและพัฒนาชุมชนแห่งการเรียนรู้ทางวิชาชีพ (PLC)",
+          "targetItems": 7,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "aspect-2",
+      "number": 2,
+      "name": "ด้านการจัดการเรียนการสอนและการจัดการศึกษา",
+      "color": "emerald",
+      "badgeClass": "bg-emerald-500",
+      "lightBgClass": "bg-emerald-50",
+      "textClass": "text-emerald-600",
+      "borderClass": "border-emerald-200",
+      "totalIndicators": 8,
+      "totalEvidenceItems": 32,
+      "indicators": [
+        {
+          "id": "ind-2-1",
+          "code": "2.1",
+          "title": "การจัดกิจกรรมการเรียนรู้ที่เน้นผู้เรียนเป็นสำคัญ",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-2-2",
+          "code": "2.2",
+          "title": "การบริหารจัดการชั้นเรียนและสภาพแวดล้อมที่เอื้อต่อการเรียนรู้",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-2-3",
+          "code": "2.3",
+          "title": "การพัฒนาทักษะดิจิทัลและการรู้เท่าทันเทคโนโลยี",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-2-4",
+          "code": "2.4",
+          "title": "การแนะแนวและส่งเสริมสุขภาวะผู้เรียน",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-2-5",
+          "code": "2.5",
+          "title": "การสร้างระบบดูแลช่วยเหลือนักศึกษา/ผู้เข้าอบรม",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-2-6",
+          "code": "2.6",
+          "title": "การจัดการศึกษาสำหรับผู้มีความต้องการจำเป็นพิเศษ",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-2-7",
+          "code": "2.7",
+          "title": "การบูรณาการหลักสูตรสู่การฝึกปฏิบัติงานจริง (OJT)",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-2-8",
+          "code": "2.8",
+          "title": "การประเมินสมรรถนะการปฏิบัติงานของผู้เรียน",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "aspect-3",
+      "number": 3,
+      "name": "ด้านการศึกษาตลอดชีวิตและวิชาชีพ",
+      "color": "amber",
+      "badgeClass": "bg-amber-500",
+      "lightBgClass": "bg-amber-50",
+      "textClass": "text-amber-600",
+      "borderClass": "border-amber-200",
+      "totalIndicators": 5,
+      "totalEvidenceItems": 22,
+      "indicators": [
+        {
+          "id": "ind-3-1",
+          "code": "3.1",
+          "title": "การพัฒนาทักษะวิชาชีพยุคใหม่ (Reskill & Upskill)",
+          "targetItems": 5,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-3-2",
+          "code": "3.2",
+          "title": "การจัดทำคอร์สเรียนออนไลน์และแหล่งเรียนรู้แบบเปิด",
+          "targetItems": 5,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-3-3",
+          "code": "3.3",
+          "title": "การสร้างเครือข่ายความร่วมมือกับสถานประกอบการภาครัฐและเอกชน",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-3-4",
+          "code": "3.4",
+          "title": "การรับรองมาตรฐานคุณวุฒิวิชาชีพและสมรรถนะบุคคล",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-3-5",
+          "code": "3.5",
+          "title": "การติดตามผลการมีงานทำและความก้าวหน้าในสายอาชีพ",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "aspect-4",
+      "number": 4,
+      "name": "ด้านการส่งเสริม สนับสนุนการจัดการเรียนรู้",
+      "color": "purple",
+      "badgeClass": "bg-purple-600",
+      "lightBgClass": "bg-purple-50",
+      "textClass": "text-purple-600",
+      "borderClass": "border-purple-200",
+      "totalIndicators": 5,
+      "totalEvidenceItems": 20,
+      "indicators": [
+        {
+          "id": "ind-4-1",
+          "code": "4.1",
+          "title": "การจัดหาและสนับสนุนโครงสร้างพื้นฐานระบบดิจิทัล",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-4-2",
+          "code": "4.2",
+          "title": "การพัฒนาบุคลากรและเจ้าหน้าที่ผู้ให้บริการ",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-4-3",
+          "code": "4.3",
+          "title": "การบริหารงบประมาณและการจัดซื้อจัดจ้างอย่างโปร่งใส",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-4-4",
+          "code": "4.4",
+          "title": "การส่งเสริมสิ่งอำนวยความสะดวกและการเข้าถึงที่เท่าเทียม (Accessibility)",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-4-5",
+          "code": "4.5",
+          "title": "การสร้างบรรยากาศและวัฒนธรรมองค์กรแห่งการเรียนรู้",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "aspect-5",
+      "number": 5,
+      "name": "ด้านการนิเทศ กำกับ ติดตาม และประเมินผล",
+      "color": "teal",
+      "badgeClass": "bg-teal-500",
+      "lightBgClass": "bg-teal-50",
+      "textClass": "text-teal-600",
+      "borderClass": "border-teal-200",
+      "totalIndicators": 4,
+      "totalEvidenceItems": 14,
+      "indicators": [
+        {
+          "id": "ind-5-1",
+          "code": "5.1",
+          "title": "การพัฒนาระบบประกันคุณภาพภายในองค์กร",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-5-2",
+          "code": "5.2",
+          "title": "การกำกับ ติดตาม ตัวชี้วัดผลสัมฤทธิ์ตามข้อตกลง PA",
+          "targetItems": 4,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-5-3",
+          "code": "5.3",
+          "title": "การจัดทำรายงานผลการประเมินตนเอง (SAR) และ Portfolio",
+          "targetItems": 3,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        },
+        {
+          "id": "ind-5-4",
+          "code": "5.4",
+          "title": "การนำผลการประเมินไปใช้วางแผนพัฒนาอย่างต่อเนื่อง",
+          "targetItems": 3,
+          "status": "PENDING",
+          "evidenceTitle": "",
+          "evidenceUrl": "",
+          "notes": ""
+        }
+      ]
+    }
+  ]
+}
