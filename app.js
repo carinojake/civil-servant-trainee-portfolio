@@ -1873,22 +1873,23 @@ function renderScheduleList() {
 
                             ${(() => {
                                 const isMorning = s.period.includes('เช้า') || s.id.includes('-m');
-                                const customDocTitle = isMorning ? dayItem.morningDocTitle : dayItem.afternoonDocTitle;
-                                const customDocUrl = isMorning ? dayItem.morningDocUrl : dayItem.afternoonDocUrl;
-                                const effectiveFileName = customDocTitle || s.file_name || 'เอกสารประกอบการบรรยาย.pdf';
-                                const effectiveFileUrl = customDocUrl || s.file_url || 'https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h';
+                                const filesList = isMorning 
+                                    ? ((dayItem.morningFiles && dayItem.morningFiles.length > 0) ? dayItem.morningFiles : [{ title: dayItem.morningDocTitle || s.file_name || 'เอกสารบรรยาย.pdf', url: dayItem.morningDocUrl || s.file_url || 'https://drive.google.com/drive/folders/1Y_krySxHGiwvRFK_2x0bZ3utqtdl5TzI' }])
+                                    : ((dayItem.afternoonFiles && dayItem.afternoonFiles.length > 0) ? dayItem.afternoonFiles : [{ title: dayItem.afternoonDocTitle || s.file_name || 'เอกสารบรรยาย.pdf', url: dayItem.afternoonDocUrl || s.file_url || 'https://drive.google.com/drive/folders/1Y_krySxHGiwvRFK_2x0bZ3utqtdl5TzI' }]);
                                 
                                 return `
-                                    <div class="pt-2 border-t border-slate-200/60 flex items-center justify-between gap-2 flex-wrap">
-                                        <div class="text-[11px] text-slate-700 truncate flex-1 min-w-[150px]" title="${effectiveFileName}">
-                                            📄 <strong>ไฟล์:</strong> ${effectiveFileName}
-                                        </div>
-                                        <div class="flex items-center space-x-1 shrink-0">
-                                            <a href="${effectiveFileUrl}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] shadow-2xs transition flex items-center space-x-1">
-                                                <i class="fa-brands fa-google-drive"></i>
-                                                <span>เปิดไฟล์ Drive</span>
-                                            </a>
-                                        </div>
+                                    <div class="pt-2 border-t border-slate-200/60 space-y-1.5">
+                                        ${filesList.map((f, fIdx) => `
+                                            <div class="flex items-center justify-between gap-2 flex-wrap bg-slate-50/80 p-1.5 rounded-lg border border-slate-200/70">
+                                                <div class="text-[11px] text-slate-700 truncate flex-1 min-w-[140px]" title="${f.title || 'เอกสาร'}">
+                                                    📄 ${filesList.length > 1 ? `<strong class="text-blue-700">[${fIdx + 1}]</strong>` : ''} <strong>ไฟล์:</strong> ${f.title || 'เอกสารประกอบการบรรยาย.pdf'}
+                                                </div>
+                                                <a href="${f.url || '#'}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[10px] shadow-2xs transition flex items-center space-x-1 shrink-0">
+                                                    <i class="fa-brands fa-google-drive"></i>
+                                                    <span>เปิดไฟล์ Drive</span>
+                                                </a>
+                                            </div>
+                                        `).join('')}
                                     </div>
                                 `;
                             })()}
@@ -2310,6 +2311,72 @@ function saveReflectionFromModal() {
     showToast(`บันทึกสรุปการเรียนรู้วันที่ ${dayNum} เรียบร้อยแล้ว`);
 }
 
+
+/* ==========================================================================
+   DYNAMIC MULTI-FILE ATTACHMENTS CONTROLLER (1, 2, 3, 4...)
+   ========================================================================== */
+function addMorningFileRow(title = '', url = '') {
+    const container = document.getElementById('morning-files-container');
+    if (!container) return;
+
+    const rowId = 'm-file-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+    const count = container.querySelectorAll('.file-row').length + 1;
+
+    const div = document.createElement('div');
+    div.id = rowId;
+    div.className = 'file-row p-2 bg-slate-50 rounded-lg border border-slate-200 space-y-1.5 transition';
+    div.innerHTML = `
+        <div class="flex items-center justify-between text-[11px] font-bold text-slate-700">
+            <span><i class="fa-solid fa-file-lines text-emerald-600 mr-1"></i>ไฟล์/สไลด์ชุดที่ ${count}</span>
+            ${count > 1 ? `
+                <button type="button" onclick="document.getElementById('${rowId}').remove()" class="text-rose-500 hover:text-rose-700 text-[10px] font-semibold cursor-pointer">
+                    <i class="fa-solid fa-trash mr-0.5"></i>ลบไฟล์นี้
+                </button>
+            ` : ''}
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+                <input type="text" value="${title.replace(/"/g, '&quot;')}" placeholder="ชื่อไฟล์ เช่น Workshop Dashboard.pdf" class="m-file-title w-full p-2 text-xs rounded-lg border border-slate-300 bg-white font-medium">
+            </div>
+            <div>
+                <input type="url" value="${url.replace(/"/g, '&quot;')}" placeholder="URL ลิงก์ (Drive / Canva / PDF)" class="m-file-url w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+            </div>
+        </div>
+    `;
+    container.appendChild(div);
+}
+
+function addAfternoonFileRow(title = '', url = '') {
+    const container = document.getElementById('afternoon-files-container');
+    if (!container) return;
+
+    const rowId = 'a-file-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+    const count = container.querySelectorAll('.file-row').length + 1;
+
+    const div = document.createElement('div');
+    div.id = rowId;
+    div.className = 'file-row p-2 bg-slate-50 rounded-lg border border-slate-200 space-y-1.5 transition';
+    div.innerHTML = `
+        <div class="flex items-center justify-between text-[11px] font-bold text-slate-700">
+            <span><i class="fa-solid fa-file-lines text-emerald-600 mr-1"></i>ไฟล์/สไลด์ชุดที่ ${count}</span>
+            ${count > 1 ? `
+                <button type="button" onclick="document.getElementById('${rowId}').remove()" class="text-rose-500 hover:text-rose-700 text-[10px] font-semibold cursor-pointer">
+                    <i class="fa-solid fa-trash mr-0.5"></i>ลบไฟล์นี้
+                </button>
+            ` : ''}
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+                <input type="text" value="${title.replace(/"/g, '&quot;')}" placeholder="ชื่อไฟล์ เช่น สไลด์วิชา 3.4.pdf" class="a-file-title w-full p-2 text-xs rounded-lg border border-slate-300 bg-white font-medium">
+            </div>
+            <div>
+                <input type="url" value="${url.replace(/"/g, '&quot;')}" placeholder="URL ลิงก์ (Drive / Canva / PDF)" class="a-file-url w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
+            </div>
+        </div>
+    `;
+    container.appendChild(div);
+}
+
 function openDayLinksModal(dayNum) {
     const item = appState.attendance.find(a => a.day === dayNum);
     if (!item) return;
@@ -2319,7 +2386,7 @@ function openDayLinksModal(dayNum) {
     if (titleEl) {
         titleEl.innerHTML = `
             <i class="fa-solid fa-link text-emerald-600 mr-1.5"></i>
-            <span>จัดการลิงก์ & คะแนนวันที่ ${item.day} (${item.date})</span>
+            <span>จัดการลิงก์ ${item.day === 7 ? '& ไฟล์เอกสาร' : '& คะแนน'}วันที่ ${item.day} (${item.date})</span>
         `;
     }
 
@@ -2329,25 +2396,39 @@ function openDayLinksModal(dayNum) {
     setInputValue('modal-links-morning-pretest-score', mPreScore);
     setInputValue('modal-links-morning-pretest-max', item.morningPreTestMax || item.preTestMax || 10);
 
-    setInputValue('modal-links-morning-doc-url', item.morningDocUrl || item.docUrl || '');
-    setInputValue('modal-links-morning-doc-title', item.morningDocTitle || item.docTitle || '');
-
     setInputValue('modal-links-morning-posttest-url', item.morningPostTestUrl || '');
     setInputValue('modal-links-morning-posttest-score', item.morningPostTestScore !== undefined ? item.morningPostTestScore : '');
     setInputValue('modal-links-morning-posttest-max', item.morningPostTestMax || 10);
+
+    // Populate Morning Multi-Files
+    const mContainer = document.getElementById('morning-files-container');
+    if (mContainer) {
+        mContainer.innerHTML = '';
+        const mFiles = (item.morningFiles && item.morningFiles.length > 0) ? item.morningFiles : [
+            { title: item.morningDocTitle || (item.day === 7 ? '19-8-69 ช่วงเช้า การบริหารคลังข้อมูลและแดชบอร์ด (สถิติแห่งชาติ).pdf' : ''), url: item.morningDocUrl || (item.day === 7 ? 'https://drive.google.com/drive/folders/1Y_krySxHGiwvRFK_2x0bZ3utqtdl5TzI' : '') }
+        ];
+        mFiles.forEach(f => addMorningFileRow(f.title, f.url));
+    }
 
     // 2. Afternoon Session (บ่าย)
     setInputValue('modal-links-afternoon-pretest-url', item.afternoonPreTestUrl || '');
     setInputValue('modal-links-afternoon-pretest-score', item.afternoonPreTestScore !== undefined ? item.afternoonPreTestScore : '');
     setInputValue('modal-links-afternoon-pretest-max', item.afternoonPreTestMax || 10);
 
-    setInputValue('modal-links-afternoon-doc-url', item.afternoonDocUrl || '');
-    setInputValue('modal-links-afternoon-doc-title', item.afternoonDocTitle || '');
-
     setInputValue('modal-links-afternoon-posttest-url', item.afternoonPostTestUrl || item.postTestUrl || '');
     const aPostScore = item.afternoonPostTestScore !== undefined ? item.afternoonPostTestScore : (item.postTestScore !== undefined ? item.postTestScore : '');
     setInputValue('modal-links-afternoon-posttest-score', aPostScore);
     setInputValue('modal-links-afternoon-posttest-max', item.afternoonPostTestMax || item.postTestMax || 10);
+
+    // Populate Afternoon Multi-Files
+    const aContainer = document.getElementById('afternoon-files-container');
+    if (aContainer) {
+        aContainer.innerHTML = '';
+        const aFiles = (item.afternoonFiles && item.afternoonFiles.length > 0) ? item.afternoonFiles : [
+            { title: item.afternoonDocTitle || (item.day === 7 ? '19-8-69 ช่วงบ่าย เรื่อง งานสารบรรณและการร่างข้.pdf' : ''), url: item.afternoonDocUrl || (item.day === 7 ? 'https://drive.google.com/drive/folders/1Y_krySxHGiwvRFK_2x0bZ3utqtdl5TzI' : '') }
+        ];
+        aFiles.forEach(f => addAfternoonFileRow(f.title, f.url));
+    }
 
     // 3. Daily Evaluation
     setInputValue('modal-links-eval-url', item.evalUrl || '');
@@ -2368,13 +2449,22 @@ function saveDayLinksFromModal() {
     item.morningPreTestScore = mPreScore !== '' ? parseFloat(mPreScore) : undefined;
     item.morningPreTestMax = parseFloat(getInputValue('modal-links-morning-pretest-max')) || 10;
 
-    item.morningDocUrl = getInputValue('modal-links-morning-doc-url');
-    item.morningDocTitle = getInputValue('modal-links-morning-doc-title');
-
     item.morningPostTestUrl = getInputValue('modal-links-morning-posttest-url');
     const mPostScore = getInputValue('modal-links-morning-posttest-score');
     item.morningPostTestScore = mPostScore !== '' ? parseFloat(mPostScore) : undefined;
     item.morningPostTestMax = parseFloat(getInputValue('modal-links-morning-posttest-max')) || 10;
+
+    // Collect Morning Files (1, 2, 3, 4...)
+    const mRows = document.querySelectorAll('#morning-files-container .file-row');
+    const mFiles = [];
+    mRows.forEach(row => {
+        const title = row.querySelector('.m-file-title')?.value?.trim() || '';
+        const url = row.querySelector('.m-file-url')?.value?.trim() || '';
+        if (title || url) mFiles.push({ title, url });
+    });
+    item.morningFiles = mFiles;
+    item.morningDocTitle = mFiles.length > 0 ? mFiles[0].title : '';
+    item.morningDocUrl = mFiles.length > 0 ? mFiles[0].url : '';
 
     // 2. Afternoon Session Save
     item.afternoonPreTestUrl = getInputValue('modal-links-afternoon-pretest-url');
@@ -2382,15 +2472,24 @@ function saveDayLinksFromModal() {
     item.afternoonPreTestScore = aPreScore !== '' ? parseFloat(aPreScore) : undefined;
     item.afternoonPreTestMax = parseFloat(getInputValue('modal-links-afternoon-pretest-max')) || 10;
 
-    item.afternoonDocUrl = getInputValue('modal-links-afternoon-doc-url');
-    item.afternoonDocTitle = getInputValue('modal-links-afternoon-doc-title');
-
     item.afternoonPostTestUrl = getInputValue('modal-links-afternoon-posttest-url');
     const aPostScore = getInputValue('modal-links-afternoon-posttest-score');
     item.afternoonPostTestScore = aPostScore !== '' ? parseFloat(aPostScore) : undefined;
     item.afternoonPostTestMax = parseFloat(getInputValue('modal-links-afternoon-posttest-max')) || 10;
 
-    // 3. Backward Compatibility & Primary pointers
+    // Collect Afternoon Files (1, 2, 3, 4...)
+    const aRows = document.querySelectorAll('#afternoon-files-container .file-row');
+    const aFiles = [];
+    aRows.forEach(row => {
+        const title = row.querySelector('.a-file-title')?.value?.trim() || '';
+        const url = row.querySelector('.a-file-url')?.value?.trim() || '';
+        if (title || url) aFiles.push({ title, url });
+    });
+    item.afternoonFiles = aFiles;
+    item.afternoonDocTitle = aFiles.length > 0 ? aFiles[0].title : '';
+    item.afternoonDocUrl = aFiles.length > 0 ? aFiles[0].url : '';
+
+    // 3. Compatibility pointers
     item.preTestUrl = item.morningPreTestUrl || item.afternoonPreTestUrl || '';
     item.preTestScore = item.morningPreTestScore !== undefined ? item.morningPreTestScore : item.afternoonPreTestScore;
     item.preTestMax = item.morningPreTestMax || 10;
@@ -2410,83 +2509,10 @@ function saveDayLinksFromModal() {
     saveState();
     closeModal('modal-day-links');
     renderScheduleList();
-    showToast(`บันทึกลิงก์และคะแนน (เช้า-บ่าย) วันที่ ${dayNum} เรียบร้อยแล้ว`);
+    renderKPIs();
+    showToast(`บันทึกข้อมูลและไฟล์ทั้งหมด (${mFiles.length + aFiles.length} ไฟล์) วันที่ ${dayNum} เรียบร้อยแล้ว 🎉`, 'success');
 }
 
-// --------------------------------------------------------------------------
-// 6. M3: OJT Tracker & Checklist (4 Dimensions & >=90 Hours)
-// --------------------------------------------------------------------------
-function renderOjtTable() {
-    const tbody = document.getElementById('ojt-logs-table-body');
-    if (!tbody) return;
-
-    const filterDim = document.getElementById('ojt-dimension-filter')?.value || 'ALL';
-    const filtered = appState.ojtLogs.filter(l => filterDim === 'ALL' || l.dimension === filterDim);
-
-    if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-400 bg-slate-50">ไม่พบรายการบันทึกการฝึกงาน</td></tr>`;
-        return;
-    }
-
-    const dimBadges = {
-        '1': 'bg-blue-100 text-blue-800 border-blue-200',
-        '2': 'bg-emerald-100 text-emerald-800 border-emerald-200',
-        '3': 'bg-purple-100 text-purple-800 border-purple-200',
-        '4': 'bg-amber-100 text-amber-800 border-amber-200'
-    };
-
-    tbody.innerHTML = filtered.map(log => `
-        <tr class="hover:bg-slate-50 transition border-b border-slate-100">
-            <td class="p-3 whitespace-nowrap font-medium text-slate-600">${log.date}</td>
-            <td class="p-3 whitespace-nowrap">
-                <span class="px-2 py-1 rounded text-[11px] font-bold border ${dimBadges[log.dimension] || 'bg-slate-100 text-slate-700'}">
-                    ${log.dimensionName}
-                </span>
-            </td>
-            <td class="p-3 font-bold text-govNavy text-center">${log.hours} ชม.</td>
-            <td class="p-3">
-                <div class="font-semibold text-slate-800">${log.task}</div>
-                ${log.output ? `<div class="text-[11px] text-slate-500 mt-0.5"><i class="fa-solid fa-award text-amber-500 mr-1"></i>ผลลัพธ์: ${log.output}</div>` : ''}
-            </td>
-            <td class="p-3 text-center">
-                ${log.link ? `<a href="${log.link}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm" title="เปิดเอกสาร"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : '<span class="text-slate-300">-</span>'}
-            </td>
-            <td class="p-3 text-center whitespace-nowrap">
-                <button onclick="editOjtLog('${log.id}')" class="text-slate-500 hover:text-blue-600 mr-2" title="แก้ไข"><i class="fa-solid fa-pen"></i></button>
-                <button onclick="deleteOjtLog('${log.id}')" class="text-slate-400 hover:text-rose-600" title="ลบ"><i class="fa-solid fa-trash"></i></button>
-            </td>
-        </tr>
-    `).join('');
-}
-
-function filterOjtLogs() {
-    renderOjtTable();
-}
-
-function renderOjtChecklist() {
-    const container = document.getElementById('ojt-checklist-container');
-    if (!container) return;
-
-    container.innerHTML = appState.ojtChecklist.map(chk => `
-        <label class="p-3 rounded-xl border ${chk.done ? 'bg-emerald-50/50 border-emerald-200' : 'bg-slate-50 border-slate-200'} flex items-start space-x-3 cursor-pointer hover:bg-slate-100 transition">
-            <input type="checkbox" ${chk.done ? 'checked' : ''} onchange="toggleOjtChecklist('${chk.id}')" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500">
-            <div>
-                <div class="font-bold ${chk.done ? 'text-emerald-900' : 'text-slate-700'}">${chk.title}</div>
-                <div class="text-[11px] text-slate-500">${chk.done ? '✓ ตรวจสอบและดำเนินการเรียบร้อยแล้ว' : 'รอดำเนินการให้ครบถ้วน'}</div>
-            </div>
-        </label>
-    `).join('');
-}
-
-function toggleOjtChecklist(chkId) {
-    const item = appState.ojtChecklist.find(c => c.id === chkId);
-    if (!item) return;
-
-    item.done = !item.done;
-    saveState();
-    renderOjtChecklist();
-    showToast('อัปเดตรายการ Checklist เรียบร้อยแล้ว');
-}
 
 function openNewOjtModal() {
     setInputValue('modal-ojt-id', '');
@@ -7848,3 +7874,6 @@ function saveEditedSessionRoom() {
 window.openEditRoomModal = openEditRoomModal;
 window.onPresetRoomSelected = onPresetRoomSelected;
 window.saveEditedSessionRoom = saveEditedSessionRoom;
+
+window.addMorningFileRow = addMorningFileRow;
+window.addAfternoonFileRow = addAfternoonFileRow;

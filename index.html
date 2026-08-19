@@ -2270,21 +2270,17 @@
                         </div>
                     </div>
 
-                    <!-- 1.2 สไลด์/เอกสาร เช้า -->
+                    <!-- 1.2 สไลด์/เอกสาร เช้า (รองรับหลายไฟล์ 1, 2, 3, 4...) -->
                     <div class="p-2.5 bg-white rounded-lg border border-blue-100 space-y-2">
                         <div class="font-bold text-emerald-800 text-[11px] flex items-center justify-between">
-                            <span><i class="fa-solid fa-file-pdf text-emerald-600 mr-1"></i>1.2 เอกสาร / สไลด์บรรยายช่วงเช้า</span>
-                            <span class="text-[10px] text-slate-400 font-normal">Canva / PDF / Drive</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-file-pdf text-emerald-600"></i>1.2 เอกสาร / สไลด์บรรยายช่วงเช้า (Canva / PDF / Drive)</span>
+                            <button type="button" onclick="addMorningFileRow('', '')" class="text-[10px] bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-300 flex items-center gap-1 cursor-pointer transition">
+                                <i class="fa-solid fa-plus"></i> เพิ่มไฟล์ที่ 2, 3, 4...
+                            </button>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-doc-url">URL สไลด์เช้า</label>
-                                <input type="url" id="modal-links-morning-doc-url" placeholder="https://drive.google.com/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-morning-doc-title">ชื่อไฟล์ / หัวข้อสไลด์เช้า</label>
-                                <input type="text" id="modal-links-morning-doc-title" placeholder="เช่น สไลด์บรรยายเช้า.pdf" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            </div>
+                        
+                        <div id="morning-files-container" class="space-y-2">
+                            <!-- Dynamic File Rows (1, 2, 3, 4...) will be injected here -->
                         </div>
                     </div>
 
@@ -2340,21 +2336,17 @@
                         </div>
                     </div>
 
-                    <!-- 2.2 สไลด์/เอกสาร บ่าย -->
+                    <!-- 2.2 สไลด์/เอกสาร บ่าย (รองรับหลายไฟล์ 1, 2, 3, 4...) -->
                     <div class="p-2.5 bg-white rounded-lg border border-emerald-100 space-y-2">
                         <div class="font-bold text-emerald-800 text-[11px] flex items-center justify-between">
-                            <span><i class="fa-solid fa-file-pdf text-emerald-600 mr-1"></i>2.2 เอกสาร / สไลด์บรรยายช่วงบ่าย</span>
-                            <span class="text-[10px] text-slate-400 font-normal">Canva / PDF / Drive</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-file-pdf text-emerald-600"></i>2.2 เอกสาร / สไลด์บรรยายช่วงบ่าย (Canva / PDF / Drive)</span>
+                            <button type="button" onclick="addAfternoonFileRow('', '')" class="text-[10px] bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded border border-emerald-300 flex items-center gap-1 cursor-pointer transition">
+                                <i class="fa-solid fa-plus"></i> เพิ่มไฟล์ที่ 2, 3, 4...
+                            </button>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-doc-url">URL สไลด์บ่าย</label>
-                                <input type="url" id="modal-links-afternoon-doc-url" placeholder="https://drive.google.com/..." class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-slate-600 font-semibold mb-1" for="modal-links-afternoon-doc-title">ชื่อไฟล์ / หัวข้อสไลด์บ่าย</label>
-                                <input type="text" id="modal-links-afternoon-doc-title" placeholder="เช่น สไลด์บรรยายบ่าย.pdf" class="w-full p-2 text-xs rounded-lg border border-slate-300 bg-white">
-                            </div>
+                        
+                        <div id="afternoon-files-container" class="space-y-2">
+                            <!-- Dynamic File Rows (1, 2, 3, 4...) will be injected here -->
                         </div>
                     </div>
 
@@ -3435,7 +3427,7 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=3.0.6"></script>
+    <script src="app.js?v=3.0.7"></script>
 
     <!-- ====================================================================
          WELCOME TOUR / ONBOARDING MODAL & OVERLAY (Task #4)
