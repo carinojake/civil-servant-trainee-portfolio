@@ -8527,13 +8527,13 @@ function renderPaAspectsAccordion() {
                                 <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-2xs hover:border-slate-300 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                     <div class="flex items-start gap-2.5 flex-1 min-w-0">
                                         <span class="px-1.5 py-0.5 rounded bg-slate-100 font-mono font-bold text-slate-600 text-[11px] shrink-0">
-                                            ${ind.code}
+                                            ${escapeHtml(ind.code)}
                                         </span>
                                         <div class="min-w-0">
-                                            <h5 class="font-bold text-slate-800 text-xs">${ind.title}</h5>
+                                            <h5 class="font-bold text-slate-800 text-xs">${escapeHtml(ind.title)}</h5>
                                             ${ind.evidenceTitle ? `
-                                                <div class="text-[11px] text-slate-600 mt-1 truncate" title="${ind.evidenceTitle}">
-                                                    📄 <strong>หลักฐาน:</strong> ${ind.evidenceTitle}
+                                                <div class="text-[11px] text-slate-600 mt-1 truncate" title="${escapeHtml(ind.evidenceTitle)}">
+                                                    📄 <strong>หลักฐาน:</strong> ${escapeHtml(ind.evidenceTitle)}
                                                 </div>
                                             ` : `
                                                 <div class="text-[11px] text-slate-400 mt-0.5 italic">
@@ -8541,7 +8541,7 @@ function renderPaAspectsAccordion() {
                                                 </div>
                                             `}
                                             ${ind.notes ? `
-                                                <p class="text-[10px] text-slate-500 mt-0.5 line-clamp-1"><i class="fa-regular fa-comment-dots mr-1"></i>${ind.notes}</p>
+                                                <p class="text-[10px] text-slate-500 mt-0.5 line-clamp-1"><i class="fa-regular fa-comment-dots mr-1"></i>${escapeHtml(ind.notes)}</p>
                                             ` : ''}
                                         </div>
                                     </div>
@@ -8550,7 +8550,7 @@ function renderPaAspectsAccordion() {
                                         ${badge}
                                         <span class="text-[11px] text-slate-500 font-semibold">${ind.targetItems || 1} รายการ</span>
                                         ${ind.evidenceUrl ? `
-                                            <a href="${ind.evidenceUrl}" target="_blank" class="px-2.5 py-1 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold text-[11px] border border-teal-200 transition flex items-center gap-1 shadow-2xs" title="เปิดไฟล์หลักฐาน">
+                                            <a href="${escapeHtml(ind.evidenceUrl)}" target="_blank" class="px-2.5 py-1 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-700 font-bold text-[11px] border border-teal-200 transition flex items-center gap-1 shadow-2xs" title="เปิดไฟล์หลักฐาน">
                                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                                 <span>ดูไฟล์</span>
                                             </a>
