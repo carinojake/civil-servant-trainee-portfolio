@@ -163,6 +163,10 @@
                     <i class="fa-solid fa-chalkboard-user text-emerald-400"></i>
                     <span>M9: วิทยากร & วัน-วิชา-ไฟล์</span>
                 </button>
+                <button onclick="switchTab('m10')" id="nav-m10" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition border border-teal-400/40 bg-teal-500/10 text-teal-300 hover:text-white" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-clipboard-check text-teal-400"></i>
+                    <span>M10: ตรวจสอบหลักฐาน PA</span>
+                </button>
                 <button type="button" onclick="toggleAIBuddyDrawer()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-govNavy font-bold px-3.5 py-2 rounded-lg text-xs flex items-center space-x-2 transition shadow shadow-amber-500/30 border border-amber-200 cursor-pointer" title="เปิดหน้าต่าง AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน">
                     <i class="fa-solid fa-robot"></i>
                     <span>AI Co-Pilot (Drawer)</span>
@@ -224,6 +228,10 @@
                     </p>
                 </div>
                 <div class="flex items-center space-x-2 flex-wrap gap-2">
+                    <button onclick="switchTab('m10')" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow flex items-center space-x-2 cursor-pointer border border-teal-400">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <span>M10: ตรวจสอบหลักฐาน PA</span>
+                    </button>
                     <button type="button" onclick="toggleAIBuddyDrawer()" class="bg-gradient-to-r from-govNavy via-blue-900 to-indigo-900 hover:from-blue-900 hover:to-indigo-950 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-lg flex items-center space-x-2 border-2 border-amber-400 cursor-pointer animate-pulse-glow">
                         <i class="fa-solid fa-robot text-amber-400"></i>
                         <span>เปิด AI Co-Pilot ผู้ช่วยติว</span>
@@ -423,6 +431,16 @@
                                 <div>
                                     <div class="text-xs font-bold text-emerald-900">เพิ่มบันทึกการฝึกงาน OJT</div>
                                     <div class="text-[11px] text-slate-500">ลงชั่วโมงและสรุปเนื้องาน</div>
+                                </div>
+                            </button>
+
+                            <button onclick="switchTab('m10')" class="w-full p-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-left transition flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-clipboard-check"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-teal-900">M10: ตรวจสอบหลักฐาน PA (146 รายการ)</div>
+                                    <div class="text-[11px] text-slate-500">ติดตามตัวชี้วัด 5 ด้าน & สรุปกราฟสถิติ</div>
                                 </div>
                             </button>
 
@@ -3560,7 +3578,7 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=3.1.0"></script>
+    <script src="app.js?v=3.1.1"></script>
 
     <!-- ====================================================================
          WELCOME TOUR / ONBOARDING MODAL & OVERLAY (Task #4)
