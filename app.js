@@ -1974,12 +1974,26 @@ function renderScheduleList() {
                             <h3 class="text-base font-bold text-govNavy">${dayItem.date} (วันที่ ${dayItem.day})</h3>
                             <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">${sessionsCountLabel}</span>
                         </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${isPresent ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
-                                ${isPresent ? '✓ เข้าเรียนแล้ว' : 'ยังไม่เช็กอิน'}
-                            </span>
-                            <button type="button" onclick="toggleAttendanceStatus(${dayItem.day})" class="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer">
-                                สลับสถานะ
+                                                <div class="flex items-center space-x-2">
+                            ${dayItem.status === 'PRESENT' ? `
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                    <i class="fa-solid fa-check mr-1 text-emerald-600"></i> เข้าเรียนแล้ว
+                                </span>
+                            ` : dayItem.status === 'LEAVE' ? `
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+                                    <i class="fa-solid fa-hospital-user mr-1 text-amber-600"></i> ลาไปพบแพทย์ / ลาป่วย
+                                </span>
+                            ` : dayItem.status === 'ONLINE' ? `
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-300">
+                                    <i class="fa-solid fa-laptop mr-1 text-blue-600"></i> เรียนออนไลน์
+                                </span>
+                            ` : `
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-300">
+                                    ยังไม่เช็กอิน
+                                </span>
+                            `}
+                            <button type="button" onclick="toggleAttendanceStatus(${dayItem.day})" class="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer px-2 py-0.5 rounded-md hover:bg-blue-50 border border-blue-200 transition" title="คลิกเพื่อสลับสถานะ (เข้าเรียน / ลาไปหาหมอ / ออนไลน์ / ยังไม่เช็กอิน)">
+                                <i class="fa-solid fa-repeat text-blue-500 mr-1"></i>สลับสถานะ
                             </button>
                         </div>
                     </div>
@@ -2156,10 +2170,23 @@ function toggleAttendanceStatus(dayNum) {
     const dayItem = appState.attendance.find(a => a.day === dayNum);
     if (!dayItem) return;
 
-    dayItem.status = (dayItem.status === 'PRESENT') ? 'ABSENT' : 'PRESENT';
+    if (dayItem.status === 'PRESENT') {
+        dayItem.status = 'LEAVE';
+        showToast(`อัปเดตวันที่ ${dayNum}: ลาไปพบแพทย์ / ลาป่วย 🏥`, 'warning');
+    } else if (dayItem.status === 'LEAVE') {
+        dayItem.status = 'ONLINE';
+        showToast(`อัปเดตวันที่ ${dayNum}: เรียนออนไลน์ 🌐`, 'info');
+    } else if (dayItem.status === 'ONLINE') {
+        dayItem.status = 'ABSENT';
+        showToast(`อัปเดตวันที่ ${dayNum}: ยังไม่เช็กอิน`, 'info');
+    } else {
+        dayItem.status = 'PRESENT';
+        showToast(`อัปเดตวันที่ ${dayNum}: เข้าเรียนแล้ว ✓`, 'success');
+    }
+
     saveState();
     renderScheduleList();
-    showToast(`อัปเดตสถานะวันที่ ${dayNum} เรียบร้อยแล้ว`);
+    renderKPIs();
 }
 
 function quickCheckInToday() {
