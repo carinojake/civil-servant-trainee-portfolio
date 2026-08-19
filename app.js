@@ -118,7 +118,9 @@ const defaultAppData = {
             afternoon: "รายวิชาวินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ",
             afternoonComputer: true,
             status: "PRESENT",
-            reflection: "เข้าร่วมกิจกรรมปฐมนิเทศ Ice Breaking ทำความคุ้นเคยกับเพื่อนร่วมรุ่น 40 คน และเรียนรู้วิชาวินัย จริยธรรม คุณธรรมของข้าราชการยุคดิจิทัล",
+            morningDocUrl: "https://drive.google.com/drive/folders/1fd257IWGbfXw6caWmIlVTnYtqBzNGdkg",
+        afternoonDocUrl: "https://drive.google.com/drive/folders/1fd257IWGbfXw6caWmIlVTnYtqBzNGdkg",
+        reflection: "เข้าร่วมกิจกรรมปฐมนิเทศ Ice Breaking ทำความคุ้นเคยกับเพื่อนร่วมรุ่น 40 คน และเรียนรู้วิชาวินัย จริยธรรม คุณธรรมของข้าราชการยุคดิจิทัล",
             actionPlan: "ยึดมั่นในวินัยและจรรยาบรรณวิชาชีพ พร้อมเปิดรับการเรียนรู้ตลอด 13 วัน",
             preTestUrl: "",
             preTestScore: 8,
@@ -166,7 +168,9 @@ const defaultAppData = {
                 ]
             },
             status: "PRESENT",
-            reflection: "เรียนรู้การวิเคราะห์ข้อมูลภาครัฐ การบริหารโครงการแบบ Agile และการออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
+            morningDocUrl: "https://drive.google.com/drive/folders/1QcQisBHyrBYWF3zVQ6WCxJVbOqlqDATn",
+        afternoonDocUrl: "https://drive.google.com/drive/folders/1QcQisBHyrBYWF3zVQ6WCxJVbOqlqDATn",
+        reflection: "เรียนรู้การวิเคราะห์ข้อมูลภาครัฐ การบริหารโครงการแบบ Agile และการออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
             actionPlan: "นำกรอบคิด Agile มาปรับใช้ในการวางแผนพัฒนาระบบไอทีเพื่อส่งมอบผลงานได้รวดเร็วและตรงจุด",
             preTestUrl: "",
             preTestScore: 7,
@@ -199,7 +203,9 @@ const defaultAppData = {
                 afternoonComputer: true
             },
             status: "PRESENT",
-            reflection: "ฝึกเทคนิคการสื่อสารสร้างคอนเทนต์ภาครัฐ ภาวะผู้นำในองค์กรที่ยอมรับความหลากหลาย และการวิเคราะห์ข้อมูลเพื่อการตัดสินใจเชิงกลยุทธ์",
+            morningDocUrl: "https://drive.google.com/drive/folders/1bVD5wtbeGsLQUVUxlWZItT95nckzhYxU",
+        afternoonDocUrl: "https://drive.google.com/drive/folders/1bVD5wtbeGsLQUVUxlWZItT95nckzhYxU",
+        reflection: "ฝึกเทคนิคการสื่อสารสร้างคอนเทนต์ภาครัฐ ภาวะผู้นำในองค์กรที่ยอมรับความหลากหลาย และการวิเคราะห์ข้อมูลเพื่อการตัดสินใจเชิงกลยุทธ์",
             actionPlan: "จัดทำ Data Visualization เพื่อสนับสนุนการตัดสินใจของผู้บริหารให้ชัดเจน เข้าใจง่าย",
             preTestUrl: "https://forms.gle/9YocowbsaVH1XHBU8",
             preTestScore: 8,
@@ -224,7 +230,9 @@ const defaultAppData = {
             afternoon: "รายวิชาบริบทการบริหารราชการ การเปลี่ยนแปลงเชิงกระบวนทัศน์ และระบบนิเวศการทำงานในยุคดิจิทัล",
             afternoonComputer: true,
             status: "PRESENT",
-            reflection: "ฝึกปฏิบัติการใช้ AI ช่วยงานเอกสารและการวิเคราะห์ข้อมูล พร้อมทำความเข้าใจระบบนิเวศการทำงานภาครัฐยุคดิจิทัล",
+            morningDocUrl: "https://drive.google.com/drive/folders/16Pr6akVs5ILWS2ImP4psQfgX1uFL0U1d",
+        afternoonDocUrl: "https://drive.google.com/drive/folders/16Pr6akVs5ILWS2ImP4psQfgX1uFL0U1d",
+        reflection: "ฝึกปฏิบัติการใช้ AI ช่วยงานเอกสารและการวิเคราะห์ข้อมูล พร้อมทำความเข้าใจระบบนิเวศการทำงานภาครัฐยุคดิจิทัล",
             actionPlan: "นำ Prompt Engineering มาเพิ่มความเร็วในการสืบค้นและสรุปข้อมูลรายงานภาครัฐอย่างปลอดภัย",
             preTestUrl: "https://forms.gle/eDgmSY5FBeUEac6q7",
             preTestScore: 8,
@@ -249,7 +257,9 @@ const defaultAppData = {
             afternoon: "รายวิชางานสารบรรณและกฎหมายภาครัฐขั้นสูง",
             afternoonComputer: true,
             status: "PRESENT",
-            reflection: "ฝึกทักษะการร่างหนังสือราชการ การจัดการระบบสารบรรณอิเล็กทรอนิกส์ (e-Saraban) และข้อกฎหมายที่เกี่ยวข้อง",
+            morningDocUrl: "https://drive.google.com/drive/folders/1czX-tPtKqs6xXln3VqOzjZIlboDo3Gp2",
+        afternoonDocUrl: "https://drive.google.com/drive/folders/1czX-tPtKqs6xXln3VqOzjZIlboDo3Gp2",
+        reflection: "ฝึกทักษะการร่างหนังสือราชการ การจัดการระบบสารบรรณอิเล็กทรอนิกส์ (e-Saraban) และข้อกฎหมายที่เกี่ยวข้อง",
             actionPlan: "เขียนหนังสือราชการให้ถูกต้องตามระเบียบสารบรรณ 3 ย่อหน้ามาตรฐาน",
             preTestUrl: "",
             preTestScore: 7,
@@ -6435,7 +6445,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "กิจกรรม_Ice_Breaking_รู้จักฉันรู้จักเธอ 10 ส.ค. 69.pdf, กำหนดการปฐมนิเทศ.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1fd257IWGbfXw6caWmIlVTnYtqBzNGdkg",
         "notes": "วันแรก - เรียนร่วม BB 212 (ผู้เข้าอบรม 40 คน)"
     },
     {
@@ -6458,7 +6468,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "Powerpoint กาารบรรยาย อ.มาณิช 10ส.ค.69.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1fd257IWGbfXw6caWmIlVTnYtqBzNGdkg",
         "notes": "บรรยายโดย อ.มาณิช อินทฉิม (อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ สำนักงานเลขาธิการสภาผู้แทนราษฎร)"
     },
     {
@@ -6481,7 +6491,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "11-8-69 ช่วงเช้า เรื่อง ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน ห้องอบรม 1 PPT.pdf",
-        "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
+        "file_url": "https://drive.google.com/drive/folders/1QcQisBHyrBYWF3zVQ6WCxJVbOqlqDATn",
         "notes": "แยกห้องอบรม BB 202"
     },
     {
@@ -6505,7 +6515,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "CV ผศ.ดร.ดวงใจ จิตคงชื่น.pdf, CV ดร.ปริสุทธิ์ จิตต์ภักดี.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1QcQisBHyrBYWF3zVQ6WCxJVbOqlqDATn",
         "notes": "แยกห้องอบรม BB 203 (ทีมวิทยากรจาก BDI และ ก.พ.)"
     },
     {
@@ -6527,7 +6537,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "11-8-69 ช่วงบ่าย เรื่อง กฎหมาย ระเบียบ และข้อบังคับพื้นฐานฯ ห้องอบรม 1 PPT.pdf",
-        "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
+        "file_url": "https://drive.google.com/drive/folders/1QcQisBHyrBYWF3zVQ6WCxJVbOqlqDATn",
         "notes": "บรรยายโดย อ.มาณิช อินทฉิม ห้อง BB 202"
     },
     {
@@ -6551,7 +6561,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "CV ดร. ขวัญศิริ ศิริมังคลา.pdf, CV อาจารย์มงคล สิริถิรวัฒน์.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1QcQisBHyrBYWF3zVQ6WCxJVbOqlqDATn",
         "notes": "ทีมวิทยากรจาก BDI และ ก.พ. ห้อง BB 203"
     },
     {
@@ -6573,7 +6583,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "13-8-69 ช่วงเช้า เรื่อง ทักษะพื้นฐานด้านการบริการภาครัฐ ห้องอบรม 1.pdf",
-        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "file_url": "https://drive.google.com/drive/folders/1bVD5wtbeGsLQUVUxlWZItT95nckzhYxU",
         "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
     },
     {
@@ -6595,7 +6605,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "CV ผศ.ดร.ภริมา วินิธาสถิตย์กุล.pdf",
-        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "file_url": "https://drive.google.com/drive/folders/1bVD5wtbeGsLQUVUxlWZItT95nckzhYxU",
         "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
     },
     {
@@ -6617,7 +6627,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "CV นายวิศรุต เสรีนิราช.pdf",
-        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "file_url": "https://drive.google.com/drive/folders/1bVD5wtbeGsLQUVUxlWZItT95nckzhYxU",
         "notes": "วิทยากร นายวิศรุต เสรีนิราช"
     },
     {
@@ -6639,7 +6649,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "CV นางสาววราภรณ์ ไตรศักดิ์ศรี.pdf",
-        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "file_url": "https://drive.google.com/drive/folders/1bVD5wtbeGsLQUVUxlWZItT95nckzhYxU",
         "notes": "บรรยายโดย คุณวราภรณ์ ไตรศักดิ์ศรี"
     },
     {
@@ -6661,7 +6671,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "14-8-69 เรื่อง การประยุกต์ใช้ AI ในการทำงานราชการ ห้องอบรม 1.pdf",
-        "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
+        "file_url": "https://drive.google.com/drive/folders/16Pr6akVs5ILWS2ImP4psQfgX1uFL0U1d",
         "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
     },
     {
@@ -6683,7 +6693,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "CV ผศ.ดร.ชนินทร์ ฐิติเพชรกุล.pdf",
-        "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
+        "file_url": "https://drive.google.com/drive/folders/16Pr6akVs5ILWS2ImP4psQfgX1uFL0U1d",
         "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
     },
     {
@@ -6706,7 +6716,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "CV รศ.ดร.เกยูร วงศ์ก้อม.pdf, 14-8-69 ช่วงบ่าย เรื่อง บริบทการบริหารราชการ.pdf",
-        "file_url": "https://drive.google.com/file/d/1Y8vT05KM62HwYtCOfO5EK_eaEJTBpzv2/view",
+        "file_url": "https://drive.google.com/drive/folders/16Pr6akVs5ILWS2ImP4psQfgX1uFL0U1d",
         "notes": "บรรยายโดย รศ.ดร.เกยูร วงศ์ก้อม และ ดร.สุชีรา พลราชม ม.สวนดุสิต"
     },
     {
@@ -6728,7 +6738,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ_eSaraban.pdf, ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1czX-tPtKqs6xXln3VqOzjZIlboDo3Gp2",
         "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
     },
     {
@@ -6750,7 +6760,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "การเขียนหนังสือราชการเชิงวิเคราะห์และข้อกฎหมายสารบรรณ.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1czX-tPtKqs6xXln3VqOzjZIlboDo3Gp2",
         "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
     },
     {
