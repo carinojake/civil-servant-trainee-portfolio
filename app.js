@@ -6773,7 +6773,7 @@ const master13DaysHubSessions = [
         ],
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
-        "file_name": "เอกสารบรรยาย_3.2_การบริหารคลังข้อมูลและแดชบอร์ด_สถิติแห่งชาติ.pdf",
+        "file_name": "19-8-69 ช่วงเช้า การบริหารคลังข้อมูลและแดชบอร์ด (สถิติแห่งชาติ).pdf",
         "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
         "notes": "📢 ประกาศย้ายห้อง: ห้องอบรม 211 (ทานเบรคในห้อง / ทานอาหารกลางวันรวมกันที่ห้อง 210)"
     },
@@ -6796,7 +6796,7 @@ const master13DaysHubSessions = [
         ],
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
-        "file_name": "เอกสารบรรยาย_3.4_งานสารบรรณและการร่างข้อเสนอเชิงวิเคราะห์_ม.รามคำแหง.pdf",
+        "file_name": "19-8-69 ช่วงบ่าย เรื่อง งานสารบรรณและการร่างข้.pdf",
         "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
         "notes": "📢 ประกาศย้ายห้อง: ห้องอบรม 211 (ทานเบรคในห้อง / ทานอาหารกลางวันรวมกันที่ห้อง 210)"
     },
@@ -7720,9 +7720,14 @@ function openEditRoomModal(sessionId) {
     const presetSelect = document.getElementById('edit-room-preset-select');
     const customInput = document.getElementById('edit-room-custom-input');
     const notesInput = document.getElementById('edit-room-notes-input');
+    const filenameInput = document.getElementById('edit-session-filename-input');
+    const fileurlInput = document.getElementById('edit-session-fileurl-input');
 
     if (customInput) customInput.value = session.room || '';
     if (notesInput) notesInput.value = session.notes || '';
+    if (filenameInput) filenameInput.value = session.file_name || '';
+    if (fileurlInput) fileurlInput.value = session.file_url || '';
+
     if (presetSelect) {
         presetSelect.value = '';
         Array.from(presetSelect.options).forEach(opt => {
@@ -7748,6 +7753,8 @@ function saveEditedSessionRoom() {
 
     const newRoom = document.getElementById('edit-room-custom-input')?.value?.trim();
     const newNotes = document.getElementById('edit-room-notes-input')?.value?.trim();
+    const newFilename = document.getElementById('edit-session-filename-input')?.value?.trim();
+    const newFileurl = document.getElementById('edit-session-fileurl-input')?.value?.trim();
 
     if (!newRoom) {
         showToast('กรุณาระบุชื่อห้องเรียน', 'error');
@@ -7756,11 +7763,18 @@ function saveEditedSessionRoom() {
 
     session.room = newRoom;
     session.notes = newNotes;
+    if (newFilename) session.file_name = newFilename;
+    if (newFileurl) session.file_url = newFileurl;
 
     // Save custom session overrides to localStorage
     try {
         const savedOverrides = JSON.parse(localStorage.getItem('civil_custom_sessions') || '{}');
-        savedOverrides[sessionId] = { room: newRoom, notes: newNotes };
+        savedOverrides[sessionId] = { 
+            room: newRoom, 
+            notes: newNotes,
+            file_name: newFilename,
+            file_url: newFileurl
+        };
         localStorage.setItem('civil_custom_sessions', JSON.stringify(savedOverrides));
     } catch (e) {
         console.warn('Could not persist room override to localStorage:', e);
@@ -7768,7 +7782,7 @@ function saveEditedSessionRoom() {
 
     closeModal('modal-edit-session-room');
     renderScheduleList();
-    showToast(`อัปเดตห้องเป็น "${newRoom}" เรียบร้อยแล้ว 🎉`, 'success');
+    showToast(`อัปเดตข้อมูลและลิงก์ไฟล์เรียบร้อยแล้ว 🎉`, 'success');
 }
 
 // Load persisted room overrides on startup
