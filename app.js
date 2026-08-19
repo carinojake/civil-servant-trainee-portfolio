@@ -2300,7 +2300,7 @@ function toggleAttendanceStatus(dayNum) {
 
     saveState();
     renderScheduleList();
-    renderKPIs();
+    updateKpiMetrics();
 }
 
 function quickCheckInToday() {
@@ -2572,7 +2572,7 @@ function saveDayLinksFromModal() {
     saveState();
     closeModal('modal-day-links');
     renderScheduleList();
-    renderKPIs();
+    updateKpiMetrics();
     showToast(`บันทึกข้อมูลและไฟล์ทั้งหมด (${mFiles.length + aFiles.length} ไฟล์) วันที่ ${dayNum} เรียบร้อยแล้ว 🎉`, 'success');
 }
 
