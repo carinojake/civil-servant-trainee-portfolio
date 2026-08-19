@@ -1,0 +1,325 @@
+en_name,th_name,course,province,region,calories_kcal,prep_time_minutes,is_vegetarian,sales_2025,price_baht,spice_level,rating_out_of_5
+Nam Khaeng Sai,น้ำแข็งไส,dessert,Various,Various,533,120,TRUE,305100,฿70,Mild,3.5
+Kanom Ko,ขนมก้อ,dessert,Various,Various,733,30,FALSE,,฿100,Spicy,4.9
+Mam,หม่ำ,main dish,Unknown,Unknown,374,30,,333500, 150 ,Extra Spicy,N/A
+Kaeng Kari,แกงกะหรี่,main dish,Various,Various,208,10,FALSE,335200,150,,3.0
+Kao Man Kai,ข้าวมันไก่,main dish,Bangkok,Central,512,,FALSE,,฿80,Mild,3.7
+Krob Kem,กรอบเค็ม,snack,Bangkok,Central,837,30,FALSE,10600, 150 ,Very Hot,3.7
+Tod Mun,ทอดมัน,main dish,Various,Various,758,120,FALSE,, 60 ,MILD,
+Kao Phat American,ข้าวผัดอเมริกัน,main dish,Bangkok,Central,551,15,TRUE,382000,100,Hot,4.0 stars
+Kluay Kaek,กล้วยแขก,snack,Various,Various,722,45,,345600, 45 ,NOT SPICY,3.1
+Som Tam,ส้มตำ,main dish,Various,Various,502,60,FALSE,169900, 50 ,Medium,
+Kanom Piak Pun,ขนมเปียกปูน,dessert,Various,Various,818,30,TRUE,376300,150,not spicy,2.8
+Kuai Tiao Mon,ก๋วยเตี๋ยวมอญ,main dish,Nonthaburi,Central,592,40,FALSE,394000,40,Mild,5.0 stars
+Khao Kriap Pak Mo,ข้าวเกรียบปากหม้อ,snack,Various,Various,700,20,FALSE,51000, 150 ,Hot,2.6
+Foi Thong,ฝอยทอง,dessert,Various,Various,661,30,FALSE,248900,150,None,3.4
+Kao Phat,ข้าวผัด,main dish,Various,Various,209,25,TRUE,290300,฿120,Extra Spicy,4.7
+Kai Nam,ไข่น้ำ,main dish,Various,Various,,5,TRUE,60300,40,VERY HOT,3.0
+Leng Saep,เล้งแซ่บ,main dish,Various,Various,,30,TRUE,328600,25,Mild,3.9 stars
+Kuai Tiao Khaek,ก๋วยเตี๋ยวแขก,main dish,Ayutthaya,Central,328,90,TRUE,149700, 120 ,very hot,
+Kanom La,ขนมลา,dessert,Unknown,Unknown,,120,FALSE,462600,30,Spicy,4.1
+Rad Na,ราดหน้า,main dish,Bangkok,Central,651,25,TRUE,243700,35,Mild,4.9
+Khao Daek Nga,ข้าวแดกงา,snack,Various,Various,740,15,FALSE,45400,฿60,MEDIUM,3.5 stars
+Saku,สาคู,snack,Unknown,Unknown,172,15,TRUE,462700,฿40,VERY HOT,4.8
+Kanom Ba Bin,ขนมบ้าบิ่น,snack,Various,Various,341,120,TRUE,365100,฿60,MEDIUM,3.9
+Kaeng Nok Mo,แกงนอกหม้อ,main dish,Unknown,Unknown,284,5,,10900,40,Mild,4.8
+Kanom Chamod,ขนมชะมด,dessert,Unknown,Unknown,572,60,FALSE,66300,฿60,Spicy,3.6 stars
+Yam Kai Yang Tao,ยำไก่อย่างเต่า,main dish,Unknown,Unknown,301,20,FALSE,500000,25,N/A,4.7
+Tom Pret,ต้มเปรต,main dish,Unknown,Unknown,796,60,,374700,25,Not Spicy,N/A
+Thong Yip,ทองหยิบ,dessert,Various,Various,,25,FALSE,477700,45,,3.2
+Kaeng Thepho,แกงเทโพ,main dish,Central provinces,Central,605,,FALSE,58500,50,mild,2.6
+Kaep Moo,แคบหมู,snack,Northern provinces,North,,,FALSE,235000,100,Not Spicy,3.9
+Kaeng Chuet,แกงจืด,main dish,Various,Various,555,45,FALSE,148300,60,Mild,N/A
+Kanom Thuai,ขนมถ้วย,dessert,Various,Various,266,,,433200,50,Mild,4.9
+Kung Ten,กุ้งเต้น,snack,Unknown,Unknown,125,25,TRUE,368100,100,Not Spicy,N/A
+Klub Lamduan,กลีบลำดวน,dessert,Various,Various,259,60,FALSE,127100,40,not spicy,
+Kaeng Singhon,แกงสิงหล,main dish,Unknown,Unknown,325,15,FALSE,169000,฿50,Very Hot,3.1
+Kai Yat Sai,ไข่ยัดไส้,main dish,Various,Various,176,10,FALSE,, 50 ,Spicy,3.2 stars
+Ang Ku,อังกู๊,dessert,Unknown,Unknown,573,60,FALSE,221300,฿120,None,4.2 stars
+Kaeng Hang Le,แกงฮังเล,main dish,Northern provinces,North,533,120,FALSE,47300,60,Medium,4.0
+Kaeng Bum Bai,แกงบุ่มไบ่,main dish,Various,Various,249,30,FALSE,221000,50,medium,N/A
+Phat Phong Kari,ผัดผงกะหรี่,main dish,Various,Various,831,60,FALSE,346700, 150 ,N/A,3.5
+Kaeng Salae,แกงสะแล,main dish,Various,Various,177,,FALSE,271500,35,Very Hot,-1
+Chun Pia,ชุนเปี๊ยะ,snack,Unknown,Unknown,734,20,FALSE,317800,฿35,Hot,4.1 stars
+Kaeng Chuek Som,แกงชักส้ม,main dish,Various,Various,274,5,TRUE,374900,40,hot,
+Kai Yang,ไก่ย่าง,main dish,Khon Kaen,Northeast,,120,FALSE,474000,N/A,Mild,N/A
+Kanom Kui Chai,ขนมกุยช่าย,snack,Various,Various,241,45,FALSE,273300,,N/A,4.6
+Nam Nang,น้ำหนัง,snack,Unknown,Unknown,298,5,FALSE,324600, 35 ,Not Spicy,3.2
+Kaeng Khanun,แกงขนุน,main dish,Northern provinces,North,539,5,,39500, 40 ,Mild,4.1
+Kao Raem Fuen,ข้าวแรมฟืน,main dish,Unknown,Unknown,332,15,FALSE,386900,฿30,Very Hot,N/A
+Kuai Tiao,ก๋วยเตี๋ยว,main dish,Bangkok,Central,446,40,FALSE,189200,฿45,Hot,4.3
+Kanom Ping,ขนมผิง,snack,Various,Various,359,15,FALSE,303800,70,medium,2.6
+Kai Tai Nam,ไก่ใต้น้ำ,main dish,Northern provinces,North,240,60,FALSE,150600, 70 ,not spicy,2.6
+Thong Muon,ทองม้วน,snack,Various,Various,490,,FALSE,362600,60,NOT SPICY,2.9 stars
+Kanom Tua Paeb,ขนมถั่วแปบ,snack,Various,Various,194,5,FALSE,,฿60,Very Hot,-1
+Khao Mao,ข้าวเม่า,dessert,Various,Various,131,,,52000,฿30,Mild,4.8
+Thong Yod,ทองหยอด,dessert,Various,Various,168,20,FALSE,162800,฿45,Spicy,2.8
+Rum,หรุ่ม,snack,Unknown,Unknown,506,30,FALSE,453700,120,,3.0
+Ang Kab Bob,อังแกบบอบ,main dish,Unknown,Unknown,528,45,FALSE,56900,N/A,Medium,3.7 stars
+Mee Krob,หมี่กรอบ,main dish,Bangkok,Central,499,25,FALSE,315900,40,MEDIUM,3.9
+Kaeng Som,แกงส้ม,main dish,Various,Various,305,15,FALSE,16300,฿60,Mild,2.7
+Pa Lo,พะโล้,main dish,Various,Various,501,5,TRUE,444700,฿40,Not Spicy,4.5
+Kanom Luk Gawad,ขนมลูกกวาด,dessert,Unknown,Unknown,528,90,,420000,150,None,4.4 stars
+Phat Prik Khing,ผัดพริกขิง,main dish,Various,Various,356,60,FALSE,86700,25,Spicy,3.1
+Kaeng Liang,แกงเลียง,main dish,Various,Various,790,120,FALSE,426600, 120 ,Medium,3.6
+Thu Kiao Tom Nam Tan,ถั่วเขียวต้มน้ำตาล,dessert,Various,Various,,120,FALSE,,150,,
+Phat Priao Wan,ผัดเปรี้ยวหวาน,main dish,Various,Various,824,60,TRUE,262000,N/A,Hot,3.4
+Sap Yaek,สัพแหยก,main dish,Unknown,Unknown,343,10,FALSE,24000,,Medium,N/A
+Nam Ngiao,น้ำเงี้ยว,main dish,Northern provinces,North,848,40,FALSE,430400,35,None,3.7
+Moo Cha Muang,หมูชะมวง,main dish,Various,Various,375,25,FALSE,262800,40,VERY HOT,N/A
+Kaeng Runjuan,แกงรัญจวน,main dish,Central provinces,Central,568,25,FALSE,246100,100,Mild,4.4
+Kraya Sadt,กระยาสารท,dessert,Various,Various,202,60,FALSE,,฿80,Very Hot,3.9
+Dara Thong,ดาราทอง,dessert,Unknown,Unknown,551,5,FALSE,436300,70,Very Hot,4.5 stars
+Thong Ek,ทองเอก,dessert,Various,Various,,20,FALSE,472000,฿150,Med,N/A
+Tom Saep,ต้มแซ่บ,main dish,Northeast provinces,Northeast,420,120,,,N/A,Not Spicy,3.3 stars
+Kaeng Rawaeng,แกงระแวง,main dish,Central provinces,Central,448,5,FALSE,447600,30,MILD,3.8 stars
+Kaeng Bon,แกงบอน,main dish,Various,Various,,20,FALSE,11200,100,NOT SPICY,2.7
+Kua Kling,คั่วกลิ้ง,main dish,Southern provinces,South,382,30,FALSE,56100,100,Medium,
+Kanom Man Sampalang,ขนมมันสำปะหลัง,dessert,Various,Various,417,40,FALSE,362000,N/A,None,3.2
+Kaeng Buan,แกงบวน,main dish,Central provinces,Central,794,25,FALSE,12300, 35 ,medium,
+Khanom Chin Kaeng Kai Kua,ขนมจีนแกงไก่คั่ว,main dish,Various,Various,283,,,260200,,NOT SPICY,N/A
+San Mo,แซนโม,main dish,Unknown,Unknown,814,60,FALSE,412100,,HOT,4.9
+A Law,อาละหว่า,dessert,Unknown,Unknown,753,25,TRUE,348800,N/A,None,4.6
+Kao Kha Mu,ข้าวขาหมู,main dish,Bangkok,Central,570,45,FALSE,19500,100,,3.8
+Yen Ta Fo,เย็นตาโฟ,main dish,Bangkok,Central,464,120,TRUE,259400,฿150,Not Spicy,4.0
+Bo Toa,บอเตาะ,main dish,Unknown,Unknown,,90,FALSE,199300,40,Very Hot,N/A
+Dok Kai,ดอกไข่,snack,Unknown,Unknown,483,,TRUE,270500,฿70,MILD,-1
+Moo Ping,หมูปิ้ง,snack,Various,Various,317,40,TRUE,129200,฿50,very hot,2.9
+Kanom Kheaw,ขนมเขียว,snack,Various,Various,803,90,TRUE,414800,70,Not Spicy,4.9
+Yam Sam Krob,ยำสามกรอบ,main dish,Various,Various,775,45,FALSE,451100,150,N/A,3.8 stars
+Kanom Kae Aam,ขนมแก้อาม,dessert,Unknown,Unknown,546,10,TRUE,159700, 40 ,N/A,4.4
+Kao Chi,ข้าวจี่,main dish,Rural areas,Northeast,843,40,FALSE,458400,70,Very Hot,2.8
+Miang Kham,เมี่ยงคำ,snack,Various,Various,473,40,FALSE,395700,100,Medium,3.9
+Sup Singapore,ซุปสิงคโปร์,main dish,Various,Various,,30,FALSE,153300,฿40,Very Hot,2.5
+Thung Thong,ถุงทอง,snack,Bangkok,Central,664,,FALSE,476100,฿60,None,4.4
+Otao,โอต้าว,snack,Unknown,Unknown,654,120,FALSE,266400, 35 ,Mild,4.1 stars
+Kai Ob Fang,ไก่อบฟาง,main dish,Rural areas,Central,808,40,,365100,,Spicy,3.2
+Khao Pan,ข้าวพัน,snack,Unknown,Unknown,291,20,TRUE,274100,50,,3.6 stars
+Fak Khiao Kwan,ฟักเขียวกวน,dessert,Various,Various,574,20,FALSE,7400,40,not spicy,4.3
+Krabong,กระบอง,snack,Unknown,Unknown,390,,TRUE,166800,60,,
+Kaeng Phet,แกงเผ็ด,main dish,Various,Various,546,,FALSE,,฿25,not spicy,2.8
+Kanom Jor Hu,ขนมเจาะหู,dessert,Unknown,Unknown,663,45,FALSE,,70,Very Hot,3.3
+Sa Rim,ซ่าหริ่ม,dessert,Various,Various,766,25,FALSE,410500,80,Hot,3.0
+A Kao,อาเกาะ,dessert,Unknown,Unknown,740,,TRUE,196500,฿60,Extra Spicy,4.8
+Kaeng Patcharee,แกงปัจรี,main dish,Unknown,Unknown,325,15,TRUE,334600,฿80,Hot,2.5
+Kanom Kui Ling,ขนมควยลิง,snack,Various,Various,227,120,TRUE,428400,45,Not Spicy,-1
+Kanom Mor Kaeng,ขนมหม้อแกง,dessert,Various,Various,197,120,FALSE,105000,฿35,very hot,
+Ko Kae,โก๋แก่,snack,Unknown,Unknown,179,25,TRUE,191700,30,hot,3.9 stars
+Tom Khreung Nai Moo,ต้มเครื่องในหมู,main dish,Various,Various,498,15,FALSE,134700,,Extra Spicy,3.5 stars
+Jub Chai,จับฉ่าย,main dish,Various,Various,761,15,FALSE,293600,฿35,mild,4.7
+Kanom Farang Kudi Chin,ขนมฝรั่งกุฎีจีน,dessert,Various,Various,722,30,TRUE,283000,฿50,MEDIUM,4.4 stars
+Kao Soi,ข้าวซอย,main dish,Chiang Mai,North,318,15,TRUE,442200, 45 ,Hot,3.7
+Kai Dao,ไข่ดาว,main dish,Various,Various,524,45,FALSE,258000,50,NOT SPICY,-1
+Kaeng Buat,แกงบวด,dessert,Various,Various,296,45,FALSE,398800,60,Not Spicy,2.9 stars
+Kanom Hua Lan,ขนมหัวล้าน,dessert,Unknown,Unknown,,45,FALSE,433000,฿100,Not Spicy,2.9
+Kai Sam Yang,ไก่สามอย่าง,main dish,Unknown,Unknown,253,25,,,25,Medium,4.2
+Suea Rong Hai,เสือร้องไห้,main dish,Northeast provinces,Northeast,831,90,FALSE,370200, 30 ,Medium,N/A
+Kanom Pia,ขนมเปี๊ยะ,snack,Various,Various,548,10,FALSE,332000,120,not spicy,3.7
+Kaeng Khae,แกงแค,main dish,Northern provinces,North,303,120,FALSE,277800,80,very hot,
+Pa Thong Ko,ปาท่องโก๋,snack,Various,Various,332,10,TRUE,58900,25,Med,2.6
+Phra Ram Long Song,พระรามลงสรง,main dish,Unknown,Unknown,706,5,FALSE,320300,25,Hot,4.5
+Sankhaya Kuan,สังขยา (กวน),dessert,Various,Various,836,30,FALSE,,฿45,MILD,10
+Kha Kai Super,ขาไก่ซุปเปอร์,main dish,Bangkok,Central,610,20,,323300, 50 ,Not Spicy,
+Phat Khing,ผัดขิง,main dish,Various,Various,760,10,FALSE,264300,฿100,Not Spicy,4.4
+Kanom Jeeb,ขนมจีบ,snack,Bangkok,Central,607,60,,244100,100,N/A,N/A
+Pla Haeng Tang Mo,ปลาแห้งแตงโม,snack,Unknown,Unknown,196,60,FALSE,482500,N/A,None,-1
+Roti,โรตี,snack,Various,Various,590,5,FALSE,193200,100,Hot,3.8
+Yam Pla Duk Fu,ยำปลาดุกฟู,main dish,Various,Various,238,90,FALSE,, 45 ,MEDIUM,3.0
+Kanom Grok,ขนมกรอก,snack,Various,Various,,15,TRUE,208600,35,Spicy,2.9
+Som Choon Yam,ส้มฉุน (ยำ),salad,Various,Various,790,,TRUE,52300, 25 ,,4.2
+Sa Uh,สะเออะ,main dish,Unknown,Unknown,703,5,FALSE,339800, 40 ,Not Spicy,3.9
+Ma Ho,ม้าฮ่อ,snack,Various,Various,401,,FALSE,404600, 100 ,Very Hot,3.5
+Loba,โลบะ,main dish,Southern provinces,South,716,20,TRUE,381900,100,Spicy,-1
+Khang Khao Pueak,ค้างคาวเผือก,snack,Various,Various,387,20,,108700,120,Spicy,
+Hoi Tod,หอยทอด,main dish,Coastal provinces,South,722,5,FALSE,405900,80,mild,3.8 stars
+Kao Rad Na Kai,ข้าวราดหน้าไก่,main dish,Bangkok,Central,,25,FALSE,131500,45,Hot,4.9
+Kao Mok,ข้าวหมก,main dish,Southern provinces,South,470,30,TRUE,5400,45,MEDIUM,4.3
+Srong,สร่ง,snack,Unknown,Unknown,688,30,FALSE,338700,70,Medium,4.7
+Kiem Ee,เกี้ยมอี๋,main dish,Bangkok,Central,282,5,,497000, 60 ,very hot,3.9
+A Law,อาลัว,dessert,Unknown,Unknown,178,10,TRUE,170300,฿45,Medium,2.6
+Tom Kati,ต้มกะทิ,main dish,Various,Various,547,5,TRUE,445300,฿80,Not Spicy,2.8
+Nam Tok,น้ำตก,main dish,Various,Various,,20,FALSE,473300,฿50,Medium,3.3
+Kanom Kusarang,ขนมกุสรัง,dessert,Various,Various,792,25,FALSE,,70,Hot,3.1
+Tom Kha Kai,ต้มข่าไก่,main dish,Various,Various,693,30,TRUE,15000,45,N/A,
+Khao Mao,ข้าวเม่า,dessert,Unknown,Unknown,692,120,FALSE,266700,120,Hot,N/A
+Kuai Tiao Ruea,ก๋วยเตี๋ยวเรือ,main dish,Ayutthaya,Central,482,120,TRUE,495800,70,not spicy,3.7
+Khao Lam,ข้าวหลาม,dessert,Various,Various,,120,TRUE,363700,฿25,,N/A
+Kuay Teow Lord,ก๋วยเตี๋ยวหลอด,main dish,Bangkok,Central,,,FALSE,350800,฿120,Extra Spicy,3.7
+Kanom Khai,ขนมไข่,snack,Various,Various,248,5,FALSE,201800, 60 ,Mild,4.4
+Kluay Buat Chi,กล้วยบวชชี,dessert,Various,Various,273,,FALSE,,฿120,,4.5
+Kung Chae Nam Pla,กุ้งแช่น้ำปลา,main dish,Coastal provinces,South,153,10,FALSE,, 150 ,N/A,3.4 stars
+Kao Pheup,ข้าวเปิ๊บ,main dish,Unknown,Unknown,782,5,FALSE,94700,35,,N/A
+Chao Kuai,เฉาก๊วย,dessert,Various,Various,482,30,FALSE,355600,฿80,Medium,10
+La Sao,ละซอ,main dish,Unknown,Unknown,357,5,TRUE,132700,฿100,Mild,3.8 stars
+A Pong,อาโป้ง,snack,Unknown,Unknown,745,30,FALSE,314400,40,N/A,3.3
+Kanom Pang Na Moo,ขนมปังหน้าหมู,snack,Bangkok,Central,174,30,FALSE,225100,60,Not Spicy,4.9
+Panaeng,พะแนง,main dish,Various,Various,760,30,FALSE,93400,35,Not Spicy,4.3
+Phat See Ew,ผัดซีอิ๊ว,main dish,Bangkok,Central,434,25,TRUE,282600,70,Not Spicy,4.8 stars
+Kratong Thong,กระทงทอง,snack,Unknown,Unknown,233,90,FALSE,,25,Mild,3.1
+Kao Man Kaeng Kai,ข้าวมันแกงไก่,main dish,Various,Various,778,120,FALSE,235100,60,Med,4.1
+Kuai Chap,กวยจั๊บ,main dish,Bangkok,Central,132,,FALSE,339600,150,Hot,3.9
+Hoi Siab Jim Malakor,หอยเสียบจิ้มมะละกอ,snack,Unknown,Unknown,818,120,,333000, 30 ,Not Spicy,4.1 stars
+Kai Katet,ไก่กะเต็ด,main dish,Unknown,Unknown,361,10,FALSE,411600,฿50,Very Hot,3.2
+Koey Yeung Kok Siang Bi,เกยย้งก๊กเซียงบี๊,main dish,Bangkok,Central,736,10,FALSE,453500,30,Med,N/A
+Phat Cha,ผัดฉ่า,main dish,Various,Various,202,30,TRUE,100300,,hot,2.7
+Maskot,มัศกอด,dessert,Unknown,Unknown,285,,,429700,120,None,2.6
+Kaeng Matsaman,แกงมัสมั่น,main dish,Southern provinces,South,290,15,FALSE,431100,120,Hot,2.8
+Kao Maew,ข้าวแมว,main dish,Unknown,Unknown,502,60,FALSE,241900,40,,4.6
+Kaeng Ron,แกงร้อน,main dish,Unknown,Unknown,,,FALSE,20200,฿60,mild,10
+O Aew,โอ้เอ๋ว,dessert,Unknown,Unknown,,30,TRUE,, 150 ,medium,4.0
+Poh Pia,เปาะเปี๊ยะ,snack,Various,Various,282,40,TRUE,175000,,hot,
+Kari Puff,กะหรี่ปั๊บ,snack,Bangkok,Central,131,15,FALSE,42300,N/A,Not Spicy,4.0 stars
+Kanom Thien,ขนมเทียน,dessert,Various,Various,689,90,FALSE,147900,฿45,None,4.7
+Vihok Long Rang,วิหคหลงรัง,snack,Unknown,Unknown,246,,FALSE,201400,60,,4.4
+Aeb,แอ็บ,main dish,Unknown,Unknown,,5,,410600,100,MEDIUM,4.6
+Tam Tang,ตำแตง,main dish,Various,Various,287,25,TRUE,422600,฿30,Hot,
+Mok,หมก,main dish,Unknown,Unknown,444,45,FALSE,145800,฿100,Mild,3.8
+Khao Ya Khu,ข้าวยาคู,dessert,Unknown,Unknown,800,15,TRUE,90600,45,,
+Kaeng Kua,แกงคั่ว,main dish,Various,Various,397,20,FALSE,326500,35,Mild,4.5
+Kanom Thang Taek,ขนมถังแตก,snack,Various,Various,681,,FALSE,262200,60,Med,4.2
+Phat Kaphrao,ผัดกะเพรา,main dish,Various,Various,415,10,FALSE,424400,฿35,Hot,4.7
+Yam Kai Dao,ยำไข่ดาว,main dish,Various,Various,549,10,FALSE,246000,50,Very Hot,4.0
+Sai Krok Isan,ไส้กรอกอีสาน,main dish,Northeast provinces,Northeast,353,,,123800, 50 ,Very Hot,4.6
+Kaeng To Mae Ha,แกงตอแมะฮ,main dish,Unknown,Unknown,536,90,FALSE,239400,,Very Hot,4.2
+Lab,ลาบ,main dish,Northeast provinces,Northeast,337,30,FALSE,478000, 45 ,Medium,3.8
+Kanom Tom,ขนมต้ม,dessert,Various,Various,386,30,FALSE,82500,฿100,mild,2.7 stars
+Poo Ja,ปูจ๋า,main dish,Various,Various,,90,TRUE,,80,None,N/A
+Kai Paam,ไข่ป่าม,main dish,Northern provinces,North,124,20,FALSE,422500,฿45,Hot,3.2
+Kanom Puang Pratad,ขนมพวงประทัด,snack,Unknown,Unknown,149,40,FALSE,133200,฿80,Not Spicy,3.5
+Kanom Gong,ขนมกง,dessert,Various,Various,254,45,,,60,Hot,3.1
+Moo Wan,หมูหวาน,main dish,Various,Various,304,20,FALSE,12100,N/A,Hot,N/A
+Kaeng Ho,แกงโฮะ,main dish,Unknown,Unknown,182,20,FALSE,92400,35,Extra Spicy,4.3 stars
+Dok Kung,ดอกกุ้ง,snack,Unknown,Unknown,380,25,FALSE,248000,฿40,mild,3.5
+Kanom Chak,ขนมจาก,snack,Various,Various,560,20,TRUE,,120,not spicy,
+Cho Hraeng,จอแหร้ง,main dish,Unknown,Unknown,,45,TRUE,19300,30,None,-1
+Med Kanoon,เม็ดขนุน,dessert,Various,Various,525,20,TRUE,144500, 80 ,Very Hot,4.8
+Yam Tawai,ยำทวาย,main dish,Unknown,Unknown,,5,,,฿70,Extra Spicy,3.5
+Ro Yor,รอเยาะ,main dish,Unknown,Unknown,722,20,TRUE,167100, 150 ,Hot,3.9
+La We Kadam,ละแวกะดาม,main dish,Unknown,Unknown,,10,TRUE,,฿50,MEDIUM,N/A
+Kaeng Noppakao,แกงนพเก้า,main dish,Unknown,Unknown,634,,FALSE,266200,120,Hot,2.5
+Cho Phak Kat,จอผักกาด,main dish,Northern provinces,North,706,,TRUE,,80,medium,3.0 stars
+Luk Chup,ลูกชุบ,dessert,Various,Various,222,5,FALSE,420100,120,Hot,4.4
+Sankhaya Nueng,สังขยา (นึ่ง),dessert,Various,Various,326,25,TRUE,145900, 35 ,medium,10
+Kanom Luem Gluen,ขนมลืมกลืน,dessert,Various,Various,297,30,FALSE,496600,70,Medium,2.5 stars
+Kao Chi,ข้าวจี่,snack,Various,Various,374,15,TRUE,400900, 80 ,mild,3.6 stars
+Kanom Geson Lam Chiek,ขนมเกสรลำเจียก,dessert,Unknown,Unknown,822,,FALSE,91700,,Mild,2.6
+Kaeng Nang Loy,แกงนางลอย,main dish,Unknown,Unknown,787,15,FALSE,176500,150,Mild,-1
+Phi Tai Wak,ผีตายหวาก,dessert,Unknown,Unknown,636,60,TRUE,486400,฿80,medium,4.8
+Moo Hong,หมูฮ้อง,main dish,Southern provinces,South,,10,FALSE,144200, 35 ,Not Spicy,3.9
+Kanom Chang Ma,ขนมแชงม้า,dessert,Unknown,Unknown,823,25,FALSE,243000,50,None,3.1 stars
+Kaeng Hong,แกงหอง,main dish,Unknown,Unknown,524,120,TRUE,325400,35,HOT,3.0
+Kaeng Khiao Wan,แกงเขียวหวาน,main dish,Various,Various,194,,FALSE,183300,,HOT,3.7
+Kanom Tokyo,ขนมโตเกียว,dessert,Bangkok,Central,451,60,FALSE,56800,120,Spicy,4.3
+Phat Thai,ผัดไทย,main dish,Bangkok,Central,462,120,FALSE,478000,150,,4.7 stars
+Tu Bo,ตูโบ้,dessert,Unknown,Unknown,219,45,FALSE,, 120 ,Mild,-1
+Kuai Tiao Pak Mo,ก๋วยเตี๋ยวปากหม้อ,main dish,Nakhon Pathom,Central,150,60,FALSE,52800, 40 ,Not Spicy,3.0 stars
+Khanom Chin,ขนมจีน,main dish,Various,Various,,20,FALSE,424500,120,Extra Spicy,
+Kaeng Poe,แกงเปอะ,main dish,Northeast provinces,Northeast,314,15,TRUE,39400,40,VERY HOT,2.8 stars
+Kai Raberd,ไข่ระเบิด,main dish,Unknown,Unknown,798,10,TRUE,30000,฿120,Medium,3.7
+Kanom Nam Dok Mai,ขนมน้ำดอกไม้,dessert,Unknown,Unknown,394,15,FALSE,341100,80,Mild,10
+Kaeng Ngao Ngod,แกงเหงาหงอด,main dish,Unknown,Unknown,807,15,FALSE,,฿70,medium,3.6 stars
+Khao Kriap Kung,ข้าวเกรียบกุ้ง,snack,Bangkok,Central,711,10,,423300,25,Mild,2.9
+Lon,หลน,main dish,Unknown,Unknown,320,,TRUE,343100,120,Very Hot,3.0 stars
+Tom Yam,ต้มยำ,main dish,Various,Various,236,20,TRUE,364900,70,,3.7
+Kanom Beung,ขนมเบื้อง,snack,Various,Various,518,60,FALSE,306400,45,None,10
+Moo Takro,หมูตะกร้อ,snack,Unknown,Unknown,432,,FALSE,129400,฿50,MEDIUM,2.7 stars
+Mata Ba,มะตะบะ,snack,Southern provinces,South,322,90,TRUE,369000,฿25,Hot,2.6
+Khao Tom Bai Kapho,ข้าวต้มใบกะพ้อ,dessert,Various,Various,147,90,FALSE,,80,MEDIUM,3.7 stars
+Sai Ua,ไส้อั่ว,main dish,Northern provinces,North,264,25,FALSE,364200,฿45,hot,4.8
+Kao Tom,ข้าวต้ม,main dish,Various,Various,,25,TRUE,255300,,very hot,4.1
+Mamoung Kwan,มะม่วงกวน,dessert,Unknown,Unknown,445,15,TRUE,471000,25,Med,4.0
+Gruay Thip,กรวยทิพย์,snack,Unknown,Unknown,370,45,,,฿50,Mild,2.7
+Kanom Nian,ขนมเนียล,dessert,Unknown,Unknown,,45,TRUE,204000,45,not spicy,N/A
+Kanom Kheng,ขนมเข่ง,dessert,Various,Various,300,60,TRUE,471500,,NOT SPICY,3.2
+Kaeng Somrom,แกงสมรม,main dish,Unknown,Unknown,471,10,TRUE,303700,N/A,Medium,3.1
+Kai Kwam,ไข่คว่ำ,main dish,Various,Various,192,10,FALSE,367000,70,Not Spicy,4.4
+Kalamae,กะละแม,dessert,Various,Various,,,FALSE,259800,,N/A,4.5
+Ha Kun,แฮ่กึ๊น,snack,Unknown,Unknown,,90,FALSE,341400,40,Mild,3.4
+Pla Nam,ปลาแนม,snack,Unknown,Unknown,498,60,FALSE,287600, 35 ,Medium,4.0 stars
+Tom Som,ต้มส้ม,main dish,Various,Various,691,90,FALSE,184300, 70 ,Medium,3.9 stars
+Khao Tom Nam Woon,ข้าวต้มน้ำวุ้น,dessert,Various,Various,692,120,FALSE,335700,60,Not Spicy,2.7
+Roti Sai Mai,โรตีสายไหม,snack,Various,Various,390,5,FALSE,410700,฿30,N/A,4.9
+Khao Pong,ข้าวโป่ง,snack,Various,Various,473,15,FALSE,83800, 100 ,N/A,4.5
+Khrong Khrang Krop,ครองแครงกรอบ,snack,Various,Various,399,,FALSE,388000,25,Medium,4.6 stars
+Kai Look Kheuy,ไข่ลูกเขย,main dish,Various,Various,185,90,TRUE,,100,Mild,N/A
+Om,อ่อม,main dish,Various,Various,344,60,TRUE,175600, 80 ,,3.5
+Kanom Thuai Fu,ขนมถ้วยฟู,dessert,Various,Various,,30,FALSE,248700,120,Spicy,-1
+Tupa Sutong,ตูปะซูตง,main dish,Unknown,Unknown,434,15,TRUE,193900,N/A,Med,
+Kao Phat Sapparot,ข้าวผัดสับปะรด,main dish,Coastal provinces,South,368,45,FALSE,443300, 30 ,MILD,3.3 stars
+Kaeng Chin Chuan,แกงจีนจ๊วน,main dish,Various,Various,801,45,FALSE,29700,120,,2.6
+Soup Asa Ren,ซุปอาสาเรน,soup,Bangkok,Central,137,30,,, 60 ,HOT,3.0
+Nua Nang Phao,เนื้อนางเพา,main dish,Unknown,Unknown,,20,FALSE,169000, 60 ,N/A,10
+Yam Sanat,ยำสะนัด,main dish,Unknown,Unknown,,25,,359000,฿150,,3.6 stars
+Tom Jiw,ต้มจิ๋ว,main dish,Various,Various,138,90,,357000,25,Mild,4.6
+Kao Na Ped,ข้าวหน้าเป็ด,main dish,Bangkok,Central,840,10,,281300,70,Medium,-1
+Ma Uan,ม้าอ้วน,snack,Unknown,Unknown,448,45,TRUE,215500, 120 ,Not Spicy,4.4 stars
+Soi Ju,ซอยจุ๊,main dish,Northeast provinces,Northeast,360,15,TRUE,329500,30,Extra Spicy,2.6
+Yam Yai,ยำใหญ่,main dish,Various,Various,667,120,TRUE,44200, 30 ,Medium,2.9
+Som Chun,ส้มฉุน,salad,Various,Various,228,15,FALSE,,80,Mild,-1
+Tub Tim Grob,ทับทิมกรอบ,dessert,Various,Various,527,90,FALSE,115400,฿30,Not Spicy,4.6 stars
+Kao Yam,ข้าวยำ,main dish,Southern provinces,South,189,5,FALSE,276100,70,Not Spicy,3.8
+Sup Khreung Nai,ซุปเครื่องใน,main dish,Various,Various,406,,FALSE,273600,70,Med,4.8
+Pla Kok,ปลาคก,main dish,Unknown,Unknown,622,,TRUE,,45,Very Hot,3.1
+Kai Hor Bai Toey,ไก่ห่อใบเตย,main dish,Various,Various,,40,FALSE,322000,150,Hot,3.4 stars
+Ja Mongkut,จ่ามงกุฎ,dessert,Unknown,Unknown,,90,FALSE,180300,80,Not Spicy,3.1
+Kaeng Lueang,แกงเหลือง,main dish,Southern provinces,South,205,,FALSE,471000,,Very Hot,10
+Kai Koa Lae,ไก่กอและ,main dish,Pattani,South,539,40,TRUE,,80,very hot,2.7
+Phat Khi Mao,ผัดขี้เมา,main dish,Bangkok,Central,798,90,FALSE,249700,150,Very Hot,3.6 stars
+Salapao,ซาลาเปา,snack,Various,Various,,60,TRUE,88700,฿60,Mild,4.4
+Khao Tu,ข้าวตู,snack,Various,Various,244,15,FALSE,377000,฿35,Very Hot,10
+Ngob,งบ,main dish,Unknown,Unknown,343,60,FALSE,213500,฿25,Extra Spicy,
+Kao Khluk Kapi,ข้าวคลุกกะปิ,main dish,Bangkok,Central,775,10,FALSE,105100,฿30,Very Hot,-1
+Kaeng Tumi,แกงตูมี้,main dish,Unknown,Unknown,133,40,,74700,฿40,N/A,4.1
+Tom Kloang,ต้มโคล้ง,main dish,Various,Various,413,60,TRUE,423800,฿80,Not Spicy,3.3
+Hoi Tak,หอยตาก,snack,Unknown,Unknown,258,40,TRUE,102200,฿30,not spicy,4.5 stars
+Kao Chae,ข้าวแช่,main dish,Central provinces,Central,827,60,TRUE,,฿25,Hot,4.7
+Chu Chi,ฉู่ฉี่,main dish,Various,Various,301,5,FALSE,261000,N/A,Very Hot,3.0
+Kao Man Somtam,ข้าวมันส้มตำ,main dish,Various,Various,228,45,FALSE,167300,50,not spicy,4.9
+Lot Chong,ลอดช่อง,dessert,Various,Various,309,90,FALSE,, 30 ,Hot,4.0
+Kuai Tiao Kua Kai,ก๋วยเตี๋ยวคั่วไก่,main dish,Bangkok,Central,515,20,FALSE,432000,25,Medium,4.9
+Kao Kan Jin,ข้าวกั๊นจิ๊น,main dish,Northern provinces,North,199,10,FALSE,68400, 100 ,hot,3.0 stars
+Phat Phak Bung,ผัดผักบุ้ง,main dish,Various,Various,,20,FALSE,, 80 ,Mild,N/A
+Sate,สะเต๊ะ,snack,Southern provinces,South,739,90,FALSE,479200,100,Med,3.4
+Kanom Kee Nu,ขนมขี้หนู,snack,Various,Various,376,20,TRUE,495700,25,Spicy,3.8 stars
+Tau Huai,เต้าฮวย,dessert,Various,Various,251,5,FALSE,11700,35,Mild,2.9
+Phat Sam Muen,ผัดสามเหม็น,main dish,Various,Various,732,40,FALSE,,฿50,Mild,4.8 stars
+Khanom,ฆานม,dessert,Unknown,Unknown,634,45,FALSE,37700, 25 ,Not Spicy,N/A
+Hoi Jo,ฮ่อยจ๊อ,snack,Southern provinces,South,578,5,,390400, 40 ,Mild,3.6
+Kao Lao,เกาเหลา,main dish,Bangkok,Central,379,,,288500,฿25,MILD,3.5
+Kanom Wong,ขนมวง,snack,Various,Various,590,40,FALSE,491300,,N/A,3.7
+Karaang,กะราง,main dish,Unknown,Unknown,314,40,TRUE,96200, 30 ,Med,3.7 stars
+Kanom Krok,ขนมครก,snack,Various,Various,251,15,FALSE,471200,N/A,Mild,3.8 stars
+Kaeng Paa,แกงป่า,main dish,Various,Various,355,40,FALSE,335800,25,Hot,4.8
+Khao Tang Na Tang,ข้าวตังหน้าตั้ง,snack,Various,Various,736,,,414200,35,Very Hot,-1
+Kanom Chan,ขนมชั้น,dessert,Various,Various,352,10,FALSE,91800,40,VERY HOT,4.2
+Ice Cream Pad,ไอติมผัด,dessert,Unknown,Unknown,268,45,FALSE,154300,฿40,Medium,4.3
+Khao Ho Tod,ข้าวห่อทอด,snack,Unknown,Unknown,465,60,FALSE,372200,60,Not Spicy,3.2
+Tai Pla,ไตปลา,main dish,Southern provinces,South,529,10,,451400,N/A,N/A,4.4 stars
+Kanom Tan,ขนมตาล,dessert,Various,Various,,60,FALSE,464200, 120 ,Spicy,4.6
+Kao Sia Po,ข้าวเสียโป,main dish,Unknown,Unknown,210,20,FALSE,425500,80,Very Hot,4.0
+Cho Muang,ช่อม่วง,snack,Unknown,Unknown,,30,FALSE,91400,฿80,Mild,2.5 stars
+Khao Niao Mamuang,ข้าวเหนียวมะม่วง,dessert,Various,Various,319,90,FALSE,345900,120,N/A,2.5
+Khao Kriap Ya Na,ข้าวเกรียบยาหน้า,snack,Various,Various,210,15,TRUE,402000,฿35,N/A,2.6 stars
+Kanom Khai Hong,ขนมไข่หงส์,snack,Various,Various,425,20,TRUE,55700,฿150,Not Spicy,10
+Kai Jeow,ไข่เจียว,main dish,Various,Various,270,45,FALSE,407000,,Mild,N/A
+Kanom Pang Ka Kai,ขนมปังขาไก่,snack,Bangkok,Central,846,30,FALSE,342800,N/A,medium,4.9
+Pla,พล่า,main dish,Various,Various,688,,FALSE,169600,60,NOT SPICY,4.3
+Khao Tom Mat,ข้าวต้มมัด,dessert,Various,Various,,,TRUE,124100,40,Med,5.0
+Sup,ซุบ,main dish,Unknown,Unknown,234,45,FALSE,493000,60,hot,4.8
+Kanom Muang Phet,ขนมเมืองเพชร,dessert,Unknown,Unknown,343,,,160100, 35 ,Mild,3.6
+Kanom Khai Nok Krata,ขนมไข่นกกระทา,snack,Various,Various,573,,FALSE,331300,70,NOT SPICY,4.5
+Rai Rai,เรไร,dessert,Unknown,Unknown,376,20,FALSE,465300,N/A,medium,10
+Kaeng Khee Lek,แกงขี้เหล็ก,main dish,Various,Various,751,45,FALSE,481700, 45 ,,N/A
+Koi,ก้อย,main dish,Ubon Ratchathani,Northeast,476,120,FALSE,196400,฿100,Mild,4.2
+Moo Manao,หมูมะนาว,main dish,Various,Various,840,5,FALSE,125000,30,Not Spicy,4.3
+Oo,อู๋,main dish,Unknown,Unknown,686,10,FALSE,191500,N/A,mild,4.7 stars
+La Tiang,ล่าเตียง,snack,Unknown,Unknown,357,120,FALSE,51200,N/A,,2.6
+Jok,โจ๊ก,main dish,Bangkok,Central,763,15,TRUE,116900,N/A,Hot,3.0
+Kaeng Kradang,แกงกระด้าง,main dish,Northern provinces,North,554,30,FALSE,227100,35,Not Spicy,3.0 stars
+Kanom Pak Kad,ขนมผักกาด,snack,Bangkok,Central,690,10,FALSE,430700,30,Extra Spicy,10
+Kaeng Sap Nok,แกงสับนก,main dish,Unknown,Unknown,650,90,FALSE,315000, 60 ,,2.8
+Pan Sip,ปั้นสิบ,snack,Unknown,Unknown,666,5,FALSE,493400,100,Medium,4.7
+Mee Kati,หมี่กะทิ,main dish,Central provinces,Central,136,40,TRUE,363900, 150 ,Medium,4.0
+Kao Dok Rai,ข้าวดอกราย,main dish,Unknown,Unknown,472,,TRUE,81200,฿70,None,3.0
+Khao Niao Ping,ข้าวเหนียวปิ้ง,snack,Various,Various,,30,,28600,฿100,Not Spicy,N/A
+Karawek Sod Si,การเวกสอดสี,snack,Unknown,Unknown,666,20,,, 100 ,Spicy,2.9

@@ -90,704 +90,418 @@
   ],
   "lecturers": [
     {
-      "id": "chanatat_b",
+      "id": "01",
       "name": "ดร.ชณทัต บุญชูวงศ์",
+      "category": "AI & ดิจิทัล",
       "position": "อาจารย์ประจำภาควิชาครุศาสตร์เทคโนโลยีและสารสนเทศ",
-      "organization": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านเทคโนโลยีการศึกษา นวัตกรรมดิจิทัล และการประยุกต์ใช้ AI ในการทำงาน",
-      "category_ids": [
-        "ai_digital",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "AI และดิจิทัล",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "4.4 การบริหารจัดการฐานข้อมูลและสถาปัตยกรรมข้อมูลภาครัฐ (25 ส.ค. 69)",
-        "4.5 การวิเคราะห์ข้อมูลเพื่อปรับปรุงงานบริการ (25 ส.ค. 69)",
-        "5.2 การประยุกต์ใช้เทคโนโลยีอัตโนมัติและ AI ในงานธุรการ (26 ส.ค. 69)"
-      ],
-      "cv_file": "ดร.ชณทัต บุญชูวงศ์.pdf",
-      "cv_available": true,
-      "verified": true,
+      "agency": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
+      "expertise": "AI-integrated learning, Omnichannel Service, AI Chatbot & Prompt Engineering",
       "email": "chanatat.buu@gmail.com",
-      "bio_highlights": "ปริญญาเอก ด้านเทคโนโลยีการศึกษา ผู้เชี่ยวชาญการออกแบบการเรียนรู้ดิจิทัลและเทคโนโลยีอัตโนมัติ"
+      "vehicle_plate": "4กฎ 45 กรุงเทพมหานคร",
+      "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+      "icon": "fa-robot",
+      "primary_day": 10,
+      "days_label": "วันที่ 10, 11",
+      "teaching_days": [
+        10,
+        11
+      ]
     },
     {
-      "id": "taweesak_k",
+      "id": "02",
       "name": "รศ.ดร.ทวีศักดิ์ กฤษเจริญ",
-      "position": "รองศาสตราจารย์ประจำคณะบริหารธุรกิจ",
-      "organization": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ (KMUTNB)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการจัดการกลยุทธ์ การพัฒนาองค์การ และการบริหารทรัพยากรมนุษย์ภาครัฐ",
-      "category_ids": [
-        "public_admin",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "บริหารราชการ",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "การพัฒนาภาวะผู้นำและการทำงานเป็นทีมในองค์กรภาครัฐ (20 ส.ค. 69 ช่วงเช้า)",
-        "การบริหารจัดการสำนักงานอัจฉริยะ & งานสารบรรณคนพิการ (20 ส.ค. 69 ช่วงบ่าย)"
-      ],
-      "cv_file": "CV รศ.ดร.ทวีศักดิ์ กฤษเจริญ.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการพัฒนาสมรรถนะบุคลากรภาครัฐและการบริหารการเปลี่ยนแปลง"
+      "category": "บริหารราชการ",
+      "position": "คณบดี บัณฑิตวิทยาลัยการจัดการและนวัตกรรม",
+      "agency": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
+      "expertise": "Data Storytelling, Executive Pitching, Inter-agency Coordination, กฎหมายปฏิบัติราชการทางอิเล็กทรอนิกส์",
+      "email": "taweesak.kri@kmutt.ac.th",
+      "vehicle_plate": "7กท 2323 กรุงเทพมหานคร",
+      "badge_color": "bg-amber-100 text-amber-800 border-amber-200",
+      "icon": "fa-landmark",
+      "primary_day": 8,
+      "days_label": "วันที่ 8",
+      "teaching_days": [
+        8
+      ]
     },
     {
-      "id": "sutiwat_s",
+      "id": "03",
       "name": "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
-      "position": "ผู้ช่วยศาสตราจารย์ประจำคณะครุศาสตร์อุตสาหกรรมและเทคโนโลยี",
-      "organization": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านวิศวกรรมคอมพิวเตอร์ ระบบสารสนเทศ และการวิเคราะห์ข้อมูลขั้นสูง",
-      "category_ids": [
-        "ai_digital",
-        "data_analytics"
-      ],
-      "category_labels": [
-        "AI และดิจิทัล",
-        "ข้อมูล"
-      ],
-      "courses_taught": [
-        "4.4 การบริหารจัดการฐานข้อมูลและสถาปัตยกรรมข้อมูลภาครัฐ (25 ส.ค. 69)",
-        "4.5 การวิเคราะห์ข้อมูลเพื่อปรับปรุงงานบริการ (25 ส.ค. 69)",
-        "5.2 การประยุกต์ใช้เทคโนโลยีอัตโนมัติและ AI ในงานธุรการ (26 ส.ค. 69)"
-      ],
-      "cv_file": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf",
-      "cv_available": true,
-      "verified": true,
+      "category": "AI & ดิจิทัล",
+      "position": "คณบดีคณะครุศาสตร์อุตสาหกรรมและเทคโนโลยี",
+      "agency": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
+      "expertise": "AI & Automation, Service Dashboard, Customer Insights, Power Automate & Google Apps Script",
       "email": "sutiwat.sup@kmutt.ac.th",
-      "bio_highlights": "ผู้เชี่ยวชาญด้านการพัฒนาระบบอัตโนมัติ Data Architecture และนวัตกรรมอัจฉริยะ"
+      "vehicle_plate": "5กฬ62 กรุงเทพมหานคร",
+      "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+      "icon": "fa-laptop-code",
+      "primary_day": 10,
+      "days_label": "วันที่ 10, 11",
+      "teaching_days": [
+        10,
+        11
+      ]
     },
     {
-      "id": "duangjai_j",
+      "id": "04",
       "name": "ผศ.ดร.ดวงใจ จิตคงชื่น",
-      "position": "ผู้อำนวยการฝ่ายพัฒนากำลังคน สถาบันข้อมูลขนาดใหญ่",
-      "organization": "สถาบันข้อมูลขนาดใหญ่ (BDI องค์การมหาชน)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้าน Big Data Analytics, Data Governance และการขับเคลื่อนองค์กรด้วยข้อมูล",
-      "category_ids": [
-        "data_analytics",
-        "ai_digital"
-      ],
-      "category_labels": [
-        "ข้อมูล",
-        "AI และดิจิทัล"
-      ],
-      "courses_taught": [
-        "การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / Agile (11 ส.ค. 69 ช่วงเช้า BB 203)"
-      ],
-      "cv_file": "CV ผศ.ดร.ดวงใจ จิตคงชื่น.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้นำด้านการสร้างบุคลากรข้อมูลระดับชาติและการวางยุทธศาสตร์ Big Data ภาครัฐ"
+      "category": "ข้อมูล",
+      "position": "ผู้อำนวยการฝ่ายพัฒนากำลังคน",
+      "agency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+      "expertise": "AI, Data Science, Business Analytics, Machine Learning และ Data Visualization",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-chart-pie",
+      "primary_day": 2,
+      "days_label": "วันที่ 2",
+      "teaching_days": [
+        2
+      ]
     },
     {
-      "id": "kwansiri_s",
+      "id": "05",
       "name": "ดร.ขวัญศิริ ศิริมังคลา",
-      "position": "นักการศึกษาด้านนวัตกรรมข้อมูลอาวุโส",
-      "organization": "สถาบันข้อมูลขนาดใหญ่ (BDI องค์การมหาชน)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการจัดการข้อมูล การทำความสะอาดข้อมูล และ Data Pipeline",
-      "category_ids": [
-        "data_analytics"
-      ],
-      "category_labels": [
-        "ข้อมูล"
-      ],
-      "courses_taught": [
-        "การออกแบบกระบวนงานดิจิทัล (Digital Workflow Design) (11 ส.ค. 69 ช่วงบ่าย BB 203)"
-      ],
-      "cv_file": "CV ดร.ขวัญศิริ ศิริมังคลา.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการถ่ายทอดทักษะ Data Analytics และการสร้างโมเดลวิเคราะห์ข้อมูลภาครัฐ"
+      "category": "ข้อมูล",
+      "position": "Senior Data Innovation Educator (นักการศึกษาด้านนวัตกรรมข้อมูลอาวุโส)",
+      "agency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+      "expertise": "คณิตศาสตร์ประยุกต์ การพยากรณ์ข้อมูล และการสื่อสารข้อมูลด้วย BI/Visualization",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-chart-line",
+      "primary_day": 2,
+      "days_label": "วันที่ 2",
+      "teaching_days": [
+        2
+      ]
     },
     {
-      "id": "parisut_j",
+      "id": "06",
       "name": "ดร.ปริสุทธิ์ จิตต์ภักดี",
+      "category": "ข้อมูล",
       "position": "ผู้เชี่ยวชาญการศึกษาด้านนวัตกรรมข้อมูล",
-      "organization": "สถาบันข้อมูลขนาดใหญ่ (BDI องค์การมหาชน)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้าน Data Visualization, Business Intelligence และแดชบอร์ดเพื่อการตัดสินใจ",
-      "category_ids": [
-        "data_analytics",
-        "ai_digital"
-      ],
-      "category_labels": [
-        "ข้อมูล",
-        "AI และดิจิทัล"
-      ],
-      "courses_taught": [
-        "การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / Agile (11 ส.ค. 69 ช่วงเช้า BB 203)",
-        "การออกแบบกระบวนงานดิจิทัล (Digital Workflow Design) (11 ส.ค. 69 ช่วงบ่าย BB 203)"
-      ],
-      "cv_file": "CV ดร.ปริสุทธิ์ จิตต์ภักดี.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการออกแบบแดชบอร์ดภาครัฐและการสื่อสารด้วยข้อมูล (Data Storytelling)"
+      "agency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+      "expertise": "Data Science, Machine Learning, NLP, Data Governance และ BI",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-database",
+      "primary_day": 2,
+      "days_label": "วันที่ 2",
+      "teaching_days": [
+        2
+      ]
     },
     {
-      "id": "sukrita_p",
+      "id": "07",
       "name": "ดร.สุกฤตา ปรีชาว่อง",
-      "position": "ผู้เชี่ยวชาญด้านการพัฒนาบุคลากรและองค์กร",
-      "organization": "มหาวิทยาลัยสวนดุสิต / วิทยากรผู้ทรงคุณวุฒิ",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการปรับตัวสู่โลกการทำงาน จิตวิทยาองค์กร และทักษะการทำงานร่วมกับผู้อื่น",
-      "category_ids": [
-        "workplace_skills",
-        "disability_inclusion"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "คนพิการและการเข้าถึง"
-      ],
-      "courses_taught": [
-        "การปรับตัวและสร้างสัมพันธภาพในการทำงานมืออาชีพ (18 ส.ค. 69 เช้า BB 203)",
-        "เทคนิคการสื่อสารและการทำงานร่วมกับผู้อื่น (18 ส.ค. 69 บ่าย BB 202/203)",
-        "การพัฒนาภาวะผู้นำและการทำงานเป็นทีม (20 ส.ค. 69 เช้า)",
-        "จิตวิทยาการทำงานและการสื่อสารในองค์กร (24 ส.ค. 69 บ่าย)"
-      ],
-      "cv_file": "CV ดร. สุกฤตา ปรีชาว่อง.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญด้าน Inclusive Workplace และการเสริมสร้าง Growth Mindset สำหรับคนพิการ"
+      "category": "ทักษะการทำงาน",
+      "position": "ผู้เชี่ยวชาญด้านจิตวิทยาและการพัฒนาบุคลากร",
+      "agency": "องค์กรพัฒนาบุคลากรและการเรียนรู้",
+      "expertise": "Customer Psychology, Deep Listening, Resilience & Emotional Regulation",
+      "email": "sukritta.glow@gmail.com",
+      "vehicle_plate": "5 ขอ 9629 กรุงเทพมหานคร",
+      "badge_color": "bg-cyan-100 text-cyan-800 border-cyan-200",
+      "icon": "fa-comments",
+      "primary_day": 8,
+      "days_label": "วันที่ 8",
+      "teaching_days": [
+        8
+      ]
     },
     {
-      "id": "waraporn_t",
+      "id": "08",
       "name": "นางสาววราภรณ์ ไตรศักดิ์ศรี",
-      "position": "วิทยากรผู้เชี่ยวชาญด้านการบริหารราชการและ PDPA",
-      "organization": "สำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล / ก.พ.ร.",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านกฎหมายคุ้มครองข้อมูลส่วนบุคคล (PDPA) และธรรมาภิบาลข้อมูลภาครัฐ",
-      "category_ids": [
-        "law_regulations",
-        "data_analytics"
-      ],
-      "category_labels": [
-        "กฎหมายและราชการ",
-        "ข้อมูล"
-      ],
-      "courses_taught": [
-        "การบริหารและวิเคราะห์ข้อมูลเพื่อการตัดสินใจ & PDPA (13 ส.ค. 69 ช่วงบ่าย BB 203)"
-      ],
-      "cv_file": "ประวัติวิทยากร_คุณวราภรณ์ ไตรศักดิ์ศรี.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญด้านแนวปฏิบัติทางกฎหมายดิจิทัลและมาตรฐานความปลอดภัยทางไซเบอร์ในหน่วยงานรัฐ"
+      "category": "AI & ดิจิทัล",
+      "position": "นักวิชาการคอมพิวเตอร์ชำนาญการพิเศษ",
+      "agency": "สำนักงานสถิติแห่งชาติ",
+      "expertise": "Advanced Excel (XLOOKUP, Pivot), Data Visualization, Power BI Dashboard, Database Management",
+      "vehicle_plate": "ฬ 1416 กรุงเทพมหานคร",
+      "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+      "icon": "fa-table",
+      "primary_day": 3,
+      "days_label": "วันที่ 3",
+      "teaching_days": [
+        3
+      ]
     },
     {
-      "id": "keyoon_w",
+      "id": "09",
       "name": "รศ.ดร.เกยูร วงศ์ก้อม",
-      "position": "ข้าราชการบำนาญ / ผู้ทรงคุณวุฒิ คณะครุศาสตร์",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญระดับแนวหน้าด้านการศึกษาพิเศษและเทคโนโลยีสิ่งอำนวยความสะดวกสำหรับคนพิการ",
-      "category_ids": [
-        "disability_inclusion",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "คนพิการและการเข้าถึง",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "บริบทการบริหารราชการยุคดิจิทัล และการเข้าถึงของคนพิการ (14 ส.ค. 69 ช่วงบ่าย BB 202 & 203)"
-      ],
-      "cv_file": "CV รศ. ดร.เกยูร วงศ์ก้อม.pdf",
-      "cv_available": true,
-      "verified": true,
-      "phone": "065-192-6919",
-      "email": "keyoon_won@hotmail.com",
-      "bio_highlights": "ผู้อุทิศตนเพื่อยกระดับการศึกษาและการมีงานทำของคนพิการในประเทศไทยอย่างต่อเนื่องยาวนาน"
+      "category": "คนพิการ & การเข้าถึง",
+      "position": "ข้าราชการบำนาญ / อาจารย์ด้านการศึกษาพิเศษ",
+      "agency": "คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต",
+      "expertise": "การศึกษาพิเศษ การวิจัยเพื่อคนพิการ และการส่งเสริมศักยภาพคนหูหนวก",
+      "badge_color": "bg-emerald-100 text-emerald-800 border-emerald-200",
+      "icon": "fa-hands-asl-interpreting",
+      "primary_day": 4,
+      "days_label": "วันที่ 4",
+      "teaching_days": [
+        4
+      ]
     },
     {
-      "id": "parima_w",
+      "id": "10",
       "name": "ผศ.ดร.ภริมา วินิธาสถิตย์กุล",
-      "position": "ผู้ช่วยศาสตราจารย์ คณะครุศาสตร์",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านทักษะการบริการภาครัฐ การสื่อสารองค์กร และ Service Excellence",
-      "category_ids": [
-        "workplace_skills",
-        "public_admin"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "วิชาทักษะพื้นฐานด้านการบริการภาครัฐ (13 ส.ค. 69 เช้า BB 202 - FND)",
-        "วิชาเทคนิคการสื่อสารและสร้างคอนเทนต์ภาครัฐ (13 ส.ค. 69 เช้า BB 203 - ADV)"
-      ],
-      "cv_file": "CV ผศ. ดร.ภริมา วินิธาสถิตย์กุล.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการออกแบบ Service Blueprint และมาตรฐานการบริการที่เป็นมิตรและครอบคลุม"
-    },
-    {
-      "id": "chanin_t",
-      "name": "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล",
-      "position": "รองคณบดี คณะครุศาสตร์ / หัวหน้าส่วนงานพัฒนาบุคลากรและเทคโนโลยีการศึกษา",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านเทคโนโลยีและสื่อสารการศึกษา การประยุกต์ใช้ AI ในการทำงานราชการ",
-      "category_ids": [
-        "ai_digital",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "AI และดิจิทัล",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "วิชาการประยุกต์ใช้ AI ในการปฏิบัติงานราชการ (14 ส.ค. 69 เช้า BB 202 & BB 203)"
-      ],
-      "cv_file": "CV  ผศ. ดร. ชนินทร์  ฐิติเพชรกุล.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ปริญญาเอก เทคโนโลยีและสื่อสารการศึกษา (มก.) & Visiting Fellow ณ University of Northern Colorado สหรัฐอเมริกา"
-    },
-    {
-      "id": "jarunee_t",
-      "name": "อาจารย์จารุณี ทองอร่าม",
-      "position": "อาจารย์ประจำคณะครุศาสตร์",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการพัฒนาบุคลิกภาพ จรรยาบรรณวิชาชีพ และทักษะมนุษยสัมพันธ์",
-      "category_ids": [
-        "workplace_skills",
-        "public_admin"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "การพัฒนาบุคลิกภาพและการสื่อสาร (18 ส.ค. 69 เช้า BB 202 - FND)",
-        "เทคนิคการสื่อสารและการทำงานร่วมกับผู้อื่น (18 ส.ค. 69 บ่าย BB 202 & 203)"
-      ],
-      "cv_file": "ประวัติวิทยากร_นางสาวจารุณี  ทองอร่าม.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการเสริมสร้างสมรรถนะการสื่อสารระหว่างบุคคลและการทำงานร่วมกับทีมหลากหลาย"
-    },
-    {
-      "id": "natthinee_k",
-      "name": "อาจารย์ณัฐฐิณี คงไกรฤกษ์",
-      "position": "อาจารย์ประจำสาขาวิชาการศึกษาพิเศษ",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านจิตวิทยาการเรียนรู้ การปรับพฤติกรรม และการเข้าถึงข้อมูลของคนพิการ",
-      "category_ids": [
-        "disability_inclusion",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "คนพิการและการเข้าถึง",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "การปรับตัวและสร้างสัมพันธภาพในการทำงานมืออาชีพ (18 ส.ค. 69 เช้า BB 203 - ADV)"
-      ],
-      "cv_file": "ประวัติวิทยากร_อ. ณัฐฐิณี  คงไกรฤกษ.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญด้านการสนับสนุนและการจัดสภาพแวดล้อมที่เอื้อต่อการทำงานของคนพิการ"
-    },
-    {
-      "id": "chutima_k",
-      "name": "ผศ.ชุติมา กลั่นไพฑูรย์",
-      "position": "ผู้ช่วยศาสตราจารย์ คณะครุศาสตร์",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการสื่อสารและการสร้างสรรค์เนื้อหาเพื่อการประชาสัมพันธ์ภาครัฐ",
-      "category_ids": [
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "การพัฒนาบุคลิกภาพและการสื่อสาร (18 ส.ค. 69 เช้า BB 202 - FND)"
-      ],
-      "cv_file": "ประวัติวิทยากร_ผศ. ชุติมา  กลั่นไพฑูรย์.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการถ่ายทอดเทคนิคการสื่อสารที่มีประสิทธิภาพและทักษะการนำเสนองานราชการ"
-    },
-    {
-      "id": "mongkol_s",
-      "name": "อาจารย์มงคล สิริถิรวัฒน์",
-      "position": "อดีตผู้อำนวยการส่วนวินัยและระบบคุณธรรม",
-      "organization": "สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านวินัย จรรยาบรรณ กฎหมายข้าราชการพลเรือน และระบบคุณธรรมภาครัฐ",
-      "category_ids": [
-        "law_regulations",
-        "public_admin"
-      ],
-      "category_labels": [
-        "กฎหมายและราชการ",
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / Agile (11 ส.ค. 69 เช้า BB 203)",
-        "การออกแบบกระบวนงานดิจิทัล (11 ส.ค. 69 บ่าย BB 203)"
-      ],
-      "cv_file": "ประวัติวิทยากร_อาจารย์มงคล สิริถิรวัฒน์ .pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "อดีตผู้บริหารสำนักงาน ก.พ. ผู้ทรงคุณวุฒิที่มีความเชี่ยวชาญลึกซึ้งด้านวินัยและกฎหมายราชการ"
-    },
-    {
-      "id": "manich_i",
-      "name": "อาจารย์มาณิช อินทฉิม",
-      "position": "อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ",
-      "organization": "สำนักงานเลขาธิการสภาผู้แทนราษฎร",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านระบบราชการ การบริหารราชการแผ่นดิน และกระบวนการนิติบัญญัติ",
-      "category_ids": [
-        "public_admin",
-        "law_regulations"
-      ],
-      "category_labels": [
-        "บริหารราชการ",
-        "กฎหมายและราชการ"
-      ],
-      "courses_taught": [
-        "วินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ (10 ส.ค. 69 บ่าย BB 212)",
-        "ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน (11 ส.ค. 69 เช้า BB 202)",
-        "กฎหมาย ระเบียบ และข้อบังคับพื้นฐานฯ (11 ส.ค. 69 บ่าย BB 202)",
-        "การบริหารจัดการองค์กรภาครัฐสู่ความเป็นเลิศ / ระบบงานนิติบัญญัติ (19 ส.ค. 69 บ่าย)"
-      ],
-      "cv_file": "ประวัติวิทยากร_อาจารย์ มาณิช อินทฉิม.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้ทรงคุณวุฒิระดับสูงที่มีประสบการณ์บริหารงานนิติบัญญัติและระบบราชการแผ่นดินกว่า 30 ปี"
-    },
-    {
-      "id": "nantaporn_m",
-      "name": "นางสาวนันทพร มากมูล",
-      "position": "ผู้เชี่ยวชาญด้านการสื่อสารและการสร้างสรรค์คอนเทนต์ดิจิทัล",
-      "organization": "ผู้เชี่ยวชาญอิสระ / วิทยากรรับเชิญภาครัฐ",
-      "one_line_expertise": "ผู้เชี่ยวชาญการผลิตสื่อดิจิทัล เทคนิคการเล่าเรื่อง และการสร้างคอนเทนต์ภาครัฐยุคใหม่",
-      "category_ids": [
-        "workplace_skills",
-        "ai_digital"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "AI และดิจิทัล"
-      ],
-      "courses_taught": [
-        "การสื่อสารเชิงสร้างสรรค์ในองค์กร (24 ส.ค. 69)"
-      ],
-      "cv_file": "CV นางสาวนันทพร มากมูล.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญด้าน Digital Content Strategy และการสื่อสารภาพลักษณ์องค์กรภาครัฐ"
-    },
-    {
-      "id": "wisarut_s",
-      "name": "นายวิศรุต เสรีนิราช",
-      "position": "ผู้เชี่ยวชาญด้าน Design Thinking และ Service Innovation",
-      "organization": "ผู้เชี่ยวชาญและที่ปรึกษานวัตกรรมบริการภาครัฐ",
-      "one_line_expertise": "ผู้เชี่ยวชาญกระบวนการคิดเชิงออกแบบ (Design Thinking) และการพัฒนานวัตกรรมการบริการ",
-      "category_ids": [
-        "workplace_skills",
-        "public_admin"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "วิชาทักษะการคิดเชิงออกแบบ (Design Thinking) (13 ส.ค. 69 ช่วงบ่าย BB 202 - FND)"
-      ],
-      "cv_file": "CV นายวิศรุต เสรีนิราช.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "Facilitator ด้าน Design Thinking ผู้เชี่ยวชาญการแปลงปัญหาเชิงระบบให้เป็นบริการที่ตอบโจทย์ประชาชน"
-    },
-    {
-      "id": "sucheera_p",
-      "name": "ดร.สุชีรา พลราชม",
-      "position": "นักวิชาการศึกษา ชำนาญการ",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้าน Inclusive Education และการฟื้นฟูสมรรถภาพคนพิการ",
-      "category_ids": [
-        "disability_inclusion",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "คนพิการและการเข้าถึง",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "บริบทการบริหารราชการยุคดิจิทัล และการเข้าถึงของคนพิการ (14 ส.ค. 69 ช่วงบ่าย BB 202 & 203)"
-      ],
-      "cv_file": "CV ดร. สุชีรา พลราชม.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "Doctor of Education (Special Needs and Inclusive Education) จาก University of Exeter สหราชอาณาจักร"
-    },
-    {
-      "id": "prachaya_c",
-      "name": "รศ.ดร.ปรัชญา ชุ่มนาเสียว",
-      "position": "รองศาสตราจารย์ประจำคณะรัฐศาสตร์",
-      "organization": "มหาวิทยาลัยรามคำแหง",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านกฎหมายมหาชน การบริหารทรัพยากรมนุษย์ และการบริหารรัฐกิจ",
-      "category_ids": [
-        "public_admin",
-        "law_regulations"
-      ],
-      "category_labels": [
-        "บริหารราชการ",
-        "กฎหมายและราชการ"
-      ],
-      "courses_taught": [
-        "การจัดการกระบวนการทำงานและผลิตภาพภาครัฐ (19 ส.ค. 69 เช้า BB 202/203)"
-      ],
-      "cv_file": "รศ.ดรปรัชญา ชุ่มนาเสียว.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ดุษฎีบัณฑิตการพัฒนาทรัพยากรมนุษย์ และนิติศาสตรบัณฑิต (กฎหมายมหาชน) จุฬาลงกรณ์มหาวิทยาลัย"
-    },
-    {
-      "id": "taweesak_r",
-      "name": "รศ.เรือโท ดร.ทวีศักดิ์ รูปสิงห์",
-      "position": "รองศาสตราจารย์ คณะบริหารธุรกิจ",
-      "organization": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ (KMUTNB)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการจัดการโลจิสติกส์ การบริหารการปฏิบัติการ และการพัฒนาระบบงาน",
-      "category_ids": [
-        "public_admin",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "บริหารราชการ",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "การจัดการกระบวนการทำงานและผลิตภาพภาครัฐ (19 ส.ค. 69 เช้า BB 202/203)"
-      ],
-      "cv_file": "รศ.ดร.ทวีศักดิ์ รูปสิงห์.pdf",
-      "cv_available": true,
-      "verified": true,
-      "phone": "086-004-1437",
-      "email": "roopsingt@gmail.com",
-      "bio_highlights": "ผู้เชี่ยวชาญด้าน Supply Chain และการปรับปรุงประสิทธิภาพกระบวนการทำงานในองค์กร"
-    },
-    {
-      "id": "arisara_k",
-      "name": "นางสาวอริสรา ขุนพิทักษ์",
-      "position": "หัวหน้าสำนักงานเลขานุการ คณะศิลปศาสตร์และวิทยาศาสตร์",
-      "organization": "มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตกำแพงแสน",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านงานสารบรรณ การบริหารงานสำนักงาน และการเงินการคลังภาครัฐ",
-      "category_ids": [
-        "public_admin",
-        "workplace_skills"
-      ],
-      "category_labels": [
-        "บริหารราชการ",
-        "ทักษะการทำงาน"
-      ],
-      "courses_taught": [
-        "งานสารบรรณและการบริหารงานสำนักงานอัจฉริยะ"
-      ],
-      "cv_file": "นางสาวอริสรา ขุนพิทักษ์.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "หัวหน้าสำนักงานเลขานุการ ผู้มีประสบการณ์ตรงในการบริหารจัดการระบบสารบรรณและงานเอกสารราชการ"
-    },
-    {
-      "id": "supree_k",
-      "name": "ผศ.ดร.สุปรียส์ กาญจนพิศศาล",
+      "category": "คนพิการ & การเข้าถึง",
       "position": "ผู้ช่วยศาสตราจารย์",
-      "organization": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ (KMUTNB)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านเทคโนโลยีสารสนเทศ การวิเคราะห์ระบบ และการจัดการข้อมูล",
-      "category_ids": [
-        "ai_digital",
-        "data_analytics"
-      ],
-      "category_labels": [
-        "AI และดิจิทัล",
-        "ข้อมูล"
-      ],
-      "courses_taught": [
-        "การจัดการข้อมูลและเทคโนโลยีดิจิทัลขั้นสูง (24 ส.ค. 69 เช้า BB 202/203)"
-      ],
-      "cv_file": "CV ผศ.ดร.สุปรียส์ กาญจนพิศศาล.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญด้าน Information Systems Architecture และเทคโนโลยีการประมวลผลข้อมูล"
+      "agency": "คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต",
+      "expertise": "จิตวิทยา การศึกษาพิเศษ ภาษามือไทย และการสื่อสารเชิงสร้างสรรค์",
+      "badge_color": "bg-emerald-100 text-emerald-800 border-emerald-200",
+      "icon": "fa-heart",
+      "primary_day": 3,
+      "days_label": "วันที่ 3",
+      "teaching_days": [
+        3
+      ]
     },
     {
-      "id": "wanchai_p",
-      "name": "รศ.ดร.วันชัย ปานจันทร์",
-      "position": "รองศาสตราจารย์ / ผู้ทรงคุณวุฒิด้านรัฐประศาสนศาสตร์",
-      "organization": "ผู้ทรงคุณวุฒิสถาบันอุดมศึกษา",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการวางแผนกลยุทธ์และการประเมินผลโครงการภาครัฐ",
-      "category_ids": [
-        "public_admin"
-      ],
-      "category_labels": [
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "จิตวิทยาการทำงานและการสื่อสารในองค์กร (24 ส.ค. 69 บ่าย)"
-      ],
-      "cv_file": "รศ.ดร.วันชัย ปานจันทร์.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการออกแบบนโยบายสาธารณะและการวัดผลลัพธ์การดำเนินงานภาครัฐ"
+      "id": "11",
+      "name": "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล",
+      "category": "AI & ดิจิทัล",
+      "position": "รองคณบดี / หัวหน้าส่วนงานพัฒนาบุคลากรฯ",
+      "agency": "คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต",
+      "expertise": "AI เพื่อการทำงานและการศึกษา IT Service Management และสื่อดิจิทัลเพื่อการเข้าถึง",
+      "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+      "icon": "fa-laptop-code",
+      "primary_day": 4,
+      "days_label": "วันที่ 4",
+      "teaching_days": [
+        4
+      ]
     },
     {
-      "id": "supitchaya_k",
+      "id": "12",
+      "name": "อาจารย์จารุณี ทองอร่าม",
+      "category": "AI & ดิจิทัล",
+      "position": "อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ",
+      "agency": "มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ",
+      "expertise": "Web/Mobile App, Google Workspace, Photoshop/Illustrator, Excel และ Content Marketing",
+      "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+      "icon": "fa-palette",
+      "primary_day": 6,
+      "days_label": "วันที่ 6",
+      "teaching_days": [
+        6
+      ]
+    },
+    {
+      "id": "13",
+      "name": "อาจารย์ณัฐฐิณี คงไกรฤกษ์",
+      "category": "AI & ดิจิทัล",
+      "position": "อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ",
+      "agency": "มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ",
+      "expertise": "การออกแบบฐานข้อมูล การพัฒนาโปรแกรม และการวิเคราะห์/ออกแบบระบบ",
+      "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+      "icon": "fa-network-wired",
+      "primary_day": 6,
+      "days_label": "วันที่ 6",
+      "teaching_days": [
+        6
+      ]
+    },
+    {
+      "id": "14",
+      "name": "ผศ.ชุติมา กลั่นไพฑูรย์",
+      "category": "AI & ดิจิทัล",
+      "position": "ผู้ช่วยศาสตราจารย์ สาขาระบบสารสนเทศ",
+      "agency": "มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ",
+      "expertise": "Visual Studio .NET, Word/Excel, Google Workspace, Cloud Collaboration และ UI/UX",
+      "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+      "icon": "fa-cloud",
+      "primary_day": 6,
+      "days_label": "วันที่ 6",
+      "teaching_days": [
+        6
+      ]
+    },
+    {
+      "id": "15",
+      "name": "อาจารย์มงคล สิริถิรวัฒน์",
+      "category": "ทักษะการทำงาน",
+      "position": "ผู้จัดการโครงการรัฐสภาร่วมใจรวมพลังสร้างสุข",
+      "agency": "สสส. ประจำสำนักงานเลขาธิการสภาผู้แทนราษฎร",
+      "expertise": "รัฐประศาสนศาสตร์ การสร้างเสริมสุขภาวะ การทำงานเป็นทีม และการจัดกระบวนการ",
+      "badge_color": "bg-cyan-100 text-cyan-800 border-cyan-200",
+      "icon": "fa-people-group",
+      "primary_day": 2,
+      "days_label": "วันที่ 2",
+      "teaching_days": [
+        2
+      ]
+    },
+    {
+      "id": "16",
+      "name": "อาจารย์มาณิช อินทฉิม",
+      "category": "กฎหมาย & ราชการ",
+      "position": "อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ / วิทยากรเชี่ยวชาญ",
+      "agency": "สำนักงานเลขาธิการสภาผู้แทนราษฎร",
+      "expertise": "ระบบงานนิติบัญญัติ กฎหมาย นโยบายสาธารณะ หน้าที่พลเมือง และการบริหารราชการ",
+      "badge_color": "bg-rose-100 text-rose-800 border-rose-200",
+      "icon": "fa-scale-balanced",
+      "primary_day": 7,
+      "days_label": "วันที่ 7",
+      "teaching_days": [
+        7
+      ]
+    },
+    {
+      "id": "17",
       "name": "นางสาวสุพิชฌาย์ กลิ่นหอม",
-      "position": "นิติกรชำนาญการพิเศษ ผู้เชี่ยวชาญด้านงานสารบรรณ",
-      "organization": "สำนักงานปลัดสำนักนายกรัฐมนตรี (สปน.)",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ และระบบสารบรรณอิเล็กทรอนิกส์ (e-Saraban)",
-      "category_ids": [
-        "law_regulations",
-        "public_admin"
-      ],
-      "category_labels": [
-        "กฎหมายและราชการ",
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "การจัดการระบบงานสารบรรณอิเล็กทรอนิกส์ (e-Saraban) & การใช้ภาษาราชการ (17 ส.ค. 69 เช้า BB 205)",
-        "งานสารบรรณและกฎหมายภาครัฐขั้นสูง / การเขียนหนังสือราชการเชิงวิเคราะห์ (17 ส.ค. 69 บ่าย BB 205)",
-        "5.3 งานสารบรรณและการเขียนเชิงวิเคราะห์ขั้นสูง (26 ส.ค. 69 บ่าย BB 202/203)"
-      ],
-      "cv_file": "ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
-      "cv_available": true,
-      "verified": true,
-      "phone": "086-663-1725",
-      "bio_highlights": "วิทยากรต้นแบบงานสารบรรณ สปน. ผู้เชี่ยวชาญการจัดทำหนังสือราชการและระบบสารบรรณดิจิทัล"
+      "category": "กฎหมาย & ราชการ",
+      "position": "นิติกรชำนาญการพิเศษ",
+      "agency": "สำนักงานปลัดสำนักนายกรัฐมนตรี (สปน.)",
+      "expertise": "งานสารบรรณและการเขียนเชิงวิเคราะห์ขั้นสูง บันทึกข้อความเสนอผู้บังคับบัญชาเชิงวิเคราะห์",
+      "email": "saraban@opm.go.th",
+      "phone": "086-6631725",
+      "travel_by": "รถไฟฟ้า",
+      "badge_color": "bg-rose-100 text-rose-800 border-rose-200",
+      "icon": "fa-feather",
+      "primary_day": 11,
+      "days_label": "วันที่ 11",
+      "teaching_days": [
+        11
+      ]
     },
     {
-      "id": "lanchakorn_k",
-      "name": "คุณลัญชกร คำศรี",
-      "position": "วิทยากรผู้เชี่ยวชาญด้านการพัฒนาทักษะชีวิตและการทำงาน",
-      "organization": "สถาบันพัฒนาศักยภาพมนุษย์",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการสื่อสารอย่างเห็นอกเห็นใจ (Nonviolent Communication) และการทำงานเป็นทีม",
-      "category_ids": [
-        "workplace_skills",
-        "disability_inclusion"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "คนพิการและการเข้าถึง"
-      ],
-      "courses_taught": [
-        "การสื่อสารอย่างเห็นอกเห็นใจและการทำงานเป็นทีม (26 ส.ค. 69)"
-      ],
-      "cv_file": "คุณลัญชกร คำศรี.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "กระบวนกรด้านการสื่อสารเพื่อสร้างสัมพันธภาพและการพัฒนาจิตวิทยาเชิงบวกในองค์กร"
+      "id": "18",
+      "name": "นางสาวนันทพร มากมูล",
+      "category": "การสื่อสาร & บริหาร",
+      "position": "ผู้เชี่ยวชาญด้านจิตวิทยาการสื่อสารภาครัฐและการบริหารวิกฤต",
+      "agency": "วิทยากรเชี่ยวชาญอิสระ",
+      "expertise": "เทคนิคการสื่อสารสร้างคอนเทนต์ภาครัฐ, นโยบาย DEI, การคลี่คลายข้อร้องเรียน (De-escalation), Social Media Crisis",
+      "email": "nantaporn.pla2@gmail.com",
+      "vehicle_plate": "6 ขฒต 913 กรุงเทพมหานคร",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-bullhorn",
+      "primary_day": 3,
+      "days_label": "วันที่ 3, 9",
+      "teaching_days": [
+        3,
+        9
+      ]
     },
     {
-      "id": "atcharee_a",
-      "name": "คุณอัจฉรีย์ อำไพกิจพาณิชย์",
-      "position": "ผู้เชี่ยวชาญด้านจิตวิทยาการให้คำปรึกษาและสุขภาวะองค์กร",
-      "organization": "สถาบันสุขภาพจิตและจิตวิทยาองค์กร",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการดูแลสุขภาวะทางใจ การจัดการความเครียด และการสร้างแรงบันดาลใจในการทำงาน",
-      "category_ids": [
-        "workplace_skills",
-        "disability_inclusion"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "คนพิการและการเข้าถึง"
-      ],
-      "courses_taught": [
-        "การดูแลสุขภาวะทางจิตและการเสริมสร้างความเข้มแข็งทางใจ (26 ส.ค. 69)"
-      ],
-      "cv_file": "คุณอัจฉรีย์ อำไพกิจพาณิชย.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการให้คำปรึกษาเชิงจิตวิทยาและการสร้างพลังบวกในการปฏิบัติงาน"
+      "id": "19",
+      "name": "นายวิศรุต เสรีนิราช",
+      "category": "การสื่อสาร & บริหาร",
+      "position": "ผู้เชี่ยวชาญด้านการสื่อสารและการผลิตสื่อดิจิทัลภาครัฐ",
+      "agency": "วิทยากรเชี่ยวชาญอิสระ",
+      "expertise": "จิตวิทยาการสื่อสารภาครัฐ การเล่าเรื่องเชิงรุก อินโฟกราฟิกเพื่อประชาชน และการบริหารจัดการวิกฤตบนโลกออนไลน์",
+      "email": "wisarut.se@gmail.com",
+      "vehicle_plate": "6 ขฒต 913 กรุงเทพมหานคร",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-video",
+      "primary_day": 3,
+      "days_label": "วันที่ 3, 9",
+      "teaching_days": [
+        3,
+        9
+      ]
     },
     {
-      "id": "chanchai_c",
-      "name": "ดร.ชาญชัย ชัยสุขโกศล",
-      "position": "อาจารย์และกระบวนกรอิสระด้านสันติวิธีและการสื่อสาร",
-      "organization": "สถาบันสิทธิมนุษยชนและสันติศึกษา",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการสื่อสารอย่างสันติ การแก้ไขความขัดแย้ง และการเรียนรู้เชิงลึก",
-      "category_ids": [
-        "workplace_skills",
-        "public_admin"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "ทักษะการเจรจาและการจัดการความขัดแย้งในงานราชการ (26 ส.ค. 69)"
-      ],
-      "cv_file": "ดร.ชาญชัย ชัยสุขโกศล.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ดุษฎีบัณฑิตและผู้เชี่ยวชาญกระบวนการเรียนรู้แบบมีส่วนร่วมและการสร้างความเข้าใจในสังคม"
+      "id": "20",
+      "name": "นางสาวธัญมาศ ทองมูลเล็ก",
+      "category": "ข้อมูล",
+      "position": "นักวิชาการสถิติ / ผู้เชี่ยวชาญด้านคลังข้อมูล",
+      "agency": "สำนักงานสถิติแห่งชาติ",
+      "expertise": "การทำความสะอาดข้อมูล (Data Cleaning) และการวิเคราะห์สถิติขั้นสูงเพื่อการวางแผนราชการ",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-broom",
+      "primary_day": 7,
+      "days_label": "วันที่ 7",
+      "teaching_days": [
+        7
+      ]
     },
     {
-      "id": "surat_p",
-      "name": "ดร.สุรัตน์ เพชรนิล",
-      "position": "ผู้เชี่ยวชาญด้านการพัฒนาทรัพยากรมนุษย์และนวัตกรรมการศึกษา",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการออกแบบหลักสูตรและการพัฒนาสมรรถนะบุคลากรยุคดิจิทัล",
-      "category_ids": [
-        "workplace_skills",
-        "ai_digital"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "AI และดิจิทัล"
-      ],
-      "courses_taught": [
-        "การพัฒนาตนเองอย่างต่อเนื่องเพื่อความก้าวหน้าในสายอาชีพ (26 ส.ค. 69)"
-      ],
-      "cv_file": "ดร.สุรัตน์ เพชรนิล.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการออกแบบกระบวนการเรียนรู้สำหรับผู้ใหญ่และการใช้เครื่องมือดิจิทัลพัฒนาตนเอง"
+      "id": "21",
+      "name": "นายศราวุฒิ ศรีทอง",
+      "category": "ข้อมูล",
+      "position": "นักวิชาการคอมพิวเตอร์ / ผู้เชี่ยวชาญด้านธรรมาภิบาลข้อมูล",
+      "agency": "สำนักงานสถิติแห่งชาติ",
+      "expertise": "ธรรมาภิบาลข้อมูล (Data Governance), พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) และความปลอดภัยไซเบอร์",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-shield-halved",
+      "primary_day": 7,
+      "days_label": "วันที่ 7",
+      "teaching_days": [
+        7
+      ]
     },
     {
-      "id": "suphachai_m",
-      "name": "รศ.ดร.ศุภชัย เหมือนโพธิ์",
-      "position": "รองศาสตราจารย์ / ประธานคณะกรรมการบริหารโครงการ",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการบริหารการศึกษาและการพัฒนาคุณภาพชีวิตคนพิการ",
-      "category_ids": [
-        "disability_inclusion",
-        "public_admin"
-      ],
-      "category_labels": [
-        "คนพิการและการเข้าถึง",
-        "บริหารราชการ"
-      ],
-      "courses_taught": [
-        "ปฐมนิเทศและทำความเข้าใจหลักสูตร / Ice Breaking (10 ส.ค. 69 เช้า BB 212)"
-      ],
-      "cv_file": "ประวัติวิทยากร_ปฐมนิเทศ.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้ทรงคุณวุฒิขับเคลื่อนหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ"
+      "id": "22",
+      "name": "นางสาวภัทรศยา จำจองวุฒิ",
+      "category": "ข้อมูล",
+      "position": "นักวิชาการสถิติ / ผู้เชี่ยวชาญด้าน Data Visualization",
+      "agency": "สำนักงานสถิติแห่งชาติ",
+      "expertise": "การสร้างแดชบอร์ดอัจฉริยะ (Power BI, Looker Studio) เปลี่ยนข้อมูลตัวเลขราชการให้เป็นภาพเข้าใจง่าย",
+      "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+      "icon": "fa-chart-pie",
+      "primary_day": 7,
+      "days_label": "วันที่ 7",
+      "teaching_days": [
+        7
+      ]
     },
     {
-      "id": "chudaporn_s",
-      "name": "ผศ.ชุดาพร สอนภักดี",
-      "position": "ผู้ช่วยศาสตราจารย์ / ผู้ร่วมรับผิดชอบโครงการ",
-      "organization": "มหาวิทยาลัยสวนดุสิต",
-      "one_line_expertise": "ผู้เชี่ยวชาญด้านการจัดกิจกรรม Ice Breaking และกระบวนการกลุ่มสัมพันธ์",
-      "category_ids": [
-        "workplace_skills",
-        "disability_inclusion"
-      ],
-      "category_labels": [
-        "ทักษะการทำงาน",
-        "คนพิการและการเข้าถึง"
-      ],
-      "courses_taught": [
-        "ปฐมนิเทศและทำความเข้าใจหลักสูตร / Ice Breaking (10 ส.ค. 69 เช้า BB 212)"
-      ],
-      "cv_file": "กิจกรรม_Ice_Breaking_รู้จักฉันรู้จักเธอ 10 ส.ค. 69.pdf",
-      "cv_available": true,
-      "verified": true,
-      "bio_highlights": "ผู้เชี่ยวชาญการออกแบบกิจกรรมการเรียนรู้แบบมีส่วนร่วมและการสร้างบรรยากาศกลุ่มเชิงบวก"
+      "id": "23",
+      "name": "รศ.ดร.ปรัชญา ชุ่มนาเสียว",
+      "category": "บริหารราชการ",
+      "position": "รองศาสตราจารย์ คณะรัฐศาสตร์",
+      "agency": "มหาวิทยาลัยรามคำแหง",
+      "expertise": "งานสารบรรณและการร่างข้อเสนอเชิงวิเคราะห์ บันทึกข้อความระดับสูง Logical Framework และ KPIs & OKRs ภาครัฐ",
+      "email": "Prachaya.Dr23@gmail.com",
+      "travel_by": "รถสาธารณะ",
+      "badge_color": "bg-amber-100 text-amber-800 border-amber-200",
+      "icon": "fa-file-lines",
+      "primary_day": 7,
+      "days_label": "วันที่ 7",
+      "teaching_days": [
+        7
+      ]
+    },
+    {
+      "id": "24",
+      "name": "รศ.ดร.วันชัย ปานจันทร์",
+      "category": "บริหารราชการ & บริการ",
+      "position": "รองศาสตราจารย์ / ผู้เชี่ยวชาญด้านการบริการภาครัฐ",
+      "agency": "วิทยากรเชี่ยวชาญอิสระ",
+      "expertise": "Customer Journey Mapping, การบริหารความสัมพันธ์ระยะยาว (CRM) และการส่งมอบบริการเชิงรุก (Proactive Service)",
+      "email": "chaipanjan@gmail.com",
+      "vehicle_plate": "8กจ 131 กรุงเทพมหานคร",
+      "badge_color": "bg-amber-100 text-amber-800 border-amber-200",
+      "icon": "fa-user-group",
+      "primary_day": 9,
+      "days_label": "วันที่ 9",
+      "teaching_days": [
+        9
+      ]
+    },
+    {
+      "id": "25",
+      "name": "คณะทำงานโครงการจัดสอบวัดผล Post-Test รวม",
+      "category": "วัดผล & ประเมิน",
+      "position": "คณะทำงานทดสอบวัดผลสัมฤทธิ์ทางการเรียนรู้",
+      "agency": "โครงการเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ",
+      "expertise": "การทดสอบวัดความรู้ Post-Test รวม 13 วัน เกณฑ์การประเมินผลสัมฤทธิ์ และการจัดทำรายงานสรุปผล",
+      "badge_color": "bg-indigo-100 text-indigo-800 border-indigo-200",
+      "icon": "fa-clipboard-check",
+      "primary_day": 12,
+      "days_label": "วันที่ 12",
+      "teaching_days": [
+        12
+      ]
+    },
+    {
+      "id": "26",
+      "name": "คณะผู้บริหารโครงการ พิธีปิดการอบรม & ปฐมนิเทศ OJT",
+      "category": "บริหารโครงการ",
+      "position": "คณะผู้บริหารและคณะทำงานโครงการ",
+      "agency": "หน่วยงานภาครัฐและภาคีเครือข่ายความร่วมมือ",
+      "expertise": "การฝึกปฏิบัติงานจริง (OJT 90 ชม.), การประเมินสมรรถนะ 4 มิติ และการส่งตัวเข้าสู่หน่วยงานภาครัฐ",
+      "badge_color": "bg-emerald-100 text-emerald-800 border-emerald-200",
+      "icon": "fa-award",
+      "primary_day": 13,
+      "days_label": "วันที่ 13",
+      "teaching_days": [
+        13
+      ]
     }
   ],
   "learning_map": [
@@ -1436,8 +1150,9 @@
       "room": "ห้องอบรมตามกำหนดการ",
       "subject": "การเตรียมความพร้อมและประเมินผลการเรียนรู้หลังการอบรม (Post-Test)",
       "subtopics": [
-        "การทบทวนองค์ความรู้และทักษะตลอดหลักสูตรภาคทฤษฎี",
-        "การทดสอบวัดความรู้หลังการฝึกอบรม (Post-Test) ภาคทฤษฎี"
+        "การประเมินผลการเรียนรู้รายวิชาและภาพรวมหลักสูตร 13 วัน",
+        "การทดสอบวัดผลสัมฤทธิ์ Post-Test รวมทุกสายหลักสูตร",
+        "การตรวจทานและจัดเตรียมแฟ้มสะสมผลงานดิจิทัล (Digital Portfolio)"
       ],
       "lecturers": [
         "คณะทำงานโครงการจัดสอบวัดผล Post-Test รวม"

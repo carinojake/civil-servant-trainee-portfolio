@@ -4770,208 +4770,418 @@ function openGeminiSpark(dayNumber) {
 
 const masterLecturersList = [
     {
-        id: '01',
-        name: 'ดร.ชณทัต บุญชูวงศ์',
-        category: 'AI & ดิจิทัล',
-        position: 'อาจารย์ประจำภาควิชาครุศาสตร์เทคโนโลยีและสารสนเทศ',
-        agency: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)',
-        expertise: 'AI-integrated learning, Digital Literacy, สื่อดิจิทัล และการเรียนรู้ด้วยเทคโนโลยี',
-        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-robot',
-        primaryDay: 10,
-        daysLabel: 'วันที่ 10, 11'
+        "id": "01",
+        "name": "ดร.ชณทัต บุญชูวงศ์",
+        "category": "AI & ดิจิทัล",
+        "position": "อาจารย์ประจำภาควิชาครุศาสตร์เทคโนโลยีและสารสนเทศ",
+        "agency": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
+        "expertise": "AI-integrated learning, Omnichannel Service, AI Chatbot & Prompt Engineering",
+        "email": "chanatat.buu@gmail.com",
+        "vehicle_plate": "4กฎ 45 กรุงเทพมหานคร",
+        "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+        "icon": "fa-robot",
+        "primary_day": 10,
+        "days_label": "วันที่ 10, 11",
+        "teaching_days": [
+            10,
+            11
+        ]
     },
     {
-        id: '02',
-        name: 'รศ.ดร.ทวีศักดิ์ กฤษเจริญ',
-        category: 'บริหารราชการ',
-        position: 'คณบดี บัณฑิตวิทยาลัยการจัดการและนวัตกรรม',
-        agency: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี',
-        expertise: 'รัฐประศาสนศาสตร์ นโยบายสาธารณะ การบริหารองค์กร และการเปลี่ยนแปลงเชิงระบบ',
-        badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
-        icon: 'fa-landmark',
-        primaryDay: 8,
-        daysLabel: 'วันที่ 8'
+        "id": "02",
+        "name": "รศ.ดร.ทวีศักดิ์ กฤษเจริญ",
+        "category": "บริหารราชการ",
+        "position": "คณบดี บัณฑิตวิทยาลัยการจัดการและนวัตกรรม",
+        "agency": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
+        "expertise": "Data Storytelling, Executive Pitching, Inter-agency Coordination, กฎหมายปฏิบัติราชการทางอิเล็กทรอนิกส์",
+        "email": "taweesak.kri@kmutt.ac.th",
+        "vehicle_plate": "7กท 2323 กรุงเทพมหานคร",
+        "badge_color": "bg-amber-100 text-amber-800 border-amber-200",
+        "icon": "fa-landmark",
+        "primary_day": 8,
+        "days_label": "วันที่ 8",
+        "teaching_days": [
+            8
+        ]
     },
     {
-        id: '03',
-        name: 'ผศ.ดร.สุธิวัชร ศุภลักษณ์',
-        category: 'AI & ดิจิทัล',
-        position: 'ผู้ช่วยศาสตราจารย์ / นักวิจัย',
-        agency: 'มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี',
-        expertise: 'AI เพื่อการเรียนการสอน เกมการเรียนรู้ ความคิดเชิงคำนวณ และสื่อการเรียนรู้สมัยใหม่',
-        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-gamepad',
-        primaryDay: 10,
-        daysLabel: 'วันที่ 10, 11'
+        "id": "03",
+        "name": "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
+        "category": "AI & ดิจิทัล",
+        "position": "คณบดีคณะครุศาสตร์อุตสาหกรรมและเทคโนโลยี",
+        "agency": "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (KMUTT)",
+        "expertise": "AI & Automation, Service Dashboard, Customer Insights, Power Automate & Google Apps Script",
+        "email": "sutiwat.sup@kmutt.ac.th",
+        "vehicle_plate": "5กฬ62 กรุงเทพมหานคร",
+        "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+        "icon": "fa-laptop-code",
+        "primary_day": 10,
+        "days_label": "วันที่ 10, 11",
+        "teaching_days": [
+            10,
+            11
+        ]
     },
     {
-        id: '04',
-        name: 'ผศ.ดร.ดวงใจ จิตคงชื่น',
-        category: 'ข้อมูล',
-        position: 'รองประธานฝ่ายพัฒนากำลังคน',
-        agency: 'สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)',
-        expertise: 'AI, Data Science, Business Analytics, Machine Learning และ Data Visualization',
-        badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-        icon: 'fa-chart-pie',
-        primaryDay: 2,
-        daysLabel: 'วันที่ 2'
+        "id": "04",
+        "name": "ผศ.ดร.ดวงใจ จิตคงชื่น",
+        "category": "ข้อมูล",
+        "position": "ผู้อำนวยการฝ่ายพัฒนากำลังคน",
+        "agency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+        "expertise": "AI, Data Science, Business Analytics, Machine Learning และ Data Visualization",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-chart-pie",
+        "primary_day": 2,
+        "days_label": "วันที่ 2",
+        "teaching_days": [
+            2
+        ]
     },
     {
-        id: '05',
-        name: 'ดร.ขวัญศิริ ศิริมังคลา',
-        category: 'ข้อมูล',
-        position: 'Senior Data Innovation Educator',
-        agency: 'สถาบันข้อมูลขนาดใหญ่ (BDI)',
-        expertise: 'คณิตศาสตร์ประยุกต์ การพยากรณ์ข้อมูล และการสื่อสารข้อมูลด้วย BI/Visualization',
-        badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-        icon: 'fa-chart-line',
-        primaryDay: 2,
-        daysLabel: 'วันที่ 2'
+        "id": "05",
+        "name": "ดร.ขวัญศิริ ศิริมังคลา",
+        "category": "ข้อมูล",
+        "position": "Senior Data Innovation Educator (นักการศึกษาด้านนวัตกรรมข้อมูลอาวุโส)",
+        "agency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+        "expertise": "คณิตศาสตร์ประยุกต์ การพยากรณ์ข้อมูล และการสื่อสารข้อมูลด้วย BI/Visualization",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-chart-line",
+        "primary_day": 2,
+        "days_label": "วันที่ 2",
+        "teaching_days": [
+            2
+        ]
     },
     {
-        id: '06',
-        name: 'ดร.ปริสุทธิ์ จิตต์ภักดี',
-        category: 'ข้อมูล',
-        position: 'ผู้เชี่ยวชาญการศึกษาด้านนวัตกรรมข้อมูล',
-        agency: 'สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน)',
-        expertise: 'Data Science, Machine Learning, NLP, Image Mining, Data Governance และ BI',
-        badgeColor: 'bg-blue-100 text-blue-800 border-blue-200',
-        icon: 'fa-database',
-        primaryDay: 2,
-        daysLabel: 'วันที่ 2'
+        "id": "06",
+        "name": "ดร.ปริสุทธิ์ จิตต์ภักดี",
+        "category": "ข้อมูล",
+        "position": "ผู้เชี่ยวชาญการศึกษาด้านนวัตกรรมข้อมูล",
+        "agency": "สถาบันข้อมูลขนาดใหญ่ (องค์การมหาชน) - BDI",
+        "expertise": "Data Science, Machine Learning, NLP, Data Governance และ BI",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-database",
+        "primary_day": 2,
+        "days_label": "วันที่ 2",
+        "teaching_days": [
+            2
+        ]
     },
     {
-        id: '07',
-        name: 'ดร.สุกฤตา ปรีชาว่อง',
-        category: 'ทักษะการทำงาน',
-        position: 'Co-founder / CEO / Coach / Trainer',
-        agency: 'องค์กรพัฒนาบุคลากรและการเรียนรู้ (อิสระ)',
-        expertise: 'การโค้ช พัฒนาบุคลากร ภาวะผู้นำ การให้คำปรึกษา และการจัดกระบวนการเรียนรู้',
-        badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-        icon: 'fa-comments',
-        primaryDay: 6,
-        daysLabel: 'วันที่ 6, 8, 9'
+        "id": "07",
+        "name": "ดร.สุกฤตา ปรีชาว่อง",
+        "category": "ทักษะการทำงาน",
+        "position": "ผู้เชี่ยวชาญด้านจิตวิทยาและการพัฒนาบุคลากร",
+        "agency": "องค์กรพัฒนาบุคลากรและการเรียนรู้",
+        "expertise": "Customer Psychology, Deep Listening, Resilience & Emotional Regulation",
+        "email": "sukritta.glow@gmail.com",
+        "vehicle_plate": "5 ขอ 9629 กรุงเทพมหานคร",
+        "badge_color": "bg-cyan-100 text-cyan-800 border-cyan-200",
+        "icon": "fa-comments",
+        "primary_day": 8,
+        "days_label": "วันที่ 8",
+        "teaching_days": [
+            8
+        ]
     },
     {
-        id: '08',
-        name: 'นางสาววราภรณ์ ไตรศักดิ์ศรี',
-        category: 'AI & ดิจิทัล',
-        position: 'นักวิชาการคอมพิวเตอร์ชำนาญการพิเศษ',
-        agency: 'สำนักงานสถิติแห่งชาติ',
-        expertise: 'PDPA, Microsoft Office/Excel, Cybersecurity Awareness, แบบสอบถามออนไลน์ และ Infographic',
-        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-shield-halved',
-        primaryDay: 3,
-        daysLabel: 'วันที่ 3'
+        "id": "08",
+        "name": "นางสาววราภรณ์ ไตรศักดิ์ศรี",
+        "category": "AI & ดิจิทัล",
+        "position": "นักวิชาการคอมพิวเตอร์ชำนาญการพิเศษ",
+        "agency": "สำนักงานสถิติแห่งชาติ",
+        "expertise": "Advanced Excel (XLOOKUP, Pivot), Data Visualization, Power BI Dashboard, Database Management",
+        "vehicle_plate": "ฬ 1416 กรุงเทพมหานคร",
+        "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+        "icon": "fa-table",
+        "primary_day": 3,
+        "days_label": "วันที่ 3",
+        "teaching_days": [
+            3
+        ]
     },
     {
-        id: '09',
-        name: 'รศ.ดร.เกยูร วงศ์ก้อม',
-        category: 'คนพิการ & การเข้าถึง',
-        position: 'ข้าราชการบำนาญ / อาจารย์ด้านการศึกษาพิเศษ',
-        agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
-        expertise: 'การศึกษาพิเศษ การวิจัยเพื่อคนพิการ และการส่งเสริมศักยภาพคนหูหนวก',
-        badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-        icon: 'fa-hands-asl-interpreting',
-        primaryDay: 4,
-        daysLabel: 'วันที่ 4'
+        "id": "09",
+        "name": "รศ.ดร.เกยูร วงศ์ก้อม",
+        "category": "คนพิการ & การเข้าถึง",
+        "position": "ข้าราชการบำนาญ / อาจารย์ด้านการศึกษาพิเศษ",
+        "agency": "คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต",
+        "expertise": "การศึกษาพิเศษ การวิจัยเพื่อคนพิการ และการส่งเสริมศักยภาพคนหูหนวก",
+        "badge_color": "bg-emerald-100 text-emerald-800 border-emerald-200",
+        "icon": "fa-hands-asl-interpreting",
+        "primary_day": 4,
+        "days_label": "วันที่ 4",
+        "teaching_days": [
+            4
+        ]
     },
     {
-        id: '10',
-        name: 'ผศ.ดร.ภริมา วินิธาสถิตย์กุล',
-        category: 'คนพิการ & การเข้าถึง',
-        position: 'ผู้ช่วยศาสตราจารย์',
-        agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
-        expertise: 'จิตวิทยา การศึกษาพิเศษ ภาษามือไทย และการสื่อสารเชิงสร้างสรรค์',
-        badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-        icon: 'fa-heart',
-        primaryDay: 3,
-        daysLabel: 'วันที่ 3'
+        "id": "10",
+        "name": "ผศ.ดร.ภริมา วินิธาสถิตย์กุล",
+        "category": "คนพิการ & การเข้าถึง",
+        "position": "ผู้ช่วยศาสตราจารย์",
+        "agency": "คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต",
+        "expertise": "จิตวิทยา การศึกษาพิเศษ ภาษามือไทย และการสื่อสารเชิงสร้างสรรค์",
+        "badge_color": "bg-emerald-100 text-emerald-800 border-emerald-200",
+        "icon": "fa-heart",
+        "primary_day": 3,
+        "days_label": "วันที่ 3",
+        "teaching_days": [
+            3
+        ]
     },
     {
-        id: '11',
-        name: 'ผศ.ดร.ชนินทร์ ฐิติเพชรกุล',
-        category: 'AI & ดิจิทัล',
-        position: 'รองคณบดี / หัวหน้าส่วนงานพัฒนาบุคลากรฯ',
-        agency: 'คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต',
-        expertise: 'AI เพื่อการทำงานและการศึกษา IT Service Management และสื่อดิจิทัลเพื่อการเข้าถึง',
-        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-laptop-code',
-        primaryDay: 4,
-        daysLabel: 'วันที่ 4'
+        "id": "11",
+        "name": "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล",
+        "category": "AI & ดิจิทัล",
+        "position": "รองคณบดี / หัวหน้าส่วนงานพัฒนาบุคลากรฯ",
+        "agency": "คณะครุศาสตร์ มหาวิทยาลัยสวนดุสิต",
+        "expertise": "AI เพื่อการทำงานและการศึกษา IT Service Management และสื่อดิจิทัลเพื่อการเข้าถึง",
+        "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+        "icon": "fa-laptop-code",
+        "primary_day": 4,
+        "days_label": "วันที่ 4",
+        "teaching_days": [
+            4
+        ]
     },
     {
-        id: '12',
-        name: 'อาจารย์จารุณี ทองอร่าม',
-        category: 'AI & ดิจิทัล',
-        position: 'อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ',
-        agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
-        expertise: 'Web/Mobile App, Google Workspace, Photoshop/Illustrator, Excel และ Content Marketing',
-        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-palette',
-        primaryDay: 6,
-        daysLabel: 'วันที่ 6'
+        "id": "12",
+        "name": "อาจารย์จารุณี ทองอร่าม",
+        "category": "AI & ดิจิทัล",
+        "position": "อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ",
+        "agency": "มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ",
+        "expertise": "Web/Mobile App, Google Workspace, Photoshop/Illustrator, Excel และ Content Marketing",
+        "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+        "icon": "fa-palette",
+        "primary_day": 6,
+        "days_label": "วันที่ 6",
+        "teaching_days": [
+            6
+        ]
     },
     {
-        id: '13',
-        name: 'อาจารย์ณัฐฐิณี คงไกรฤกษ์',
-        category: 'AI & ดิจิทัล',
-        position: 'อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ',
-        agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
-        expertise: 'การออกแบบฐานข้อมูล การพัฒนาโปรแกรม และการวิเคราะห์/ออกแบบระบบ',
-        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-network-wired',
-        primaryDay: 6,
-        daysLabel: 'วันที่ 6'
+        "id": "13",
+        "name": "อาจารย์ณัฐฐิณี คงไกรฤกษ์",
+        "category": "AI & ดิจิทัล",
+        "position": "อาจารย์ สาขาระบบสารสนเทศและคอมพิวเตอร์ธุรกิจ",
+        "agency": "มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ",
+        "expertise": "การออกแบบฐานข้อมูล การพัฒนาโปรแกรม และการวิเคราะห์/ออกแบบระบบ",
+        "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+        "icon": "fa-network-wired",
+        "primary_day": 6,
+        "days_label": "วันที่ 6",
+        "teaching_days": [
+            6
+        ]
     },
     {
-        id: '14',
-        name: 'ผศ.ชุติมา กลั่นไพฑูรย์',
-        category: 'AI & ดิจิทัล',
-        position: 'ผู้ช่วยศาสตราจารย์ สาขาระบบสารสนเทศ',
-        agency: 'มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ',
-        expertise: 'Visual Studio .NET, Word/Excel, Google Workspace, Cloud Collaboration และ UI/UX',
-        badgeColor: 'bg-purple-100 text-purple-800 border-purple-200',
-        icon: 'fa-cloud',
-        primaryDay: 6,
-        daysLabel: 'วันที่ 6'
+        "id": "14",
+        "name": "ผศ.ชุติมา กลั่นไพฑูรย์",
+        "category": "AI & ดิจิทัล",
+        "position": "ผู้ช่วยศาสตราจารย์ สาขาระบบสารสนเทศ",
+        "agency": "มหาวิทยาลัยเทคโนโลยีราชมงคลสุวรรณภูมิ",
+        "expertise": "Visual Studio .NET, Word/Excel, Google Workspace, Cloud Collaboration และ UI/UX",
+        "badge_color": "bg-purple-100 text-purple-800 border-purple-200",
+        "icon": "fa-cloud",
+        "primary_day": 6,
+        "days_label": "วันที่ 6",
+        "teaching_days": [
+            6
+        ]
     },
     {
-        id: '15',
-        name: 'อาจารย์มงคล สิริถิรวัฒน์',
-        category: 'ทักษะการทำงาน',
-        position: 'ผู้จัดการโครงการรัฐสภาร่วมใจรวมพลังสร้างสุข',
-        agency: 'สสส. ประจำสำนักงานเลขาธิการสภาผู้แทนราษฎร',
-        expertise: 'รัฐประศาสนศาสตร์ การสร้างเสริมสุขภาวะ การทำงานเป็นทีม และการจัดกระบวนการ',
-        badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-200',
-        icon: 'fa-people-group',
-        primaryDay: 2,
-        daysLabel: 'วันที่ 2'
+        "id": "15",
+        "name": "อาจารย์มงคล สิริถิรวัฒน์",
+        "category": "ทักษะการทำงาน",
+        "position": "ผู้จัดการโครงการรัฐสภาร่วมใจรวมพลังสร้างสุข",
+        "agency": "สสส. ประจำสำนักงานเลขาธิการสภาผู้แทนราษฎร",
+        "expertise": "รัฐประศาสนศาสตร์ การสร้างเสริมสุขภาวะ การทำงานเป็นทีม และการจัดกระบวนการ",
+        "badge_color": "bg-cyan-100 text-cyan-800 border-cyan-200",
+        "icon": "fa-people-group",
+        "primary_day": 2,
+        "days_label": "วันที่ 2",
+        "teaching_days": [
+            2
+        ]
     },
     {
-        id: '16',
-        name: 'อาจารย์มาณิช อินทฉิม',
-        category: 'กฎหมาย & ราชการ',
-        position: 'อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ / วิทยากรเชี่ยวชาญ',
-        agency: 'สำนักงานเลขาธิการสภาผู้แทนราษฎร',
-        expertise: 'ระบบงานนิติบัญญัติ กฎหมาย นโยบายสาธารณะ หน้าที่พลเมือง และการบริหารราชการ',
-        badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
-        icon: 'fa-scale-balanced',
-        primaryDay: 7,
-        daysLabel: 'วันที่ 7'
+        "id": "16",
+        "name": "อาจารย์มาณิช อินทฉิม",
+        "category": "กฎหมาย & ราชการ",
+        "position": "อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ / วิทยากรเชี่ยวชาญ",
+        "agency": "สำนักงานเลขาธิการสภาผู้แทนราษฎร",
+        "expertise": "ระบบงานนิติบัญญัติ กฎหมาย นโยบายสาธารณะ หน้าที่พลเมือง และการบริหารราชการ",
+        "badge_color": "bg-rose-100 text-rose-800 border-rose-200",
+        "icon": "fa-scale-balanced",
+        "primary_day": 7,
+        "days_label": "วันที่ 7",
+        "teaching_days": [
+            7
+        ]
     },
     {
-        id: '17',
-        name: 'นางสาวสุพิชฌาย์ กลิ่นหอม',
-        category: 'กฎหมาย & ราชการ',
-        position: 'นิติกรชำนาญการพิเศษ',
-        agency: 'ส่วนระเบียบกลาง กองกฎหมายและระเบียบกลาง สำนักงานปลัดสำนักนายกรัฐมนตรี',
-        expertise: 'กฎหมายและระเบียบงานสารบรรณ งานสารบรรณอิเล็กทรอนิกส์ และการเขียนหนังสือราชการเชิงวิเคราะห์',
-        badgeColor: 'bg-rose-100 text-rose-800 border-rose-200',
-        icon: 'fa-feather',
-        primaryDay: 5,
-        daysLabel: 'วันที่ 5, 11'
+        "id": "17",
+        "name": "นางสาวสุพิชฌาย์ กลิ่นหอม",
+        "category": "กฎหมาย & ราชการ",
+        "position": "นิติกรชำนาญการพิเศษ",
+        "agency": "สำนักงานปลัดสำนักนายกรัฐมนตรี (สปน.)",
+        "expertise": "งานสารบรรณและการเขียนเชิงวิเคราะห์ขั้นสูง บันทึกข้อความเสนอผู้บังคับบัญชาเชิงวิเคราะห์",
+        "email": "saraban@opm.go.th",
+        "phone": "086-6631725",
+        "travel_by": "รถไฟฟ้า",
+        "badge_color": "bg-rose-100 text-rose-800 border-rose-200",
+        "icon": "fa-feather",
+        "primary_day": 11,
+        "days_label": "วันที่ 11",
+        "teaching_days": [
+            11
+        ]
+    },
+    {
+        "id": "18",
+        "name": "นางสาวนันทพร มากมูล",
+        "category": "การสื่อสาร & บริหาร",
+        "position": "ผู้เชี่ยวชาญด้านจิตวิทยาการสื่อสารภาครัฐและการบริหารวิกฤต",
+        "agency": "วิทยากรเชี่ยวชาญอิสระ",
+        "expertise": "เทคนิคการสื่อสารสร้างคอนเทนต์ภาครัฐ, นโยบาย DEI, การคลี่คลายข้อร้องเรียน (De-escalation), Social Media Crisis",
+        "email": "nantaporn.pla2@gmail.com",
+        "vehicle_plate": "6 ขฒต 913 กรุงเทพมหานคร",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-bullhorn",
+        "primary_day": 3,
+        "days_label": "วันที่ 3, 9",
+        "teaching_days": [
+            3,
+            9
+        ]
+    },
+    {
+        "id": "19",
+        "name": "นายวิศรุต เสรีนิราช",
+        "category": "การสื่อสาร & บริหาร",
+        "position": "ผู้เชี่ยวชาญด้านการสื่อสารและการผลิตสื่อดิจิทัลภาครัฐ",
+        "agency": "วิทยากรเชี่ยวชาญอิสระ",
+        "expertise": "จิตวิทยาการสื่อสารภาครัฐ การเล่าเรื่องเชิงรุก อินโฟกราฟิกเพื่อประชาชน และการบริหารจัดการวิกฤตบนโลกออนไลน์",
+        "email": "wisarut.se@gmail.com",
+        "vehicle_plate": "6 ขฒต 913 กรุงเทพมหานคร",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-video",
+        "primary_day": 3,
+        "days_label": "วันที่ 3, 9",
+        "teaching_days": [
+            3,
+            9
+        ]
+    },
+    {
+        "id": "20",
+        "name": "นางสาวธัญมาศ ทองมูลเล็ก",
+        "category": "ข้อมูล",
+        "position": "นักวิชาการสถิติ / ผู้เชี่ยวชาญด้านคลังข้อมูล",
+        "agency": "สำนักงานสถิติแห่งชาติ",
+        "expertise": "การทำความสะอาดข้อมูล (Data Cleaning) และการวิเคราะห์สถิติขั้นสูงเพื่อการวางแผนราชการ",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-broom",
+        "primary_day": 7,
+        "days_label": "วันที่ 7",
+        "teaching_days": [
+            7
+        ]
+    },
+    {
+        "id": "21",
+        "name": "นายศราวุฒิ ศรีทอง",
+        "category": "ข้อมูล",
+        "position": "นักวิชาการคอมพิวเตอร์ / ผู้เชี่ยวชาญด้านธรรมาภิบาลข้อมูล",
+        "agency": "สำนักงานสถิติแห่งชาติ",
+        "expertise": "ธรรมาภิบาลข้อมูล (Data Governance), พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) และความปลอดภัยไซเบอร์",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-shield-halved",
+        "primary_day": 7,
+        "days_label": "วันที่ 7",
+        "teaching_days": [
+            7
+        ]
+    },
+    {
+        "id": "22",
+        "name": "นางสาวภัทรศยา จำจองวุฒิ",
+        "category": "ข้อมูล",
+        "position": "นักวิชาการสถิติ / ผู้เชี่ยวชาญด้าน Data Visualization",
+        "agency": "สำนักงานสถิติแห่งชาติ",
+        "expertise": "การสร้างแดชบอร์ดอัจฉริยะ (Power BI, Looker Studio) เปลี่ยนข้อมูลตัวเลขราชการให้เป็นภาพเข้าใจง่าย",
+        "badge_color": "bg-blue-100 text-blue-800 border-blue-200",
+        "icon": "fa-chart-pie",
+        "primary_day": 7,
+        "days_label": "วันที่ 7",
+        "teaching_days": [
+            7
+        ]
+    },
+    {
+        "id": "23",
+        "name": "รศ.ดร.ปรัชญา ชุ่มนาเสียว",
+        "category": "บริหารราชการ",
+        "position": "รองศาสตราจารย์ คณะรัฐศาสตร์",
+        "agency": "มหาวิทยาลัยรามคำแหง",
+        "expertise": "งานสารบรรณและการร่างข้อเสนอเชิงวิเคราะห์ บันทึกข้อความระดับสูง Logical Framework และ KPIs & OKRs ภาครัฐ",
+        "email": "Prachaya.Dr23@gmail.com",
+        "travel_by": "รถสาธารณะ",
+        "badge_color": "bg-amber-100 text-amber-800 border-amber-200",
+        "icon": "fa-file-lines",
+        "primary_day": 7,
+        "days_label": "วันที่ 7",
+        "teaching_days": [
+            7
+        ]
+    },
+    {
+        "id": "24",
+        "name": "รศ.ดร.วันชัย ปานจันทร์",
+        "category": "บริหารราชการ & บริการ",
+        "position": "รองศาสตราจารย์ / ผู้เชี่ยวชาญด้านการบริการภาครัฐ",
+        "agency": "วิทยากรเชี่ยวชาญอิสระ",
+        "expertise": "Customer Journey Mapping, การบริหารความสัมพันธ์ระยะยาว (CRM) และการส่งมอบบริการเชิงรุก (Proactive Service)",
+        "email": "chaipanjan@gmail.com",
+        "vehicle_plate": "8กจ 131 กรุงเทพมหานคร",
+        "badge_color": "bg-amber-100 text-amber-800 border-amber-200",
+        "icon": "fa-user-group",
+        "primary_day": 9,
+        "days_label": "วันที่ 9",
+        "teaching_days": [
+            9
+        ]
+    },
+    {
+        "id": "25",
+        "name": "คณะทำงานโครงการจัดสอบวัดผล Post-Test รวม",
+        "category": "วัดผล & ประเมิน",
+        "position": "คณะทำงานทดสอบวัดผลสัมฤทธิ์ทางการเรียนรู้",
+        "agency": "โครงการเตรียมความพร้อมสำหรับการจ้างงานคนพิการในหน่วยงานภาครัฐ",
+        "expertise": "การทดสอบวัดความรู้ Post-Test รวม 13 วัน เกณฑ์การประเมินผลสัมฤทธิ์ และการจัดทำรายงานสรุปผล",
+        "badge_color": "bg-indigo-100 text-indigo-800 border-indigo-200",
+        "icon": "fa-clipboard-check",
+        "primary_day": 12,
+        "days_label": "วันที่ 12",
+        "teaching_days": [
+            12
+        ]
+    },
+    {
+        "id": "26",
+        "name": "คณะผู้บริหารโครงการ พิธีปิดการอบรม & ปฐมนิเทศ OJT",
+        "category": "บริหารโครงการ",
+        "position": "คณะผู้บริหารและคณะทำงานโครงการ",
+        "agency": "หน่วยงานภาครัฐและภาคีเครือข่ายความร่วมมือ",
+        "expertise": "การฝึกปฏิบัติงานจริง (OJT 90 ชม.), การประเมินสมรรถนะ 4 มิติ และการส่งตัวเข้าสู่หน่วยงานภาครัฐ",
+        "badge_color": "bg-emerald-100 text-emerald-800 border-emerald-200",
+        "icon": "fa-award",
+        "primary_day": 13,
+        "days_label": "วันที่ 13",
+        "teaching_days": [
+            13
+        ]
     }
 ];
 
@@ -5651,6 +5861,33 @@ function openLecturerModal(lecturerId) {
     if (agencyEl) agencyEl.innerText = lecturer.agency;
     if (expEl) expEl.innerText = lecturer.expertise;
 
+    // Contact & Logistics Info
+    const emailBox = document.getElementById('modal-lecturer-email-box');
+    const emailEl = document.getElementById('modal-lecturer-email');
+    const logBox = document.getElementById('modal-lecturer-logistics-box');
+    const logEl = document.getElementById('modal-lecturer-logistics');
+
+    if (emailBox && emailEl) {
+        if (lecturer.email) {
+            emailBox.classList.remove('hidden');
+            emailEl.innerText = lecturer.email + (lecturer.phone ? ` (${lecturer.phone})` : '');
+        } else {
+            emailBox.classList.add('hidden');
+        }
+    }
+
+    if (logBox && logEl) {
+        if (lecturer.vehicle_plate) {
+            logBox.classList.remove('hidden');
+            logEl.innerHTML = `<i class="fa-solid fa-car text-emerald-600 mr-1"></i>ทะเบียน: ${lecturer.vehicle_plate}`;
+        } else if (lecturer.travel_by) {
+            logBox.classList.remove('hidden');
+            logEl.innerHTML = `<i class="fa-solid fa-train text-blue-600 mr-1"></i>เดินทาง: ${lecturer.travel_by}`;
+        } else {
+            logBox.classList.add('hidden');
+        }
+    }
+
     // Find all courses taught by this lecturer in masterCourseMatrixTraceability
     const courses = masterCourseMatrixTraceability.filter(c => c.lecturerId === lecturerId);
     if (coursesList) {
@@ -6074,686 +6311,687 @@ window.updateAdminButtonsVisibility = updateAdminButtonsVisibility;
    14. M2 LECTURER HUB ENGINE & MULTI-VIEW CONTROLLER (HUB / CLASSIC / TREE)
    ========================================================================== */
 const master13DaysHubSessions = [
-  {
-    "id": "session-10-am",
-    "date": "10 สิงหาคม 2569",
-    "date_iso": "2569-08-10",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 212 (เรียนร่วม)",
-    "subject": "ปฐมนิเทศและทำความเข้าใจหลักสูตร / กิจกรรม Ice Breaking",
-    "subtopics": [
-      "กิจกรรมสร้างความคุ้นเคย (Ice Breaking) รู้จักฉันรู้จักเธอ",
-      "แนะนำหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการ รุ่นที่ 1",
-      "แนวทางการเรียนรู้ กฎระเบียบ และการประเมินผลการอบรม"
-    ],
-    "lecturers": [
-      "รศ.ดร.ศุภชัย เหมือนโพธิ์",
-      "ผศ.ชุดาพร สอนภักดี"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "กิจกรรม_Ice_Breaking_รู้จักฉันรู้จักเธอ 10 ส.ค. 69.pdf, กำหนดการปฐมนิเทศ.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วันแรก - เรียนร่วม BB 212 (ผู้เข้าอบรม 40 คน)"
-  },
-  {
-    "id": "session-10-pm",
-    "date": "10 สิงหาคม 2569",
-    "date_iso": "2569-08-10",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 212 (เรียนร่วม)",
-    "subject": "วินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ",
-    "subtopics": [
-      "หลักวินัย คุณธรรม จริยธรรม และมาตรฐานทางจริยธรรมของบุคลากรภาครัฐ",
-      "ความซื่อสัตย์สุจริต และการป้องกันการทุจริต/ผลประโยชน์ทับซ้อน",
-      "กรณีศึกษาด้านจริยธรรมข้าราชการ"
-    ],
-    "lecturers": [
-      "อาจารย์มาณิช อินทฉิม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "Powerpoint กาารบรรยาย อ.มาณิช 10ส.ค.69.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "บรรยายโดย อ.มาณิช อินทฉิม (อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ สำนักงานเลขาธิการสภาผู้แทนราษฎร)"
-  },
-  {
-    "id": "session-11-fnd-am",
-    "date": "11 สิงหาคม 2569",
-    "date_iso": "2569-08-11",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "foundation",
-    "track_label": "หลักสูตรพื้นฐาน",
-    "room": "ห้อง BB 202 (พื้นฐาน - FND)",
-    "subject": "ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน",
-    "subtopics": [
-      "ความหมาย ความสำคัญ และวิวัฒนาการของระบบราชการไทย",
-      "โครงสร้างการบริหารราชการแผ่นดิน ส่วนกลาง ส่วนภูมิภาค ส่วนท้องถิ่น",
-      "บทบาท อำนาจหน้าที่ และภารกิจของหน่วยงานภาครัฐ"
-    ],
-    "lecturers": [
-      "อาจารย์มาณิช อินทฉิม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "11-8-69 ช่วงเช้า เรื่อง ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน ห้องอบรม 1 PPT.pdf",
-    "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
-    "notes": "แยกห้องอบรม BB 202"
-  },
-  {
-    "id": "session-11-adv-am",
-    "date": "11 สิงหาคม 2569",
-    "date_iso": "2569-08-11",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ขั้นสูง - ADV)",
-    "subject": "การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / Agile",
-    "subtopics": [
-      "1.1 ธรรมาภิบาลข้อมูล (Data Governance) และการคิดเชิงข้อมูล",
-      "1.2 การบริหารโครงการภาครัฐและการทำงานแบบ Agile (Trello, Jira, Notion)"
-    ],
-    "lecturers": [
-      "ผศ.ดร.ดวงใจ จิตคงชื่น",
-      "ดร.ปริสุทธิ์ จิตต์ภักดี",
-      "อาจารย์มงคล สิริถิรวัฒน์"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ผศ.ดร.ดวงใจ จิตคงชื่น.pdf, CV ดร.ปริสุทธิ์ จิตต์ภักดี.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "แยกห้องอบรม BB 203 (ทีมวิทยากรจาก BDI และ ก.พ.)"
-  },
-  {
-    "id": "session-11-fnd-pm",
-    "date": "11 สิงหาคม 2569",
-    "date_iso": "2569-08-11",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "foundation",
-    "track_label": "หลักสูตรพื้นฐาน",
-    "room": "ห้อง BB 202 (พื้นฐาน - FND)",
-    "subject": "กฎหมาย ระเบียบ และข้อบังคับพื้นฐานที่เกี่ยวข้องกับการปฏิบัติราชการ",
-    "subtopics": [
-      "พ.ร.บ. ระเบียบข้าราชการพลเรือน พ.ศ. 2551",
-      "พ.ร.บ. ข้อมูลข่าวสารของราชการ และวิธีปฏิบัติราชการทางปกครอง"
-    ],
-    "lecturers": [
-      "อาจารย์มาณิช อินทฉิม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "11-8-69 ช่วงบ่าย เรื่อง กฎหมาย ระเบียบ และข้อบังคับพื้นฐานฯ ห้องอบรม 1 PPT.pdf",
-    "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
-    "notes": "บรรยายโดย อ.มาณิช อินทฉิม ห้อง BB 202"
-  },
-  {
-    "id": "session-11-adv-pm",
-    "date": "11 สิงหาคม 2569",
-    "date_iso": "2569-08-11",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ขั้นสูง - ADV)",
-    "subject": "การออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
-    "subtopics": [
-      "1.3.1 มาตรฐานและโครงสร้างเอกสารดิจิทัล",
-      "1.3.2 ลายมือชื่ออิเล็กทรอนิกส์ (e-Signature) และการปรับปรุงผังงาน"
-    ],
-    "lecturers": [
-      "ดร.ปริสุทธิ์ จิตต์ภักดี",
-      "ดร.ขวัญศิริ ศิริมังคลา",
-      "อาจารย์มงคล สิริถิรวัฒน์"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ดร. ขวัญศิริ ศิริมังคลา.pdf, CV อาจารย์มงคล สิริถิรวัฒน์.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "ทีมวิทยากรจาก BDI และ ก.พ. ห้อง BB 203"
-  },
-  {
-    "id": "session-13-fnd-am",
-    "date": "13 สิงหาคม 2569",
-    "date_iso": "2569-08-13",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "foundation",
-    "track_label": "หลักสูตรพื้นฐาน",
-    "room": "ห้อง BB 202 (FND)",
-    "subject": "วิชาทักษะพื้นฐานด้านการบริการภาครัฐ",
-    "subtopics": [
-      "Service Mind in Public Sector",
-      "การสื่อสารเพื่อสร้างความประทับใจและการจัดการข้อร้องเรียน"
-    ],
-    "lecturers": [
-      "ผศ.ดร.ภริมา วินิธาสถิตย์กุล"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "13-8-69 ช่วงเช้า เรื่อง ทักษะพื้นฐานด้านการบริการภาครัฐ ห้องอบรม 1.pdf",
-    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
-    "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
-  },
-  {
-    "id": "session-13-adv-am",
-    "date": "13 สิงหาคม 2569",
-    "date_iso": "2569-08-13",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ADV)",
-    "subject": "วิชาเทคนิคการสื่อสารและสร้างคอนเทนต์ภาครัฐ",
-    "subtopics": [
-      "การสื่อสารนโยบายภาครัฐให้เข้าใจง่าย",
-      "การผลิตสื่อดิจิทัลและ Content Strategy"
-    ],
-    "lecturers": [
-      "ผศ.ดร.ภริมา วินิธาสถิตย์กุล"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ผศ.ดร.ภริมา วินิธาสถิตย์กุล.pdf",
-    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
-    "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
-  },
-  {
-    "id": "session-13-fnd-pm",
-    "date": "13 สิงหาคม 2569",
-    "date_iso": "2569-08-13",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "foundation",
-    "track_label": "หลักสูตรพื้นฐาน",
-    "room": "ห้อง BB 202 (FND)",
-    "subject": "วิชาทักษะการคิดเชิงออกแบบ (Design Thinking)",
-    "subtopics": [
-      "5 ขั้นตอน Design Thinking สำหรับงานบริการภาครัฐ",
-      "User Empathy และ Service Prototyping"
-    ],
-    "lecturers": [
-      "นายวิศรุต เสรีนิราช"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV นายวิศรุต เสรีนิราช.pdf",
-    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
-    "notes": "วิทยากร นายวิศรุต เสรีนิราช"
-  },
-  {
-    "id": "session-13-adv-pm",
-    "date": "13 สิงหาคม 2569",
-    "date_iso": "2569-08-13",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ADV)",
-    "subject": "วิชาการบริหารและวิเคราะห์ข้อมูลเพื่อการตัดสินใจ & PDPA",
-    "subtopics": [
-      "Data Governance, Risk, Compliance (GRC)",
-      "พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) และ Cyber Security"
-    ],
-    "lecturers": [
-      "นางสาววราภรณ์ ไตรศักดิ์ศรี"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV นางสาววราภรณ์ ไตรศักดิ์ศรี.pdf",
-    "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
-    "notes": "บรรยายโดย คุณวราภรณ์ ไตรศักดิ์ศรี"
-  },
-  {
-    "id": "session-14-fnd-am",
-    "date": "14 สิงหาคม 2569",
-    "date_iso": "2569-08-14",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "foundation",
-    "track_label": "หลักสูตรพื้นฐาน",
-    "room": "ห้อง BB 202 (FND)",
-    "subject": "วิชาการประยุกต์ใช้ AI ในการปฏิบัติงาน",
-    "subtopics": [
-      "Generative AI Tools สำหรับงานราชการ",
-      "Prompt Engineering ช่วยร่างหนังสือและสรุปรายงาน"
-    ],
-    "lecturers": [
-      "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "14-8-69 เรื่อง การประยุกต์ใช้ AI ในการทำงานราชการ ห้องอบรม 1.pdf",
-    "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
-    "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
-  },
-  {
-    "id": "session-14-adv-am",
-    "date": "14 สิงหาคม 2569",
-    "date_iso": "2569-08-14",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ADV)",
-    "subject": "วิชาการประยุกต์ใช้ AI ในการปฏิบัติงานราชการขั้นสูง",
-    "subtopics": [
-      "การสร้าง AI Automation Agent เบื้องต้น",
-      "การผสาน AI เข้ากับระบบงานราชการอย่างปลอดภัย"
-    ],
-    "lecturers": [
-      "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ผศ.ดร.ชนินทร์ ฐิติเพชรกุล.pdf",
-    "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
-    "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
-  },
-  {
-    "id": "session-14-joint-pm",
-    "date": "14 สิงหาคม 2569",
-    "date_iso": "2569-08-14",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 202 & 203 (เรียนร่วม)",
-    "subject": "บริบทการบริหารราชการยุคดิจิทัล และการเข้าถึงของคนพิการ",
-    "subtopics": [
-      "การเปลี่ยนแปลงกระบวนทัศน์ภาครัฐยุคดิจิทัล",
-      "การส่งเสริมการเข้าถึงและเทคโนโลยีสิ่งอำนวยความสะดวกสำหรับคนพิการ"
-    ],
-    "lecturers": [
-      "รศ.ดร.เกยูร วงศ์ก้อม",
-      "ดร.สุชีรา พลราชม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV รศ.ดร.เกยูร วงศ์ก้อม.pdf, 14-8-69 ช่วงบ่าย เรื่อง บริบทการบริหารราชการ.pdf",
-    "file_url": "https://drive.google.com/file/d/1Y8vT05KM62HwYtCOfO5EK_eaEJTBpzv2/view",
-    "notes": "บรรยายโดย รศ.ดร.เกยูร วงศ์ก้อม และ ดร.สุชีรา พลราชม ม.สวนดุสิต"
-  },
-  {
-    "id": "session-17-am",
-    "date": "17 สิงหาคม 2569",
-    "date_iso": "2569-08-17",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 205 (เรียนร่วม)",
-    "subject": "การจัดการระบบงานสารบรรณอิเล็กทรอนิกส์ (e-Saraban) & การใช้ภาษาราชการ",
-    "subtopics": [
-      "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ (ฉบับที่ 4) พ.ศ. 2564",
-      "การรับ-ส่ง เกษียนหนังสือ และการจัดทำหนังสือราชการ e-Saraban"
-    ],
-    "lecturers": [
-      "นางสาวสุพิชฌาย์ กลิ่นหอม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ_eSaraban.pdf, ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
-  },
-  {
-    "id": "session-17-pm",
-    "date": "17 สิงหาคม 2569",
-    "date_iso": "2569-08-17",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 205 (เรียนร่วม)",
-    "subject": "งานสารบรรณและกฎหมายภาครัฐขั้นสูง / การเขียนหนังสือราชการเชิงวิเคราะห์",
-    "subtopics": [
-      "การเขียนบันทึกข้อความเสนอผู้บริหารเชิงวิเคราะห์",
-      "ข้อกฎหมายและประเด็นที่มักพบข้อผิดพลาดในงานสารบรรณภาครัฐ"
-    ],
-    "lecturers": [
-      "นางสาวสุพิชฌาย์ กลิ่นหอม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "การเขียนหนังสือราชการเชิงวิเคราะห์และข้อกฎหมายสารบรรณ.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
-  },
-  {
-    "id": "session-18-fnd-am",
-    "date": "18 สิงหาคม 2569",
-    "date_iso": "2569-08-18",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "foundation",
-    "track_label": "หลักสูตรพื้นฐาน",
-    "room": "ห้อง BB 202 (FND)",
-    "subject": "การพัฒนาบุคลิกภาพและการสื่อสาร",
-    "subtopics": [
-      "การพัฒนาบุคลิกภาพและความมั่นใจในสถานที่ทำงานราชการ",
-      "มารยาทและการสื่อสารระหว่างบุคคล"
-    ],
-    "lecturers": [
-      "อาจารย์จารุณี ทองอร่าม",
-      "ผศ.ชุติมา กลั่นไพฑูรย์"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV อ.จารุณี ทองอร่าม.pdf, CV ผศ. ชุติมา กลั่นไพฑูรย์.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "ห้อง BB 202 ทีมวิทยากร ม.สวนดุสิต"
-  },
-  {
-    "id": "session-18-adv-am",
-    "date": "18 สิงหาคม 2569",
-    "date_iso": "2569-08-18",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ADV)",
-    "subject": "การปรับตัวและสร้างสัมพันธภาพในการทำงานมืออาชีพ",
-    "subtopics": [
-      "การปรับตัวสู่โลกการทำงานและการประสานงานข้ามหน่วยงาน",
-      "จิตวิทยาการสร้างความร่วมมือในองค์กร"
-    ],
-    "lecturers": [
-      "อาจารย์ณัฐฐิณี คงไกรฤกษ์",
-      "ดร.สุกฤตา ปรีชาว่อง"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, ประวัติวิทยากร_อ. ณัฐฐิณี คงไกรฤกษ.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "ห้อง BB 203 ทีมวิทยากร ม.สวนดุสิต"
-  },
-  {
-    "id": "session-18-pm",
-    "date": "18 สิงหาคม 2569",
-    "date_iso": "2569-08-18",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 202 & 203 (เรียนร่วม)",
-    "subject": "เทคนิคการสื่อสารและการทำงานร่วมกับผู้อื่น",
-    "subtopics": [
-      "การสื่อสารเพื่อลดความขัดแย้งและการทำงานเป็นทีม",
-      "Workshop การพัฒนาสมรรถนะการสื่อสารข้ามสายงาน"
-    ],
-    "lecturers": [
-      "ดร.สุกฤตา ปรีชาว่อง",
-      "อาจารย์จารุณี ทองอร่าม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, CV อ.จารุณี ทองอร่าม.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "เรียนร่วม BB 202 & 203"
-  },
-  {
-    "id": "session-19-am",
-    "date": "19 สิงหาคม 2569",
-    "date_iso": "2569-08-19",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 202 / BB 203",
-    "subject": "การจัดการกระบวนการทำงานและผลิตภาพภาครัฐ",
-    "subtopics": [
-      "Lean Management ในหน่วยงานราชการ",
-      "การวิเคราะห์ Flowchart และการเพิ่มผลผลิตในการทำงาน"
-    ],
-    "lecturers": [
-      "รศ.ดร.เรือโท ทวีศักดิ์ รูปสิงห์",
-      "รศ.ดร.ปรัชญา ชุ่มนาเสียว"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "รศ.ดร.ทวีศักดิ์ รูปสิงห์.pdf, รศ.ดรปรัชญา ชุ่มนาเสียว.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากรจาก มจพ. และ ม.รามคำแหง"
-  },
-  {
-    "id": "session-19-pm",
-    "date": "19 สิงหาคม 2569",
-    "date_iso": "2569-08-19",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 202 / BB 203",
-    "subject": "การบริหารจัดการองค์กรภาครัฐสู่ความเป็นเลิศ / ระบบงานนิติบัญญัติ",
-    "subtopics": [
-      "การบริหารราชการแผ่นดินสู่ความเป็นเลิศ",
-      "กระบวนการและระบบงานนิติบัญญัติที่เกี่ยวข้องกับข้าราชการ"
-    ],
-    "lecturers": [
-      "อาจารย์มาณิช อินทฉิม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "ประวัติวิทยากร_อาจารย์ มาณิช อินทฉิม.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "บรรยายโดย อ.มาณิช อินทฉิม"
-  },
-  {
-    "id": "session-20-am",
-    "date": "20 สิงหาคม 2569",
-    "date_iso": "2569-08-20",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 202 / BB 203",
-    "subject": "การพัฒนาภาวะผู้นำและการทำงานเป็นทีม",
-    "subtopics": [
-      "Self-Leadership ภาวะผู้นำในตนเอง",
-      "การสร้างความร่วมมือและการสื่อสารเชิงบวกในทีม"
-    ],
-    "lecturers": [
-      "รศ.ดร.ทวีศักดิ์ กฤษเจริญ",
-      "ดร.สุกฤตา ปรีชาว่อง"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV รศ.ดร.ทวีศักดิ์ กฤษเจริญ.pdf, CV ดร. สุกฤตา ปรีชาว่อง.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากรจาก มจพ. และ ม.สวนดุสิต"
-  },
-  {
-    "id": "session-20-pm",
-    "date": "20 สิงหาคม 2569",
-    "date_iso": "2569-08-20",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "foundation",
-    "track_label": "หลักสูตรพื้นฐาน",
-    "room": "ห้อง BB 202 (ห้อง 1)",
-    "subject": "การบริหารจัดการสำนักงานอัจฉริยะ & งานสารบรรณคนพิการ",
-    "subtopics": [
-      "Smart Office Tools สำหรับงานเอกสารราชการ",
-      "การฝึกอบรมงานสารบรรณสำหรับผู้พิการ"
-    ],
-    "lecturers": [
-      "รศ.ดร.ทวีศักดิ์ กฤษเจริญ"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "20-8-69 ช่วงบ่าย เรื่อง การบริหารจัดการสำนักงานอัจฉริยะ ห้องอบรม 1.pdf, การฝึกอบรมงานสารบรรณสำหรับผู้พิการ.rar",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "มีไฟล์เอกสารและแบบฝึกปฏิบัติงานสารบรรณคนพิการ (.rar)"
-  },
-  {
-    "id": "session-24-am",
-    "date": "24 สิงหาคม 2569",
-    "date_iso": "2569-08-24",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 202 / BB 203",
-    "subject": "การจัดการข้อมูลและเทคโนโลยีดิจิทัลขั้นสูง",
-    "subtopics": [
-      "สถาปัตยกรรมระบบสารสนเทศภาครัฐ",
-      "การประมวลผลและการจัดการความปลอดภัยข้อมูล"
-    ],
-    "lecturers": [
-      "ผศ.ดร.สุปรียส์ กาญจนพิศศาล",
-      "ดร.สุกฤตา ปรีชาว่อง"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ผศ.ดร.สุปรียส์ กาญจนพิศศาล.pdf, CV ดร. สุกฤตา ปรีชาว่อง.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากรจาก มจพ. และ ม.สวนดุสิต"
-  },
-  {
-    "id": "session-24-pm",
-    "date": "24 สิงหาคม 2569",
-    "date_iso": "2569-08-24",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 202 / BB 203",
-    "subject": "จิตวิทยาการทำงานและการสื่อสารในองค์กร",
-    "subtopics": [
-      "การสร้างความเข้มแข็งทางใจ (Resilience)",
-      "การวางแผนและติดตามประเมินผลโครงการภาครัฐ"
-    ],
-    "lecturers": [
-      "ดร.สุกฤตา ปรีชาว่อง",
-      "รศ.ดร.วันชัย ปานจันทร์"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, รศ.ดร.วันชัย ปานจันทร์.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากรผู้ทรงคุณวุฒิ"
-  },
-  {
-    "id": "session-25-am",
-    "date": "25 สิงหาคม 2569",
-    "date_iso": "2569-08-25",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ADV)",
-    "subject": "4.4 การบริหารจัดการฐานข้อมูลและสถาปัตยกรรมข้อมูลภาครัฐ",
-    "subtopics": [
-      "การออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์",
-      "Data Integration & Open Data ภาครัฐ"
-    ],
-    "lecturers": [
-      "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
-      "ดร.ชณทัต บุญชูวงศ์"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากรจาก มจธ. (KMUTT)"
-  },
-  {
-    "id": "session-25-pm",
-    "date": "25 สิงหาคม 2569",
-    "date_iso": "2569-08-25",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 203 (ADV)",
-    "subject": "4.5 การวิเคราะห์ข้อมูลเพื่อปรับปรุงงานบริการ (Data Analytics for Service Improvement)",
-    "subtopics": [
-      "การวัดผลและวิเคราะห์ดัชนี CSAT, NPS, Customer Effort Score",
-      "การสร้าง Service Dashboard รายงานผู้บริหาร"
-    ],
-    "lecturers": [
-      "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
-      "ดร.ชณทัต บุญชูวงศ์"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากรจาก มจธ. (KMUTT)"
-  },
-  {
-    "id": "session-26-am",
-    "date": "26 สิงหาคม 2569",
-    "date_iso": "2569-08-26",
-    "period": "ช่วงเช้า (09:00 – 12:00 น.)",
-    "track": "advanced",
-    "track_label": "หลักสูตรขั้นสูง",
-    "room": "ห้อง BB 202 / BB 203",
-    "subject": "5.2 การประยุกต์ใช้เทคโนโลยีอัตโนมัติและ AI ในงานธุรการ",
-    "subtopics": [
-      "การสร้างระบบทำงานอัตโนมัติ (Power Automate / Apps Script)",
-      "Prompt Engineering ร่างหนังสือและรายงานการประชุม"
-    ],
-    "lecturers": [
-      "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
-      "ดร.ชณทัต บุญชูวงศ์"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากรจาก มจธ. (KMUTT)"
-  },
-  {
-    "id": "session-26-pm",
-    "date": "26 สิงหาคม 2569",
-    "date_iso": "2569-08-26",
-    "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้อง BB 202 / BB 203",
-    "subject": "5.3 งานสารบรรณและการเขียนเชิงวิเคราะห์ขั้นสูง",
-    "subtopics": [
-      "การเขียนบันทึกข้อความเสนอผู้บังคับบัญชาเชิงวิเคราะห์",
-      "Workshop งานสารบรรณและการเขียนเชิงวิเคราะห์"
-    ],
-    "lecturers": [
-      "นางสาวสุพิชฌาย์ กลิ่นหอม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันจากไฟล์",
-    "file_name": "ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม สปน."
-  },
-  {
-    "id": "session-27-joint",
-    "date": "27 สิงหาคม 2569",
-    "date_iso": "2569-08-27",
-    "period": "เต็มวัน (09:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้องอบรมตามกำหนดการ",
-    "subject": "การเตรียมความพร้อมและประเมินผลการเรียนรู้หลังการอบรม (Post-Test)",
-    "subtopics": [
-      "การทบทวนองค์ความรู้และทักษะตลอดหลักสูตรภาคทฤษฎี",
-      "การทดสอบวัดความรู้หลังการฝึกอบรม (Post-Test) ภาคทฤษฎี"
-    ],
-    "lecturers": [
-      "คณะทำงานโครงการจัดสอบวัดผล Post-Test รวม"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันกำหนดการ",
-    "file_name": "แบบทดสอบ Post-Test และเกณฑ์การประเมินผลสัมฤทธิ์.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "คณะทำงานโครงการจัดสอบวัดผล Post-Test รวม 13 วัน"
-  },
-  {
-    "id": "session-28-joint",
-    "date": "28 สิงหาคม 2569",
-    "date_iso": "2569-08-28",
-    "period": "เต็มวัน (09:00 – 16:00 น.)",
-    "track": "joint",
-    "track_label": "เรียนร่วม",
-    "room": "ห้องอบรมตามกำหนดการ",
-    "subject": "พิธีปิดการฝึกอบรมภาคทฤษฎี และปฐมนิเทศการฝึกปฏิบัติงานจริง (OJT 90 ชม.)",
-    "subtopics": [
-      "การสรุปผลการประเมินการฝึกอบรมภาคทฤษฎี รุ่นที่ 1",
-      "การมอบหมายหน่วยงานภาครัฐสำหรับฝึกปฏิบัติงาน (1-30 ก.ย. 69)",
-      "พิธีปิดการฝึกอบรมภาคทฤษฎีและถ่ายภาพร่วมกัน"
-    ],
-    "lecturers": [
-      "คณะผู้บริหารโครงการ พิธีปิดการอบรม & ปฐมนิเทศ OJT"
-    ],
-    "status": "verified",
-    "status_label": "ยืนยันกำหนดการ",
-    "file_name": "กำหนดการพิธีปิดและคู่มือปฐมนิเทศ_OJT_90ชม.pdf",
-    "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
-    "notes": "พิธีปิดการฝึกอบรมภาคทฤษฎี และปฐมนิเทศการฝึกปฏิบัติงานจริง (OJT 90 ชม.)"
-  }
+    {
+        "id": "session-10-am",
+        "date": "10 สิงหาคม 2569",
+        "date_iso": "2569-08-10",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 212 (เรียนร่วม)",
+        "subject": "ปฐมนิเทศและทำความเข้าใจหลักสูตร / กิจกรรม Ice Breaking",
+        "subtopics": [
+            "กิจกรรมสร้างความคุ้นเคย (Ice Breaking) รู้จักฉันรู้จักเธอ",
+            "แนะนำหลักสูตรเตรียมความพร้อมสำหรับการจ้างงานคนพิการ รุ่นที่ 1",
+            "แนวทางการเรียนรู้ กฎระเบียบ และการประเมินผลการอบรม"
+        ],
+        "lecturers": [
+            "รศ.ดร.ศุภชัย เหมือนโพธิ์",
+            "ผศ.ชุดาพร สอนภักดี"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "กิจกรรม_Ice_Breaking_รู้จักฉันรู้จักเธอ 10 ส.ค. 69.pdf, กำหนดการปฐมนิเทศ.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วันแรก - เรียนร่วม BB 212 (ผู้เข้าอบรม 40 คน)"
+    },
+    {
+        "id": "session-10-pm",
+        "date": "10 สิงหาคม 2569",
+        "date_iso": "2569-08-10",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 212 (เรียนร่วม)",
+        "subject": "วินัย คุณธรรม จริยธรรม และจรรยาบรรณของบุคลากรภาครัฐ",
+        "subtopics": [
+            "หลักวินัย คุณธรรม จริยธรรม และมาตรฐานทางจริยธรรมของบุคลากรภาครัฐ",
+            "ความซื่อสัตย์สุจริต และการป้องกันการทุจริต/ผลประโยชน์ทับซ้อน",
+            "กรณีศึกษาด้านจริยธรรมข้าราชการ"
+        ],
+        "lecturers": [
+            "อาจารย์มาณิช อินทฉิม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "Powerpoint กาารบรรยาย อ.มาณิช 10ส.ค.69.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "บรรยายโดย อ.มาณิช อินทฉิม (อดีตที่ปรึกษาด้านระบบงานนิติบัญญัติ สำนักงานเลขาธิการสภาผู้แทนราษฎร)"
+    },
+    {
+        "id": "session-11-fnd-am",
+        "date": "11 สิงหาคม 2569",
+        "date_iso": "2569-08-11",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "foundation",
+        "track_label": "หลักสูตรพื้นฐาน",
+        "room": "ห้อง BB 202 (พื้นฐาน - FND)",
+        "subject": "ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน",
+        "subtopics": [
+            "ความหมาย ความสำคัญ และวิวัฒนาการของระบบราชการไทย",
+            "โครงสร้างการบริหารราชการแผ่นดิน ส่วนกลาง ส่วนภูมิภาค ส่วนท้องถิ่น",
+            "บทบาท อำนาจหน้าที่ และภารกิจของหน่วยงานภาครัฐ"
+        ],
+        "lecturers": [
+            "อาจารย์มาณิช อินทฉิม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "11-8-69 ช่วงเช้า เรื่อง ความรู้พื้นฐานเกี่ยวกับระบบราชการและการบริหารราชการแผ่นดิน ห้องอบรม 1 PPT.pdf",
+        "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
+        "notes": "แยกห้องอบรม BB 202"
+    },
+    {
+        "id": "session-11-adv-am",
+        "date": "11 สิงหาคม 2569",
+        "date_iso": "2569-08-11",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ขั้นสูง - ADV)",
+        "subject": "การวิเคราะห์ข้อมูลและการบริหารราชการยุคดิจิทัล / Agile",
+        "subtopics": [
+            "1.1 ธรรมาภิบาลข้อมูล (Data Governance) และการคิดเชิงข้อมูล",
+            "1.2 การบริหารโครงการภาครัฐและการทำงานแบบ Agile (Trello, Jira, Notion)"
+        ],
+        "lecturers": [
+            "ผศ.ดร.ดวงใจ จิตคงชื่น",
+            "ดร.ปริสุทธิ์ จิตต์ภักดี",
+            "อาจารย์มงคล สิริถิรวัฒน์"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ผศ.ดร.ดวงใจ จิตคงชื่น.pdf, CV ดร.ปริสุทธิ์ จิตต์ภักดี.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "แยกห้องอบรม BB 203 (ทีมวิทยากรจาก BDI และ ก.พ.)"
+    },
+    {
+        "id": "session-11-fnd-pm",
+        "date": "11 สิงหาคม 2569",
+        "date_iso": "2569-08-11",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "foundation",
+        "track_label": "หลักสูตรพื้นฐาน",
+        "room": "ห้อง BB 202 (พื้นฐาน - FND)",
+        "subject": "กฎหมาย ระเบียบ และข้อบังคับพื้นฐานที่เกี่ยวข้องกับการปฏิบัติราชการ",
+        "subtopics": [
+            "พ.ร.บ. ระเบียบข้าราชการพลเรือน พ.ศ. 2551",
+            "พ.ร.บ. ข้อมูลข่าวสารของราชการ และวิธีปฏิบัติราชการทางปกครอง"
+        ],
+        "lecturers": [
+            "อาจารย์มาณิช อินทฉิม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "11-8-69 ช่วงบ่าย เรื่อง กฎหมาย ระเบียบ และข้อบังคับพื้นฐานฯ ห้องอบรม 1 PPT.pdf",
+        "file_url": "https://drive.google.com/file/d/1V3QprwQ9-12BtCq4WlTPjdq68r7MDS8w/view",
+        "notes": "บรรยายโดย อ.มาณิช อินทฉิม ห้อง BB 202"
+    },
+    {
+        "id": "session-11-adv-pm",
+        "date": "11 สิงหาคม 2569",
+        "date_iso": "2569-08-11",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ขั้นสูง - ADV)",
+        "subject": "การออกแบบกระบวนงานดิจิทัล (Digital Workflow Design)",
+        "subtopics": [
+            "1.3.1 มาตรฐานและโครงสร้างเอกสารดิจิทัล",
+            "1.3.2 ลายมือชื่ออิเล็กทรอนิกส์ (e-Signature) และการปรับปรุงผังงาน"
+        ],
+        "lecturers": [
+            "ดร.ปริสุทธิ์ จิตต์ภักดี",
+            "ดร.ขวัญศิริ ศิริมังคลา",
+            "อาจารย์มงคล สิริถิรวัฒน์"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ดร. ขวัญศิริ ศิริมังคลา.pdf, CV อาจารย์มงคล สิริถิรวัฒน์.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "ทีมวิทยากรจาก BDI และ ก.พ. ห้อง BB 203"
+    },
+    {
+        "id": "session-13-fnd-am",
+        "date": "13 สิงหาคม 2569",
+        "date_iso": "2569-08-13",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "foundation",
+        "track_label": "หลักสูตรพื้นฐาน",
+        "room": "ห้อง BB 202 (FND)",
+        "subject": "วิชาทักษะพื้นฐานด้านการบริการภาครัฐ",
+        "subtopics": [
+            "Service Mind in Public Sector",
+            "การสื่อสารเพื่อสร้างความประทับใจและการจัดการข้อร้องเรียน"
+        ],
+        "lecturers": [
+            "ผศ.ดร.ภริมา วินิธาสถิตย์กุล"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "13-8-69 ช่วงเช้า เรื่อง ทักษะพื้นฐานด้านการบริการภาครัฐ ห้องอบรม 1.pdf",
+        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
+    },
+    {
+        "id": "session-13-adv-am",
+        "date": "13 สิงหาคม 2569",
+        "date_iso": "2569-08-13",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ADV)",
+        "subject": "วิชาเทคนิคการสื่อสารและสร้างคอนเทนต์ภาครัฐ",
+        "subtopics": [
+            "การสื่อสารนโยบายภาครัฐให้เข้าใจง่าย",
+            "การผลิตสื่อดิจิทัลและ Content Strategy"
+        ],
+        "lecturers": [
+            "ผศ.ดร.ภริมา วินิธาสถิตย์กุล"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ผศ.ดร.ภริมา วินิธาสถิตย์กุล.pdf",
+        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "notes": "บรรยายโดย ผศ.ดร.ภริมา วินิธาสถิตย์กุล ม.สวนดุสิต"
+    },
+    {
+        "id": "session-13-fnd-pm",
+        "date": "13 สิงหาคม 2569",
+        "date_iso": "2569-08-13",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "foundation",
+        "track_label": "หลักสูตรพื้นฐาน",
+        "room": "ห้อง BB 202 (FND)",
+        "subject": "วิชาทักษะการคิดเชิงออกแบบ (Design Thinking)",
+        "subtopics": [
+            "5 ขั้นตอน Design Thinking สำหรับงานบริการภาครัฐ",
+            "User Empathy และ Service Prototyping"
+        ],
+        "lecturers": [
+            "นายวิศรุต เสรีนิราช"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV นายวิศรุต เสรีนิราช.pdf",
+        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "notes": "วิทยากร นายวิศรุต เสรีนิราช"
+    },
+    {
+        "id": "session-13-adv-pm",
+        "date": "13 สิงหาคม 2569",
+        "date_iso": "2569-08-13",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ADV)",
+        "subject": "วิชาการบริหารและวิเคราะห์ข้อมูลเพื่อการตัดสินใจ & PDPA",
+        "subtopics": [
+            "Data Governance, Risk, Compliance (GRC)",
+            "พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) และ Cyber Security"
+        ],
+        "lecturers": [
+            "นางสาววราภรณ์ ไตรศักดิ์ศรี"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV นางสาววราภรณ์ ไตรศักดิ์ศรี.pdf",
+        "file_url": "https://drive.google.com/file/d/1v7GozAE6tadNYDsLiAAVQzaSYresOZk8/view",
+        "notes": "บรรยายโดย คุณวราภรณ์ ไตรศักดิ์ศรี"
+    },
+    {
+        "id": "session-14-fnd-am",
+        "date": "14 สิงหาคม 2569",
+        "date_iso": "2569-08-14",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "foundation",
+        "track_label": "หลักสูตรพื้นฐาน",
+        "room": "ห้อง BB 202 (FND)",
+        "subject": "วิชาการประยุกต์ใช้ AI ในการปฏิบัติงาน",
+        "subtopics": [
+            "Generative AI Tools สำหรับงานราชการ",
+            "Prompt Engineering ช่วยร่างหนังสือและสรุปรายงาน"
+        ],
+        "lecturers": [
+            "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "14-8-69 เรื่อง การประยุกต์ใช้ AI ในการทำงานราชการ ห้องอบรม 1.pdf",
+        "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
+        "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
+    },
+    {
+        "id": "session-14-adv-am",
+        "date": "14 สิงหาคม 2569",
+        "date_iso": "2569-08-14",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ADV)",
+        "subject": "วิชาการประยุกต์ใช้ AI ในการปฏิบัติงานราชการขั้นสูง",
+        "subtopics": [
+            "การสร้าง AI Automation Agent เบื้องต้น",
+            "การผสาน AI เข้ากับระบบงานราชการอย่างปลอดภัย"
+        ],
+        "lecturers": [
+            "ผศ.ดร.ชนินทร์ ฐิติเพชรกุล"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ผศ.ดร.ชนินทร์ ฐิติเพชรกุล.pdf",
+        "file_url": "https://drive.google.com/file/d/1JAmEVo-0j-lhbOvOQ1Wy1rQ7-4O9lbjy/view",
+        "notes": "บรรยายโดย ผศ.ดร.ชนินทร์ ฐิติเพชรกุล ม.สวนดุสิต"
+    },
+    {
+        "id": "session-14-joint-pm",
+        "date": "14 สิงหาคม 2569",
+        "date_iso": "2569-08-14",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 202 & 203 (เรียนร่วม)",
+        "subject": "บริบทการบริหารราชการยุคดิจิทัล และการเข้าถึงของคนพิการ",
+        "subtopics": [
+            "การเปลี่ยนแปลงกระบวนทัศน์ภาครัฐยุคดิจิทัล",
+            "การส่งเสริมการเข้าถึงและเทคโนโลยีสิ่งอำนวยความสะดวกสำหรับคนพิการ"
+        ],
+        "lecturers": [
+            "รศ.ดร.เกยูร วงศ์ก้อม",
+            "ดร.สุชีรา พลราชม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV รศ.ดร.เกยูร วงศ์ก้อม.pdf, 14-8-69 ช่วงบ่าย เรื่อง บริบทการบริหารราชการ.pdf",
+        "file_url": "https://drive.google.com/file/d/1Y8vT05KM62HwYtCOfO5EK_eaEJTBpzv2/view",
+        "notes": "บรรยายโดย รศ.ดร.เกยูร วงศ์ก้อม และ ดร.สุชีรา พลราชม ม.สวนดุสิต"
+    },
+    {
+        "id": "session-17-am",
+        "date": "17 สิงหาคม 2569",
+        "date_iso": "2569-08-17",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 205 (เรียนร่วม)",
+        "subject": "การจัดการระบบงานสารบรรณอิเล็กทรอนิกส์ (e-Saraban) & การใช้ภาษาราชการ",
+        "subtopics": [
+            "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ (ฉบับที่ 4) พ.ศ. 2564",
+            "การรับ-ส่ง เกษียนหนังสือ และการจัดทำหนังสือราชการ e-Saraban"
+        ],
+        "lecturers": [
+            "นางสาวสุพิชฌาย์ กลิ่นหอม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ_eSaraban.pdf, ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
+    },
+    {
+        "id": "session-17-pm",
+        "date": "17 สิงหาคม 2569",
+        "date_iso": "2569-08-17",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 205 (เรียนร่วม)",
+        "subject": "งานสารบรรณและกฎหมายภาครัฐขั้นสูง / การเขียนหนังสือราชการเชิงวิเคราะห์",
+        "subtopics": [
+            "การเขียนบันทึกข้อความเสนอผู้บริหารเชิงวิเคราะห์",
+            "ข้อกฎหมายและประเด็นที่มักพบข้อผิดพลาดในงานสารบรรณภาครัฐ"
+        ],
+        "lecturers": [
+            "นางสาวสุพิชฌาย์ กลิ่นหอม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "การเขียนหนังสือราชการเชิงวิเคราะห์และข้อกฎหมายสารบรรณ.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม (นิติกรชำนาญการพิเศษ สปน.)"
+    },
+    {
+        "id": "session-18-fnd-am",
+        "date": "18 สิงหาคม 2569",
+        "date_iso": "2569-08-18",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "foundation",
+        "track_label": "หลักสูตรพื้นฐาน",
+        "room": "ห้อง BB 202 (FND)",
+        "subject": "การพัฒนาบุคลิกภาพและการสื่อสาร",
+        "subtopics": [
+            "การพัฒนาบุคลิกภาพและความมั่นใจในสถานที่ทำงานราชการ",
+            "มารยาทและการสื่อสารระหว่างบุคคล"
+        ],
+        "lecturers": [
+            "อาจารย์จารุณี ทองอร่าม",
+            "ผศ.ชุติมา กลั่นไพฑูรย์"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV อ.จารุณี ทองอร่าม.pdf, CV ผศ. ชุติมา กลั่นไพฑูรย์.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "ห้อง BB 202 ทีมวิทยากร ม.สวนดุสิต"
+    },
+    {
+        "id": "session-18-adv-am",
+        "date": "18 สิงหาคม 2569",
+        "date_iso": "2569-08-18",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ADV)",
+        "subject": "การปรับตัวและสร้างสัมพันธภาพในการทำงานมืออาชีพ",
+        "subtopics": [
+            "การปรับตัวสู่โลกการทำงานและการประสานงานข้ามหน่วยงาน",
+            "จิตวิทยาการสร้างความร่วมมือในองค์กร"
+        ],
+        "lecturers": [
+            "อาจารย์ณัฐฐิณี คงไกรฤกษ์",
+            "ดร.สุกฤตา ปรีชาว่อง"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, ประวัติวิทยากร_อ. ณัฐฐิณี คงไกรฤกษ.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "ห้อง BB 203 ทีมวิทยากร ม.สวนดุสิต"
+    },
+    {
+        "id": "session-18-pm",
+        "date": "18 สิงหาคม 2569",
+        "date_iso": "2569-08-18",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 202 & 203 (เรียนร่วม)",
+        "subject": "เทคนิคการสื่อสารและการทำงานร่วมกับผู้อื่น",
+        "subtopics": [
+            "การสื่อสารเพื่อลดความขัดแย้งและการทำงานเป็นทีม",
+            "Workshop การพัฒนาสมรรถนะการสื่อสารข้ามสายงาน"
+        ],
+        "lecturers": [
+            "ดร.สุกฤตา ปรีชาว่อง",
+            "อาจารย์จารุณี ทองอร่าม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, CV อ.จารุณี ทองอร่าม.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "เรียนร่วม BB 202 & 203"
+    },
+    {
+        "id": "session-19-am",
+        "date": "19 สิงหาคม 2569",
+        "date_iso": "2569-08-19",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 202 / BB 203",
+        "subject": "การจัดการกระบวนการทำงานและผลิตภาพภาครัฐ",
+        "subtopics": [
+            "Lean Management ในหน่วยงานราชการ",
+            "การวิเคราะห์ Flowchart และการเพิ่มผลผลิตในการทำงาน"
+        ],
+        "lecturers": [
+            "รศ.ดร.เรือโท ทวีศักดิ์ รูปสิงห์",
+            "รศ.ดร.ปรัชญา ชุ่มนาเสียว"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "รศ.ดร.ทวีศักดิ์ รูปสิงห์.pdf, รศ.ดรปรัชญา ชุ่มนาเสียว.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากรจาก มจพ. และ ม.รามคำแหง"
+    },
+    {
+        "id": "session-19-pm",
+        "date": "19 สิงหาคม 2569",
+        "date_iso": "2569-08-19",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 202 / BB 203",
+        "subject": "การบริหารจัดการองค์กรภาครัฐสู่ความเป็นเลิศ / ระบบงานนิติบัญญัติ",
+        "subtopics": [
+            "การบริหารราชการแผ่นดินสู่ความเป็นเลิศ",
+            "กระบวนการและระบบงานนิติบัญญัติที่เกี่ยวข้องกับข้าราชการ"
+        ],
+        "lecturers": [
+            "อาจารย์มาณิช อินทฉิม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "ประวัติวิทยากร_อาจารย์ มาณิช อินทฉิม.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "บรรยายโดย อ.มาณิช อินทฉิม"
+    },
+    {
+        "id": "session-20-am",
+        "date": "20 สิงหาคม 2569",
+        "date_iso": "2569-08-20",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 202 / BB 203",
+        "subject": "การพัฒนาภาวะผู้นำและการทำงานเป็นทีม",
+        "subtopics": [
+            "Self-Leadership ภาวะผู้นำในตนเอง",
+            "การสร้างความร่วมมือและการสื่อสารเชิงบวกในทีม"
+        ],
+        "lecturers": [
+            "รศ.ดร.ทวีศักดิ์ กฤษเจริญ",
+            "ดร.สุกฤตา ปรีชาว่อง"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV รศ.ดร.ทวีศักดิ์ กฤษเจริญ.pdf, CV ดร. สุกฤตา ปรีชาว่อง.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากรจาก มจพ. และ ม.สวนดุสิต"
+    },
+    {
+        "id": "session-20-pm",
+        "date": "20 สิงหาคม 2569",
+        "date_iso": "2569-08-20",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "foundation",
+        "track_label": "หลักสูตรพื้นฐาน",
+        "room": "ห้อง BB 202 (ห้อง 1)",
+        "subject": "การบริหารจัดการสำนักงานอัจฉริยะ & งานสารบรรณคนพิการ",
+        "subtopics": [
+            "Smart Office Tools สำหรับงานเอกสารราชการ",
+            "การฝึกอบรมงานสารบรรณสำหรับผู้พิการ"
+        ],
+        "lecturers": [
+            "รศ.ดร.ทวีศักดิ์ กฤษเจริญ"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "20-8-69 ช่วงบ่าย เรื่อง การบริหารจัดการสำนักงานอัจฉริยะ ห้องอบรม 1.pdf, การฝึกอบรมงานสารบรรณสำหรับผู้พิการ.rar",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "มีไฟล์เอกสารและแบบฝึกปฏิบัติงานสารบรรณคนพิการ (.rar)"
+    },
+    {
+        "id": "session-24-am",
+        "date": "24 สิงหาคม 2569",
+        "date_iso": "2569-08-24",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 202 / BB 203",
+        "subject": "การจัดการข้อมูลและเทคโนโลยีดิจิทัลขั้นสูง",
+        "subtopics": [
+            "สถาปัตยกรรมระบบสารสนเทศภาครัฐ",
+            "การประมวลผลและการจัดการความปลอดภัยข้อมูล"
+        ],
+        "lecturers": [
+            "ผศ.ดร.สุปรียส์ กาญจนพิศศาล",
+            "ดร.สุกฤตา ปรีชาว่อง"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ผศ.ดร.สุปรียส์ กาญจนพิศศาล.pdf, CV ดร. สุกฤตา ปรีชาว่อง.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากรจาก มจพ. และ ม.สวนดุสิต"
+    },
+    {
+        "id": "session-24-pm",
+        "date": "24 สิงหาคม 2569",
+        "date_iso": "2569-08-24",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 202 / BB 203",
+        "subject": "จิตวิทยาการทำงานและการสื่อสารในองค์กร",
+        "subtopics": [
+            "การสร้างความเข้มแข็งทางใจ (Resilience)",
+            "การวางแผนและติดตามประเมินผลโครงการภาครัฐ"
+        ],
+        "lecturers": [
+            "ดร.สุกฤตา ปรีชาว่อง",
+            "รศ.ดร.วันชัย ปานจันทร์"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ดร. สุกฤตา ปรีชาว่อง.pdf, รศ.ดร.วันชัย ปานจันทร์.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากรผู้ทรงคุณวุฒิ"
+    },
+    {
+        "id": "session-25-am",
+        "date": "25 สิงหาคม 2569",
+        "date_iso": "2569-08-25",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ADV)",
+        "subject": "4.4 การบริหารจัดการฐานข้อมูลและสถาปัตยกรรมข้อมูลภาครัฐ",
+        "subtopics": [
+            "การออกแบบโครงสร้างฐานข้อมูลเชิงสัมพันธ์",
+            "Data Integration & Open Data ภาครัฐ"
+        ],
+        "lecturers": [
+            "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
+            "ดร.ชณทัต บุญชูวงศ์"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากรจาก มจธ. (KMUTT)"
+    },
+    {
+        "id": "session-25-pm",
+        "date": "25 สิงหาคม 2569",
+        "date_iso": "2569-08-25",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 203 (ADV)",
+        "subject": "4.5 การวิเคราะห์ข้อมูลเพื่อปรับปรุงงานบริการ (Data Analytics for Service Improvement)",
+        "subtopics": [
+            "การวัดผลและวิเคราะห์ดัชนี CSAT, NPS, Customer Effort Score",
+            "การสร้าง Service Dashboard รายงานผู้บริหาร"
+        ],
+        "lecturers": [
+            "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
+            "ดร.ชณทัต บุญชูวงศ์"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากรจาก มจธ. (KMUTT)"
+    },
+    {
+        "id": "session-26-am",
+        "date": "26 สิงหาคม 2569",
+        "date_iso": "2569-08-26",
+        "period": "ช่วงเช้า (09:00 – 12:00 น.)",
+        "track": "advanced",
+        "track_label": "หลักสูตรขั้นสูง",
+        "room": "ห้อง BB 202 / BB 203",
+        "subject": "5.2 การประยุกต์ใช้เทคโนโลยีอัตโนมัติและ AI ในงานธุรการ",
+        "subtopics": [
+            "การสร้างระบบทำงานอัตโนมัติ (Power Automate / Apps Script)",
+            "Prompt Engineering ร่างหนังสือและรายงานการประชุม"
+        ],
+        "lecturers": [
+            "ผศ.ดร.สุธิวัชร ศุภลักษณ์",
+            "ดร.ชณทัต บุญชูวงศ์"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "CV ผศ.ดร.สุธิวัชร ศุภลักษณ์.pdf, ดร.ชณทัต บุญชูวงศ์.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากรจาก มจธ. (KMUTT)"
+    },
+    {
+        "id": "session-26-pm",
+        "date": "26 สิงหาคม 2569",
+        "date_iso": "2569-08-26",
+        "period": "ช่วงบ่าย (13:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้อง BB 202 / BB 203",
+        "subject": "5.3 งานสารบรรณและการเขียนเชิงวิเคราะห์ขั้นสูง",
+        "subtopics": [
+            "การเขียนบันทึกข้อความเสนอผู้บังคับบัญชาเชิงวิเคราะห์",
+            "Workshop งานสารบรรณและการเขียนเชิงวิเคราะห์"
+        ],
+        "lecturers": [
+            "นางสาวสุพิชฌาย์ กลิ่นหอม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันจากไฟล์",
+        "file_name": "ประวัติวิทยากร-สุพิชฌาย์ กลิ่นหอม.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "วิทยากร: นางสาวสุพิชฌาย์ กลิ่นหอม สปน."
+    },
+    {
+        "id": "session-27-joint",
+        "date": "27 สิงหาคม 2569",
+        "date_iso": "2569-08-27",
+        "period": "เต็มวัน (09:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้องอบรมตามกำหนดการ",
+        "subject": "การเตรียมความพร้อมและประเมินผลการเรียนรู้หลังการอบรม (Post-Test)",
+        "subtopics": [
+            "การประเมินผลการเรียนรู้รายวิชาและภาพรวมหลักสูตร 13 วัน",
+            "การทดสอบวัดผลสัมฤทธิ์ Post-Test รวมทุกสายหลักสูตร",
+            "การตรวจทานและจัดเตรียมแฟ้มสะสมผลงานดิจิทัล (Digital Portfolio)"
+        ],
+        "lecturers": [
+            "คณะทำงานโครงการจัดสอบวัดผล Post-Test รวม"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันกำหนดการ",
+        "file_name": "แบบทดสอบ Post-Test และเกณฑ์การประเมินผลสัมฤทธิ์.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "คณะทำงานโครงการจัดสอบวัดผล Post-Test รวม 13 วัน"
+    },
+    {
+        "id": "session-28-joint",
+        "date": "28 สิงหาคม 2569",
+        "date_iso": "2569-08-28",
+        "period": "เต็มวัน (09:00 – 16:00 น.)",
+        "track": "joint",
+        "track_label": "เรียนร่วม",
+        "room": "ห้องอบรมตามกำหนดการ",
+        "subject": "พิธีปิดการฝึกอบรมภาคทฤษฎี และปฐมนิเทศการฝึกปฏิบัติงานจริง (OJT 90 ชม.)",
+        "subtopics": [
+            "การสรุปผลการประเมินการฝึกอบรมภาคทฤษฎี รุ่นที่ 1",
+            "การมอบหมายหน่วยงานภาครัฐสำหรับฝึกปฏิบัติงาน (1-30 ก.ย. 69)",
+            "พิธีปิดการฝึกอบรมภาคทฤษฎีและถ่ายภาพร่วมกัน"
+        ],
+        "lecturers": [
+            "คณะผู้บริหารโครงการ พิธีปิดการอบรม & ปฐมนิเทศ OJT"
+        ],
+        "status": "verified",
+        "status_label": "ยืนยันกำหนดการ",
+        "file_name": "กำหนดการพิธีปิดและคู่มือปฐมนิเทศ_OJT_90ชม.pdf",
+        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "notes": "พิธีปิดการฝึกอบรมภาคทฤษฎี และปฐมนิเทศการฝึกปฏิบัติงานจริง (OJT 90 ชม.)"
+    }
 ];
 
 let activeM2ViewMode = localStorage.getItem('civil_m2_view_mode') || 'HUB'; // 'HUB' | 'CLASSIC' | 'TREE'
