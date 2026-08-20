@@ -726,9 +726,9 @@ const defaultAppData = {
             },
             advanced: {
                 room: "ห้อง BB 211 (ห้อง 2 - สายสีแดง)",
-                morning: "รายวิชาทักษะของผู้นำด้านความคิดและการประสานงาน",
+                morning: "รายวิชาจิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์",
                 morningComputer: false,
-                afternoon: "รายวิชาจิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์",
+                afternoon: "รายวิชาทักษะของผู้นำด้านความคิดและการประสานงาน",
                 afternoonComputer: false
             },
             status: "PRESENT",
@@ -740,24 +740,24 @@ const defaultAppData = {
             postTestUrl: "",
             postTestScore: 9,
             postTestMax: 10,
-            morningDocTitle: "เอกสารบรรยาย_3.5_ทักษะของผู้นำด้านความคิดและการประสานงาน_KMUTT.pdf",
+            morningDocTitle: "เอกสารบรรยาย_4.1_จิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์.pdf",
             morningDocUrl: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
-            afternoonDocTitle: "เอกสารบรรยาย_4.1_จิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์.pdf",
+            afternoonDocTitle: "เอกสารบรรยาย_3.5_ทักษะของผู้นำด้านความคิดและการประสานงาน_KMUTT.pdf",
             afternoonDocUrl: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
             morningFiles: [
-                {
-                    title: "เอกสารบรรยาย_3.5_ทักษะของผู้นำด้านความคิดและการประสานงาน_KMUTT.pdf",
-                    url: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx"
-                }
-            ],
-            afternoonFiles: [
                 {
                     title: "เอกสารบรรยาย_4.1_จิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์.pdf",
                     url: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx"
                 }
             ],
+            afternoonFiles: [
+                {
+                    title: "เอกสารบรรยาย_3.5_ทักษะของผู้นำด้านความคิดและการประสานงาน_KMUTT.pdf",
+                    url: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx"
+                }
+            ],
             docUrl: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
-            docTitle: "สไลด์จิตวิทยาบริการและการบริหารอารมณ์.pdf",
+            docTitle: "เอกสารบรรยาย_4.1_จิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์.pdf",
             evalUrl: "",
             evalSubmitted: true
         },
