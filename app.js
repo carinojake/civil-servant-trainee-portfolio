@@ -740,7 +740,23 @@ const defaultAppData = {
             postTestUrl: "",
             postTestScore: 9,
             postTestMax: 10,
-            docUrl: "",
+            morningDocTitle: "เอกสารบรรยาย_3.5_ทักษะของผู้นำด้านความคิดและการประสานงาน_KMUTT.pdf",
+            morningDocUrl: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
+            afternoonDocTitle: "เอกสารบรรยาย_4.1_จิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์.pdf",
+            afternoonDocUrl: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
+            morningFiles: [
+                {
+                    title: "เอกสารบรรยาย_3.5_ทักษะของผู้นำด้านความคิดและการประสานงาน_KMUTT.pdf",
+                    url: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx"
+                }
+            ],
+            afternoonFiles: [
+                {
+                    title: "เอกสารบรรยาย_4.1_จิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์.pdf",
+                    url: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx"
+                }
+            ],
+            docUrl: "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
             docTitle: "สไลด์จิตวิทยาบริการและการบริหารอารมณ์.pdf",
             evalUrl: "",
             evalSubmitted: true
@@ -1049,7 +1065,8 @@ function loadSavedState() {
                     3: 'https://drive.google.com/drive/folders/1bVD5wtbeGsLQUVUxlWZItT95nckzhYxU',
                     4: 'https://drive.google.com/drive/folders/16Pr6akVs5ILWS2ImP4psQfgX1uFL0U1d',
                     5: 'https://drive.google.com/drive/folders/1czX-tPtKqs6xXln3VqOzjZIlboDo3Gp2',
-                    7: 'https://drive.google.com/drive/folders/1Y_krySxHGiwvRFK_2x0bZ3utqtdl5TzI'
+                    7: 'https://drive.google.com/drive/folders/1Y_krySxHGiwvRFK_2x0bZ3utqtdl5TzI',
+                    8: 'https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx'
                 };
 
                 appState.attendance = defaultAppData.attendance.map((defDay, idx) => {
@@ -7339,7 +7356,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "เอกสารบรรยาย_4.1_จิตวิทยาการบริการขั้นสูงและการจัดการอารมณ์.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
         "notes": "📢 ห้องอบรม 2: ใช้ห้อง 211 (สายคล้องคอสีแดง) / ทานเบรคในห้อง / ทานอาหารกลางวันรวมกันที่ห้อง 210"
     },
     {
@@ -7362,7 +7379,7 @@ const master13DaysHubSessions = [
         "status": "verified",
         "status_label": "ยืนยันจากไฟล์",
         "file_name": "เอกสารบรรยาย_3.5_ทักษะของผู้นำด้านความคิดและการประสานงาน_KMUTT.pdf",
-        "file_url": "https://drive.google.com/drive/folders/1NKpmB-N9p4tTS4g72aLKhsC9lGPSEK7h",
+        "file_url": "https://drive.google.com/drive/folders/1G11yDmsqXsiSQqXaK_VNeNhLahezLwOx",
         "notes": "📢 ห้องอบรม 2: ใช้ห้อง 211 (สายคล้องคอสีแดง) / ทานเบรคในห้อง / ทานอาหารกลางวันรวมกันที่ห้อง 210"
     },
     {
