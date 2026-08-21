@@ -553,4 +553,18 @@ html.is-locked, body.is-locked {
     box-shadow: 0 12px 20px -6px rgba(0, 0, 0, 0.08);
 }
 
+/* --------------------------------------------------------------------------
+   10. Mobile Bottom Navigation & Touch Optimization
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+    body {
+        padding-bottom: 4.75rem;
+    }
+    #ai-buddy-fab {
+        bottom: 4.75rem !important;
+        right: 1rem !important;
+    }
+}
+
+
 

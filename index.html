@@ -52,124 +52,93 @@
     <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to main content)</a>
 
     <!-- Accessibility Bar & Global App Header -->
-    <header class="bg-govNavy text-white shadow-lg border-b-4 border-govGreen sticky top-0 z-40 app-header-bar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-                <!-- System Title & Badge -->
-                <div class="flex items-center space-x-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400 text-2xl shadow-inner shrink-0">
+    <!-- Accessibility Bar & Global App Header (Official Thai Government Standard) -->
+    <header class="bg-govNavy text-white shadow-lg sticky top-0 z-40 no-print transition-colors duration-200 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-2.5 sm:py-3 gap-3">
+                <!-- Left: Logo & System Identity -->
+                <div class="flex items-center space-x-3 min-w-0">
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400 text-xl sm:text-2xl shadow-inner shrink-0">
                         <i class="fa-solid fa-graduation-cap"></i>
                     </div>
-                    <div>
-                        <div class="flex items-center space-x-2 flex-wrap">
-                            <span class="bg-govGreen text-white px-2 py-0.5 rounded text-[11px] font-semibold tracking-wide uppercase">หลักสูตรภาครัฐ รุ่นที่ 1</span>
-                            <span class="text-xs text-blue-200"><i class="fa-solid fa-hotel text-emerald-400"></i> เซ็นทารา ไลฟ์ & OJT</span>
-                            <span id="current-user-badge" class="bg-blue-900/80 border border-blue-400/40 text-blue-100 text-[11px] px-2 py-0.5 rounded-full font-medium">
+                    <div class="min-w-0">
+                        <h1 class="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white leading-tight truncate">
+                            ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล
+                        </h1>
+                        <!-- Compact Badges Sub-row -->
+                        <div class="flex items-center gap-1.5 flex-wrap mt-0.5 text-[10px] sm:text-[11px]">
+                            <span class="bg-govGreen text-white px-2 py-0.5 rounded font-semibold tracking-wide uppercase shadow-2xs">รุ่นที่ 1</span>
+                            <span class="text-slate-300 hidden xs:inline"><i class="fa-solid fa-hotel text-emerald-400 mr-0.5"></i> เซ็นทารา & OJT</span>
+                            <span id="current-user-badge" class="bg-blue-900/80 border border-blue-400/30 text-blue-100 px-2 py-0.5 rounded-full font-medium truncate max-w-[150px] sm:max-w-none">
                                 ผู้เรียน: <strong id="header-user-name">นายเจค (ADV)</strong>
                             </span>
                         </div>
-                        <h1 class="text-lg md:text-xl font-bold tracking-tight text-white leading-tight mt-0.5">
-                            ระบบบันทึกการอบรมและแฟ้มผลงานดิจิทัล
-                        </h1>
                     </div>
                 </div>
 
-                <!-- Accessibility Controls & Backup Actions -->
-                <div class="flex items-center flex-wrap gap-2 justify-end">
-                    <!-- Theme Switcher -->
-                    <div class="bg-white/10 border border-white/20 rounded-lg p-1 flex items-center space-x-1" role="group" aria-label="สลับธีมการแสดงผล">
-                        <button onclick="setTheme('theme-dynamic')" id="btn-theme-dynamic" class="px-2.5 py-1 text-xs rounded font-medium transition bg-white/20 text-white" title="ธีม Modern Dynamic (ค่าเริ่มต้น)">
-                            <i class="fa-solid fa-palette mr-1"></i> สีมาตรฐาน
-                        </button>
-                        <button onclick="setTheme('theme-slate')" id="btn-theme-slate" class="px-2.5 py-1 text-xs rounded font-medium transition text-slate-300 hover:text-white" title="ธีม Executive Slate">
-                            <i class="fa-solid fa-moon mr-1"></i> โทนมืด
-                        </button>
-                        <button onclick="setTheme('theme-contrast')" id="btn-theme-contrast" class="px-2.5 py-1 text-xs rounded font-medium transition text-amber-300 hover:text-amber-200 border border-amber-400/40" title="ธีม High Contrast สำหรับผู้พิการทางสายตา">
-                            <i class="fa-solid fa-circle-half-stroke mr-1"></i> คอนทราสต์สูง
-                        </button>
-                    </div>
+                <!-- Right: Clean Minimalist Action Hub -->
+                <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+                    <!-- Quick Lock Button -->
+                    <button onclick="lockAppImmediately()" class="p-2 sm:px-2.5 sm:py-1.5 rounded-xl bg-white/10 hover:bg-rose-600/80 text-amber-300 hover:text-white border border-white/15 transition flex items-center gap-1.5 text-xs font-semibold cursor-pointer shadow-2xs min-h-[40px]" title="ล็อคหน้าจอทันที (Passcode Lock)">
+                        <i class="fa-solid fa-lock"></i>
+                        <span class="hidden md:inline">ล็อค</span>
+                    </button>
 
-                    <!-- Font Resizer -->
-                    <div class="bg-white/10 border border-white/20 rounded-lg p-1 flex items-center space-x-1" role="group" aria-label="ปรับขนาดตัวอักษร">
-                        <button onclick="setFontSize('font-normal')" id="btn-font-normal" class="px-2 py-1 text-xs rounded font-bold transition bg-white/20" title="ขนาดตัวอักษรปกติ (16px)">A</button>
-                        <button onclick="setFontSize('font-large')" id="btn-font-large" class="px-2 py-1 text-xs rounded font-bold transition text-slate-300 hover:text-white" title="ขนาดตัวอักษรใหญ่ (18px)">A+</button>
-                        <button onclick="setFontSize('font-xlarge')" id="btn-font-xlarge" class="px-2 py-1 text-xs rounded font-bold transition text-slate-300 hover:text-white" title="ขนาดตัวอักษรใหญ่พิเศษ (20px)">A++</button>
-                    </div>
-
-                    <!-- Backup / Restore / AI / Lock Buttons -->
-                    <div class="flex items-center space-x-1.5">
-                        <button type="button" onclick="toggleAIBuddyDrawer()" class="bg-amber-400 hover:bg-amber-300 text-govNavy font-bold px-2.5 py-1.5 rounded-lg text-xs transition flex items-center space-x-1.5 shadow border border-amber-200 cursor-pointer" title="เปิด AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน">
-                            <i class="fa-solid fa-robot"></i>
-                            <span class="hidden sm:inline font-bold">AI Co-Pilot</span>
-                        </button>
-                        <button onclick="exportDataJSON()" class="bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 border border-blue-400/40" title="ดาวน์โหลดสำรองข้อมูล (JSON Backup)">
-                            <i class="fa-solid fa-download"></i>
-                            <span class="hidden sm:inline">สำรอง JSON</span>
-                        </button>
-                        <label class="bg-emerald-700 hover:bg-emerald-600 text-white px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 cursor-pointer border border-emerald-400/40" title="นำเข้าข้อมูลสำรอง (Restore JSON)">
-                            <i class="fa-solid fa-upload"></i>
-                            <span class="hidden sm:inline">กู้คืน</span>
-                            <input type="file" id="import-json-input" accept=".json" class="hidden" onchange="importDataJSON(event)">
-                        </label>
-                        <button onclick="lockAppImmediately()" class="bg-slate-700 hover:bg-rose-700 text-white px-2.5 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 border border-slate-500/40" title="ล็อคหน้าจอทันที (Passcode Lock)">
-                            <i class="fa-solid fa-lock text-amber-400"></i>
-                            <span class="hidden sm:inline">ล็อค</span>
-                        </button>
-                    </div>
+                    <!-- Settings & Accessibility Single Gear Button (Settings Modal Trigger) -->
+                    <button onclick="openModal('modal-app-settings')" id="btn-open-settings-modal" class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 transition flex items-center gap-1.5 text-xs font-semibold cursor-pointer shadow-2xs min-h-[40px]" title="ตั้งค่าระบบ ธีม ขนาดอักษร และสำรองข้อมูล" aria-label="ตั้งค่าระบบและตัวเลือกการเข้าถึง">
+                        <i class="fa-solid fa-gear text-amber-400 text-sm"></i>
+                        <span class="hidden sm:inline">ตั้งค่า & เข้าถึง</span>
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Main Navigation Bar (7 Modules + Dashboard) -->
-        <nav class="bg-govNavyDark/95 border-t border-white/10 px-4 sm:px-6 lg:px-8 overflow-x-auto tab-navigation-bar" aria-label="เมนูหลัก 7 โมดูล">
+        <!-- Main Navigation Bar (10 Modules + Dashboard, Horizontal Scroll on all devices) -->
+        <nav class="bg-govNavyDark/95 border-t border-white/10 px-4 sm:px-6 lg:px-8 overflow-x-auto tab-navigation-bar" aria-label="เมนูหลัก 10 โมดูล">
             <div class="max-w-7xl mx-auto flex space-x-1 py-1.5 min-w-max">
-                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn active px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="true">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn active px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="true">
                     <i class="fa-solid fa-chart-pie"></i>
-                    <span>แดชบอร์ดภาพรวม</span>
+                    <span>แดชบอร์ด</span>
                 </button>
-                <button onclick="switchTab('m1')" id="nav-m1" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                <button onclick="switchTab('m1')" id="nav-m1" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="false">
                     <i class="fa-solid fa-user-tie"></i>
-                    <span>M1: ประวัติ & ทำเนียบ 40 คน</span>
+                    <span>M1: ทำเนียบ 40 คน</span>
                 </button>
-                <button onclick="switchTab('m2')" id="nav-m2" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                <button onclick="switchTab('m2')" id="nav-m2" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="false">
                     <i class="fa-solid fa-calendar-check"></i>
-                    <span>M2: อบรม 13 วัน & Daily Note</span>
+                    <span>M2: อบรม 13 วัน</span>
                 </button>
-                <button onclick="switchTab('m3')" id="nav-m3" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                <button onclick="switchTab('m3')" id="nav-m3" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="false">
                     <i class="fa-solid fa-briefcase"></i>
-                    <span>M3: บันทึก OJT 4 ด้าน (≥90 ชม.)</span>
+                    <span>M3: OJT (≥90 ชม.)</span>
                 </button>
-                <button onclick="switchTab('m4')" id="nav-m4" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                <button onclick="switchTab('m4')" id="nav-m4" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="false">
                     <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
-                    <span>M4: AI ขัดเกลา & R-C-T-F</span>
+                    <span>M4: AI ขัดเกลา</span>
                 </button>
-                <button onclick="switchTab('m5')" id="nav-m5" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                <button onclick="switchTab('m5')" id="nav-m5" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="false">
                     <i class="fa-solid fa-folder-open"></i>
-                    <span>M5: คลังผลงาน & Alt-Text</span>
+                    <span>M5: คลังผลงาน</span>
                 </button>
-                <button onclick="switchTab('m6')" id="nav-m6" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                <button onclick="switchTab('m6')" id="nav-m6" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="false">
                     <i class="fa-solid fa-book-bookmark text-emerald-400"></i>
-                    <span>M6: เล่ม Portfolio 7 หน้า A4</span>
+                    <span>M6: เล่ม Portfolio 7 หน้า</span>
                 </button>
-                <button onclick="switchTab('m7')" id="nav-m7" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition" role="tab" aria-selected="false">
+                <button onclick="switchTab('m7')" id="nav-m7" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition" role="tab" aria-selected="false">
                     <i class="fa-solid fa-universal-access text-cyan-400"></i>
                     <span>M7: การเข้าถึง & PDPA</span>
                 </button>
-                <button onclick="switchTab('m8')" id="nav-m8" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition border border-amber-400/40 bg-amber-500/10 text-amber-300 hover:text-white" role="tab" aria-selected="false">
+                <button onclick="switchTab('m8')" id="nav-m8" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition border border-amber-400/40 bg-amber-500/10 text-amber-300 hover:text-white" role="tab" aria-selected="false">
                     <i class="fa-solid fa-graduation-cap text-amber-400"></i>
                     <span>M8: AI ติว & คลังข้อสอบ</span>
                 </button>
-                <button onclick="switchTab('m9')" id="nav-m9" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition border border-emerald-400/40 bg-emerald-500/10 text-emerald-300 hover:text-white" role="tab" aria-selected="false">
+                <button onclick="switchTab('m9')" id="nav-m9" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition border border-emerald-400/40 bg-emerald-500/10 text-emerald-300 hover:text-white" role="tab" aria-selected="false">
                     <i class="fa-solid fa-chalkboard-user text-emerald-400"></i>
                     <span>M9: วิทยากร & วัน-วิชา-ไฟล์</span>
                 </button>
-                <button onclick="switchTab('m10')" id="nav-m10" class="tab-btn px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition border border-teal-400/40 bg-teal-500/10 text-teal-300 hover:text-white" role="tab" aria-selected="false">
+                <button onclick="switchTab('m10')" id="nav-m10" class="tab-btn px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition border border-teal-400/40 bg-teal-500/10 text-teal-300 hover:text-white" role="tab" aria-selected="false">
                     <i class="fa-solid fa-clipboard-check text-teal-400"></i>
                     <span>M10: ตรวจสอบหลักฐาน PA</span>
-                </button>
-                <button type="button" onclick="toggleAIBuddyDrawer()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-govNavy font-bold px-3.5 py-2 rounded-lg text-xs flex items-center space-x-2 transition shadow shadow-amber-500/30 border border-amber-200 cursor-pointer" title="เปิดหน้าต่าง AI Co-Pilot ผู้ช่วยติวและทำภารกิจรายวัน">
-                    <i class="fa-solid fa-robot"></i>
-                    <span>AI Co-Pilot (Drawer)</span>
                 </button>
             </div>
         </nav>
@@ -3578,7 +3547,7 @@
     </div>
 
     <!-- Main Logic Script -->
-    <script src="app.js?v=3.1.4"></script>
+    <script src="app.js?v=3.2.0"></script>
 
     <!-- ====================================================================
          WELCOME TOUR / ONBOARDING MODAL & OVERLAY (Task #4)
@@ -3865,6 +3834,115 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- ====================================================================
+         MODAL: APP SETTINGS & ACCESSIBILITY (Themes, Font Scaling, Backup)
+         ==================================================================== -->
+    <div id="modal-app-settings" class="fixed inset-0 z-50 hidden modal-backdrop flex items-center justify-center p-4">
+        <div class="app-card max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-amber-100 text-govNavy flex items-center justify-center">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-govNavy">ตั้งค่าระบบ & การเข้าถึง</h3>
+                        <p class="text-[11px] text-slate-500">ปรับแต่งธีม ขนาดตัวอักษร และสำรองข้อมูล (WCAG 2.1 AA)</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('modal-app-settings')" class="text-slate-400 hover:text-slate-600 text-lg cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- 1. Visual Themes -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700">🎨 ธีมการแสดงผล (Themes)</label>
+                <div class="grid grid-cols-3 gap-2" role="group" aria-label="สลับธีมการแสดงผล">
+                    <button onclick="setTheme('theme-dynamic'); closeModal('modal-app-settings');" id="btn-theme-dynamic" class="p-2.5 rounded-xl border border-slate-200 text-xs font-semibold flex flex-col items-center justify-center gap-1 transition bg-blue-50 text-blue-900 hover:bg-blue-100 cursor-pointer min-h-[44px]">
+                        <i class="fa-solid fa-palette text-blue-600"></i>
+                        <span>สีมาตรฐาน</span>
+                    </button>
+                    <button onclick="setTheme('theme-slate'); closeModal('modal-app-settings');" id="btn-theme-slate" class="p-2.5 rounded-xl border border-slate-700 text-xs font-semibold flex flex-col items-center justify-center gap-1 transition bg-slate-800 text-white hover:bg-slate-900 cursor-pointer min-h-[44px]">
+                        <i class="fa-solid fa-moon text-amber-400"></i>
+                        <span>โทนมืด</span>
+                    </button>
+                    <button onclick="setTheme('theme-contrast'); closeModal('modal-app-settings');" id="btn-theme-contrast" class="p-2.5 rounded-xl border-2 border-amber-400 text-xs font-bold flex flex-col items-center justify-center gap-1 transition bg-black text-amber-300 hover:bg-slate-900 cursor-pointer min-h-[44px]">
+                        <i class="fa-solid fa-circle-half-stroke text-amber-400"></i>
+                        <span>คอนทราสต์สูง</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Font Scaling -->
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-700">🔤 ขนาดตัวอักษร (Text Size Scaling)</label>
+                <div class="grid grid-cols-3 gap-2" role="group" aria-label="ปรับขนาดตัวอักษร">
+                    <button onclick="setFontSize('font-normal')" id="btn-font-normal" class="p-2.5 rounded-xl border border-slate-200 text-xs font-bold flex items-center justify-center gap-1 transition bg-slate-100 hover:bg-slate-200 text-slate-800 cursor-pointer min-h-[44px]">
+                        <span>A ปกติ (16px)</span>
+                    </button>
+                    <button onclick="setFontSize('font-large')" id="btn-font-large" class="p-2.5 rounded-xl border border-slate-200 text-sm font-bold flex items-center justify-center gap-1 transition bg-slate-100 hover:bg-slate-200 text-slate-800 cursor-pointer min-h-[44px]">
+                        <span>A+ ใหญ่ (18px)</span>
+                    </button>
+                    <button onclick="setFontSize('font-xlarge')" id="btn-font-xlarge" class="p-2.5 rounded-xl border border-slate-200 text-base font-bold flex items-center justify-center gap-1 transition bg-slate-100 hover:bg-slate-200 text-slate-800 cursor-pointer min-h-[44px]">
+                        <span>A++ พิเศษ (20px)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. Backup & Security -->
+            <div class="space-y-2 pt-2 border-t border-slate-100">
+                <label class="block text-xs font-bold text-slate-700">💾 จัดการข้อมูล & ความปลอดภัย (Data & Security)</label>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <button onclick="exportDataJSON()" class="p-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition flex items-center justify-center gap-1.5 cursor-pointer min-h-[44px]">
+                        <i class="fa-solid fa-download"></i>
+                        <span>สำรอง JSON</span>
+                    </button>
+                    <label class="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition flex items-center justify-center gap-1.5 cursor-pointer min-h-[44px]">
+                        <i class="fa-solid fa-upload"></i>
+                        <span>กู้คืน JSON</span>
+                        <input type="file" id="import-json-input" accept=".json" class="hidden" onchange="importDataJSON(event)">
+                    </label>
+                </div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-600 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-shield-halved text-emerald-600 text-sm"></i>
+                    <span>ความปลอดภัยรหัส PIN</span>
+                </div>
+                <button onclick="closeModal('modal-app-settings'); openChangePinModal();" class="text-blue-600 font-bold hover:underline cursor-pointer">
+                    เปลี่ยน PIN
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         MOBILE BOTTOM NAVIGATION BAR (< 768px for Ultra-fast 1-Thumb Navigation)
+         ==================================================================== -->
+    <div id="mobile-bottom-nav" class="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 py-1.5 px-2 flex justify-around items-center shadow-lg text-slate-600 no-print">
+        <button onclick="switchTab('dashboard')" class="flex flex-col items-center justify-center min-h-[44px] min-w-[48px] px-2 py-1 rounded-xl transition text-govNavy font-bold active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-chart-pie text-base"></i>
+            <span class="text-[10px] mt-0.5">ภาพรวม</span>
+        </button>
+        <button onclick="switchTab('m2')" class="flex flex-col items-center justify-center min-h-[44px] min-w-[48px] px-2 py-1 rounded-xl transition hover:text-govNavy active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-calendar-check text-base"></i>
+            <span class="text-[10px] mt-0.5">อบรม 13 วัน</span>
+        </button>
+        <button onclick="switchTab('m10')" class="flex flex-col items-center justify-center min-h-[44px] min-w-[48px] px-2 py-1 rounded-xl transition hover:text-teal-600 active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-clipboard-check text-teal-600 text-base"></i>
+            <span class="text-[10px] mt-0.5 text-teal-700 font-bold">หลักฐาน PA</span>
+        </button>
+        <button onclick="switchTab('m6')" class="flex flex-col items-center justify-center min-h-[44px] min-w-[48px] px-2 py-1 rounded-xl transition hover:text-govNavy active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-book-bookmark text-base"></i>
+            <span class="text-[10px] mt-0.5">เล่ม A4</span>
+        </button>
+        <button onclick="openModal('modal-app-settings')" class="flex flex-col items-center justify-center min-h-[44px] min-w-[48px] px-2 py-1 rounded-xl transition hover:text-govNavy active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-gear text-amber-500 text-base"></i>
+            <span class="text-[10px] mt-0.5 font-semibold">ตั้งค่า</span>
+        </button>
     </div>
 
 </body>
